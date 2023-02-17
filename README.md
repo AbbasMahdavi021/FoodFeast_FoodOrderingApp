@@ -18,7 +18,7 @@
 | member1          |                          |                 |
 | member2          |                          |                 |
 | member3          |                          |                 |
-| member4          |                          |                 |
+| Megan Lew        |  mlew1@mail.sfsu.edu     |    meganlew     |
 | Jed Graves       | jgraves4@mail.sfsu.edu   |   jgraves4      |
 | Nathan Rennacker | nrennacker@mail.sfsu.edu |   nrennacker    |
 
