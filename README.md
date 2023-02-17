@@ -15,7 +15,7 @@
 
 | Student Name     |       Student Email      | GitHub Username |
 |      :---:       |           :---:          |      :---:      |
-| member1          |                          |                 |
+| Elahe Bashiri          Ebashiri@sfsu.edu          Elahe87                    
 | member2          |                          |                 |
 | member3          |                          |                 |
 | Megan Lew        |  mlew1@mail.sfsu.edu     |    meganlew     |
