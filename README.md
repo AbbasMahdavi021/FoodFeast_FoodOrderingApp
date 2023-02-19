@@ -17,7 +17,7 @@
 |      :---:       |           :---:          |      :---:      |
 | Elahe Bashiri    |     Ebashiri@sfsu.edu    |     Elahe87     |              
 | Alexander Diaz   |  adiaz41@sfsu.edu        |    Diaz5-hub    |
-| member3          |                          |                 |
+| Abbas Mahdavi    |  amahdavi2@sfsu.edu      | AbbasMahdavi021 |
 | Megan Lew        |  mlew1@mail.sfsu.edu     |    meganlew     |
 | Jed Graves       | jgraves4@mail.sfsu.edu   |   jgraves4      |
 | Nathan Rennacker | nrennacker@mail.sfsu.edu |   nlrennacker    |
