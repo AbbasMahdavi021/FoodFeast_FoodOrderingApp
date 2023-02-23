@@ -1,5 +1,3 @@
-// this is an about page that gives some background of the developers of this app
-
 const express = require("express");
 const router = express.Router();
 const { About } = require("../models");
@@ -10,12 +8,13 @@ router.get("/", async (req, res) => {
     res.json(about);
 });
 
+// retrieves a specific about based on id (primary key)
 router.get('/:userId', async (req, res) => {
   const userId = req.params.userId;
 
   try {
+    // find by primary key
     const user = await About.findByPk(userId);
-
     if (user) {
       res.json(user);
     } else {
