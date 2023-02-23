@@ -5,21 +5,19 @@ const cors = require("cors");
 
 app.use(cors());
 
+app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+// sequlaize and listen on port 8080
+const db = require("./models");
 
-let test = {
-    field1 : 26,
-    f2 : "Hii",
-}
+// get the path to the about page
+const aboutRouter = require("./routes/About");
+app.use("/about", aboutRouter);
 
-app.get("/test", (req, res) => {
-    res.json(test);
-
+db.sequelize.sync().then(() => {
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}.`);
   });
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}!`);
 });
+
+
