@@ -28,8 +28,10 @@ const teamMembers = [
     id: 4,
     name: 'Alex Diaz',
     role: 'Developer',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    photo: '../images/4.jpg',
+    bio: `      My name is Alexander Diaz and I am a senior planning to graduate at the end of the semester. My favorite programming languages are C++ and Java which I use for game development. 
+      My role in this group project is working in the front end with the responsibility of ensuring the website visitors can easily interact with the page. 
+      Apart from programming I enjoy playing soccer , boxing and going to parties.`,
+    photo: '../images/Alex.jpg',
   },
   {
     id: 5,
