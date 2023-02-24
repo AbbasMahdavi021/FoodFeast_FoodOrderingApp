@@ -238,18 +238,23 @@ table {
 }
 
 .modal-close {
-    position: relative;
+    position: absolute;
     left: 100%;
-    transform: translatex(-110%);
+    transform: translatex(-115%);
     background-color: white;
     color: black;
     padding: 15px 20px;
     text-align: center;
-    border: .2rem solid black;
+    border: .1rem solid black;
     border-radius: 10%;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     margin-top: 10px;
     cursor: pointer;
+}
+
+.modal-image{
+    width: 50%;
+    height: auto;
 }

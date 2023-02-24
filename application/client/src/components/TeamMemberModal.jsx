@@ -15,9 +15,9 @@ function TeamMemberModal(props) {
                 <button className="modal-close" onClick={() => setIsOpen(false)}>
                     X
                 </button>
+                <img className='modal-image' src={teamMember.photo} alt={teamMember.name} />
                 <h2>{teamMember.name}</h2>
                 <p>{teamMember.bio}</p>
-                <p>Email: {teamMember.id}</p>
             </div>
         </div>
     ) : null;
