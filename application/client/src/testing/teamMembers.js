@@ -35,8 +35,8 @@ const teamMembers = [
     id: 5,
     name: 'Megan Lew',
     role: 'Frontend Lead',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    photo: '../images/1.jpg',
+    bio: 'Hello! My name is Megan Lew. Currently, I am a senior in Computer Science at San Francisco State University. My interests are working in software development and frontend.',
+    photo: '../images/Megan.jpg',
   },
   {
     id: 6,
