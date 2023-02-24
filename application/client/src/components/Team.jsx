@@ -9,11 +9,11 @@ function Team(props) {
   }}
   return (
     <div id='team-container'>
-      {props.teamMembers.map((member) => (
-        <Link className='team-link' key={member.id} to={`/team/${(rename(member.name))}`}>
-          <img className='team-image' src={member.photo} alt={member.name} />
-          <div className='image-member-name'>{member.name}</div>
-          <div className='image-member-role'>{member.role}</div>
+      {props.teamMembers.map((teamMember) => (
+        <Link className='team-link' key={teamMember.id} to={`/team/${(rename(teamMember.name))}`}>
+          <img className='team-image' src={teamMember.photo} alt={teamMember.name} />
+          <div className='image-member-name'>{teamMember.name}</div>
+          <div className='image-member-role'>{teamMember.role}</div>
         </Link>
       ))}
     </div>
