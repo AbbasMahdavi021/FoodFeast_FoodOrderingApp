@@ -22,7 +22,7 @@ const teamMembers = [
     name: 'Jed Graves',
     role: 'Developer',
     bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    photo: '../images/3.jpg',
+    photo: '../images/jed.jpeg',
   },
   {
     id: 4,
@@ -44,7 +44,9 @@ const teamMembers = [
     id: 6,
     name: 'Nathan Rennacker',
     role: 'Github Master',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    bio: `      Hi, my name is Nathan Rennacker, I’m currently finishing my computer science degree at San Francisco State University.
+      I’ve worked on projects like this before but I’m excited to work in a large group on a project this size!
+      In my free time I like to go backpacking, enjoy playing piano, and traveling!`,
     photo: '../images/Nathan.jpg',
   },
 ];
