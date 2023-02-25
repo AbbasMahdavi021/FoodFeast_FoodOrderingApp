@@ -16,7 +16,7 @@ function App() {
   return (
     <BrowserRouter>
         <div id='about-header'>Meet Our Team</div>
-        <div id='about-disclaimer'>Software Engineering Class SFSU &nbsp; &lt;Spring, 2023&gt; &nbsp; Section 03 &nbsp; Team 01</div>
+        <div id='about-disclaimer'>For demonstration only.<br></br><br></br>Software Engineering Class SFSU &nbsp; &lt;Spring, 2023&gt; &nbsp; Section 03 &nbsp; Team 01</div>
         <Team teamMembers={teamMembers}/>
         <Routes>
           {teamMembers.map((member) => (
