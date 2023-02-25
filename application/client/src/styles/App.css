@@ -157,6 +157,12 @@ table {
     font: 4em "Lexend Deca";
 }
 
+#about-disclaimer{
+    margin: 10px;
+    position: absolute;
+    top: 0;
+}
+
 #team-container {
     position: relative;
     /* 100% - ( 15% + 7.5%) = 77.5%  */
@@ -226,7 +232,7 @@ table {
     -webkit-box-shadow: 0px 0px 82px -7px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 0px 82px -7px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 82px -7px rgba(0, 0, 0, 0.75);
-    width: 60%;
+    width: 70%;
     display: flex;
     flex-direction: row;
     height: auto;
@@ -272,10 +278,12 @@ table {
 }
 
 .modal-bio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: 'Roboto Condensed';
     font-size: 1.25rem;
-    margin-top: 5%;
-    margin-left: 1%;
+    margin: 5%;
     white-space: pre-wrap;
 }
 
@@ -301,3 +309,4 @@ table {
     transition: .1s ease-in;
     filter: brightness(70%);
 }
+

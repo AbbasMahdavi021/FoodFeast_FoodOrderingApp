@@ -13,19 +13,14 @@ function App() {
     console.log("Received Info: " + res.data.msg);
   }
 
-  //this should be cleaning up urls but the space is staying in for some reason, need to double check this later
-  let rename = (name) =>{{
-    name.replace(/\s/g, '-');
-    return name;
-  }}
-
   return (
     <BrowserRouter>
         <div id='about-header'>Meet Our Team</div>
+        <div id='about-disclaimer'>Software Engineering Class SFSU &nbsp; &lt;Spring, 2023&gt; &nbsp; Section 03 &nbsp; Team 01</div>
         <Team teamMembers={teamMembers}/>
         <Routes>
           {teamMembers.map((member) => (
-            <Route key={member.id} path={`/team/${rename(member.name)}`} element={<TeamMemberModal teamMember={member}/>} />
+            <Route key={member.id} path={`/team/${member.name.replace(/\s/g, '-')}`} element={<TeamMemberModal teamMember={member}/>} />
           ))}
         </Routes>
     </BrowserRouter>
