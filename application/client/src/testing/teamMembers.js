@@ -14,15 +14,20 @@ const teamMembers = [
     id: 2,
     name: 'Abbas Mahdavi',
     role: 'Backend Lead',
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    photo: '../images/2.jpg',
+    bio: `    Hi, my name is Abbas Mahdavi and I am the Backend lead for this project. I have always been interested in web development and full-stack projects, and I am excited to bring my expertise to this project. I am passionate about new technologies and always strive for excellence in my work. 
+      In my free time, I enjoy biking and exploring new routes around my area. Biking is a great way for me to clear my head and get some exercise. I also love playing video games and diving into new virtual worlds. It's a fun and engaging way for me to unwind and relax. 
+      Overall, I am a driven and passionate individual who enjoys both technical challenges and creative problem-solving. I am excited to be part of this project and can't wait to see what we can accomplish.`,
+    photo: '../images/Abbas.jpg',
   },
   {
     id: 3,
     name: 'Jed Graves',
     role: 'Developer',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    photo: '../images/jed.jpeg',
+    bio: `    My name is Jed Graves, and I am an undergraduate Computer Science student at San Francisco State University on my last semester. I am a backend developer on this project, and am very excited to be working with a motivated team of fellow students to develop this app. 
+      Prior to my time as a student, I served four years in the Marine Corps infantry with two combat deployments to Iraq. I achieved the rank of sergeant and left with an honorable discharge. 
+      I apply the drive and discipline that I learned during that time to my studies, and intend to do the same at my future place of employment. 
+      I am currently watching the rapidly developing tech space with excitement, in anticipation of finding my role in this new era.`,
+    photo: '../images/Jed.jpg',
   },
   {
     id: 4,
