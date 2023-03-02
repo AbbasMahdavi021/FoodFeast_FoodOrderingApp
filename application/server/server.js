@@ -19,7 +19,7 @@ app.get('/', function(req, res) {
   };
 });
 
-app.get("/*", (req, res) => {
+app.get("/server", (req, res) => {
   res.send("Hello! This is the backEnd main page(endpoint).");
 });
 
