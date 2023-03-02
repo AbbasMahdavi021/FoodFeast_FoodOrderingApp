@@ -20,7 +20,7 @@
     To the the following URL to visit the frontend website
 
     To connect to the database:<br>
-    There are otherways but this a simple way:<br>
+    (There are otherways but this is the simplest)<br>
     In MySQL Workbench, create a new Connection using the + button.<br>
     Using the given info above, Test and Create a new Connection:<br>
         Hostname: 35.160.127.228  <br>
