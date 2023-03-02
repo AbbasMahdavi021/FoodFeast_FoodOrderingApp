@@ -13,7 +13,7 @@ const con = mysql.createConnection({
 con.connect(function (err) {
     if (err) throw err;
     console.log("Connected!");
-    con.query("CREATE DATABASE IF NOT EXISTS food_app_dev", function (err, result) {
+    con.query("CREATE DATABASE IF NOT EXISTS SFSUFF", function (err, result) {
         if (err) throw err;
         console.log("Database created");
     });
@@ -35,12 +35,12 @@ db.getConnection((err, connection) => {
             "CREATE TABLE IF NOT EXISTS `users` (" +
             "`id` int NOT NULL AUTO_INCREMENT," +
             "`username` varchar(128) NOT NULL," +
-            "`email2` varchar(255) NOT NULL, " +
+            "`email` varchar(255) NOT NULL, " +
             "`password` varchar(255) NOT NULL," +
             "PRIMARY KEY (`id`)," +
             "UNIQUE KEY `id_UNIQUE` (`id`)," +
             "UNIQUE KEY `username_UNIQUE` (`username`)," +
-            "UNIQUE KEY `email2_UNIQUE` (`email2`)" +
+            "UNIQUE KEY `email_UNIQUE` (`email`)" +
             ")";
 
         connection.query(sql, (err, rows) => {
