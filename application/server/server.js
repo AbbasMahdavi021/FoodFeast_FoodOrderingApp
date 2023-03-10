@@ -19,19 +19,10 @@ app.get('/*', function(req, res) {
   };
 });
 
+
+
 app.get("/", (req, res) => {
   res.send("Hello! This is the backEnd main page(endpoint).");
-});
-
-
-let test = {
-  age : 26,
-  msg : "Hi",
-}
-
-app.get("/test", (req, res) => {
-  res.json(test);
-
 });
 
 app.get("about", (req, res) => {
