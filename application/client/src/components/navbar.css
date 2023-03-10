@@ -1,0 +1,86 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-size: 1.6rem;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: rgb(204, 204, 204);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 8vh;
+  background: rgb(228, 60, 8);
+}
+.brand {
+  text-transform: uppercase;
+  
+}
+.Logo{
+    height: 100%;
+    width: auto;
+}
+.navList {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1rem;
+}
+.navButton {
+  display: none;
+}
+.navButton div {
+  width: 2.5rem;
+  height: 0.2rem;
+  margin: 0.4rem;
+  background: rgb(204, 204, 204);
+  transition: 0.3s ease-in;
+}
+
+@media screen and (max-width: 768px) {
+  .navButton {
+    display: block;
+    cursor: pointer;
+  }
+  .navList {
+    position: fixed;
+    top: 8vh;
+    right: 0;
+    height: 100%;
+    width: 45%;
+    background: rgb(228, 60, 8);
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: 0.5s ease-in;
+  }
+}
+
+/* Open Panel */
+.openList {
+  transform: translateX(0%);
+}
+
+/* Panel Button Animation */
+
+.toggle .line1 {
+  transform: rotate(-45deg) translate(-4px, 5px);
+}
+.toggle .line2 {
+  opacity: 0;
+}
+.toggle .line3 {
+  transform: rotate(45deg) translate(-4px, -5px);
+}
