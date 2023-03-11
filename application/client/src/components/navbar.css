@@ -15,7 +15,20 @@ li {
 }
 a {
   text-decoration: none;
-  color: rgb(204, 204, 204);
+  color: rgb(255, 255, 255);
+  font-size: 24px;
+  font-family: Georgia, serif;
+
+}
+
+a.navLink {
+  border-bottom: 1px solid transparent;
+  transition: border-bottom 0.2s ease-in-out;
+  margin-right: 20px;
+}
+
+a.navLink:hover {
+  border-bottom: 1px solid white;
 }
 
 .nav {
@@ -30,6 +43,7 @@ a {
   
 }
 .Logo{
+    position: relative;
     height: 100%;
     width: auto;
 }

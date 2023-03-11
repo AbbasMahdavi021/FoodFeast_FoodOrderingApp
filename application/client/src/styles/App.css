@@ -157,7 +157,7 @@ table {
     font: 4em "Lexend Deca";
 }
 
-#about-disclaimer{
+#about-disclaimer {
     margin: 10px;
     position: absolute;
     top: 0;
@@ -182,6 +182,7 @@ table {
     width: 100%;
     max-width: 20%;
     text-decoration: none !important;
+    margin-top: 5%;
 }
 
 .team-image {
@@ -189,6 +190,7 @@ table {
     height: auto;
     filter: grayscale(1);
     transition: all 0.5s ease;
+    border-radius: 5%;
 }
 
 .team-link:hover .team-image {
@@ -220,7 +222,7 @@ table {
 }
 
 .modal-overlay {
-    position: absolute;
+    position: fixed;
     background-color: white;
     top: 50%;
     left: 50%;
@@ -232,11 +234,22 @@ table {
     -webkit-box-shadow: 0px 0px 82px -7px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 0px 82px -7px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 82px -7px rgba(0, 0, 0, 0.75);
-    width: 75%;
+    width: 100%;
+    max-width: 75%;
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     height: auto;
 }
+
+@media screen and (min-width: 768px) {
+    .modal-overlay {
+        flex-wrap: nowrap;
+        max-height: 90%;
+    }
+}
+
 
 @keyframes appear {
     100% {
@@ -246,11 +259,11 @@ table {
 
 .modal-image-container {
     height: 100%;
-    margin-bottom: -.3333333%;
+    margin-bottom: -0.3333333%;
 }
 
 .modal-image {
-    max-width: 65vh;
+    max-width: 100%;
     max-height: 65vh;
     border-bottom-left-radius: 1%;
     border-top-left-radius: 1%;
@@ -270,9 +283,10 @@ table {
     justify-content: center;
     align-items: center;
     line-height: 130%;
-    border-top: .1rem solid black;
-    border-bottom: .1rem solid black;
-    margin-top: 15%;
+    border-top: 0.1rem solid black;
+    border-bottom: 0.1rem solid black;
+    margin-top: 5%;
+    margin-bottom: 5%;
     font-family: 'Lexend Deca';
     font-size: 2.5rem;
 }
@@ -282,7 +296,7 @@ table {
     justify-content: center;
     align-items: center;
     font-family: 'Roboto Condensed';
-    font-size: 1.25rem;
+    font-size: 3rem;
     margin: 5%;
     white-space: pre-wrap;
 }
@@ -291,22 +305,33 @@ table {
     position: absolute;
     left: 100%;
     top: 0;
-    transform: translatex(-115%);
+    transform: translateX(-115%);
     background-color: white;
     color: black;
     padding: 15px 20px;
     text-align: center;
-    border: .1rem solid black;
+    border: 0.1rem solid black;
     border-radius: 10%;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 1.5rem;
     margin-top: 10px;
     cursor: pointer;
 }
 
 .modal-close:hover {
-    transition: .1s ease-in;
+    transition: 0.1s ease-in;
     filter: brightness(70%);
 }
 
+@media screen and (min-width: 768px) {
+    .modal-image {
+        max-width: 50vw;
+        max-height: 50vh;
+    }
+
+    .modal-name {
+        margin-top: 10%;
+        margin-bottom: 0;
+    }
+}
