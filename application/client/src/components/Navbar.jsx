@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./navbar.css";
-import Logo from "./Logo.png";
 
 function Navbar() {
   const [active, setActive] = useState("navList");
@@ -21,7 +20,7 @@ function Navbar() {
         SFSU-FoodFeast
       </a>
 
-      <img alt="logo" src={Logo} className="Logo"/>
+      <img alt="logo" src={process.env.PUBLIC_URL + '/images/brand/Logo.png'} className="Logo"/>
 
       <ul className={active}>
         <li className="navItems">
