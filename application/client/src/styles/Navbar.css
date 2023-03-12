@@ -4,15 +4,19 @@
   margin: 0;
   box-sizing: border-box;
 }
+
 html {
   font-size: 62.5%;
 }
+
 body {
   font-size: 1.6rem;
 }
+
 li {
   list-style: none;
 }
+
 a {
   text-decoration: none;
   color: rgb(255, 255, 255);
@@ -20,13 +24,11 @@ a {
   font-family: Georgia, serif;
 
 }
-
 a.navLink {
   border-bottom: 1px solid transparent;
   transition: border-bottom 0.2s ease-in-out;
   margin-right: 20px;
 }
-
 a.navLink:hover {
   border-bottom: 1px solid white;
 }
@@ -38,24 +40,29 @@ a.navLink:hover {
   height: 8vh;
   background: rgb(228, 60, 8);
 }
+
 .brand {
   text-transform: uppercase;
-  
+
 }
-.Logo{
-    position: relative;
-    height: 100%;
-    width: auto;
+
+.Logo {
+  position: relative;
+  height: 100%;
+  width: auto;
 }
+
 .navList {
   display: flex;
   align-items: center;
   justify-content: space-around;
   gap: 1rem;
 }
+
 .navButton {
   display: none;
 }
+
 .navButton div {
   width: 2.5rem;
   height: 0.2rem;
@@ -69,6 +76,7 @@ a.navLink:hover {
     display: block;
     cursor: pointer;
   }
+
   .navList {
     position: fixed;
     top: 8vh;
@@ -79,6 +87,7 @@ a.navLink:hover {
     flex-direction: column;
     transform: translateX(100%);
     transition: 0.5s ease-in;
+    z-index: 9999;
   }
 }
 
@@ -92,9 +101,11 @@ a.navLink:hover {
 .toggle .line1 {
   transform: rotate(-45deg) translate(-4px, 5px);
 }
+
 .toggle .line2 {
   opacity: 0;
 }
+
 .toggle .line3 {
   transform: rotate(45deg) translate(-4px, -5px);
 }

@@ -1,10 +1,14 @@
-const express = require("express");
-const app = express();
-const port = 8080;
 const cors = require("cors");
 const path = require("path");
+const port = 8080;
+const express = require("express");
 
+
+const authRoutes = require("./routes/auth.js");
+
+const app = express();
 app.use(cors());
+
 const _dirname = path.dirname("");
 const buildPath = path.join(__dirname, "../client/build");
 
@@ -19,15 +23,10 @@ app.get('/*', function(req, res) {
   };
 });
 
+app.use("/api/auth", authRoutes);
 
 
-app.get("/", (req, res) => {
-  res.send("Hello! This is the backEnd main page(endpoint).");
-});
 
-app.get("about", (req, res) => {
-  res.sendFile("Link to AboutPage"); // TODO: replace path with proper about path!
-});
 
 app.listen(port, () => {
   console.log(`listening on http://localhost:${port}...`);
