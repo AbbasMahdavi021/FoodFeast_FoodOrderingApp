@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -10,12 +11,25 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from "axios";
 
-
 const theme = createTheme();
 
-
-
 export default function SignIn() {
+
+    const [formData, setFormData] = useState({ 
+        username: "",
+        email: "",
+        password: ""
+    });
+
+    const handleChange = (e) => {
+        let obj = {
+            ...formData
+        }
+
+        obj[e.target.name] = e.target.value;
+        setFormData(obj);
+        console.log(formData.username + "HI")
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -25,14 +39,14 @@ export default function SignIn() {
             username: data.get('username'),
             email: data.get('email'),
             password: data.get('password'),
+
         };
 
         try {
-            const res = await axios.post("/register", inputs);
+            const res = await axios.post("/api/auth/register", inputs);
             console.log(res);
         } catch (err) {
             console.log(err);
-            
         }
     };
 
@@ -46,7 +60,7 @@ export default function SignIn() {
                     sm={4}
                     md={7}
                     sx={{
-                        backgroundImage: `url(${process.env.PUBLIC_URL}/images/brand/banner.jpg)`, //Change later
+                        backgroundImage: `url(${process.env.PUBLIC_URL}/images/brand/banner.jpg)`, //TODO 
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                     }}
@@ -68,6 +82,8 @@ export default function SignIn() {
                             <Grid container spacing={2}>
                                 <Grid item xs={12}>
                                     <TextField
+                                        value = {formData.name}
+                                        onChange={e => handleChange(e)}
                                         autoComplete="given-name"
                                         name="username"
                                         required
@@ -89,6 +105,8 @@ export default function SignIn() {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
+                                        value = {formData.email}
+                                        onChange={e => handleChange(e)}
                                         required
                                         fullWidth
                                         id="email"
@@ -109,6 +127,8 @@ export default function SignIn() {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
+                                        value = {formData.password}
+                                        onChange={e => handleChange(e)}
                                         required
                                         fullWidth
                                         name="password"

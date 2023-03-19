@@ -8,7 +8,7 @@ const teamMembers = [
       I possess excellent communication, teaching, and training skills, along with the ability to work independently with minimal supervision and a strong work ethic.
       When I'm not working, I enjoy hiking with my family or getting lost in a good book.
       My goal is to improve the user experience of health informatics systems by incorporating user-centered design principles, with the aim of making life easier for patients through intuitive and efficient interfaces.'`,
-    photo: '../images/Elahe.jpg',
+    photo: '../images/brand/Elahe.jpg',
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const teamMembers = [
     bio: `    Hi, my name is Abbas Mahdavi and I am the Backend lead for this project. I have always been interested in web development and full-stack projects, and I am excited to bring my expertise to this project. I am passionate about new technologies and always strive for excellence in my work. 
       In my free time, I enjoy biking and exploring new routes around my area. Biking is a great way for me to clear my head and get some exercise. I also love playing video games and diving into new virtual worlds. It's a fun and engaging way for me to unwind and relax. 
       Overall, I am a driven and passionate individual who enjoys both technical challenges and creative problem-solving. I am excited to be part of this project and can't wait to see what we can accomplish.`,
-    photo: '../images/Abbas.jpg',
+    photo: '../images/brand/Abbas.jpg',
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const teamMembers = [
       Prior to my time as a student, I served four years in the Marine Corps infantry with two combat deployments to Iraq. I achieved the rank of sergeant and left with an honorable discharge. 
       I apply the drive and discipline that I learned during that time to my studies, and intend to do the same at my future place of employment. 
       I am currently watching the rapidly developing tech space with excitement, in anticipation of finding my role in this new era.`,
-    photo: '../images/Jed.jpg',
+    photo: '../images/brand/Jed.jpg',
   },
   {
     id: 4,
@@ -36,14 +36,14 @@ const teamMembers = [
     bio: `      My name is Alexander Diaz and I am a senior planning to graduate at the end of the semester. My favorite programming languages are C++ and Java which I use for game development. 
       My role in this group project is working in the front end with the responsibility of ensuring the website visitors can easily interact with the page. 
       Apart from programming I enjoy playing soccer , boxing and going to parties.`,
-    photo: '../images/Alex.jpg',
+    photo: '../images/brand/Alex.jpg',
   },
   {
     id: 5,
     name: 'Megan Lew',
     role: 'Frontend Lead',
     bio: 'Hello! My name is Megan Lew. Currently, I am a senior in Computer Science at San Francisco State University. My interests are working in software development and frontend.',
-    photo: '../images/Megan.jpg',
+    photo: '../images/brand/Megan.jpg',
   },
   {
     id: 6,
@@ -52,7 +52,7 @@ const teamMembers = [
     bio: `      Hi, my name is Nathan Rennacker, I'm currently finishing my computer science degree at San Francisco State University.
       I’ve worked on projects like this before but I'm excited to work in a large group on a project this size!
       In my free time I like to go backpacking, enjoy playing piano, and traveling!`,
-    photo: '../images/Nathan.jpg',
+    photo: '../images/brand/Nathan.jpg',
   },
 ];
 

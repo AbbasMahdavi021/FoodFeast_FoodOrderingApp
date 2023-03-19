@@ -35,10 +35,13 @@ a.navLink:hover {
 
 .nav {
   display: flex;
+  position: sticky;
   align-items: center;
   justify-content: space-around;
   height: 8vh;
   background: rgb(228, 60, 8);
+  top: 0;
+  z-index: 9999;
 }
 
 .brand {
