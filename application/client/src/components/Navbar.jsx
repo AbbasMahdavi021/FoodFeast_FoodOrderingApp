@@ -19,34 +19,34 @@ function Navbar() {
       <a href="/" className="brand">
         SFSU-FoodFeast
       </a>
-
+  
       <img alt="logo" src={process.env.PUBLIC_URL + '/images/brand/Logo.png'} className="Logo"/>
-
+  
       <ul className={active}>
         <li className="navItems">
           <a href="/" className="navLink">
             Home
           </a>
         </li>
-
+  
         <li className="navItem">
           <a href="/login" className="navLink">
             Login
           </a>
         </li>
-
+  
         <li className="navItem">
           <a href="/" className="navLink">
             Enroll Resturant
           </a>
         </li>
-
+  
         <li className="navItem">
           <a href="/about" className="navLink">
             About Us
           </a>
         </li>
-
+  
       </ul>
       <div onClick={navToggle} className={icon}>
         <div className="line1"></div>
@@ -55,6 +55,7 @@ function Navbar() {
       </div>
     </nav>
   );
+  
 }
 
 export default Navbar;
