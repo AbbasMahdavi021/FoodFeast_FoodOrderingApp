@@ -1,0 +1,43 @@
+html,
+body {
+    height: 100%;
+    font-family: sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.content {
+    flex: 1 0 auto;
+    padding: 10px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    z-index: 9998;
+}
+
+.footer p1 {
+    text-align: left;
+    display: inline-block;
+    font-style: italic;
+    padding: 10px;
+}
+
+.footer p2 {
+    text-align: center;
+    display: inline-block;
+    padding: 10px;
+}
