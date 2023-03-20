@@ -26,18 +26,20 @@ body {
     align-items: center;
     background-color: rgb(0, 0, 0);
     color: white;
-    z-index: 9998;
+    z-index: 9999;
 }
 
-.footer p1 {
+.footer-text {
+    display: inline-block;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.footer-text:first-of-type {
     text-align: left;
-    display: inline-block;
     font-style: italic;
-    padding: 10px;
 }
 
-.footer p2 {
+.footer-text:last-of-type {
     text-align: center;
-    display: inline-block;
-    padding: 10px;
 }
