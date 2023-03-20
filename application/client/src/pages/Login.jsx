@@ -45,11 +45,12 @@ export default function Login() {
     }
 
     try {
+      console.log("HAHAH");
       const res = await axios.post("/auth/login", formData);
-      if (res.data.success){
+      if (res.data.success) {
         navigate("/");
       }
-      
+
     } catch (err) {
       setErr(err.response.data);
     }
