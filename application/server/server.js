@@ -8,6 +8,8 @@ const authRoutes = require("./routes/auth.js");
 
 const app = express();
 app.use(cors());
+app.use(express.json());
+
 
 const _dirname = path.dirname("");
 const buildPath = path.join(__dirname, "../client/build");
@@ -24,7 +26,6 @@ app.get('/*', function(req, res) {
 });
 
 app.use("/auth", authRoutes);
-
 
 
 

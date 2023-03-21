@@ -17,8 +17,8 @@ const theme = createTheme();
 export default function Register() {
 
     const [formData, setFormData] = useState({
-        username: "",
         email: "",
+        username: "",
         password: ""
     });
 
@@ -119,7 +119,7 @@ export default function Register() {
                             <Grid container spacing={2}>
                                 <Grid item xs={12}>
                                     <TextField
-                                        value={formData.name}
+                                        value={formData.username}
                                         onChange={e => handleChange(e)}
                                         autoComplete="given-name"
                                         name="username"
@@ -208,7 +208,6 @@ export default function Register() {
                                     {err}
                                 </p>
                             )}
-
                         </Box>
                     </Box>
                 </Grid>
