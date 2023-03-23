@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 import Home from '../pages/Home';
+import Favorites from '../pages/Favorites';
 import About from '../pages/About';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
@@ -17,17 +18,26 @@ function RoutesManager() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+
+        <Route path="/" element={
+          <div className="flex-container">
+            <div className="flex-item">
+              <Home />
+            </div>
+            <Favorites />
+          </div>
+        } />
+        
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About teamMembers={teamMembers} />} />
-        
+
         {teamMembers.map((member) => (
-          <Route key={member.id} 
-                 path={`/team/${member.name.replace(/\s/g, '-')}`} 
-                 element={<TeamMemberModal teamMember={member}/>} />
+          <Route key={member.id}
+            path={`/team/${member.name.replace(/\s/g, '-')}`}
+            element={<TeamMemberModal teamMember={member} />} />
         ))}
-        
+
       </Routes>
       <Footer />
     </BrowserRouter>
