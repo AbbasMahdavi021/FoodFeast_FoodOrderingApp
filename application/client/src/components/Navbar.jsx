@@ -40,9 +40,15 @@ function Navbar() {
             Enroll Resturant
           </a>
         </li>
+
+        <li className="navItem">
+          <a href="/" className="navLink">
+            Drivers
+          </a>
+        </li>
   
         <li className="navItem">
-          <a href="/about" className="navLink">
+          <a href="/about" className="navLink"> 
             About Us
           </a>
         </li>
