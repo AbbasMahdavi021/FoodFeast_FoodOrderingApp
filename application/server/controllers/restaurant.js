@@ -53,4 +53,23 @@ const getRestaurantsByCuisine = async (req, res) => {
   }
 };
 
-module.exports = { getRestaurants, getRestaurantById, getRestaurantsByCuisine };
+
+const getMenu = async (req, res) => {
+
+  try {
+    const id = req.params.id;
+    const rows = [];
+    const q = 'SELECT * FROM menu_items WHERE restaurant_id = ?';
+
+    db.query(q, [id], (error, results) => {
+      results.forEach(row => rows.push(row));
+      res.send(rows);
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.send([]);
+  }
+}
+
+module.exports = { getRestaurants, getRestaurantById, getRestaurantsByCuisine, getMenu };

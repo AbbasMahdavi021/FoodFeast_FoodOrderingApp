@@ -43,6 +43,7 @@ const Home = () => {
 
         const fuse = new Fuse(allRestaurants, {
             keys: ["name", "cuisine"],
+            threshold: 0.3,
         });
 
         const searchResults = fuse.search(searchRestaurants);
@@ -82,14 +83,25 @@ const Home = () => {
             <div className="restaurant-container">
                 {restaurants.map((restaurant) => {
                     return (
-                        <Link to={`/${restaurant.name}`} key={restaurant.id}>
+                        <Link to={`/restaurant/getMenu/${restaurant.id}`}>
                             <div className="restaurant-box">
                                 <img src={restaurant.picture} alt={restaurant.name} />
-                                <h2>{restaurant.name}</h2>
-                                <p>{restaurant.description}</p>
-                                <p>Rating: {restaurant.rating}</p>
-                                <p>Cuisine: {restaurant.cuisine}</p>
-                                <p>Delivery Time: {restaurant.est_delivery_time}</p>
+                                <div className="restaurant-details">
+                                    <h2>{restaurant.name}</h2>
+                                    <p>$$$$$</p>
+                                    <p>{restaurant.cuisine}</p>
+                                    <h1>{restaurant.description}</h1>
+                                    <p>
+                                        {[...Array(5)].map((star, i) => {
+                                            if (i < restaurant.rating) {
+                                                return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star1.png'} alt="star" />;
+                                            } else {
+                                                return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star2.png'} alt="star" />;
+                                            }
+                                        })}
+                                    </p>
+                                    <p>{restaurant.est_delivery_time - 10} - {restaurant.est_delivery_time}</p>
+                                </div>
                             </div>
                         </Link>
                     );

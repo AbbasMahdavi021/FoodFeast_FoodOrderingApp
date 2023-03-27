@@ -12,6 +12,7 @@ import Register from '../pages/Register';
 
 import TeamMemberModal from "../components/TeamMemberModel";
 import teamMembers from '../components/teamMembers';
+import Restaurant from '../pages/Restaurant';
 
 function RoutesManager() {
   return (
@@ -31,6 +32,8 @@ function RoutesManager() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About teamMembers={teamMembers} />} />
+
+        <Route path="/restaurant/getMenu/:id" element= {<Restaurant/>} />
 
         {teamMembers.map((member) => (
           <Route key={member.id}
