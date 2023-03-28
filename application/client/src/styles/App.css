@@ -159,20 +159,7 @@ table {
 
 /*//////////////////// Main PAGE /////////////////////////////*/
 
-.flex-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
-.flex-item {
-    flex: 5;
-}
-
-.Filter,
-.Favorites {
-    flex: 1;
-}
 
 /* Filter */
 
@@ -181,48 +168,17 @@ table {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
 }
 
-.search-bar {
+.filter-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
-    width: 200%;
-    margin-left: 20px;
+    justify-content: center;
+    margin: 20px;
 }
-
-
-.search-bar input[type="text"] {
-    padding: 10px;
-    border: none;
-    border-bottom-left-radius: 15px;
-    border-top-left-radius: 15px;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 300px;
-    font-size: 16px;
-    outline: none;
-}
-
-.search-bar input[type="text"]::placeholder {
-    color: #b2b2b2;
-}
-
-.search-bar button {
-    border: none;
-    background-color: transparent;
-    margin-left: -8px;
-    margin-top: 2px;
-    cursor: pointer;
-}
-
-.search-bar img {
-    width: 39px;
-    height: 39px;
-    border-bottom-right-radius: 15px;
-    border-top-right-radius: 15px;
-}
-
 
 .filter-container h2 {
     text-decoration: none;
@@ -230,14 +186,6 @@ table {
     font-size: 24px;
     font-family: Georgia, serif;
     margin-right: 20px;
-}
-
-.filter-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: 20px;
-
 }
 
 .filter-container button {
@@ -260,6 +208,42 @@ table {
     color: white;
 }
 
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.search-bar input[type="text"] {
+    padding: 10px;
+    border: none;
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-bar input[type="text"]::placeholder {
+    color: #b2b2b2;
+}
+
+.search-bar button {
+    border: none;
+    background-color: transparent;
+    margin-left: -8px;
+    margin-top: 2px;
+    cursor: pointer;
+}
+
+.search-bar img {
+    width: 40px;
+    height: 40px;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
 /* Filter */
 
 
@@ -267,6 +251,7 @@ table {
 .restaurant-container {
     display: flex;
     flex-wrap: wrap;
+    margin-left: 150px;
     margin-bottom: 60px;
 }
 
@@ -276,7 +261,7 @@ table {
     background-color: white;
     padding: 3px;
     margin: 10px;
-    height: 450px;
+    height: 550px;
     width: 300px;
     display: flex;
     flex-direction: column;
@@ -298,7 +283,7 @@ table {
     left: 0;
     right: 0;
     height: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 25%, transparent 50%);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 40%, transparent 70%);
     border-radius: 9px;
 }
 
@@ -307,12 +292,12 @@ table {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     z-index: 9;
-    max-height: 200px;
     position: absolute;
     bottom: 0;
     right: 0;
     left: 0;
     margin: 20px;
+    color: #ffffff;
 }
 
 .restaurant-details h2 {
@@ -320,12 +305,13 @@ table {
     grid-row: 1 / span 1;
     font-size: 36px;
     text-transform: capitalize;
+    max-width: 60px;
 }
 
 .restaurant-details p:nth-of-type(1) {
     grid-column: 2 / span 1;
     grid-row: 1 / span 1;
-    margin-top: 10px;
+    margin-top: 5px;
     margin-right: 10px;
     text-align: right;
 }
@@ -334,14 +320,13 @@ table {
     grid-column: 1 / span 2;
     grid-row: 2 / span 1;
     font-size: 25px;
-    margin-top: -10px;
     font-style: italic;
 }
 
 .restaurant-details h1 {
     grid-column: 1 / span 2;
     grid-row: 3 / span 1;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .restaurant-details p:nth-of-type(3) {
@@ -357,9 +342,16 @@ table {
 .restaurant-details p:nth-of-type(4) {
     grid-column: 2 / span 1;
     grid-row: 4 / span 1;
-    font-size: 25px;
+    font-size: 20px;
     margin-right: 10px;
+    margin-top: 5px;
     text-align: right;
+}
+
+.restaurant-details p:nth-of-type(5) {
+    grid-column: 1 / span 2;
+    grid-row: 5 / span 1;
+    font-size: 18px;
 }
 
 /* Home */

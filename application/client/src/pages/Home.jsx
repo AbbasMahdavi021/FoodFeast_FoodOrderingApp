@@ -42,7 +42,7 @@ const Home = () => {
         event.preventDefault();
 
         const fuse = new Fuse(allRestaurants, {
-            keys: ["name", "cuisine"],
+            keys: ["name", "cuisine", "description"],
             threshold: 0.3,
         });
 
@@ -83,12 +83,12 @@ const Home = () => {
             <div className="restaurant-container">
                 {restaurants.map((restaurant) => {
                     return (
-                        <Link to={`/restaurant/getMenu/${restaurant.id}`}>
+                        <Link to={`${restaurant.name.replace(/\s/g, '')}/${restaurant.id}`}>
                             <div className="restaurant-box">
                                 <img src={restaurant.picture} alt={restaurant.name} />
                                 <div className="restaurant-details">
                                     <h2>{restaurant.name}</h2>
-                                    <p>$$$$$</p>
+                                    <p>{restaurant.price}</p>
                                     <p>{restaurant.cuisine}</p>
                                     <h1>{restaurant.description}</h1>
                                     <p>
@@ -100,7 +100,8 @@ const Home = () => {
                                             }
                                         })}
                                     </p>
-                                    <p>{restaurant.est_delivery_time - 10} - {restaurant.est_delivery_time}</p>
+                                    <p>{restaurant.est_delivery_time - 5}-{restaurant.est_delivery_time} mins</p>
+                                    <p>{restaurant.address}</p>
                                 </div>
                             </div>
                         </Link>
