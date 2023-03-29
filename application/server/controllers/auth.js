@@ -50,9 +50,33 @@ const login = (req, res) => {
         }
 
         console.log("Logged in as " + data[0].username);
+        req.session.isLoggedIn = true;
+        req.session.username = req.body.username;
 
         return res.status(200).send({success:true});
     });
 };
 
-module.exports = { register, login};
+const logout = (req, res) => {
+
+    req.session.destroy(err => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json("Could not logging out");
+        }
+        return res.status(200).json({success: true});
+    });
+}
+
+const getStatus = async (req, res) => {
+    try {
+        let loggedIn = req.session.isLoggedIn || false;
+        res.send({
+            isLoggedIn: loggedIn
+        });
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+
+module.exports = { register, login, logout, getStatus};

@@ -2,15 +2,19 @@ const cors = require("cors");
 const path = require("path");
 const port = 8080;
 const express = require("express");
+const cookieParser = require("cookie-parser");
 
 
 const authRoutes = require("./routes/auth.js");
 const restaurantRoutes = require("./routes/restaurant.js");
+const session = require("./config/session.js");
 
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+session(app);
+app.use(cookieParser());
 
 
 //Build//////////////////////////////////////////////////////////////

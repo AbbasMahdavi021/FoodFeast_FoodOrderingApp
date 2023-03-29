@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -29,8 +28,6 @@ export default function Login() {
     setFormData(obj);
   };
 
-  const navigate = useNavigate();
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -45,10 +42,9 @@ export default function Login() {
     }
 
     try {
-      console.log("HAHAH");
       const res = await axios.post("/auth/login", formData);
       if (res.data.success) {
-        navigate("/");
+        window.location.href = '/';
       }
 
     } catch (err) {

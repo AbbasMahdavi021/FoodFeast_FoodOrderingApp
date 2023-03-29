@@ -1,5 +1,5 @@
 const express = require("express");
-const { getRestaurants, getRestaurantById , getRestaurantsByCuisine, getMenu } = require("../controllers/restaurant.js");
+const { getRestaurants , getRestaurantsByCuisine, getMenu } = require("../controllers/restaurant.js");
 const router = express.Router();
 
 router.get("/getAllRestaurants", getRestaurants);

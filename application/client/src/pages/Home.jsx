@@ -52,19 +52,6 @@ const Home = () => {
         setRestaurants(filteredRestaurants);
     };
 
-    //Replace with below code if don't want to use fuse.js
-
-    // const handleSearch = (event) => {
-    //     event.preventDefault();
-    //     const filteredRestaurants = allRestaurants.filter((restaurant) => {
-    //         return (
-    //             restaurant.name.toLowerCase().includes(searchRestaurants.toLowerCase()) ||
-    //             restaurant.cuisine.toLowerCase().includes(searchRestaurants.toLowerCase())
-    //         );
-    //     });
-    //     setRestaurants(filteredRestaurants);
-    // };
-
 
     return (
         <div>
@@ -83,7 +70,7 @@ const Home = () => {
             <div className="restaurant-container">
                 {restaurants.map((restaurant) => {
                     return (
-                        <Link to={`${restaurant.name.replace(/\s/g, '')}/${restaurant.id}`}>
+                        <Link key={restaurant.id} to={`${restaurant.name.replace(/\s/g, '')}/${restaurant.id}` }>
                             <div className="restaurant-box">
                                 <img src={restaurant.picture} alt={restaurant.name} />
                                 <div className="restaurant-details">
