@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -13,11 +14,11 @@ import axios from "axios";
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function Register() {
 
-    const [formData, setFormData] = useState({ 
-        username: "",
+    const [formData, setFormData] = useState({
         email: "",
+        username: "",
         password: ""
     });
 
@@ -28,27 +29,63 @@ export default function SignIn() {
 
         obj[e.target.name] = e.target.value;
         setFormData(obj);
-        console.log(formData.username + "HI")
     };
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
 
-        const inputs = {
-            username: data.get('username'),
-            email: data.get('email'),
-            password: data.get('password'),
+        if (!formData.username) {
+            setErr("Username field is required");
+            return;
+        }
 
-        };
+        if (!formData.email) {
+            setErr("Email field is required");
+            return;
+        }
+
+        // check if email ends with @sfsu.edu
+        const emailRegex = /^[\w-.]+@sfsu.edu$/i;
+        if (!emailRegex.test(formData.email)) {
+            setErr("Please enter a valid SFSU email address");
+            return;
+        }
+
+        if (!formData.password) {
+            setErr("Password field is required");
+            return;
+        }
+
+        // Validate password format
+        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
+        if (!passwordRegex.test(formData.password)) {
+            setErr("Password must contain: one lowercase letter, one uppercase letter, one number, and 5 characters long!");
+            return;
+        }
 
         try {
-            const res = await axios.post("/api/auth/register", inputs);
-            console.log(res);
+            const res = await axios.post("/auth/register", formData);
+            navigate("/login");
         } catch (err) {
-            console.log(err);
+            setErr(err.response.data);
         }
     };
+
+
+    //error display
+
+    const [err, setErr] = useState(null);
+
+    useEffect(() => {
+        if (err) {
+            const timerId = setTimeout(() => {
+                setErr(null);
+            }, 3000);
+            return () => clearTimeout(timerId);
+        }
+    }, [err]);
 
     return (
         <ThemeProvider theme={theme}>
@@ -82,7 +119,7 @@ export default function SignIn() {
                             <Grid container spacing={2}>
                                 <Grid item xs={12}>
                                     <TextField
-                                        value = {formData.name}
+                                        value={formData.username}
                                         onChange={e => handleChange(e)}
                                         autoComplete="given-name"
                                         name="username"
@@ -105,7 +142,7 @@ export default function SignIn() {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
-                                        value = {formData.email}
+                                        value={formData.email}
                                         onChange={e => handleChange(e)}
                                         required
                                         fullWidth
@@ -127,7 +164,7 @@ export default function SignIn() {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
-                                        value = {formData.password}
+                                        value={formData.password}
                                         onChange={e => handleChange(e)}
                                         required
                                         fullWidth
@@ -153,10 +190,11 @@ export default function SignIn() {
                                 type="submit"
                                 fullWidth
                                 variant="contained"
-                                sx={{ mt: 3, mb: 2, fontSize: 20}}
+                                sx={{ mt: 3, mb: 2, fontSize: 20 }}
                             >
                                 Sign Up
                             </Button>
+
                             <Grid container justifyContent="flex-end">
                                 <Grid item>
                                     <Link href="/login" variant="body2" sx={{ fontSize: 20 }}>
@@ -164,6 +202,12 @@ export default function SignIn() {
                                     </Link>
                                 </Grid>
                             </Grid>
+
+                            {err && (
+                                <p style={{ fontSize: "20px", color: "red", textAlign: "center" }}>
+                                    {err}
+                                </p>
+                            )}
                         </Box>
                     </Box>
                 </Grid>

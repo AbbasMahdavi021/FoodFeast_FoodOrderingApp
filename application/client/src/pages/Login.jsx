@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -8,18 +9,62 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from "axios";
 
 const theme = createTheme();
 
-export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+export default function Login() {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: ""
+  });
+
+  const handleChange = (e) => {
+    let obj = {
+      ...formData
+    }
+
+    obj[e.target.name] = e.target.value;
+    setFormData(obj);
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!formData.username) {
+      setErr("Username field is required");
+      return;
+    }
+
+    if (!formData.password) {
+      setErr("Password field is required");
+      return;
+    }
+
+    try {
+      const res = await axios.post("/auth/login", formData);
+      if (res.data.success) {
+        window.location.href = '/';
+      }
+
+    } catch (err) {
+      setErr(err.response.data);
+    }
+  };
+
+
+  //error display
+
+  const [err, setErr] = useState(null);
+
+  useEffect(() => {
+    if (err) {
+      const timerId = setTimeout(() => {
+        setErr(null);
+      }, 3000);
+      return () => clearTimeout(timerId);
+    }
+  }, [err]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -49,15 +94,16 @@ export default function SignIn() {
             <Typography component="h1" variant="h5" fontSize={40} align='center'>
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 1}}>
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
-                margin="normal"
+                value={formData.name}
+                onChange={e => handleChange(e)}
+                autoComplete="given-name"
+                name="username"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="Username"
                 autoFocus
                 InputLabelProps={{
                   sx: {
@@ -71,6 +117,8 @@ export default function SignIn() {
                 }}
               />
               <TextField
+                value={formData.name}
+                onChange={e => handleChange(e)}
                 margin="normal"
                 required
                 fullWidth
@@ -105,6 +153,13 @@ export default function SignIn() {
                   </Link>
                 </Grid>
               </Grid>
+
+              {err && (
+                <p style={{ fontSize: "20px", color: "red", textAlign: "center" }}>
+                  {err}
+                </p>
+              )}
+
             </Box>
           </Box>
         </Grid>

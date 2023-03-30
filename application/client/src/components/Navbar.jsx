@@ -1,9 +1,43 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import "../styles/Navbar.css";
 
 function Navbar() {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [active, setActive] = useState("navList");
   const [icon, setIcon] = useState("navButton");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getStatus = async () => {
+      try {
+        const res = await axios.get("/auth/getStatus", { withCredentials: true });
+        setIsLoggedIn(res.data.isLoggedIn);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    getStatus();
+  }, []);
+
+
+  const handleLogout = async () => {
+    try {
+      const res = await axios.post("/auth/logout", {}, { withCredentials: true });
+      console.log("Logged Out Status: " + res.data);
+      setIsLoggedIn(false);
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+
   const navToggle = () => {
     if (active === "navList") {
       setActive("navList openList");
@@ -20,7 +54,7 @@ function Navbar() {
         SFSU-FoodFeast
       </a>
 
-      <img alt="logo" src={process.env.PUBLIC_URL + '/images/brand/Logo.png'} className="Logo"/>
+      <img alt="logo" src={process.env.PUBLIC_URL + '/images/brand/Logo.png'} className="Logo" />
 
       <ul className={active}>
         <li className="navItems">
@@ -30,9 +64,15 @@ function Navbar() {
         </li>
 
         <li className="navItem">
-          <a href="/login" className="navLink">
-            Login
-          </a>
+          {isLoggedIn ? (
+            <a href="/login" className="navLink" onClick={handleLogout}>
+              Logout
+            </a>
+          ) : (
+            <a href="/login" className="navLink">
+              Login
+            </a>
+          )}
         </li>
 
         <li className="navItem">
@@ -42,9 +82,27 @@ function Navbar() {
         </li>
 
         <li className="navItem">
+          <a href="/" className="navLink">
+            Drivers
+          </a>
+        </li>
+
+        <li className="navItem">
           <a href="/about" className="navLink">
             About Us
           </a>
+        </li>
+
+        <li className="navItem">
+          {isLoggedIn ? (
+            <a href="/cart" className="navLink">
+              <ShoppingCartIcon style={{ fontSize: 36 }} />
+            </a>
+          ) : (
+            <a href="/login" className="navLink">
+              <ShoppingCartIcon style={{ fontSize: 36 }} />
+            </a>
+          )}
         </li>
 
       </ul>
