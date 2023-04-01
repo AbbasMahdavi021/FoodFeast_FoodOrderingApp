@@ -63,6 +63,14 @@ function Navbar() {
           </a>
         </li>
 
+
+        <li className="navItem">
+          <a href="/map" className="navLink">
+            Map
+          </a>
+        </li>
+  
+
         <li className="navItem">
           {isLoggedIn ? (
             <a href="/login" className="navLink" onClick={handleLogout}>

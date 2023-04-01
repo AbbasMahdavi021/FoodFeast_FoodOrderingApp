@@ -8,6 +8,7 @@ import Home from '../pages/Home';
 import About from '../pages/About';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
+import Map from '../pages/Map';
 
 import TeamMemberModal from "../components/TeamMemberModel";
 import teamMembers from '../components/teamMembers';
@@ -23,6 +24,8 @@ function RoutesManager() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About teamMembers={teamMembers} />} />
+        <Route path="/map" element={<Map />} />
+
         {teamMembers.map((member) => (
           <Route key={member.id}
             path={`/team/${member.name.replace(/\s/g, '-')}`}
