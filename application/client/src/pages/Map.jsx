@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 import {
   GoogleMap,
   LoadScript,
@@ -11,24 +12,9 @@ const containerStyle = {
   height: '100vh',
 }
 
-function RestaurantMarkers({ google }) {
+function RestaurantMarkers({ google, selectedRestaurant, setSelectedRestaurant }) {
   const [markers, setMarkers] = useState([])
-  const [selectedRestaurant, setSelectedRestaurant] = useState(null)
   const [restaurants, setRestaurants] = useState([])
-
-  {markers.map((marker, index) => (
-  <Marker
-    key={index}
-    position={marker.position}
-    onClick={() => setSelectedRestaurant(marker)}
-    zIndex={1000}
-  />
-))}
-
-
-  useEffect(() => {
-    FetchRestaurantsFromAPI()
-  }, [])
 
   async function FetchRestaurantsFromAPI() {
     try {
@@ -40,6 +26,10 @@ function RestaurantMarkers({ google }) {
       console.error('Error fetching restaurant data:', error)
     }
   }
+
+  useEffect(() => {
+    FetchRestaurantsFromAPI()
+  }, [])
 
   const geocodeRestaurants = useCallback(async () => {
     if (!google) return
@@ -54,6 +44,8 @@ function RestaurantMarkers({ google }) {
             resolve({
               name: restaurant.name,
               address: restaurant.address,
+              rating: restaurant.rating,
+              picture: restaurant.picture,
               position: { lat: location.lat(), lng: location.lng() },
             })
           } else {
@@ -82,16 +74,41 @@ function RestaurantMarkers({ google }) {
           key={index}
           position={marker.position}
           onClick={() => setSelectedRestaurant(marker)}
+          onMouseOver={() => setSelectedRestaurant(marker)}
+          zIndex={1000}
         />
       ))}
       {selectedRestaurant && (
         <InfoWindow
           position={selectedRestaurant.position}
           onCloseClick={() => setSelectedRestaurant(null)}
+          options={{ pixelOffset: new window.google.maps.Size(0, -30) }}
         >
-          <div>
-            <h4>{selectedRestaurant.name}</h4>
-            <p>{selectedRestaurant.address}</p>
+          <div className="custom-info-window">
+            <div className="info-window-name">{selectedRestaurant.name}</div>
+            <img
+              src={selectedRestaurant.picture}
+              alt={selectedRestaurant.name}
+              className="thumbnail"
+            />
+            <div className="info-window-rating">
+              rating: {selectedRestaurant.rating}
+            </div>
+            {(() => {
+              const [street, city, state] = selectedRestaurant.address.split(',')
+              return (
+                <>
+                  <p>{street.trim()}</p>
+                  <p>{city.trim()}, {state.trim()}</p>
+                </>
+              )
+            })()}
+            <Link
+              to={`/restaurants/${selectedRestaurant.name}`}
+              className="view-menu-link"
+            >
+              View Menu
+            </Link>
           </div>
         </InfoWindow>
       )}
@@ -99,8 +116,10 @@ function RestaurantMarkers({ google }) {
   )
 }
 
+
 function Map() {
   const [center, setCenter] = useState(null)
+  const [selectedRestaurant, setSelectedRestaurant] = useState(null)
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -120,11 +139,24 @@ function Map() {
     }
   }, [])
 
+  function handleMapClick() {
+    setSelectedRestaurant(null)
+  }
+
   return (
     <LoadScript googleMapsApiKey="AIzaSyDV-F6ADu9wNi12fMyIxMMjUnnfquIV_50">
       {center && (
-        <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={14}>
-          <RestaurantMarkers google={window.google} />
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={14}
+          onClick={handleMapClick}
+        >
+          <RestaurantMarkers
+            google={window.google}
+            selectedRestaurant={selectedRestaurant}
+            setSelectedRestaurant={setSelectedRestaurant}
+          />
         </GoogleMap>
       )}
     </LoadScript>

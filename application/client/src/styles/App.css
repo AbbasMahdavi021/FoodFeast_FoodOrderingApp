@@ -550,3 +550,64 @@ table {
         opacity: 1;
     }
 }
+
+.custom-info-window {
+  padding-left: 10px;
+  padding-right: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.view-menu-link {
+    position: relative;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgb(228, 60, 8);
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    border-radius: 10px 10px 10px 10px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 2rem;
+    margin-top: 10px;
+    cursor: pointer;
+    font-family: 'Roboto Condensed';
+    margin-bottom: 10px;
+}
+
+.view-menu-link:hover {
+    transition: 0.1s ease-in;
+    filter: brightness(70%);
+    color: white;
+}
+
+.info-window {
+    color: black;
+    font-family: 'Roboto Condensed';
+    font-size: 1.5rem;
+}
+
+.thumbnail {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.info-window-name {
+    font-family: 'Lexend Deca';
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.info-window-rating {
+    font-family: 'Roboto Condensed';
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+
