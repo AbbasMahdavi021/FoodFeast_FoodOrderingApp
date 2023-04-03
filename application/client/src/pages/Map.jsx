@@ -42,6 +42,7 @@ function RestaurantMarkers({ google, selectedRestaurant, setSelectedRestaurant }
           if (status === 'OK') {
             const location = results[0].geometry.location
             resolve({
+              id: restaurant.id,
               name: restaurant.name,
               address: restaurant.address,
               rating: restaurant.rating,
@@ -104,7 +105,7 @@ function RestaurantMarkers({ google, selectedRestaurant, setSelectedRestaurant }
               )
             })()}
             <Link
-              to={`/restaurants/${selectedRestaurant.name}`}
+              to={`/restaurants/${selectedRestaurant.id}`}
               className="view-menu-link"
             >
               View Menu
