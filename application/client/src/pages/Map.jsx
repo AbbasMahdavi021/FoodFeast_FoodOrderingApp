@@ -12,9 +12,14 @@ const containerStyle = {
   height: '100vh',
 }
 
-function RestaurantMarkers({ google, selectedRestaurant, setSelectedRestaurant }) {
+function RestaurantMarkers({
+  google,
+  selectedRestaurant,
+  setSelectedRestaurant,
+}) {
   const [markers, setMarkers] = useState([])
   const [restaurants, setRestaurants] = useState([])
+  const [isDataLoaded, setIsDataLoaded] = useState(false)
 
   async function FetchRestaurantsFromAPI() {
     try {
@@ -22,6 +27,7 @@ function RestaurantMarkers({ google, selectedRestaurant, setSelectedRestaurant }
       const data = await response.json()
       console.log(data)
       setRestaurants(data)
+      setIsDataLoaded(true)
     } catch (error) {
       console.error('Error fetching restaurant data:', error)
     }
@@ -32,7 +38,7 @@ function RestaurantMarkers({ google, selectedRestaurant, setSelectedRestaurant }
   }, [])
 
   const geocodeRestaurants = useCallback(async () => {
-    if (!google) return
+    if (!google || !isDataLoaded) return 
 
     const geocoder = new google.maps.Geocoder()
 
@@ -62,11 +68,11 @@ function RestaurantMarkers({ google, selectedRestaurant, setSelectedRestaurant }
     )
 
     setMarkers(geocodedRestaurants.filter((restaurant) => restaurant !== null))
-  }, [google, restaurants])
+  }, [google, restaurants, isDataLoaded])
 
   useEffect(() => {
     geocodeRestaurants()
-  }, [geocodeRestaurants, restaurants])
+  }, [geocodeRestaurants, restaurants, isDataLoaded])
 
   return (
     <>
@@ -96,11 +102,15 @@ function RestaurantMarkers({ google, selectedRestaurant, setSelectedRestaurant }
               rating: {selectedRestaurant.rating}
             </div>
             {(() => {
-              const [street, city, state] = selectedRestaurant.address.split(',')
+              const [street, city, state] = selectedRestaurant.address.split(
+                ',',
+              )
               return (
                 <>
                   <p>{street.trim()}</p>
-                  <p>{city.trim()}, {state.trim()}</p>
+                  <p>
+                    {city.trim()}, {state.trim()}
+                  </p>
                 </>
               )
             })()}
@@ -116,7 +126,6 @@ function RestaurantMarkers({ google, selectedRestaurant, setSelectedRestaurant }
     </>
   )
 }
-
 
 function Map() {
   const [center, setCenter] = useState(null)
