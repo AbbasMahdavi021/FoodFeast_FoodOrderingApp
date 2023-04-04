@@ -248,7 +248,22 @@ table {
 
 
 /* Home */
+.plate-container{   
+    flex-wrap: wrap;
+    margin-top: 30px;
+    margin-left: 160px;
+    margin-bottom: 60px;
+    color: #ffffff;
+    font-size: 46px;
+    font-family: Georgia, serif; 
+}
+.food-plate{
+    position: absolute;
+    top: 150px;
+    right: 100px;
+}
 .restaurant-container {
+    margin-top: 225px;
     display: flex;
     flex-wrap: wrap;
     margin-left: 150px;

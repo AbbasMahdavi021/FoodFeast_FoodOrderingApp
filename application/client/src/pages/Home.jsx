@@ -67,6 +67,17 @@ const Home = () => {
                 </form>
             </div>
 
+            <div className='plate-container'>
+                <h1>Meals made simple.</h1>
+                <h1>Food delivered anywhere </h1>
+                <h1>on campus.</h1>
+                <h1>Exclusive use for SFSU </h1>
+                <h1>Students, Staff, & Faculty.</h1>
+                <div className='food-plate'>
+                <img src={process.env.PUBLIC_URL + '/images/brand/food-dish.png'} alt="Plate" />
+                </div>
+            </div>
+
             <div className="restaurant-container">
                 {restaurants.map((restaurant) => {
                     return (
