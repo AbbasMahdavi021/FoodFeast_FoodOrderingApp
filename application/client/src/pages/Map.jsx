@@ -9,7 +9,7 @@ import {
 
 const containerStyle = {
   width: '100%',
-  height: '100vh',
+  height: '87vh', //So that it's not partially covered by Footer
 }
 
 function RestaurantMarkers({
@@ -29,7 +29,7 @@ function RestaurantMarkers({
       setRestaurants(data)
       setIsDataLoaded(true)
     } catch (error) {
-      console.error('Error fetching restaurant data:', error)
+      console.error('Error fetching restaurant data:', error);
     }
   }
 

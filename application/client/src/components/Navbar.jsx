@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+
 import "../styles/Navbar.css";
 
 function Navbar() {
@@ -54,22 +56,11 @@ function Navbar() {
         SFSU-FoodFeast
       </a>
 
-      <img alt="logo" src={process.env.PUBLIC_URL + '/images/brand/Logo.png'} className="Logo" />
+      <a href="/" className="Logo">
+        <img alt="logo" src={process.env.PUBLIC_URL + '/images/brand/Logo.png'} className="Logo" />
+      </a>
 
       <ul className={active}>
-        <li className="navItems">
-          <a href="/" className="navLink">
-            Home
-          </a>
-        </li>
-
-
-        <li className="navItem">
-          <a href="/map" className="navLink">
-            Map
-          </a>
-        </li>
-  
 
         <li className="navItem">
           {isLoggedIn ? (
@@ -84,13 +75,13 @@ function Navbar() {
         </li>
 
         <li className="navItem">
-          <a href="/" className="navLink">
+          <a href="/enroll" className="navLink">
             Enroll Resturant
           </a>
         </li>
 
         <li className="navItem">
-          <a href="/" className="navLink">
+          <a href="/driver" className="navLink">
             Drivers
           </a>
         </li>
@@ -98,6 +89,12 @@ function Navbar() {
         <li className="navItem">
           <a href="/about" className="navLink">
             About Us
+          </a>
+        </li>
+
+        <li className="navItem">
+          <a href="/map" className="navLink">
+            <LocationOnIcon style={{ fontSize: 36 }} />
           </a>
         </li>
 

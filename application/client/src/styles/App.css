@@ -248,22 +248,7 @@ table {
 
 
 /* Home */
-.plate-container{   
-    flex-wrap: wrap;
-    margin-top: 30px;
-    margin-left: 160px;
-    margin-bottom: 60px;
-    color: #ffffff;
-    font-size: 46px;
-    font-family: Georgia, serif; 
-}
-.food-plate{
-    position: absolute;
-    top: 150px;
-    right: 100px;
-}
 .restaurant-container {
-    margin-top: 225px;
     display: flex;
     flex-wrap: wrap;
     margin-left: 150px;
@@ -566,6 +551,14 @@ table {
     }
 }
 
+/*//////////////////// ABOUT PAGE /////////////////////////////*/
+
+/*//////////////////// MAP PAGE /////////////////////////////*/
+
+.map-page{
+    margin: 160px;
+}
+
 .custom-info-window {
   padding-left: 10px;
   padding-right: 5px;
@@ -599,6 +592,7 @@ table {
     color: white;
 }
 
+
 .info-window {
     color: black;
     font-family: 'Roboto Condensed';
@@ -624,5 +618,8 @@ table {
     font-size: 1.5rem;
     margin-bottom: 10px;
 }
+
+
+/*//////////////////// MAP PAGE /////////////////////////////*/
 
 

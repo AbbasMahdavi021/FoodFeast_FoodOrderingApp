@@ -3,6 +3,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import {useParams} from 'react-router-dom';
 import MenuItem from '../components/MenuItem';
+import '../styles/MenuItem.css';
 
 const Restaurant = (props) => {
 
@@ -27,7 +28,7 @@ const Restaurant = (props) => {
             }
         };
         getMenu();
-    }, []);
+    }, [id]);
 
     return (
         <div className='restaurant'>
@@ -35,7 +36,7 @@ const Restaurant = (props) => {
                 {newItem.map(item => {
                     return (
                         <MenuItem
-                            img={item.image}
+                            image={item.image}
                             itemName={item.name}
                             price={item.price}
                         />
