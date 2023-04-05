@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 import Fuse from 'fuse.js';
 import { Link } from 'react-router-dom';
-import Filter from './Filter';
+import Filter from '../components/Filter';
+import HomeHeader from '../components/HomeHeader';
 
 const Home = () => {
 
@@ -67,10 +68,11 @@ const Home = () => {
                 </form>
             </div>
 
+
             <div className="restaurant-container">
                 {restaurants.map((restaurant) => {
                     return (
-                        <Link key={restaurant.id} to={`${restaurant.name.replace(/\s/g, '')}/${restaurant.id}` }>
+                        <Link key={restaurant.id} to={`${restaurant.name.replace(/\s/g, '')}/${restaurant.id}`}>
                             <div className="restaurant-box">
                                 <img src={restaurant.picture} alt={restaurant.name} />
                                 <div className="restaurant-details">
