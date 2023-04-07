@@ -143,25 +143,6 @@ function Map() {
     })
   }, [])
 
-
-  // useEffect(() => {
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(
-  //       (position) => {
-  //         setCenter({
-  //           lat: position.coords.latitude,
-  //           lng: position.coords.longitude,
-  //         })
-  //       },
-  //       (error) => {
-  //         console.error('Error getting user location:', error)
-  //       },
-  //     )
-  //   } else {
-  //     console.log('Geolocation is not supported by this browser.')
-  //   }
-  // }, [])
-
   function handleMapClick() {
     setSelectedRestaurant(null)
   }
