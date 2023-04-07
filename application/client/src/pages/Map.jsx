@@ -131,23 +131,36 @@ function Map() {
   const [center, setCenter] = useState(null)
   const [selectedRestaurant, setSelectedRestaurant] = useState(null)
 
+
+  //set location to SFSU, instead of user location
+  //This should avoid API 'unsecure error', since it doesn't get need to get
+  // user's location on a http site, which isn't allowed!!!
+
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setCenter({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          })
-        },
-        (error) => {
-          console.error('Error getting user location:', error)
-        },
-      )
-    } else {
-      console.log('Geolocation is not supported by this browser.')
-    }
+    setCenter({
+      lat: 37.7209,
+      lng: -122.4782,
+    })
   }, [])
+
+
+  // useEffect(() => {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         setCenter({
+  //           lat: position.coords.latitude,
+  //           lng: position.coords.longitude,
+  //         })
+  //       },
+  //       (error) => {
+  //         console.error('Error getting user location:', error)
+  //       },
+  //     )
+  //   } else {
+  //     console.log('Geolocation is not supported by this browser.')
+  //   }
+  // }, [])
 
   function handleMapClick() {
     setSelectedRestaurant(null)
