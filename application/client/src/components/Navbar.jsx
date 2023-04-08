@@ -93,18 +93,18 @@ function Navbar() {
         </li>
 
         <li className="navItem">
-          <a href="/map" className="navLink">
+          <a href="/map" className="navItem">
             <LocationOnIcon style={{ fontSize: 36 }} />
           </a>
         </li>
 
         <li className="navItem">
           {isLoggedIn ? (
-            <a href="/cart" className="navLink">
+            <a href="/cart" className="navItem">
               <ShoppingCartIcon style={{ fontSize: 36 }} />
             </a>
           ) : (
-            <a href="/login" className="navLink">
+            <a href="/login" className="navItem">
               <ShoppingCartIcon style={{ fontSize: 36 }} />
             </a>
           )}

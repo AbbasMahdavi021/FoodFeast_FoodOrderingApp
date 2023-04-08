@@ -42,9 +42,13 @@ const Home = () => {
     const handleSearch = (event) => {
         event.preventDefault();
 
+        if (!searchRestaurants.trim()) {
+            return; // do nothing
+        }
+
         const fuse = new Fuse(allRestaurants, {
             keys: ["name", "cuisine", "description"],
-            threshold: 0.3,
+            threshold: 0.25,
         });
 
         const searchResults = fuse.search(searchRestaurants);
