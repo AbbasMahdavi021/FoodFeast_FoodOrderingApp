@@ -188,7 +188,39 @@ table {
     margin-right: 20px;
 }
 
-.filter-container button {
+.filter-container select {
+    width: 150px;
+    border: none;
+    margin: 5px;
+    padding: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    font-size: 16px;
+    color: white;
+    background-color: #2196f3;
+    cursor: pointer;
+    font-size: 20px;
+    text-align: center;
+    font-family: Georgia, serif;
+}
+
+.filter-container select option {
+    width: 150px;
+    border: none;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #2196f3;
+    background-color: #ffffff;
+    cursor: pointer;
+    font-size: 20px;
+    text-align: center;
+    font-family: Georgia, serif;
+}
+
+
+/* .filter-container button {
     width: 110px;
     border: none;
     margin: 5px;
@@ -206,7 +238,7 @@ table {
 .filter-container button.active {
     background-color: #2196f3;
     color: white;
-}
+} */
 
 .search-bar {
     display: flex;
@@ -220,10 +252,11 @@ table {
     border-bottom-left-radius: 15px;
     border-top-left-radius: 15px;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-    width: 400px;
+    width: 20em;
     font-size: 16px;
     outline: none;
 }
+
 
 .search-bar input[type="text"]::placeholder {
     color: #b2b2b2;
@@ -555,15 +588,15 @@ table {
 
 /*//////////////////// MAP PAGE /////////////////////////////*/
 
-.map-page{
+.map-page {
     margin: 160px;
 }
 
 .custom-info-window {
-  padding-left: 10px;
-  padding-right: 5px;
-  width: 100%;
-  box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 5px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 
@@ -600,11 +633,11 @@ table {
 }
 
 .thumbnail {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  margin-bottom: 10px;
-  border-radius: 5px;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 5px;
 }
 
 .info-window-name {
@@ -621,5 +654,3 @@ table {
 
 
 /*//////////////////// MAP PAGE /////////////////////////////*/
-
-

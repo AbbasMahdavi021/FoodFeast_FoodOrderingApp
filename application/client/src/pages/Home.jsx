@@ -10,6 +10,7 @@ const Home = () => {
     const [restaurants, setRestaurants] = useState([]);
     const [allRestaurants, setAllRestaurants] = useState([]);
     const [searchRestaurants, setSearchRestaurants] = useState('');
+    const [selectedCuisine, setSelectedCuisine] = useState('All');
 
     useEffect(() => {
         const getRestaurants = async () => {
@@ -29,32 +30,43 @@ const Home = () => {
         getRestaurants();
     }, []);
 
+
+
     const handleFilterChange = (cuisines) => {
+
         const checkedCuisines = cuisines.filter((cuisine) => cuisine.isChecked).map((cuisine) => cuisine.name);
 
-        const filteredRestaurants = allRestaurants.filter((restaurant) => checkedCuisines.includes(restaurant.cuisine));
-
+        const filteredRestaurants = checkedCuisines.length === 0 ? [...allRestaurants] : allRestaurants.filter((restaurant) => checkedCuisines.includes(restaurant.cuisine));
         setRestaurants(filteredRestaurants);
+
+        setSelectedCuisine(checkedCuisines.length === 1 ? checkedCuisines[0] : 'All');
     };
+
+
 
 
     //search
     const handleSearch = (event) => {
         event.preventDefault();
 
-        if (!searchRestaurants.trim()) {
-            return; // do nothing
+        const searchTerm = searchRestaurants.trim();
+        const selectedCuisineFilter = selectedCuisine === 'All' ? () => true : (restaurant) => restaurant.cuisine === selectedCuisine;
+
+        if (!searchTerm) {
+            setRestaurants(allRestaurants.filter(selectedCuisineFilter));
+            return;
         }
 
-        const fuse = new Fuse(allRestaurants, {
-            keys: ["name", "cuisine", "description"],
+        const fuseOptions = {
+            keys: ['name', 'cuisine', 'description'],
             threshold: 0.25,
-        });
+        };
 
-        const searchResults = fuse.search(searchRestaurants);
-        const filteredRestaurants = searchResults.map((result) => result.item);
+        const fuse = new Fuse(allRestaurants.filter(selectedCuisineFilter), fuseOptions);
+        const searchResults = fuse.search(searchTerm);
+        const searchedRestaurants = searchResults.map((result) => result.item);
 
-        setRestaurants(filteredRestaurants);
+        setRestaurants(searchedRestaurants);
     };
 
 
