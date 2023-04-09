@@ -205,17 +205,9 @@ table {
 }
 
 .filter-container select option {
-    width: 150px;
-    border: none;
-    margin: 5px;
-    padding: 10px;
-    border-radius: 10px;
-    font-size: 16px;
+    font-size: 20px;
     color: #2196f3;
     background-color: #ffffff;
-    cursor: pointer;
-    font-size: 20px;
-    text-align: center;
     font-family: Georgia, serif;
 }
 
