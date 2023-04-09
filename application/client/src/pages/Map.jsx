@@ -1,174 +1,128 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
 import {
   GoogleMap,
   LoadScript,
   Marker,
   InfoWindow,
 } from '@react-google-maps/api'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
 
+const apiKey = 'AIzaSyDV-F6ADu9wNi12fMyIxMMjUnnfquIV_50'
+
+// Map does not run into footer
 const containerStyle = {
   width: '100%',
-  height: '87vh', //So that it's not partially covered by Footer
+  height: '87vh',
 }
 
-function RestaurantMarkers({
-  google,
-  selectedRestaurant,
-  setSelectedRestaurant,
-}) {
-  const [markers, setMarkers] = useState([])
-  const [restaurants, setRestaurants] = useState([])
-  const [isDataLoaded, setIsDataLoaded] = useState(false)
+// Center at SFSU
+const center = {
+  lat: 37.7261723,
+  lng: -122.4799151,
+}
 
-  async function FetchRestaurantsFromAPI() {
-    try {
-      const response = await fetch('/restaurants/getAllRestaurants')
-      const data = await response.json()
-      console.log(data)
-      setRestaurants(data)
-      setIsDataLoaded(true)
-    } catch (error) {
-      console.error('Error fetching restaurant data:', error);
-    }
+// Fetch all restaurant data from the API
+async function getAllRestaurants() {
+  try {
+    const response = await axios.get('/restaurants/getAllRestaurants')
+    return response.data
+  } catch (err) {
+    console.error(err)
+    return []
   }
-
-  useEffect(() => {
-    FetchRestaurantsFromAPI()
-  }, [])
-
-  const geocodeRestaurants = useCallback(async () => {
-    if (!google || !isDataLoaded) return 
-
-    const geocoder = new google.maps.Geocoder()
-
-    const geocodeRestaurant = (restaurant) => {
-      return new Promise((resolve) => {
-        geocoder.geocode({ address: restaurant.address }, (results, status) => {
-          if (status === 'OK') {
-            const location = results[0].geometry.location
-            resolve({
-              id: restaurant.id,
-              name: restaurant.name,
-              address: restaurant.address,
-              rating: restaurant.rating,
-              picture: restaurant.picture,
-              position: { lat: location.lat(), lng: location.lng() },
-            })
-          } else {
-            console.error('Geocode error:', status)
-            resolve(null)
-          }
-        })
-      })
-    }
-
-    const geocodedRestaurants = await Promise.all(
-      restaurants.map((restaurant) => geocodeRestaurant(restaurant)),
-    )
-
-    setMarkers(geocodedRestaurants.filter((restaurant) => restaurant !== null))
-  }, [google, restaurants, isDataLoaded])
-
-  useEffect(() => {
-    geocodeRestaurants()
-  }, [geocodeRestaurants, restaurants, isDataLoaded])
-
-  return (
-    <>
-      {markers.map((marker, index) => (
-        <Marker
-          key={index}
-          position={marker.position}
-          onClick={() => setSelectedRestaurant(marker)}
-          onMouseOver={() => setSelectedRestaurant(marker)}
-          zIndex={1000}
-        />
-      ))}
-      {selectedRestaurant && (
-        <InfoWindow
-          position={selectedRestaurant.position}
-          onCloseClick={() => setSelectedRestaurant(null)}
-          options={{ pixelOffset: new window.google.maps.Size(0, -30) }}
-        >
-          <div className="custom-info-window">
-            <div className="info-window-name">{selectedRestaurant.name}</div>
-            <img
-              src={selectedRestaurant.picture}
-              alt={selectedRestaurant.name}
-              className="thumbnail"
-            />
-            <div className="info-window-rating">
-              rating: {selectedRestaurant.rating}
-            </div>
-            {(() => {
-              const [street, city, state] = selectedRestaurant.address.split(
-                ',',
-              )
-              return (
-                <>
-                  <p>{street.trim()}</p>
-                  <p>
-                    {city.trim()}, {state.trim()}
-                  </p>
-                </>
-              )
-            })()}
-            <Link
-              to={`/restaurants/${selectedRestaurant.id}`}
-              className="view-menu-link"
-            >
-              View Menu
-            </Link>
-          </div>
-        </InfoWindow>
-      )}
-    </>
-  )
 }
 
 function Map() {
-  const [center, setCenter] = useState(null)
+  const [restaurants, setRestaurants] = useState([])
   const [selectedRestaurant, setSelectedRestaurant] = useState(null)
 
+  // Fetch restaurants and their coordinates when the component mounts
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setCenter({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          })
-        },
-        (error) => {
-          console.error('Error getting user location:', error)
-        },
-      )
-    } else {
-      console.log('Geolocation is not supported by this browser.')
+    const fetchRestaurantsAndCoordinates = async () => {
+      const restaurantData = await getAllRestaurants()
+
+      // Update the restaurant objects with their coordinates
+      Promise.all(
+        restaurantData.map(async (restaurant) => {
+          const response = await fetch(
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+              restaurant.address,
+            )}&key=${apiKey}`,
+          )
+          const data = await response.json()
+          if (data.results[0]) {
+            return {
+              ...restaurant,
+              position: data.results[0].geometry.location,
+            }
+          }
+          return null
+        }),
+      ).then((updatedRestaurants) => {
+        // Store updated restaurant objects in the state
+        setRestaurants(updatedRestaurants.filter((r) => r !== null))
+      })
     }
+
+    fetchRestaurantsAndCoordinates()
   }, [])
 
-  function handleMapClick() {
+  // Handler for when a marker is hovered
+  const onMarkerHover = (restaurant) => {
+    setSelectedRestaurant(restaurant)
+  }
+
+  // Handler for closing the InfoWindow
+  const onInfoWindowCloseClick = () => {
     setSelectedRestaurant(null)
   }
 
+  // Render the Google Map component with markers and the InfoWindow
   return (
-    <LoadScript googleMapsApiKey="AIzaSyDV-F6ADu9wNi12fMyIxMMjUnnfquIV_50">
-      {center && (
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={14}
-          onClick={handleMapClick}
-        >
-          <RestaurantMarkers
-            google={window.google}
-            selectedRestaurant={selectedRestaurant}
-            setSelectedRestaurant={setSelectedRestaurant}
+    <LoadScript googleMapsApiKey={apiKey}>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={13}
+        onClick={() => setSelectedRestaurant(null)}
+      >
+        {/* Render a Marker for each restaurant */}
+        {restaurants.map((restaurant) => (
+          <Marker
+            key={restaurant.id}
+            position={restaurant.position}
+            onMouseOver={() => onMarkerHover(restaurant)}
           />
-        </GoogleMap>
-      )}
+        ))}
+
+        {/* Render an InfoWindow for the selected restaurant */}
+        {selectedRestaurant && (
+          <InfoWindow
+            position={selectedRestaurant.position}
+            onCloseClick={onInfoWindowCloseClick}
+          >
+            <div className="info-window">
+              <h2 className="info-window-name">{selectedRestaurant.name}</h2>
+              <img
+                className="thumbnail"
+                src={selectedRestaurant.picture}
+                alt={`${selectedRestaurant.name}`}
+              />
+              <p className="info-window-rating">
+                rating: {selectedRestaurant.rating}
+              </p>
+              {/* Link to the restaurant's menu */}
+              <Link
+                to={`/restaurants/${selectedRestaurant.id}`}
+                className="view-menu-link"
+              >
+                View Menu
+              </Link>
+            </div>
+          </InfoWindow>
+        )}
+      </GoogleMap>
     </LoadScript>
   )
 }
