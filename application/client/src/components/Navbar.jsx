@@ -82,18 +82,18 @@ function Navbar() {
 
         <li className="navItem">
           <a href="/map" className="navItem">
-            <LocationOnIcon style={{ fontSize: 36 }} />
+            <LocationOnIcon style={{ fontSize: 36, filter: 'drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5))'}} />
           </a>
         </li>
 
         <li className="navItem">
           {isLoggedIn ? (
             <a href="/cart" className="navItem">
-              <ShoppingCartIcon style={{ fontSize: 36 }} />
+              <ShoppingCartIcon style={{ fontSize: 36, filter: 'drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5))' }} />
             </a>
           ) : (
             <a href="/login" className="navItem">
-              <ShoppingCartIcon style={{ fontSize: 36 }} />
+              <ShoppingCartIcon style={{ fontSize: 36, filter: 'drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5))' }} />
             </a>
           )}
         </li>

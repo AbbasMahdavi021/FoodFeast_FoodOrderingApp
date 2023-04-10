@@ -19,11 +19,12 @@
 }
 .text-container h1{
     color: #ffffff;
-    font-size: 2vw;
+    font-size: clamp(20px, 2.5vw, 3vw);
     font-family: Georgia, serif;
 }
 .food-plate img{
     width: 20vw;
+    min-width: 150px;
 }
 
 
@@ -31,8 +32,8 @@
     border:3px solid rgb(241, 241, 71);
     width: 80%;
     color: #ffffff;
-    font-size: 2vw;
     font-family: Georgia, serif;
+    font-size: 20px;
     margin-bottom: 10px;
 
 }
@@ -44,8 +45,8 @@
     text-align: center;
     font-size: 20px;
     color: black;
+    cursor: pointer;
 }
-
 
 
 /*//////////////////// HOME-Browse PAGE /////////////////////////////*/
