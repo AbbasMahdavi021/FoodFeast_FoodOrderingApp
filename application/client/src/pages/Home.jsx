@@ -2,15 +2,16 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 import Fuse from 'fuse.js';
 import { Link } from 'react-router-dom';
+
 import Filter from '../components/Filter';
 import HomeHeader from '../components/HomeHeader';
 
 const Home = () => {
-
     const [restaurants, setRestaurants] = useState([]);
     const [allRestaurants, setAllRestaurants] = useState([]);
     const [searchRestaurants, setSearchRestaurants] = useState('');
     const [selectedCuisine, setSelectedCuisine] = useState('All');
+    const [cuisines, setCuisines] = useState([]);
 
     useEffect(() => {
         const getRestaurants = async () => {
@@ -20,6 +21,12 @@ const Home = () => {
                 if (rows.length > 0) {
                     setRestaurants([...rows]);
                     setAllRestaurants([...rows]);
+
+                    // Create an array of unique cuisines
+                    const uniqueCuisines = [...new Set(rows.map(restaurant => restaurant.cuisine))];
+                    // Create an array of objects containing the cuisine name
+                    const cuisinesArray = uniqueCuisines.map(cuisine => ({ name: cuisine }));
+                    setCuisines(cuisinesArray);
                 } else {
                     console.log("No Restaurants to Show!");
                 }
@@ -30,50 +37,36 @@ const Home = () => {
         getRestaurants();
     }, []);
 
-
-
     const handleFilterChange = (cuisines) => {
-
         const checkedCuisines = cuisines.filter((cuisine) => cuisine.isChecked).map((cuisine) => cuisine.name);
-
         const filteredRestaurants = checkedCuisines.length === 0 ? [...allRestaurants] : allRestaurants.filter((restaurant) => checkedCuisines.includes(restaurant.cuisine));
         setRestaurants(filteredRestaurants);
-
         setSelectedCuisine(checkedCuisines.length === 1 ? checkedCuisines[0] : 'All');
     };
 
-
-
-
-    //search
     const handleSearch = (event) => {
         event.preventDefault();
-
         const searchTerm = searchRestaurants.trim();
         const selectedCuisineFilter = selectedCuisine === 'All' ? () => true : (restaurant) => restaurant.cuisine === selectedCuisine;
-
         if (!searchTerm) {
             setRestaurants(allRestaurants.filter(selectedCuisineFilter));
             return;
         }
-
         const fuseOptions = {
             keys: ['name', 'cuisine', 'description'],
             threshold: 0.25,
         };
-
         const fuse = new Fuse(allRestaurants.filter(selectedCuisineFilter), fuseOptions);
         const searchResults = fuse.search(searchTerm);
         const searchedRestaurants = searchResults.map((result) => result.item);
-
         setRestaurants(searchedRestaurants);
     };
 
-
     return (
-        <div>
+        <div className='home-div'>
+            <HomeHeader />
             <div className='browse'>
-                <Filter handleFilterChange={handleFilterChange} />
+                <Filter cuisines={cuisines} handleFilterChange={handleFilterChange} />
                 <form onSubmit={handleSearch}>
                     <div className="search-bar">
                         <input type="text" placeholder="Search for Restaurant or Cuisine..." value={searchRestaurants} onChange={(e) => setSearchRestaurants(e.target.value)} />
@@ -83,7 +76,6 @@ const Home = () => {
                     </div>
                 </form>
             </div>
-
 
             <div className="restaurant-container">
                 {restaurants.map((restaurant) => {

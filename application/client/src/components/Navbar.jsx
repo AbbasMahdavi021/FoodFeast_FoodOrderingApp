@@ -63,18 +63,6 @@ function Navbar() {
       <ul className={active}>
 
         <li className="navItem">
-          {isLoggedIn ? (
-            <a href="/login" className="navLink" onClick={handleLogout}>
-              Logout
-            </a>
-          ) : (
-            <a href="/login" className="navLink">
-              Login
-            </a>
-          )}
-        </li>
-
-        <li className="navItem">
           <a href="/enroll" className="navLink">
             Enroll Resturant
           </a>
@@ -109,6 +97,27 @@ function Navbar() {
             </a>
           )}
         </li>
+
+        <li className="navItem">
+          {isLoggedIn ? (
+            <a href="/login" className="log-button" onClick={handleLogout}>
+              Logout
+            </a>
+          ) : (
+            <a href="/login" className="log-button">
+              Login
+            </a>
+          )}
+        </li>
+
+        {!isLoggedIn && (
+          <li className="navItem">
+            <a href="/register" className="log-button" onClick={handleLogout}>
+              Register
+            </a>
+          </li>
+        )}
+
 
       </ul>
       <div onClick={navToggle} className={icon}>

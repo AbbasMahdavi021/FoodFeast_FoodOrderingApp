@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 const Filter = (props) => {
+
   const [selectedCuisine, setSelectedCuisine] = useState('All');
 
   const handleCuisineSelected = (event) => {
@@ -12,16 +13,16 @@ const Filter = (props) => {
     }
   };
 
+
+
   return (
     <div className="filter-container">
       <h2>Cuisines</h2>
       <select value={selectedCuisine} onChange={handleCuisineSelected}>
         <option value="All">All</option>
-        <option value="American">American</option>
-        <option value="Italian">Italian</option>
-        <option value="Mexican">Mexican</option>
-        <option value="Japanese">Japanese</option>
-        <option value="Indian">Indian</option>
+        {props.cuisines.map(cuisine => (
+          <option key={cuisine.name} value={cuisine.name}>{cuisine.name}</option>
+        ))}
       </select>
     </div>
   );
