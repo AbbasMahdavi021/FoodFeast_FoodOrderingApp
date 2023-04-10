@@ -1,0 +1,196 @@
+/*//////////////////// ABOUT PAGE /////////////////////////////*/
+#about-header {
+    position: relative;
+    text-align: center;
+    height: 10%;
+    top: 5%;
+    font: 4em "Lexend Deca";
+    color: #ffffff;
+}
+
+#team-container {
+    position: relative;
+    /* 100% - ( 15% + 7.5%) = 77.5%  */
+    height: 77.5%;
+    top: 7.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5% 10%;
+    flex-wrap: wrap;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 60px;
+}
+
+.team-link {
+    width: 100%;
+    max-width: 20%;
+    text-decoration: none !important;
+    margin-top: 3%;
+}
+
+.team-image {
+    width: 100%;
+    height: auto;
+    filter: grayscale(1);
+    transition: all 0.5s ease;
+    border-radius: 5%;
+}
+
+.team-link:hover .team-image {
+    filter: grayscale(0);
+}
+
+.image-member-name {
+    position: relative;
+    width: 100%;
+    font: 1.3em "Oswald";
+    left: 5%;
+    color: rgb(255, 255, 255);
+}
+
+.image-member-role {
+    min-width: 100%;
+    position: relative;
+    left: 20%;
+    font: 1.1em "Roboto Condensed";
+    color: rgb(255, 255, 255);
+}
+
+.image-member-name:link {
+    text-decoration: none !important;
+}
+
+.image-member-role:link {
+    text-decoration: none !important;
+}
+
+.modal-overlay {
+    position: fixed;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 1%;
+    opacity: 0;
+    animation: appear 0.5s forwards;
+    border: .025rem solid black;
+    box-shadow: 0px 0px 82px -7px rgba(0, 0, 0, 0.75);
+    width: 100%;
+    max-width: 75%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    max-height: 100%;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+.modal-overlay::-webkit-scrollbar {
+    width: 5px;
+}
+
+.modal-overlay::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 5px;
+}
+
+.modal-overlay::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+.modal-image-container {
+    height: 100%;
+    margin-bottom: -0.3333333%;
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 65vh;
+    border-bottom-left-radius: 1%;
+    border-top-left-radius: 1%;
+}
+
+.modal-text-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-name {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 130%;
+    border-top: 0.1rem solid black;
+    border-bottom: 0.1rem solid black;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    font-family: 'Lexend Deca';
+    font-size: 2.5rem;
+}
+
+.modal-bio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto Condensed';
+    font-size: 3rem;
+    margin: 5%;
+    white-space: pre-wrap;
+}
+
+.modal-close {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    transform: translateX(-115%);
+    background-color: white;
+    color: rgb(0, 0, 0);
+    padding: 15px 20px;
+    text-align: center;
+    border: 0.1rem solid black;
+    border-radius: 10%;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.5rem;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    transition: 0.1s ease-in;
+    filter: brightness(70%);
+}
+
+@media screen and (min-width: 768px) {
+
+    .modal-overlay {
+        max-height: 90%;
+        max-width: 90%;
+    }
+
+    .modal-image {
+        max-width: 50vw;
+        max-height: 50vh;
+    }
+
+    .modal-name {
+        margin-top: 10%;
+        margin-bottom: 0;
+    }
+}
+
+@keyframes appear {
+    100% {
+        opacity: 1;
+    }
+}
+
+/*//////////////////// ABOUT PAGE /////////////////////////////*/

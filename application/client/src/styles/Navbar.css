@@ -99,7 +99,7 @@ a.navLink:hover {
     right: 0;
     height: 88%;
     width: 45%;
-    background: rgb(228, 60, 8);
+    background: rgb(168, 17, 168);
     flex-direction: column;
     transform: translateX(100%);
     transition: 0.5s ease-in;

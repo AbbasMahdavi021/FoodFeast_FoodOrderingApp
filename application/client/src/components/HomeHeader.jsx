@@ -1,26 +1,45 @@
 import React from 'react';
-import '../styles/HomeHeader.css';
 
-const HomeHeader = () => {
+const HomeHeader = ({ scrollToSecondPage }) => {
 
     return (
 
-        <div className='home-header'>
-            <div className='plate-container'>
-                <h1>Meals made simple.</h1>
-                <h1>Food delivered anywhere </h1>
-                <h1>on campus.</h1>
-                <h1>Exclusive use for SFSU </h1>
-                <h1>Students, Staff, & Faculty.</h1>
+        <div className='home-header-div'>
+
+            <div className='home-header'>
+                <div className='text-container'>
+                    <h1>Meals made simple.</h1>
+                    <h1>Food delivered anywhere </h1>
+                    <h1>on campus.</h1>
+                    <h1>Exclusive use for SFSU </h1>
+                    <h1>Students, Staff, & Faculty.</h1>
+                </div>
+                <div className='food-plate'>
+                    <img src={process.env.PUBLIC_URL + '/images/brand/food-dish.png'} alt="Plate" />
+                </div>
             </div>
-            <div className='food-plate'>
-                <img src={process.env.PUBLIC_URL + '/images/brand/food-dish.png'} alt="Plate" />
+
+            <div className='featured-restaurants'>
+                Put featured restaurants box here!
             </div>
+
+            <div className='featured-restaurants'>
+                Put Favored restaurants box here!
+            </div>
+
+            <div className='browse-button'>
+                <button onClick={scrollToSecondPage}>
+                    Browser All Restaurants
+                </button>
+            </div>
+
         </div>
 
-        //Featured restaurants will go Here.
+            //Featured restaurants will go Here.
 
-        //Favorite restaurants will go here.
+            //Favorite restaurants will go here.
+
+
 
     );
 }
