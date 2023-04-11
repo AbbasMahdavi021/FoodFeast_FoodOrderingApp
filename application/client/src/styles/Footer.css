@@ -37,6 +37,11 @@ body {
   font-size: 16px;
 }
 
+.footer-text a {
+  display: inline-block;
+  font-size: 16px;
+}
+
 .footer-text:first-of-type {
   text-align: left;
   font-style: italic;

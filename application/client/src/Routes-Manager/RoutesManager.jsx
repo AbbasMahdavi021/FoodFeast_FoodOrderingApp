@@ -10,6 +10,9 @@ import About from '../pages/About';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Map from '../pages/Map';
+import AdminLogin from '../pages/AdminLogin';
+import Admin from '../pages/Admin';
+
 
 import TeamMemberModal from "../components/TeamMemberModel";
 import teamMembers from '../components/teamMembers';
@@ -26,6 +29,9 @@ function RoutesManager() {
         <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About teamMembers={teamMembers} />} />
         <Route path="/map" element={<Map />} />
+
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/adminlogin" element={<AdminLogin />} />
 
         {teamMembers.map((member) => (
           <Route key={member.id}

@@ -25,7 +25,7 @@ app.use (express.static(buildPath));
 
 app.get([
 
-  '/', '/login', '/register', '/about', '/map', '/enroll', '/driver', '/cart'
+  '/', '/login', '/register', '/about', '/map', '/enroll', '/driver', '/cart', 'adminlogin',
 
 ], function(req, res) {
   res.sendFile(path.join(__dirname, "../client/build/index.html"), function(err) {

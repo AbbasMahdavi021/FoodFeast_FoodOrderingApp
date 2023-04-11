@@ -24,7 +24,7 @@ const HomeHeader = ({ scrollToSecondPage }) => {
             </div>
 
             <div className='featured-restaurants'>
-                Put Favored restaurants box here!
+                Put Favorited restaurants box here!
             </div>
 
             <div className='browse-button'>
