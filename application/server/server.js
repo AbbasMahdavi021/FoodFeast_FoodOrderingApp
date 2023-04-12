@@ -7,6 +7,9 @@ const cookieParser = require("cookie-parser");
 
 const authRoutes = require("./routes/auth.js");
 const restaurantRoutes = require("./routes/restaurant.js");
+const adminRoutes = require("./routes/admin.js");
+
+
 const session = require("./config/session.js");
 
 
@@ -39,6 +42,7 @@ app.get([
 
 app.use("/auth", authRoutes);
 app.use("/restaurants", restaurantRoutes);
+app.use("/admin", adminRoutes);
 
 
 app.listen(port, () => {

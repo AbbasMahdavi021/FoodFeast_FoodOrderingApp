@@ -28,4 +28,10 @@
     align-items: center;
     justify-content: center;
 }
+
+.admin-div h1{
+    margin-top: 10px;
+    color: white;
+    font-size: 35px;
+}
   

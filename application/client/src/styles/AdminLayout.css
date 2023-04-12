@@ -1,0 +1,92 @@
+.admin-layout {
+    display: flex;
+    flex-direction: row;
+    height: 96vh;
+}
+
+.left-boxes {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-side-boxes {
+    color: white;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.tabs {
+    justify-content: space-between;
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    margin: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab {
+    padding: 20px;
+    background-color: rgb(204, 126, 48);
+    border: 1px solid rgb(0, 0, 0);
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    cursor: pointer;
+}
+
+.tab.active {
+    background-color: aquamarine;
+}
+
+.side-boxes {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-left: 10px;
+}
+
+.top-boxes {
+    display: flex;
+    flex-direction: row;
+    height: 50%;
+}
+
+.top-box {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid white;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.user-box {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid white;
+    margin: 10px;
+    border-radius: 10px;
+
+}
+
+.tab-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
+}
+
+a.tab-button {
+    justify-content: center;
+    color: black;
+    background-color: rgb(241, 241, 71);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 10);
+    border-radius: 10px;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 20px;
+    margin: 10px;
+}

@@ -19,9 +19,12 @@ import teamMembers from '../components/teamMembers';
 import Restaurant from '../pages/Restaurant';
 
 function RoutesManager() {
+
+  const isUnique = window.location.pathname === "/admin" || window.location.pathname === "/driver";
+
   return (
     <BrowserRouter>
-      <Navbar />
+      {!isUnique && <Navbar />}
       <Routes>
 
         <Route path="/" element={<Home />} />
@@ -43,7 +46,7 @@ function RoutesManager() {
 
 
       </Routes>
-      <Footer />
+      {!isUnique &&  <Footer />}
     </BrowserRouter>
   );
 }
