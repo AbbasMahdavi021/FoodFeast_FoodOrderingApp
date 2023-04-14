@@ -8,10 +8,12 @@ const AdminUsers = () => {
 
     const [userList, setUserList] = useState([]);
 
+    const [refresh, setRefresh] = useState(1);
+
     useEffect( () => {
 
-
         const getUserList = async() => {
+            
 
             const res = await axios.get('/admin/getUserList', {withCredentials: true});
 
@@ -22,13 +24,22 @@ const AdminUsers = () => {
     
         }; getUserList();
 
-    }, [] ); 
+    }, [refresh] ); 
 
 
     return(
 
-        <div>
-            {userList.map (user => <AdminUser name={user.username} userId={user.id} key={user.id} /> ) } 
+        <div className='admin-users'>
+            <h1 className='Header'> User List </h1>
+            {userList.map ((user, index) => 
+                <AdminUser 
+                    isOdd={index %2 == 0 ? "even": "odd"}  
+                    name={user.username} 
+                    userId={user.id} 
+                    key={user.id} 
+                    refresh={setRefresh}
+                /> 
+                ) } 
         </div>
     )
 
