@@ -12,6 +12,7 @@ import Register from '../pages/Register';
 import Map from '../pages/Map';
 import AdminLogin from '../pages/AdminLogin';
 import Admin from '../pages/Admin';
+import Driver from '../pages/Driver';
 
 
 import TeamMemberModal from "../components/TeamMemberModel";
@@ -32,6 +33,7 @@ function RoutesManager() {
         <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About teamMembers={teamMembers} />} />
         <Route path="/map" element={<Map />} />
+        <Route path="/driver" element={<Driver />} />
 
         <Route path="/admin" element={<Admin />} />
         <Route path="/adminlogin" element={<AdminLogin />} />

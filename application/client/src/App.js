@@ -1,13 +1,15 @@
-import React from "react";
-
+import React from 'react';
 import './styles/App.css';
-import RoutesManager from "./Routes-Manager/RoutesManager";
+import RoutesManager from './Routes-Manager/RoutesManager';
+import { UserProvider } from './userContext';
 
 function App() {
   return (
     <div className='app'>
       <div className='container'>
-        <RoutesManager />
+        <UserProvider>
+          <RoutesManager />
+        </UserProvider>
       </div>
     </div>
   );
