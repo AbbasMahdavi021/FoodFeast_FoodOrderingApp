@@ -1,0 +1,88 @@
+.matrix-gif {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    animation: fade-out 4s ease-in-out forwards;
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+
+    60% {
+        opacity: 0.1;
+    }
+
+    80% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+.admin-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-div h1{
+    margin-top: 10px;
+    color: white;
+    font-size: 35px;
+}
+
+
+.admin-users h1{
+    text-align: center;
+    margin: 10px;
+    color: white;
+    font-size: 25px;
+}
+
+
+
+.info{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+
+
+}
+
+.info.even {
+
+    background-color: rgb(70, 70, 70);
+    
+}
+
+.info.odd {
+    background-color: rgb(51, 51, 51);
+}
+
+
+.admin-delete{
+    color: white;
+    background-color: red;
+    font-size: 16px;
+}
+
+
+.text-area{
+    background-color: black;
+    color: greenyellow;
+    resize: none;
+    height: 90%;
+    width: 100%;
+    font-size: 25px;
+}
+  

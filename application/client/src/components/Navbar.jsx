@@ -63,19 +63,7 @@ function Navbar() {
       <ul className={active}>
 
         <li className="navItem">
-          {isLoggedIn ? (
-            <a href="/login" className="navLink" onClick={handleLogout}>
-              Logout
-            </a>
-          ) : (
-            <a href="/login" className="navLink">
-              Login
-            </a>
-          )}
-        </li>
-
-        <li className="navItem">
-          <a href="/enroll" className="navLink">
+          <a href="/restaurantlogin" className="navLink">
             Enroll Resturant
           </a>
         </li>
@@ -93,22 +81,43 @@ function Navbar() {
         </li>
 
         <li className="navItem">
-          <a href="/map" className="navLink">
-            <LocationOnIcon style={{ fontSize: 36 }} />
+          <a href="/map" className="navItem">
+            <LocationOnIcon style={{ fontSize: 36, filter: 'drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5))'}} />
           </a>
         </li>
 
         <li className="navItem">
           {isLoggedIn ? (
-            <a href="/cart" className="navLink">
-              <ShoppingCartIcon style={{ fontSize: 36 }} />
+            <a href="/cart" className="navItem">
+              <ShoppingCartIcon style={{ fontSize: 36, filter: 'drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5))' }} />
             </a>
           ) : (
-            <a href="/login" className="navLink">
-              <ShoppingCartIcon style={{ fontSize: 36 }} />
+            <a href="/login" className="navItem">
+              <ShoppingCartIcon style={{ fontSize: 36, filter: 'drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5))' }} />
             </a>
           )}
         </li>
+
+        <li className="navItem">
+          {isLoggedIn ? (
+            <a href="/login" className="log-button" onClick={handleLogout}>
+              Logout
+            </a>
+          ) : (
+            <a href="/login" className="log-button">
+              Login
+            </a>
+          )}
+        </li>
+
+        {!isLoggedIn && (
+          <li className="navItem">
+            <a href="/register" className="log-button" onClick={handleLogout}>
+              Register
+            </a>
+          </li>
+        )}
+
 
       </ul>
       <div onClick={navToggle} className={icon}>

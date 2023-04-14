@@ -25,9 +25,25 @@ a {
 
 }
 a.navLink {
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 10);
   border-bottom: 1px solid transparent;
   transition: border-bottom 0.2s ease-in-out;
   margin-right: 20px;
+}
+a.navItem {
+  border-bottom: 1px solid transparent;
+  transition: border-bottom 0.2s ease-in-out;
+  margin-right: 20px;
+}
+a.log-button{
+  color: black;
+  background-color: rgb(241, 241, 71);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 10);
+  border-radius: 10px;
+  padding: 10px 20px;
+  text-align: center;
+  display: inline-block;
+  font-size: 20px;
 }
 a.navLink:hover {
   border-bottom: 1px solid white;
@@ -39,12 +55,13 @@ a.navLink:hover {
   align-items: center;
   justify-content: space-around;
   height: 8vh;
-  background: rgb(228, 60, 8);
+  background: rgb(168, 17, 168);
   top: 0;
   z-index: 9999;
 }
 
 .brand {
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 10);
   text-transform: uppercase;
 
 }
@@ -82,13 +99,12 @@ a.navLink:hover {
     position: fixed;
     top: 8vh;
     right: 0;
-    height: 100%;
+    height: 88%;
     width: 45%;
-    background: rgb(228, 60, 8);
+    background: rgb(168, 17, 168);
     flex-direction: column;
     transform: translateX(100%);
     transition: 0.5s ease-in;
-    z-index: 9999;
   }
 }
 

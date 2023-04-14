@@ -7,6 +7,9 @@ const cookieParser = require("cookie-parser");
 
 const authRoutes = require("./routes/auth.js");
 const restaurantRoutes = require("./routes/restaurant.js");
+const adminRoutes = require("./routes/admin.js");
+
+
 const session = require("./config/session.js");
 
 
@@ -23,19 +26,23 @@ const buildPath = path.join(__dirname, "../client/build");
 
 app.use (express.static(buildPath));
 
-app.get('/about', function(req, res) {
-  res.sendFile(path.join(__dirname, "../client/build/index.html")),
-  function(err) {
-    if(err) {
-      res.status(500).send(err)
+app.get([
+
+  '/', '/login', '/register', '/about', '/map', '/enroll', '/driver', '/cart', 'adminlogin',
+
+], function(req, res) {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"), function(err) {
+    if (err) {
+      res.status(500).send(err);
     }
-  };
+  });
 });
 //Build//////////////////////////////////////////////////////////////
 
 
 app.use("/auth", authRoutes);
 app.use("/restaurants", restaurantRoutes);
+app.use("/admin", adminRoutes);
 
 
 app.listen(port, () => {

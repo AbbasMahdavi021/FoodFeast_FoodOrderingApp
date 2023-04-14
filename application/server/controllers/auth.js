@@ -13,16 +13,16 @@ const register = (req, res) => {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.password, salt);
 
-        const q ="INSERT INTO users(`username`,`email`,`password`) VALUES (?)"
+        const q = "INSERT INTO users(`username`,`email`,`password`) VALUES (?)"
         const values = [
             req.body.username,
             req.body.email,
             hash,
         ]
-        db.query(q, [values], (err,data)=>{
+        db.query(q, [values], (err, data) => {
             if (err) return res.json(err);
             return res.status(200).json("User Created!"),
-            console.log("Account for " + req.body.username + " was created!")
+                console.log("Account for " + req.body.username + " was created!")
         });
     });
 };
@@ -38,14 +38,14 @@ const login = (req, res) => {
         if (err) {
             return res.json(err);
         }
-        if(data.length === 0) {
+        if (data.length === 0) {
             return res.status(404).json("Incorrect Username!");
         }
 
         //check password
         const correctPass = bcrypt.compareSync(req.body.password, data[0].password); //first item in data arr = user
 
-        if(!correctPass) {
+        if (!correctPass) {
             return res.status(400).json("Incorrect password!");
         }
 
@@ -53,7 +53,7 @@ const login = (req, res) => {
         req.session.isLoggedIn = true;
         req.session.username = req.body.username;
 
-        return res.status(200).send({success:true});
+        return res.status(200).send({ success: true });
     });
 };
 
@@ -62,21 +62,58 @@ const logout = (req, res) => {
     req.session.destroy(err => {
         if (err) {
             console.log(err);
-            return res.status(500).json("Could not logging out");
+            return res.status(500).json("Could not log out.");
         }
-        return res.status(200).json({success: true});
+        return res.status(200).json({ success: true });
     });
 }
 
+
+const adminlogin = (req, res) => {
+
+    const q = "SELECT * FROM users WHERE ( username = ?) AND isAdmin = 1";
+
+    db.query(q, [req.body.username], (err, data) => {
+        if (err) {
+            return res.json(err);
+        }
+
+        if (data.length === 0) {
+            return res.status(404).json("Incorrect Username!");
+        }
+
+        //check password
+        const correctPass = bcrypt.compareSync(req.body.password, data[0].password); //first item in data arr = user
+
+        if (!correctPass) {
+            return res.status(400).json("Incorrect password!");
+        }
+
+        console.log("Logged in as Admin: " + data[0].username);
+        req.session.isAdminLoggedIn = true;
+        req.session.username = req.body.username;
+
+        return res.status(200).send({ success: true });
+    });
+}
+
+
 const getStatus = async (req, res) => {
     try {
+        
         let loggedIn = req.session.isLoggedIn || false;
+        let adminLoggedIn = req.session.isAdminLoggedIn || false;
         res.send({
-            isLoggedIn: loggedIn
+            isLoggedIn: loggedIn,
+            isAdminLoggedIn: adminLoggedIn
         });
+
     } catch (error) {
         res.status(500).send(error);
     }
 }
 
-module.exports = { register, login, logout, getStatus};
+
+
+
+module.exports = { register, login, logout, getStatus, adminlogin };
