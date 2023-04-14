@@ -56,7 +56,7 @@ export default function Register() {
         }
 
         if (!formData.address) {
-            setErr("Restaurant Address field is required");
+            setErr("Restaurant Address field is required ");
             return;
         }
 

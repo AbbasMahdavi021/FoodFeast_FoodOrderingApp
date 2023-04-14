@@ -161,7 +161,7 @@ export default function Login() {
 
                 <Grid item>
                   <Link href="/restaurantregister" variant="h6" sx={{ fontSize: 20 }}>
-                    {"Want to register your restaurant? Register here."}
+                    {"Want to register your restaurant ? Register here."}
                   </Link>
                 </Grid>
               </Grid>

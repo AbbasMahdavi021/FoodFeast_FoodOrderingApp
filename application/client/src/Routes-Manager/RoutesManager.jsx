@@ -34,6 +34,7 @@ function RoutesManager() {
         <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About teamMembers={teamMembers} />} />
         <Route path="/map" element={<Map />} />
+        
         <Route path="/restaurantlogin" element={<RestaurantLogin />} />
         <Route path="/restaurantregister" element={<RestaurantRegister />} />
 
