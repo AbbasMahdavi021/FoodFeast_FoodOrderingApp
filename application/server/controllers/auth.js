@@ -34,8 +34,6 @@ const login = (req, res) => {
 
     const q = "SELECT * FROM users WHERE username = ?"
 
-    console.log(req.body.username + " HHA");
-
     db.query(q, [req.body.username], (err, data) => {
         if (err) {
             return res.json(err);

@@ -19,4 +19,33 @@ const getUserList = async (req, res) => {
 };
 
 
-module.exports = { getUserList };
+const deleteUser = async (req, res) => {
+
+  console.log("Delteing user...");
+
+  try {
+
+      const q = 'DELETE FROM users WHERE id = ?';
+  
+      db.query(q, [req.body.userId], () => {
+
+        console.log(req.body);
+
+        console.log("Deleted user: " + req.body.userId);
+
+        
+        res.send({status : 200})
+
+
+      });
+  
+    } catch (err) {
+      console.error(err);
+      res.send(err.message);
+    }
+};
+
+
+
+
+module.exports = { getUserList, deleteUser };
