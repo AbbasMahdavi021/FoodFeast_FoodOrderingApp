@@ -8,6 +8,7 @@ const authRoutes = require("./routes/auth.js");
 const restaurantRoutes = require("./routes/restaurant.js");
 const adminRoutes = require("./routes/admin.js");
 const favoritesRoutes = require("./routes/favorites.js");
+const featuredRoutes = require("./routes/featured.js");
 
 const session = require("./config/session.js");
 
@@ -59,6 +60,7 @@ app.use("/auth", authRoutes);
 app.use("/restaurants", restaurantRoutes);
 app.use("/admin", adminRoutes);
 app.use('/favorites', favoritesRoutes);
+app.use('/featured', featuredRoutes);
 
 
 

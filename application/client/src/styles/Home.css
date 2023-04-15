@@ -1,7 +1,7 @@
 /*//////////////////// HOME-Header PAGE /////////////////////////////*/
 
 .header-page {
-    height: 100vh;
+    height: 40vh;
 }
 
 .home-header-div {
@@ -29,6 +29,16 @@
 
 
 .featured-restaurants{
+    border:3px solid rgb(241, 241, 71);
+    width: 80%;
+    color: #ffffff;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+
+}
+
+.favorited-restaurants{
     border:3px solid rgb(241, 241, 71);
     width: 80%;
     color: #ffffff;
