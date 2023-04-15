@@ -1,47 +1,53 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react'
+import axios from 'axios'
+import UserContext from '../userContext'
 
 const HomeHeader = ({ scrollToSecondPage }) => {
+  const [favoritedRestaurants, setFavoritedRestaurants] = useState([])
+  const { user } = useContext(UserContext)
 
-    return (
+  // get the stored user id from the context
+  console.log('user in context', user)
 
-        <div className='home-header-div'>
+  useEffect(() => {
+    if (user) {
+      const fetchRestaurants = async () => {
+        try {
+          const favoritedRes = await axios.get(
+            `http://localhost:8080/favorites/${user.id}`,
+          )
 
-            <div className='home-header'>
-                <div className='text-container'>
-                    <h1>Meals made simple.</h1>
-                    <h1>Food delivered anywhere </h1>
-                    <h1>on campus.</h1>
-                    <h1>Exclusive use for SFSU </h1>
-                    <h1>Students, Staff, & Faculty.</h1>
-                </div>
-                <div className='food-plate'>
-                    <img src={process.env.PUBLIC_URL + '/images/brand/food-dish.png'} alt="Plate" />
-                </div>
-            </div>
+          setFavoritedRestaurants(favoritedRes.data)
+          console.log('favorite restaurants', favoritedRes.data)
+        } catch (error) {
+          console.error(error)
+        }
+      }
 
-            <div className='featured-restaurants'>
-                Put featured restaurants box here!
-            </div>
+      fetchRestaurants()
+    }
+  }, [user])
 
-            <div className='featured-restaurants'>
-                Put Favorited restaurants box here!
-            </div>
+  return (
+    <div className="home-header-div">
+      {/* <div className='featured-restaurants'>
+                {featuredRestaurants.map((restaurant) => (
+                    <div key={restaurant.id} className='restaurant'>
+                        <p>placeholder for featured</p>
+                    </div>
+                ))}
+            </div> */}
 
-            <div className='browse-button'>
-                <button onClick={scrollToSecondPage}>
-                    Browser All Restaurants
-                </button>
-            </div>
-
-        </div>
-
-            //Featured restaurants will go Here.
-
-            //Favorite restaurants will go here.
-
-
-
-    );
+      <div className="favorited-restaurants">
+        {favoritedRestaurants.map((restaurant, index) => (
+          <div key={index} className="restaurant">
+            <h3>{restaurant.name}</h3>
+            <p>{restaurant.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 }
 
-export default HomeHeader;
+export default HomeHeader

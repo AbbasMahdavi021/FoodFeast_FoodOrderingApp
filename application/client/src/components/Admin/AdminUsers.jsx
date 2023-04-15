@@ -33,7 +33,7 @@ const AdminUsers = () => {
             <h1 className='Header'> User List </h1>
             {userList.map ((user, index) => 
                 <AdminUser 
-                    isOdd={index %2 == 0 ? "even": "odd"}  
+                    isOdd={index %2 === 0 ? "even": "odd"}  
                     name={user.username} 
                     userId={user.id} 
                     key={user.id} 
