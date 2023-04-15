@@ -10,20 +10,29 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Stack from '@mui/material/Stack';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import axios from "axios";
+
 
 const theme = createTheme();
 
 export default function Register() {
-
-    const [formData, setFormData] = useState({
+    const [formData, setFormData, category, setCategory] = useState({
         name: "",
         email: "",
         username: "",
         password: "",
         restaurant: "",
         phone: "",
-        address: ""
+        address: "",
+        description: ""
     });
 
     const handleChange = (e) => {
@@ -33,6 +42,7 @@ export default function Register() {
 
         obj[e.target.name] = e.target.value;
         setFormData(obj);
+        setCategory(e.target.value);
     };
 
     const navigate = useNavigate();
@@ -64,6 +74,7 @@ export default function Register() {
             setErr("Email field is required");
             return;
         }
+        
 
         // check if email ends with @sfsu.edu
         const emailRegex = /^[\w-.]+@sfsu.edu$/i;
@@ -136,6 +147,7 @@ export default function Register() {
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                             <Grid container spacing={2}>
+                            {/* name */}
                             <Grid item xs={12}>
                                     <TextField
                                         value={formData.name}
@@ -159,6 +171,7 @@ export default function Register() {
                                         }}
                                     />
                                 </Grid>
+                                {/* username */}
                                 <Grid item xs={12}>
                                     <TextField
                                         value={formData.username}
@@ -182,6 +195,7 @@ export default function Register() {
                                         }}
                                     />
                                 </Grid>
+                                {/* email */}
                                 <Grid item xs={12}>
                                     <TextField
                                         value={formData.email}
@@ -204,6 +218,7 @@ export default function Register() {
                                         }}
                                     />
                                 </Grid>
+                                {/* password */}
                                 <Grid item xs={12}>
                                     <TextField
                                         value={formData.password}
@@ -227,6 +242,7 @@ export default function Register() {
                                         }}
                                     />
                                 </Grid>
+                                {/* restaurant name */}
                                 <Grid item xs={12}>
                                     <TextField
                                         value={formData.restaurantname}
@@ -250,6 +266,7 @@ export default function Register() {
                                         }}
                                     />
                                 </Grid>
+                                {/* restaurant phone number */}
                                 <Grid item xs={12}>
                                     <TextField
                                         value={formData.phone}
@@ -259,7 +276,7 @@ export default function Register() {
                                         required
                                         fullWidth
                                         id="phone"
-                                        label="Phone"
+                                        label="Restaurant Phone Number"
                                         autoFocus
                                         InputLabelProps={{
                                             sx: {
@@ -273,6 +290,98 @@ export default function Register() {
                                         }}
                                     />
                                 </Grid>
+                                {/* restaurant address */}
+                                <Grid item xs={12}>
+                                    <TextField
+                                        value={formData.address}
+                                        onChange={e => handleChange(e)}
+                                        autoComplete="given-name"
+                                        name="address"
+                                        required
+                                        fullWidth
+                                        id="address"
+                                        label="Restaurant Address"
+                                        autoFocus
+                                        InputLabelProps={{
+                                            sx: {
+                                                fontSize: '1.2rem'
+                                            }
+                                        }}
+                                        inputProps={{
+                                            style: {
+                                                fontSize: '2rem'
+                                            }
+                                        }}
+                                    />
+                                </Grid>
+                                 {/* category drop down menu */}
+                                 <Grid item xs={12}>
+                                <Box sx={{ minWidth: 120 }}>
+                                <FormControl fullWidth>
+                                <InputLabel id="category">Select Category</InputLabel>
+                                 <Select
+                                 labelId="category"
+                                 id="category"
+                                 value={category}
+                                 label="Category"
+                                 onChange={handleChange} >
+                                <MenuItem value={1}>American</MenuItem>
+                                <MenuItem value={2}>Indian</MenuItem>
+                                <MenuItem value={3}>Italian</MenuItem>
+                                <MenuItem value={4}>Japanese</MenuItem>
+                                <MenuItem value={5}>Mexican</MenuItem>
+                                </Select>
+                                </FormControl>
+                                </Box>
+                                </Grid>
+
+                                {/* add images */}
+                                <Grid item xs={12}>
+                                <Stack spacing={2} direction="row">
+                                <Button variant="text">Add Images *</Button>
+                                <Button variant="contained"
+                                component="label">
+                                Upload Images
+                                <input
+                                  type="file"
+                                  hidden
+                                 />
+                                </Button>
+                                </Stack>
+                                </Grid>
+                                {/* description box */}
+                                <Grid item xs={12}>
+                                <Box
+                                 sx={{
+                                 width: 500,
+                                 maxWidth: '100%',
+                                 }}
+                                 >
+                                <TextField  
+                                  value={formData.description}
+                                  onChange={e => handleChange(e)}
+                                  autoComplete="given-name"
+                                  name="description"
+                                  required
+                                  multiline
+                                  fullWidth
+                                  id="description"
+                                  label="Description"
+                                  autoFocus
+                                  inputProps={{
+                                    style: {
+                                    height: "100px",
+                                    },
+                                   }} />                               
+                                </Box>
+                                </Grid>
+                                 {/* accept terms & conditions */}
+                                <Grid item xs={12}>
+                                <FormGroup>
+                                <FormControlLabel control={<Checkbox defaultChecked />} label="I accept the terms & conditions" />
+                                </FormGroup>
+                                </Grid>
+                           
                             </Grid>
                             <Button
                                 type="submit"
