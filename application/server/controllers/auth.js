@@ -53,7 +53,14 @@ const login = (req, res) => {
         req.session.isLoggedIn = true;
         req.session.username = req.body.username;
 
-        return res.status(200).send({ success: true });
+        // get the users info so we can determine permissions
+        // other data can be fetched from the database this way
+        const isDriver = data[0].isDriver;
+        const username = data[0].username;
+        const id = data[0].id;
+        
+        // pass the user info to the front end
+        return res.status(200).send({ success: true, isDriver, username, id });
     });
 };
 

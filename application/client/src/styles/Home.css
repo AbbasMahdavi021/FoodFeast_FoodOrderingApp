@@ -38,6 +38,16 @@
 
 }
 
+.favorited-restaurants{
+    border:3px solid rgb(241, 241, 71);
+    width: 80%;
+    color: #ffffff;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+
+}
+
 .browse-button button {
     background-color: rgb(241, 241, 71);
     border-radius: 10px;
@@ -67,6 +77,14 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    margin: 10px;
+}
+
+.filter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .filter-container {
@@ -75,23 +93,23 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    margin: 20px;
 }
 
-.filter-container h2 {
+.filter-div h2 {
     text-decoration: none;
     color: rgb(255, 255, 255);
-    font-size: 24px;
+    font-size: 30px;
     font-family: Georgia, serif;
-    margin-right: 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 .filter-container select {
-    width: 150px;
+    height: 40px;
     border: none;
-    margin: 5px;
     padding: 10px;
-    border-radius: 10px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
     font-size: 16px;
     color: white;
     background-color: #2196f3;
@@ -102,7 +120,9 @@
 }
 
 .filter-container select option {
-    font-size: 20px;
+    text-align: left;
+    white-space: nowrap;
+    font-size: 18px;
     color: #2196f3;
     background-color: #ffffff;
     font-family: Georgia, serif;
@@ -114,17 +134,17 @@
     align-items: center;
 }
 
-.search-bar input[type="text"] {
+.search-input[type="text"] {
     padding: 10px;
     border: none;
-    border-bottom-left-radius: 15px;
-    border-top-left-radius: 15px;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-    width: 20em;
+    width: 40vw;
+    height: 40px;
+    max-width: 400px;
+    min-width: 180px;
     font-size: 16px;
     outline: none;
 }
-
 
 .search-bar input[type="text"]::placeholder {
     color: #b2b2b2;
@@ -133,17 +153,17 @@
 .search-bar button {
     border: none;
     background-color: transparent;
-    margin-left: -8px;
-    margin-top: 2px;
+    height: 41px;
     cursor: pointer;
+    padding: 0;
 }
 
-.search-bar img {
-    width: 40px;
+.search-bar button img {
     height: 40px;
-    border-bottom-right-radius: 15px;
-    border-top-right-radius: 15px;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
 }
+
 
 /* .filter-container button {
     width: 110px;

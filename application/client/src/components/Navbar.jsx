@@ -1,6 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
+import UserContext from '../userContext';
+
 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -12,6 +14,7 @@ function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [active, setActive] = useState("navList");
   const [icon, setIcon] = useState("navButton");
+  const { user, setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -25,7 +28,7 @@ function Navbar() {
       }
     }
     getStatus();
-  }, []);
+  }, [user]);
 
 
   const handleLogout = async () => {
@@ -33,6 +36,8 @@ function Navbar() {
       const res = await axios.post("/auth/logout", {}, { withCredentials: true });
       console.log("Logged Out Status: " + res.data);
       setIsLoggedIn(false);
+      setUser(null);
+      localStorage.removeItem('user');
       navigate("/");
     } catch (err) {
       console.error(err);

@@ -63,17 +63,20 @@ const Browse = () => {
 
     return (
         <div className='browse-div'>
+
             <div className='filter-div'>
-                <Filter cuisines={cuisines} handleFilterChange={handleFilterChange} />
-                <form onSubmit={handleSearch}>
-                    <div className="search-bar">
-                        <input type="text" placeholder="Search for Restaurant or Cuisine..." value={searchRestaurants} onChange={(e) => setSearchRestaurants(e.target.value)} />
+                <h2>Browse</h2>
+                <div className='filter'>
+                    <Filter cuisines={cuisines} handleFilterChange={handleFilterChange} />
+                    <form className='search-bar' onSubmit={handleSearch}>
+                        <input className='search-input' type="text" placeholder="Search for Restaurant or Cuisine..." value={searchRestaurants} onChange={(e) => setSearchRestaurants(e.target.value)} />
                         <button type="submit">
                             <img src={process.env.PUBLIC_URL + '/images/brand/search.png'} alt="Search" />
                         </button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
+
 
             <div className="restaurant-container">
                 {restaurants.map((restaurant) => {

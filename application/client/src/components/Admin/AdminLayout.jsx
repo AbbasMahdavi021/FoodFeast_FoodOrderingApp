@@ -1,30 +1,64 @@
 import React, { useState } from 'react';
-import '../..//styles/AdminLayout.css';
-import AdminUsers from './AdminUsers'
 import axios from 'axios';
 
+import AdminUsers from './AdminUsers';
+import AdminRestaurants from './AdminRestaurants';
+import AdminEnrollments from './AdminEnrollments';
+
+import '../..//styles/AdminLayout.css';
 
 
-const AdminTabs = () => {
+
+
+const AdminTabs = ({ activeTab, handleTabClick }) => {
+    const tabs = [
+        { name: 'users', label: 'Users' },
+        { name: 'restaurants', label: 'Restaurants' },
+        { name: 'enrollments', label: 'Enrollments' }
+    ];
 
     return (
         <div className='tabs'>
-
-            <div >
-                <div className='tab active'> Users </div>
-                <div className='tab'> Restaurants </div>
-                <div className='tab'> Entrollments </div>
+            <div>
+                {tabs.map(tab => (
+                    <div className={activeTab === tab.name ? 'tab active' : 'tab'} onClick={() => handleTabClick(tab.name)}>
+                        {tab.label}
+                    </div>
+                ))}
             </div>
 
             <div className='tab-buttons'>
-                <a href="/adminlogin" className="tab-button"> Logout</a>
-                <a href="/" className="tab-button"> Exit </a>
+                <a href='/adminlogin' className='tab-button'>
+                    Logout
+                </a>
+                <a href='/' className='tab-button'>
+                    Exit
+                </a>
             </div>
-
         </div>
     );
-
 };
+
+
+
+const AdminSideBoxes = ({ activeTab }) => {
+    const tabs = {
+        users: { left: <AdminUsers />, right: <div>AdminUsers INFO BOX</div> },
+        restaurants: { left: <AdminRestaurants />, right: <div>AdminRestaurants INFO BOX</div> },
+        enrollments: { left: <AdminEnrollments />, right: <div>AdminEnrollments INFO BOX</div> }
+    };
+
+    return (
+        <div className='side-boxes'>
+            <div className='top-boxes'>
+                <div className='top-box left'>{tabs[activeTab]?.left}</div>
+                <div className='top-box right'>{tabs[activeTab]?.right}</div>
+            </div>
+            <CMD />
+        </div>
+    );
+};
+
 
 
 const CMD = () => {
@@ -47,12 +81,12 @@ const CMD = () => {
         if (inputContent.length !== 0) {
 
             //push command to past Commands
-            setPastCommands( [...pastCommands, inputContent]);
+            setPastCommands([...pastCommands, inputContent]);
 
             //update lastCommand to Pastcommands.lenght -1 
-            setLastCommandIndex(pastCommands.length -1);
+            setLastCommandIndex(pastCommands.length - 1);
 
-            
+
 
             //check if command is 'clear'
 
@@ -63,14 +97,14 @@ const CMD = () => {
 
             try {
 
-                const res = await axios.get("/restaurants/getAllRestaurants", {query: inputContent}, {withCredentials: true}); 
+                const res = await axios.post("/admin/processQuery", { query: inputContent }, { withCredentials: true });
                 console.log(res);
 
-                setContent(content + "\n"  + inputContent + "\n" + JSON.stringify(res.data) );
+                setContent(content + "\n" + inputContent + "\n" + JSON.stringify(res.data));
 
             } catch (error) {
                 console.log(error)
-                setContent( content + "\n"  + inputContent + "\n" + error);
+                setContent(content + "\n" + inputContent + "\n" + error);
             }
 
         };
@@ -154,41 +188,28 @@ const CMD = () => {
 };
 
 
-const AdminSideBoxes = () => {
-
-    return (
-
-        <div className='side-boxes'>
-            <div className='top-boxes'>
-                <div className='top-box left'>
-
-                    <AdminUsers />
-
-                </div>
-                <div className='top-box right'> FAKE INFO BOX </div>
-            </div>
-            <CMD />
-
-        </div>
-    );
-};
-
 
 const AdminLayout = () => {
 
-    return (
+    const [activeTab, setActiveTab] = useState('users');
 
+    const handleTabClick = (tabName) => {
+        setActiveTab(tabName);
+    };
+
+    return (
         <div className='admin-layout'>
             <div className='left-boxes'>
-                <AdminTabs />
-
+                <AdminTabs activeTab={activeTab} handleTabClick={handleTabClick} />
             </div>
 
             <div className='admin-side-boxes'>
-                <AdminSideBoxes />
+                <AdminSideBoxes activeTab={activeTab} />
             </div>
         </div>
     );
 };
+
+
 
 export default AdminLayout;
