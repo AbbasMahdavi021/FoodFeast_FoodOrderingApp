@@ -11,16 +11,18 @@ import axios from 'axios'
 import UserContext from '../userContext'
 
 const HomeHeader = ({ scrollToSecondPage }) => {
-  const [favoritedRestaurants, setFavoritedRestaurants] = useState([])
-  const [featuredRestaurants, setFeaturedRestaurants] = useState([])
-  const { user } = useContext(UserContext)
+  const [favoritedRestaurants, setFavoritedRestaurants] = useState([]);
+  const [featuredRestaurants, setFeaturedRestaurants] = useState([]);
+  const { user } = useContext(UserContext);
 
   // get the stored user id from the context
-  console.log('user in context', user)
+  console.log('user in context', user);
 
   useEffect(() => {
-    if (user) {
-      const fetchRestaurants = async () => {
+
+    const fetchRestaurants = async () => {
+
+      if (user) {
         try {
           const favoritedRes = await axios.get(
             `http://localhost:8080/favorites/${user.id}`,
@@ -31,20 +33,22 @@ const HomeHeader = ({ scrollToSecondPage }) => {
         } catch (error) {
           console.error(error)
         }
-        try {
-          const featuredRes = await axios.get(
-            `http://localhost:8080/featured`,
-          )
-
-          setFeaturedRestaurants(featuredRes.data)
-          console.log('featured restaurants', featuredRes.data)
-        } catch (error) {
-          console.error(error)
-        }
       }
 
-      fetchRestaurants()
+      try {
+        const featuredRes = await axios.get(
+          `/restaurants/getFeatured`,
+        )
+
+        setFeaturedRestaurants(featuredRes.data)
+        console.log('featured restaurants', featuredRes.data)
+      } catch (error) {
+        console.error(error)
+      }
     }
+
+    fetchRestaurants()
+
   }, [user])
 
   return (
@@ -62,7 +66,7 @@ const HomeHeader = ({ scrollToSecondPage }) => {
           <img src={process.env.PUBLIC_URL + '/images/brand/food-dish.png'} alt="Plate" />
         </div>
       </div>
-      
+
 
       <div className="featured-restaurants">
         <h1>Featured Restaurants</h1>
@@ -74,15 +78,19 @@ const HomeHeader = ({ scrollToSecondPage }) => {
         ))}
       </div>
 
-      <div className="favorited-restaurants">
-        <h1>Favorite Restaurants</h1>
-        {favoritedRestaurants.map((restaurant, index) => (
-          <div key={index} className="restaurant">
-            <h3>{restaurant.name}</h3>
-            <p>{restaurant.description}</p>
-          </div>
-        ))}
-      </div>
+      {user ?
+        <div className="favorited-restaurants">
+          <h1>Favorite Restaurants</h1>
+          {favoritedRestaurants.map((restaurant, index) => (
+            <div key={index} className="restaurant">
+              <h3>{restaurant.name}</h3>
+              <p>{restaurant.description}</p>
+            </div>
+          ))}
+        </div>
+
+        : null
+      }
 
       <div className='browse-button'>
         <button onClick={scrollToSecondPage}>
