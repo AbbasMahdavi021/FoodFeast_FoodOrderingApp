@@ -49,10 +49,25 @@ const HomeHeader = ({ scrollToSecondPage }) => {
 
   return (
     <div className="home-header-div">
+
+      <div className='home-header'>
+        <div className='text-container'>
+          <h1>Meals made simple.</h1>
+          <h1>Food delivered anywhere </h1>
+          <h1>on campus.</h1>
+          <h1>Exclusive use for SFSU </h1>
+          <h1>Students, Staff, & Faculty.</h1>
+        </div>
+        <div className='food-plate'>
+          <img src={process.env.PUBLIC_URL + '/images/brand/food-dish.png'} alt="Plate" />
+        </div>
+      </div>
+      
+
       <div className="featured-restaurants">
+        <h1>Featured Restaurants</h1>
         {featuredRestaurants.map((restaurant) => (
           <div key={restaurant.id} className="restaurant">
-            <h1>featured Restaurants:</h1>
             <h3>{restaurant.name}</h3>
             <p>{restaurant.description}</p>
           </div>
@@ -60,14 +75,21 @@ const HomeHeader = ({ scrollToSecondPage }) => {
       </div>
 
       <div className="favorited-restaurants">
+        <h1>Favorite Restaurants</h1>
         {favoritedRestaurants.map((restaurant, index) => (
           <div key={index} className="restaurant">
-            <h1>Favorite Restaurants:</h1>
             <h3>{restaurant.name}</h3>
             <p>{restaurant.description}</p>
           </div>
         ))}
       </div>
+
+      <div className='browse-button'>
+        <button onClick={scrollToSecondPage}>
+          Browser All Restaurants
+        </button>
+      </div>
+
     </div>
   )
 }

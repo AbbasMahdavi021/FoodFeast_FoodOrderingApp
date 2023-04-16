@@ -17,7 +17,6 @@ const Filter = (props) => {
 
   return (
     <div className="filter-container">
-      <h2>Cuisines</h2>
       <select value={selectedCuisine} onChange={handleCuisineSelected}>
         <option value="All">All</option>
         {props.cuisines.map(cuisine => (

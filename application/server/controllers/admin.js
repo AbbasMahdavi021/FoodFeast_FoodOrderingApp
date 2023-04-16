@@ -33,9 +33,7 @@ const deleteUser = async (req, res) => {
 
         console.log("Deleted user: " + req.body.userId);
 
-        
         res.send({status : 200})
-
 
       });
   
@@ -46,6 +44,58 @@ const deleteUser = async (req, res) => {
 };
 
 
+const deleteRestaurant = async (req, res) => {
+
+  console.log("Delteing restaurant...");
+
+  try {
+
+      const q = 'DELETE FROM restaurants WHERE id = ?';
+  
+      db.query(q, [req.body.restaurantId], () => {
+
+        console.log(req.body);
+
+        console.log("Deleted user: " + req.body.restaurantId);
+
+        res.send({status : 200})
+
+      });
+  
+    } catch (err) {
+      console.error(err);
+      res.send(err.message);
+    }
+};
+
+const processQuery = async (req, res) => {
+
+  console.log("Executing my SQL: " + req.body.query);
+
+  try {
+
+    const q = req.body.query;
+
+    db.query(q, (error, results) => {
+
+      console.log(req.body.query);
+      
+      console.log(results);
+
+      if(error){
+        console.log(error.message);
+      }
+      res.send( JSON.stringify(results) );
+
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.send(err.message);
+  }
+
+}
 
 
-module.exports = { getUserList, deleteUser };
+
+module.exports = { getUserList, deleteUser, processQuery, deleteRestaurant};

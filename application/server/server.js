@@ -18,10 +18,10 @@ app.use(express.json());
 session(app);
 app.use(cookieParser());
 
-app.use((req, res, next) => {
-  console.log(`Request received at ${new Date().toISOString()}: ${req.method} ${req.url}`);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log(`Request received at ${new Date().toISOString()}: ${req.method} ${req.url}`);
+//   next();
+// });
 
 
 
