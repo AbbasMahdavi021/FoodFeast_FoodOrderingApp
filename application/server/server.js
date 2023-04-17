@@ -8,6 +8,8 @@ const authRoutes = require("./routes/auth.js");
 const restaurantRoutes = require("./routes/restaurant.js");
 const adminRoutes = require("./routes/admin.js");
 const favoritesRoutes = require("./routes/favorites.js");
+const enrollRestaurant = require("./routes/enrollRestaurant.js");
+const addMenuItem = require("./routes/addMenuItem.js");
 
 const session = require("./config/session.js");
 
@@ -17,16 +19,18 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-// app.use((req, res, next) => {
-//   console.log(`Request received at ${new Date().toISOString()}: ${req.method} ${req.url}`);
-//   next();
-// });
+app.get('/test', (req, res) => {
+  res.status(200).json({ message: 'Test route is working' });
+});
+
 
 
 app.use("/auth", authRoutes);
 app.use("/restaurants", restaurantRoutes);
 app.use("/admin", adminRoutes);
 app.use('/favorites', favoritesRoutes);
+app.use('/enroll', enrollRestaurant);
+app.use('/addMenuItem', addMenuItem);
 
 
 
