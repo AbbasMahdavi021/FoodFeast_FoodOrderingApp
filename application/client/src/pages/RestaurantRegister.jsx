@@ -32,6 +32,7 @@ export default function Register() {
         restaurant: "",
         phone: "",
         address: "",
+        category: "",
         description: ""
     });
 
@@ -60,16 +61,6 @@ export default function Register() {
             return;
         }
 
-        if (!formData.restaurantname) {
-            setErr("Restaurant Name field is required");
-            return;
-        }
-
-        if (!formData.address) {
-            setErr("Restaurant Address field is required ");
-            return;
-        }
-
         if (!formData.email) {
             setErr("Email field is required");
             return;
@@ -77,11 +68,11 @@ export default function Register() {
         
 
         // check if email ends with @sfsu.edu
-        const emailRegex = /^[\w-.]+@sfsu.edu$/i;
-        if (!emailRegex.test(formData.email)) {
-            setErr("Please enter a valid SFSU email address");
-            return;
-        }
+        // const emailRegex = /^[\w-.]+@sfsu.edu$/i;
+        // if (!emailRegex.test(formData.email)) {
+        //     setErr("Please enter a valid SFSU email address");
+        //     return;
+        // }
 
         if (!formData.password) {
             setErr("Password field is required");
@@ -92,6 +83,31 @@ export default function Register() {
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
         if (!passwordRegex.test(formData.password)) {
             setErr("Password must contain: one lowercase letter, one uppercase letter, one number, and 5 characters long!");
+            return;
+        }
+
+        if (!formData.restaurantname) {
+            setErr("Restaurant Name field is required");
+            return;
+        }
+
+        if (!formData.phone) {
+            setErr("Restaurant Phone field is required");
+            return;
+        }
+
+        if (!formData.address) {
+            setErr("Restaurant Address field is required ");
+            return;
+        }
+
+        // if (!formData.category) {
+        //     setErr("category field is required ");
+        //     return;
+        // }
+
+        if (!formData.description) {
+            setErr("Description field is required ");
             return;
         }
 
@@ -315,10 +331,12 @@ export default function Register() {
                                     />
                                 </Grid>
                                  {/* category drop down menu */}
-                                 <Grid item xs={12}>
+                                <Grid item xs={12}>
                                 <Box sx={{ minWidth: 120 }}>
                                 <FormControl fullWidth>
-                                <InputLabel id="category">Select Category</InputLabel>
+                                <InputLabel 
+                                 value={formData.category}
+                                 >Select Category</InputLabel>
                                  <Select
                                  labelId="category"
                                  id="category"
@@ -338,13 +356,13 @@ export default function Register() {
                                 {/* add images */}
                                 <Grid item xs={12}>
                                 <Stack spacing={2} direction="row">
-                                <Button variant="text">Add Images *</Button>
+                                <Button variant="text">Add Images</Button>
                                 <Button variant="contained"
                                 component="label">
-                                Upload Images
+                                {/* Upload Images  */}
                                 <input
                                   type="file"
-                                  hidden
+                                //   hidden
                                  />
                                 </Button>
                                 </Stack>
@@ -366,21 +384,31 @@ export default function Register() {
                                   multiline
                                   fullWidth
                                   id="description"
-                                  label="Description"
-                                  autoFocus
-                                  inputProps={{
-                                    style: {
-                                    height: "100px",
-                                    },
-                                   }} />                               
+                                  label="Description"                
+                                   autoFocus
+                                        InputLabelProps={{
+                                            sx: {
+                                                fontSize: '1.2rem'
+                                            }
+                                        }}
+                                        inputProps={{
+                                            style: {
+                                                height: "100px",
+                                                fontSize: '1.5rem'
+                                            }
+                                        }}
+                                    />                             
                                 </Box>
                                 </Grid>
+
                                  {/* accept terms & conditions */}
                                 <Grid item xs={12}>
-                                <FormGroup>
-                                <FormControlLabel control={<Checkbox defaultChecked />} label="I accept the terms & conditions" />
+                                <FormGroup >
+                                <FormControlLabel control={<Checkbox style={{ transform: "scale(1.5)", }}
+                                 defaultChecked />} label ="I accept the terms & conditions" /> 
                                 </FormGroup>
                                 </Grid>
+
                            
                             </Grid>
                             <Button
@@ -392,7 +420,7 @@ export default function Register() {
                                 Register 
                             </Button>
 
-                            <Grid container justifyContent="flex-end">
+                            <Grid container justifyContent="center">
                                 <Grid item>
                                     <Link href="/restaurantlogin" variant="body2" sx={{ fontSize: 20 }}>
                                         Already registered ? Login here.

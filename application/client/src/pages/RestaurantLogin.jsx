@@ -11,6 +11,7 @@ import axios from "axios";
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Stack from '@mui/material/Stack';
 
 
 export default function Login() {
@@ -151,21 +152,25 @@ export default function Login() {
               >
                 Sign In
               </Button>
-
-              <Grid container>
-                <FormGroup>
-                <FormControlLabel control={<Checkbox defaultChecked />} label="Remember me" />
-                </FormGroup>
-
-    
-
-                <Grid item>
+        
+              <Grid item xs={12}>
+              <Stack spacing={2} direction="row" justifyContent="space-between">
+              <FormGroup >
+              <FormControlLabel control={<Checkbox style={{ transform: "scale(1.5)", }}
+               defaultChecked />} label ="Remember Me"/> 
+              </FormGroup>
+              <Link href="/none" variant="h4" sx={{ fontSize: 12 }}>
+                    {"Forgot Password ?"}
+              </Link>
+              </Stack>
+              </Grid>
+                <Grid container justifyContent="center">
+                  <Grid item>
                   <Link href="/restaurantregister" variant="h6" sx={{ fontSize: 20 }}>
-                    {"Want to register your restaurant ? Register here."}
+                    {"Want to register your restaurant?  Register here."}
                   </Link>
                 </Grid>
-              </Grid>
-
+                 </Grid>
               {err && (
                 <p style={{ fontSize: "20px", color: "red", textAlign: "center" }}>
                   {err}
