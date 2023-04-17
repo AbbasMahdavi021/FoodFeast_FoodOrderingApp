@@ -10,7 +10,8 @@ const enrollRestaurant = async (req, res) => {
             if (error) {
                 res.status(400).json({ message: 'Restaurant not saved!' });
             } else {
-                res.status(201).json({ message: 'Restaurant saved!' });
+                const restaurant_id = results.insertId;
+                res.status(201).json({ message: 'Restaurant saved!', restaurant_id });
             }
         });
     } catch (err) {

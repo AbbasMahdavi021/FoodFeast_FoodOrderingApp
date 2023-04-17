@@ -5,10 +5,8 @@ const { saveFavorite, deleteFavorite, getFavorites } = require('../controllers/f
 const router = express.Router();
 
 router.get('/:user_id', (req, res) => {
-  console.log('Request received in /favorites/:user_id route');
   getFavorites(req, res);
 });
-
 
 router.post('/save', saveFavorite);
 router.post('/delete', deleteFavorite);

@@ -4,6 +4,7 @@ const db = require('../db');
 
 const addMenuItem = async (req, res) => {
     try {
+
         const { name, price, restaurant_id, image, description } = req.body;
         const q = 'INSERT INTO menu_items (name, price, restaurant_id, image, description) VALUES (?, ?, ?, ?, ?)';
         db.query(q, [name, price, restaurant_id, image, description], (error, results) => {

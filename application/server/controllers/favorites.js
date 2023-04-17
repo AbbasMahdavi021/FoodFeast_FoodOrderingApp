@@ -36,7 +36,6 @@ const deleteFavorite = async (req, res) => {
 
 const getFavorites = async (req, res) => {
     try {
-        console.log("getting user favorites")
         const { user_id } = req.params;
         const rows = [];
         

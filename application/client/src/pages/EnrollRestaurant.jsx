@@ -16,6 +16,7 @@ const EnrollRestaurant = (props) => {
     const [phone, setPhone] = useState('');
     const [hours, setHours] = useState('');
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -29,8 +30,9 @@ const EnrollRestaurant = (props) => {
                 phone,
                 hours,
             });
-            console.log(response);
-            navigate('/ThankYouForEnrolling');
+            console.log('your restaurant id: ', response.data.restaurant_id);
+            navigate(`/addMenuItems/${response.data.restaurant_id}`);
+
         } catch (err) {
             console.error(err);
         }
