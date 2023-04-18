@@ -21,6 +21,7 @@ import Select from "@mui/material/Select";
 import axios from "axios";
 
 
+
 const theme = createTheme();
 
 export default function Register() {
@@ -90,7 +91,7 @@ export default function Register() {
             setErr("Restaurant Name field is required");
             return;
         }
-
+        
         if (!formData.phone) {
             setErr("Restaurant Phone field is required");
             return;
@@ -333,21 +334,21 @@ export default function Register() {
                                  {/* category drop down menu */}
                                 <Grid item xs={12}>
                                 <Box sx={{ minWidth: 120 }}>
-                                <FormControl fullWidth>
-                                <InputLabel 
+                                <FormControl fullWidth >
+                                <InputLabel sx={{ fontSize: 12}}
                                  value={formData.category}
-                                 >Select Category</InputLabel>
+                                 >Select Category </InputLabel>
                                  <Select
                                  labelId="category"
                                  id="category"
                                  value={category}
                                  label="Category"
                                  onChange={handleChange} >
-                                <MenuItem value={1}>American</MenuItem>
-                                <MenuItem value={2}>Indian</MenuItem>
-                                <MenuItem value={3}>Italian</MenuItem>
-                                <MenuItem value={4}>Japanese</MenuItem>
-                                <MenuItem value={5}>Mexican</MenuItem>
+                                <MenuItem value={1} sx={{ fontSize: 15}}>American</MenuItem>
+                                <MenuItem value={2} sx={{ fontSize: 15}}>Indian</MenuItem>
+                                <MenuItem value={3} sx={{ fontSize: 15}}>Italian</MenuItem>
+                                <MenuItem value={4} sx={{ fontSize: 15}}>Japanese</MenuItem>
+                                <MenuItem value={5} sx={{ fontSize: 15}}>Mexican</MenuItem>
                                 </Select>
                                 </FormControl>
                                 </Box>
@@ -356,8 +357,8 @@ export default function Register() {
                                 {/* add images */}
                                 <Grid item xs={12}>
                                 <Stack spacing={2} direction="row">
-                                <Button variant="text">Add Images</Button>
-                                <Button variant="contained"
+                                <Button variant ="text" sx={{ fontSize: 15, color: 'gray' }}>Add Images</Button>
+                                <Button variant="contained" sx={{ background:'purple', borderRadius: 50}}
                                 component="label">
                                 {/* Upload Images  */}
                                 <input
@@ -367,6 +368,7 @@ export default function Register() {
                                 </Button>
                                 </Stack>
                                 </Grid>
+
                                 {/* description box */}
                                 <Grid item xs={12}>
                                 <Box
@@ -400,29 +402,24 @@ export default function Register() {
                                     />                             
                                 </Box>
                                 </Grid>
-
                                  {/* accept terms & conditions */}
                                 <Grid item xs={12}>
-                                <FormGroup >
-                                <FormControlLabel control={<Checkbox style={{ transform: "scale(1.5)", }}
-                                 defaultChecked />} label ="I accept the terms & conditions" /> 
-                                </FormGroup>
-                                </Grid>
-
-                           
+                                <input type="checkbox"   style={{ transform: 'scale(1.5)', marginRight: '8px'}}/>
+                                 <Link href="#" sx={{ color:'black', fontSize: 20, fontFamily:'Arial' }}> I accept the terms & conditions </Link>  
+                                </Grid>                         
                             </Grid>
                             <Button
                                 type="submit"
                                 fullWidth
                                 variant="contained"
-                                sx={{ mt: 3, mb: 2, fontSize: 20 }}
+                                sx={{ mt: 3, mb: 2, fontSize: 20, backgroundColor: 'purple'  }}
                             >
                                 Register 
                             </Button>
 
                             <Grid container justifyContent="center">
                                 <Grid item>
-                                    <Link href="/restaurantlogin" variant="body2" sx={{ fontSize: 20 }}>
+                                    <Link href="/restaurantlogin" variant="body2" sx={{ fontSize: 20, color: 'purple' }}>
                                         Already registered ? Login here.
                                     </Link>
                                 </Grid>

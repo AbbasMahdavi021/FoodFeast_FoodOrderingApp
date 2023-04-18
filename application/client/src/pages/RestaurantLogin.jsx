@@ -148,25 +148,24 @@ export default function Login() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, fontSize: 20 }}
+                sx={{ mt: 3, mb: 2, fontSize: 20, backgroundColor: 'purple' }}
               >
                 Sign In
               </Button>
-        
-              <Grid item xs={12}>
-              <Stack spacing={2} direction="row" justifyContent="space-between">
-              <FormGroup >
-              <FormControlLabel control={<Checkbox style={{ transform: "scale(1.5)", }}
-               defaultChecked />} label ="Remember Me"/> 
-              </FormGroup>
-              <Link href="/none" variant="h4" sx={{ fontSize: 12 }}>
-                    {"Forgot Password ?"}
-              </Link>
-              </Stack>
-              </Grid>
+              
+              <Grid container justifyContent="space-between" marginBottom={8} marginTop={1} marginLeft={1}  >
+             <Grid item>           
+             <input type="checkbox"   style={{ transform: 'scale(1.5)', marginRight: '8px'}}/>
+                <Link href="#" sx={{ color:'black', fontSize: 20, fontFamily:'Arial' }}>Remember Me </Link>  
+             </Grid>
+             <Grid item marginRight={1}>
+              <Link href="#" sx={{ color:'black', fontSize: 20, fontFamily:'Arial'}}>Forgot Password?</Link>
+             </Grid>
+           </Grid>
+
                 <Grid container justifyContent="center">
                   <Grid item>
-                  <Link href="/restaurantregister" variant="h6" sx={{ fontSize: 20 }}>
+                  <Link href="/restaurantregister" variant="h6" sx={{ color:'purple', fontSize: 20 }}>
                     {"Want to register your restaurant?  Register here."}
                   </Link>
                 </Grid>
