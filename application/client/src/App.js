@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles/App.css';
 import RoutesManager from './Routes-Manager/RoutesManager';
-import { UserProvider } from './userContext';
+import { UserProvider } from './context';
 
 function App() {
   return (

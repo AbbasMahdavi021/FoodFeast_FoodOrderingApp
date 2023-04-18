@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
-import UserContext from '../userContext';
+import UserContext from '../context';
 
 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -70,6 +70,12 @@ function Navbar() {
         <li className="navItem">
           <a href="/enroll" className="navLink">
             Enroll Resturant
+          </a>
+        </li>
+
+        <li className="navItem">
+          <a href="/restaurantDashboard" className="navLink">
+            Restaurant Dashboard
           </a>
         </li>
 

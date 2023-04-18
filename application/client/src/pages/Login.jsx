@@ -9,7 +9,7 @@ import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import axios from 'axios'
-import UserContext from '../userContext'
+import UserContext from '../context'
 
 export default function Login() {
   const { setUser } = useContext(UserContext)
@@ -50,7 +50,10 @@ export default function Login() {
           id: res.data.id,
           username: res.data.username,
           isDriver: res.data.isDriver,
+          isRestaurantOwner: res.data.isRestaurantOwner,
+          email: res.data.email,
         })
+
         navigate('/')
       }
     } catch (err) {
