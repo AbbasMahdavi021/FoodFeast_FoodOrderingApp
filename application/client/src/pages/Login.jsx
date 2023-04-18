@@ -11,6 +11,12 @@ import Typography from '@mui/material/Typography'
 import axios from 'axios'
 import UserContext from '../userContext'
 
+
+
+
+
+
+
 export default function Login() {
   const { setUser } = useContext(UserContext)
   const navigate = useNavigate()
@@ -98,17 +104,17 @@ export default function Login() {
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h5" fontSize={40} align="center">
-            Sign in
+          <Typography component="h1" variant="h5" fontSize={40} align="center" marginBottom={10}  marginTop={15}>
+            Sign in 
           </Typography>
 
-          <Box
+          <Box 
             component="form"
             noValidate
             onSubmit={handleSubmit}
             sx={{ mt: 1 }}
           >
-            <TextField
+            <TextField 
               value={formData.name}
               onChange={(e) => handleChange(e)}
               autoComplete="given-name"
@@ -119,14 +125,15 @@ export default function Login() {
               autoFocus
               InputLabelProps={{
                 sx: {
-                  fontSize: '1.2rem',
+                  fontSize: '1.2rem'
                 },
               }}
               inputProps={{
                 style: {
-                  fontSize: '2rem',
+                  fontSize: '2rem' 
                 },
               }}
+              sx={{ marginBottom: '2rem' }}
             />
             <TextField
               value={formData.name}
@@ -149,20 +156,36 @@ export default function Login() {
                 },
               }}
             />
+           <Grid container justifyContent="space-between" marginBottom={10} marginTop={1} marginLeft={1}  >
+             <Grid item>
+             
+             <input type="checkbox"   style={{ transform: 'scale(1.5)', marginRight: '8px'}}/>
+    
+                <Link href="#" sx={{ color:'black', fontSize: '2.2rem' }}>Remember Me </Link>
+                
+             </Grid>
+             <Grid item marginRight={1}>
+              <Link href="#" sx={{ color:'black', fontSize: '2.2rem'}}>Forgot Password?</Link>
+             </Grid>
+           </Grid>
 
-            <Button
+
+
+            <Button 
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2, fontSize: 20 }}
+              sx={{ mt: 3, mb: 2,borderRadius: '15px' ,fontSize: 20 , backgroundColor: '#fc3', color: '#000000' ,width: '250px', margintop: '50px', marginLeft: '150px', marginBottom:'80px','&:hover': {
+                backgroundColor: '#fc3'
+              }, }}
             >
               Sign In
             </Button>
 
             <Grid container>
-              <Grid item>
-                <Link href="/register" variant="h6" sx={{ fontSize: 20 }}>
-                  {"Don't have an account? Sign Up"}
+              <Grid item >
+                <Link href="/register" variant="body2" sx={{ fontSize: 20, color:'black', marginLeft:'120px',  }}>
+                  Don't have an account? Sign Up here
                 </Link>
               </Grid>
             </Grid>

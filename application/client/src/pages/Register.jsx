@@ -112,8 +112,8 @@ export default function Register() {
                             alignItems: 'center',
                         }}
                     >
-                        <Typography component="h1" variant="h5" fontSize={40} align='center'>
-                            Sign up
+                        <Typography component="h1" variant="h5" fontSize={40} align='center' marginBottom={10}>
+                            Sign up to have an account
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                             <Grid container spacing={2}>
@@ -138,6 +138,7 @@ export default function Register() {
                                                 fontSize: '2rem'
                                             }
                                         }}
+                                        
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -186,18 +187,26 @@ export default function Register() {
                                     />
                                 </Grid>
                             </Grid>
+
+                            <Grid item marginBottom={10} marginTop={1} marginLeft={1}>
+                            <input type="checkbox"  style={{ transform: 'scale(1.5)', marginRight: '8px'}} />
+                               <Link href="#" sx={{ color:'black' ,fontSize: '2.1rem'}}>I accept the terms & conditions</Link>
+                            </Grid>
+
                             <Button
                                 type="submit"
                                 fullWidth
                                 variant="contained"
-                                sx={{ mt: 3, mb: 2, fontSize: 20 }}
+                                sx={{ mt: 3, mb: 2, borderRadius: '15px',fontSize: 20 , backgroundColor: '#fc3', color: '#000000' ,width: '250px', margintop: '50px', marginLeft: '170px',marginBottom:'70px' , '&:hover': {
+                                    backgroundColor: '#fc3', 
+                                  },  }}
                             >
                                 Sign Up
                             </Button>
 
-                            <Grid container justifyContent="flex-end">
-                                <Grid item>
-                                    <Link href="/login" variant="body2" sx={{ fontSize: 20 }}>
+                            <Grid container  >
+                                <Grid item >
+                                    <Link href="/login" variant="body2" sx={{ fontSize: 20 , color:'black', marginLeft:'150px', }}>
                                         Already have an account? Sign in
                                     </Link>
                                 </Grid>
