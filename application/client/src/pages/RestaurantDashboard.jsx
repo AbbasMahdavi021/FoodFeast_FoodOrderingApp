@@ -41,10 +41,11 @@ const RestaurantDashboard = (props) => {
         console.error(err)
       }
     }
-    fetchRestaurant()
+    if (restaurantId) {
+      fetchRestaurant()
+    }
   }, [restaurantId])
-  console.log('Restaurant Name:', restaurantName)
-  console.log('Restaurant Cuisine:', restaurantCuisine)
+
   useEffect(() => {
     const fetchMenuItems = async () => {
       try {
@@ -56,7 +57,9 @@ const RestaurantDashboard = (props) => {
         console.error(err)
       }
     }
-    fetchMenuItems()
+    if (restaurantId) {
+      fetchMenuItems()
+    }
   }, [restaurantId])
 
   useEffect(() => {
@@ -71,7 +74,9 @@ const RestaurantDashboard = (props) => {
         console.error(err)
       }
     }
-    fetchOrders()
+    if (restaurantId) {
+      fetchOrders()
+    }
   }, [restaurantId])
 
   return (
@@ -100,13 +105,7 @@ const RestaurantDashboard = (props) => {
           <p>{restaurantAddress}</p>
         </div>
         <div className="restaurant-info-item">
-          <img src={restaurantPicture} alt="restaurant" />
-          <style jsx>{`
-            img {
-              width: 200px;
-              height: 200px;
-            }
-          `}</style>
+          <img src={restaurantPicture} alt="restaurant" className='restaurant-img-thumb'  />
         </div>
         <div className="restaurant-info-item">
           <h3>Phone</h3>
@@ -124,8 +123,8 @@ const RestaurantDashboard = (props) => {
           <h3>Price</h3>
           <h3>Description</h3>
         </div>
-        {restaurantMenuItems.map((menuItem) => (
-          <div className="restaurant-menu-item">
+        {restaurantMenuItems.map((menuItem, index) => (
+          <div key={index} className="restaurant-menu-item">
             <p>{menuItem.name}</p>
             <p>{menuItem.price}</p>
             <p>{menuItem.description}</p>
@@ -144,10 +143,9 @@ const RestaurantDashboard = (props) => {
           <h3>Delivery Address</h3>
           <h3>Payment Method</h3>
           <h3>Special Instructions</h3>
-          
         </div>
-        {restaurantOrders.map((order) => (
-          <div className="restaurant-orders-item">
+        {restaurantOrders.map((order, index) => (
+          <div key={index} className="restaurant-orders-item">
             <p>{order.order_id}</p>
             <p>{order.customer_id}</p>
             <p>{order.order_status}</p>
