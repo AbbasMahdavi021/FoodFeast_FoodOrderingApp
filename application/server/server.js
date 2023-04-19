@@ -10,6 +10,8 @@ const adminRoutes = require("./routes/admin.js");
 const favoritesRoutes = require("./routes/favorites.js");
 const enrollRestaurant = require("./routes/enrollRestaurant.js");
 const addMenuItem = require("./routes/addMenuItem.js");
+const orderRoutes = require("./routes/orders.js");
+
 
 const session = require("./config/session.js");
 
@@ -26,6 +28,7 @@ app.use("/admin", adminRoutes);
 app.use('/favorites', favoritesRoutes);
 app.use('/enroll', enrollRestaurant);
 app.use('/addMenuItem', addMenuItem);
+app.use('/orders', orderRoutes);
 
 
 

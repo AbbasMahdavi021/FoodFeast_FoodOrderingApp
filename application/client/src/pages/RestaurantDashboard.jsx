@@ -63,8 +63,9 @@ const RestaurantDashboard = (props) => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/orders/${restaurantId}`,
+          `http://localhost:8080/orders/restaurant/${restaurantId}`,
         )
+        console.log('Fetched orders:', response.data)
         setRestaurantOrders(response.data)
       } catch (err) {
         console.error(err)
@@ -139,6 +140,11 @@ const RestaurantDashboard = (props) => {
           <h3>Order Status</h3>
           <h3>Order Total</h3>
           <h3>Order Items</h3>
+          <h3>Order Date</h3>
+          <h3>Delivery Address</h3>
+          <h3>Payment Method</h3>
+          <h3>Special Instructions</h3>
+          
         </div>
         {restaurantOrders.map((order) => (
           <div className="restaurant-orders-item">
@@ -147,6 +153,10 @@ const RestaurantDashboard = (props) => {
             <p>{order.order_status}</p>
             <p>{order.order_total}</p>
             <p>{order.order_items}</p>
+            <p>{order.order_date}</p>
+            <p>{order.delivery_address}</p>
+            <p>{order.payment_method}</p>
+            <p>{order.special_instructions}</p>
           </div>
         ))}
       </div>
