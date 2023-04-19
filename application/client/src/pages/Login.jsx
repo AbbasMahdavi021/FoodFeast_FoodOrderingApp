@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useState, useEffect, useContext } from 'react'
+import Modal from 'react-modal';
 import { useNavigate } from 'react-router-dom'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
@@ -11,7 +12,50 @@ import Typography from '@mui/material/Typography'
 import axios from 'axios'
 import UserContext from '../context'
 
+
 export default function Login() {
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+
+  let subtitle;
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [emailInput, setEmailInput] = useState("");
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  const handleReset = async () => {
+
+    const res = await axios.post('/sendEmail/password', { email: emailInput });
+    closeModal();
+
+  };
+
+  const handleEmailInputChange = (e) => {
+    setEmailInput(e.target.value);
+  }
+
+
+
   const { setUser } = useContext(UserContext)
   const navigate = useNavigate()
 
@@ -162,7 +206,7 @@ export default function Login() {
                 </label>
               </Grid>
               <Grid item marginRight={1} marginTop={2}>
-                <Link href="/register" sx={{ color: 'black', fontSize: '2.2rem' }}>Forgot Password?</Link>
+                <Button onClick={openModal} sx={{ color: 'black', fontSize: '2.2rem' }}>Forgot Password?</Button>
               </Grid>
             </Grid>
 
@@ -192,9 +236,23 @@ export default function Login() {
               </Grid>
             </Grid>
 
+            <Modal
+              isOpen={modalIsOpen}
+              onAfterOpen={afterOpenModal}
+              onRequestClose={closeModal}
+              style={customStyles}
+              contentLabel="Example Modal"
+            >
+              <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
+              <button onClick={closeModal}> X </button>
+              <div> Enter your Email to reset your password</div>
+              <input onChange={handleEmailInputChange} type='text' value={ emailInput } />
+              <button onClick={handleReset}> Reset Password </button>
+            </Modal>
+
             {err && (
               <p
-                style={{ fontSize: '20px', color: 'red', textAlign: 'center' }}
+                style={{ fontSize: '20px', color: 'red', textAlign: 'center', marginTop: '25px' }}
               >
                 {err}
               </p>

@@ -11,6 +11,8 @@ const favoritesRoutes = require("./routes/favorites.js");
 const enrollRestaurant = require("./routes/enrollRestaurant.js");
 const addMenuItem = require("./routes/addMenuItem.js");
 const orderRoutes = require("./routes/orders.js");
+const sendEmailRoutes = require("./routes/sendEmail.js");
+
 
 
 const session = require("./config/session.js");
@@ -25,6 +27,7 @@ app.use(cookieParser());
 app.use("/auth", authRoutes);
 app.use("/restaurants", restaurantRoutes);
 app.use("/admin", adminRoutes);
+app.use("/sendEmail", sendEmailRoutes);
 app.use('/favorites', favoritesRoutes);
 app.use('/enroll', enrollRestaurant);
 app.use('/addMenuItem', addMenuItem);

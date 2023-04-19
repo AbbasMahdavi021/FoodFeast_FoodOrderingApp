@@ -52,14 +52,14 @@ const login = (req, res) => {
         return res.json(err);
       }
       if (data.length === 0) {
-        return res.status(404).json("Incorrect Username!");
+        return res.status(404).json("Incorrect Username or Password!");
       }
 
       //check password
       const correctPass = bcrypt.compareSync(req.body.password, data[0].password);
   
       if (!correctPass) {
-        return res.status(400).json("Incorrect password!");
+        return res.status(400).json("Incorrect Username or Password!");
       }
   
       console.log("Logged in as " + data[0].username);
@@ -109,14 +109,14 @@ const adminlogin = (req, res) => {
         }
 
         if (data.length === 0) {
-            return res.status(404).json("Incorrect Username!");
+            return res.status(404).json("Incorrect Username or Password!");
         }
 
         //check password
         const correctPass = bcrypt.compareSync(req.body.password, data[0].password); //first item in data arr = user
 
         if (!correctPass) {
-            return res.status(400).json("Incorrect password!");
+            return res.status(400).json("Incorrect Username or Password!");
         }
 
         console.log("Logged in as Admin: " + data[0].username);
