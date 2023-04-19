@@ -61,20 +61,12 @@ export default function Register() {
             setErr("Username field is required");
             return;
         }
-
-        if (!formData.email) {
-            setErr("Email field is required");
+        const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i;
+        if (!emailRegex.test(formData.email)) {
+            setErr("Please enter a valid email address");
             return;
         }
         
-
-        // check if email ends with @sfsu.edu
-        // const emailRegex = /^[\w-.]+@sfsu.edu$/i;
-        // if (!emailRegex.test(formData.email)) {
-        //     setErr("Please enter a valid SFSU email address");
-        //     return;
-        // }
-
         if (!formData.password) {
             setErr("Password field is required");
             return;
@@ -424,7 +416,7 @@ export default function Register() {
                                     </Link>
                                 </Grid>
                             </Grid>
-
+                                        
                             {err && (
                                 <p style={{ fontSize: "20px", color: "red", textAlign: "center" }}>
                                     {err}

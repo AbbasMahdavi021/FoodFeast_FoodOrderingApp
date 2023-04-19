@@ -159,7 +159,7 @@ export default function Login() {
                 <Link href="#" sx={{ color:'black', fontSize: 20, fontFamily:'Arial' }}>Remember Me </Link>  
              </Grid>
              <Grid item marginRight={1}>
-              <Link href="#" sx={{ color:'black', fontSize: 20, fontFamily:'Arial'}}>Forgot Password?</Link>
+              <Link href="/menuentry" sx={{ color:'black', fontSize: 20, fontFamily:'Arial'}}>Forgot Password?</Link>
              </Grid>
            </Grid>
 
