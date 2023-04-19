@@ -112,9 +112,10 @@ export default function Register() {
                             alignItems: 'center',
                         }}
                     >
-                        <Typography component="h1" variant="h5" fontSize={40} align='center'>
+                        <Typography component="h1" variant="h5" fontSize={40} align="center" marginBottom={10} marginTop={10}>
                             Sign up
                         </Typography>
+
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                             <Grid container spacing={2}>
                                 <Grid item xs={12}>
@@ -186,18 +187,32 @@ export default function Register() {
                                     />
                                 </Grid>
                             </Grid>
+
+                            <Grid item marginBottom={10} marginTop={3} marginLeft={1}>
+                                <input type="checkbox" style={{ transform: 'scale(1.5)', marginRight: '8px' }} />
+                                <Link href="#" sx={{ color: 'black', fontSize: '2.1rem' }}>I accept the Terms & Conditions</Link>
+                            </Grid>
+
                             <Button
                                 type="submit"
                                 fullWidth
                                 variant="contained"
-                                sx={{ mt: 3, mb: 2, fontSize: 20 }}
+                                sx={{
+                                    mt: 3, mb: 2, borderRadius: '15px', fontSize: 20,
+                                    backgroundColor: '#fc3', color: '#000000',
+                                    width: '250px',
+                                    '&:hover': { backgroundColor: '#FFCF01' },
+                                    boxShadow: '2px 2px 5px rgba(0, 0, 0, 10)',
+                                    display: 'block',
+                                    margin: '50px auto 50px',
+                                }}
                             >
                                 Sign Up
                             </Button>
 
                             <Grid container justifyContent="flex-end">
                                 <Grid item>
-                                    <Link href="/login" variant="body2" sx={{ fontSize: 20 }}>
+                                    <Link href="/login" variant="body2" sx={{ fontSize: 20, color: 'black' }}>
                                         Already have an account? Sign in
                                     </Link>
                                 </Grid>

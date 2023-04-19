@@ -57,7 +57,7 @@ export default function Login() {
         navigate('/')
       }
     } catch (err) {
-      console.error('Error:', err) 
+      console.error('Error:', err)
       setErr(
         err.response ? err.response.data : 'An error occurred during login.',
       )
@@ -101,7 +101,7 @@ export default function Login() {
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h5" fontSize={40} align="center">
+          <Typography component="h1" variant="h5" fontSize={40} align="center" marginBottom={10} marginTop={10}>
             Sign in
           </Typography>
 
@@ -130,6 +130,7 @@ export default function Login() {
                   fontSize: '2rem',
                 },
               }}
+              sx={{ marginBottom: '2rem' }}
             />
             <TextField
               value={formData.name}
@@ -153,19 +154,40 @@ export default function Login() {
               }}
             />
 
+            <Grid container justifyContent="space-between" marginBottom={10} marginTop={1} marginLeft={1}  >
+              <Grid item marginRight={1} marginTop={2}>
+                <label>
+                  <input type="checkbox" style={{ transform: 'scale(1.5)', marginRight: '8px' }} />
+                  <Link sx={{ color: 'black', fontSize: '2.2rem', textDecoration: 'none' }}>Remember Me </Link>
+                </label>
+              </Grid>
+              <Grid item marginRight={1} marginTop={2}>
+                <Link href="/register" sx={{ color: 'black', fontSize: '2.2rem' }}>Forgot Password?</Link>
+              </Grid>
+            </Grid>
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2, fontSize: 20 }}
+              sx={{
+                mt: 3, mb: 2, borderRadius: '15px', fontSize: 20,
+                backgroundColor: '#FFCF01', color: '#000000',
+                width: '250px',
+                '&:hover': { backgroundColor: '#fc3' },
+                boxShadow: '2px 2px 5px rgba(0, 0, 0, 10)',
+                display: 'block',
+                margin: '50px auto 50px',
+
+              }}
             >
               Sign In
             </Button>
 
             <Grid container>
               <Grid item>
-                <Link href="/register" variant="h6" sx={{ fontSize: 20 }}>
-                  {"Don't have an account? Sign Up"}
+                <Link href="/register" variant="body2" sx={{ fontSize: 20, color: 'black' }}>
+                  {"Don't have an account? Sign Up here"}
                 </Link>
               </Grid>
             </Grid>
