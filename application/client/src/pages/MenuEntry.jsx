@@ -178,6 +178,7 @@ function MenuEntry() {
                                             }
                                         }}
                                 />   
+
                                                              
                                 <Button 
                                 startIcon={<UploadFileIcon />}
@@ -193,6 +194,7 @@ function MenuEntry() {
                                 style={{ display: 'none' }}/>
               
                                 <Button
+                                    href="/addeditem"
                                     type="submit"
                                     fullWidth
                                     variant="contained"
