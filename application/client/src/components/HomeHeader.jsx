@@ -8,15 +8,12 @@
 
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
-import UserContext from '../userContext'
+import UserContext from '../context'
 
 const HomeHeader = ({ scrollToSecondPage }) => {
   const [favoritedRestaurants, setFavoritedRestaurants] = useState([]);
   const [featuredRestaurants, setFeaturedRestaurants] = useState([]);
   const { user } = useContext(UserContext);
-
-  // get the stored user id from the context
-  console.log('user in context', user);
 
   useEffect(() => {
 
@@ -29,7 +26,6 @@ const HomeHeader = ({ scrollToSecondPage }) => {
           )
 
           setFavoritedRestaurants(favoritedRes.data)
-          console.log('favorite restaurants', favoritedRes.data)
         } catch (error) {
           console.error(error)
         }
@@ -41,7 +37,6 @@ const HomeHeader = ({ scrollToSecondPage }) => {
         )
 
         setFeaturedRestaurants(featuredRes.data)
-        console.log('featured restaurants', featuredRes.data)
       } catch (error) {
         console.error(error)
       }

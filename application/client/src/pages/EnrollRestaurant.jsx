@@ -39,10 +39,10 @@ const EnrollRestaurant = (props) => {
     };
 
     return (
-        <div className='enroll_restaurant'>
+        <div className='enroll-restaurant'>
             <h1>Enroll Restaurant</h1>
             <form onSubmit={handleSubmit}>
-                <div className='form_group'>
+                <div className='form-group'>
                     <label htmlFor='name'>Restaurant Name</label>
                     <input
                         type='text'
@@ -52,7 +52,7 @@ const EnrollRestaurant = (props) => {
                         onChange={(e) => setName(e.target.value)}
                     />
                 </div>
-                <div className='form_group'>
+                <div className='form-group'>
                     <label htmlFor='cuisine'>Cuisine</label>
                     <input
                         type='text'
@@ -62,7 +62,7 @@ const EnrollRestaurant = (props) => {
                         onChange={(e) => setCuisine(e.target.value)}
                     />
                 </div>
-                <div className='form_group'>
+                <div className='form-group'>
                     <label htmlFor='est_delivery_time'>Estimated Delivery Time</label>
                     <input
                         type='text'
@@ -72,7 +72,7 @@ const EnrollRestaurant = (props) => {
                         onChange={(e) => setEstDeliveryTime(e.target.value)}
                     />
                 </div>
-                <div className='form_group'>
+                <div className='form-group'>
                     <label htmlFor='hours'>Hours</label>
                     <input
                         type='text'
@@ -82,7 +82,7 @@ const EnrollRestaurant = (props) => {
                         onChange={(e) => setHours(e.target.value)}
                     />
                 </div>
-                <div className='form_group'>
+                <div className='form-group'>
                     <label htmlFor='address'>Address</label>
                     <input
                         type='text'
@@ -92,7 +92,7 @@ const EnrollRestaurant = (props) => {
                         onChange={(e) => setAddress(e.target.value)}
                     />
                 </div>
-                <div className='form_group'>
+                <div className='form-group'>
                     <label htmlFor='phone'>Phone</label>
                     <input
                         type='text'
@@ -102,7 +102,7 @@ const EnrollRestaurant = (props) => {
                         onChange={(e) => setPhone(e.target.value)}
                     />
                 </div>
-                <div className='form_group'>
+                <div className='form-group'>
                     <label htmlFor='description'>Description</label>
                     <input
                         type='text'
@@ -112,7 +112,7 @@ const EnrollRestaurant = (props) => {
                         onChange={(e) => setDescription(e.target.value)}
                     />
                 </div>
-                <div className='form_group'>
+                <div className='form-group'>
                     <label htmlFor='image'>Image</label>
                     <input
                         type='text'

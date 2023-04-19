@@ -16,6 +16,7 @@ import Driver from '../pages/Driver';
 import Enroll from '../pages/EnrollRestaurant';
 import AddMenuItems from '../pages/AddMenuItems';
 import ThankYouForEnrolling from '../pages/ThankYouForEnrolling';
+import RestaurantDashboard from '../pages/RestaurantDashboard';
 
 
 import TeamMemberModal from "../components/TeamMemberModel";
@@ -40,6 +41,7 @@ function RoutesManager() {
         <Route path="/enroll" element={<Enroll />} />
         <Route path="/addMenuItems/:restaurantId" element={<AddMenuItems />} />
         <Route path="/thankyouforenrolling" element={<ThankYouForEnrolling />} />
+        <Route path="/restaurantDashboard" element={<RestaurantDashboard />} />
 
         <Route path="/admin" element={<Admin />} />
         <Route path="/adminlogin" element={<AdminLogin />} />

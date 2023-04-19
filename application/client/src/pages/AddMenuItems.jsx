@@ -24,7 +24,7 @@ const AddMenuItems = (props) => {
   const handleMenuItemSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:8080/addMenuItem', {
+        await axios.post('http://localhost:8080/addMenuItem', {
         name: menuItemName,
         price: menuItemPrice,
         restaurant_id: restaurantId,
@@ -56,10 +56,10 @@ const AddMenuItems = (props) => {
   }
 
   return (
-    <div className="add_menu_items">
+    <div className="add-menu-items">
       <h1>Add Menu Items</h1>
       <form onSubmit={handleMenuItemSubmit}>
-        <div className="form_group">
+        <div className="form-group">
           <label htmlFor="name">Item Name</label>
           <input
             type="text"
@@ -69,7 +69,7 @@ const AddMenuItems = (props) => {
             onChange={(e) => setMenuItemName(e.target.value)}
           />
         </div>
-        <div className="form_group">
+        <div className="form-group">
           <label htmlFor="price">Price</label>
           <input
             type="number"
@@ -79,7 +79,7 @@ const AddMenuItems = (props) => {
             onChange={(e) => setMenuItemPrice(e.target.value)}
           />
         </div>
-        <div className="form_group">
+        <div className="form-group">
           <label htmlFor="description">Description</label>
           <input
             type="text"
@@ -89,7 +89,7 @@ const AddMenuItems = (props) => {
             onChange={(e) => setMenuItemDescription(e.target.value)}
           />
         </div>
-        <div className="form_group">
+        <div className="form-group">
           <label htmlFor="image">Image</label>
           <input
             type="text"
@@ -104,7 +104,7 @@ const AddMenuItems = (props) => {
           Finish
         </button>
       </form>
-      <div className="added_menu_items">
+      <div className="added-menu-items">
         <h2>Added Menu Items</h2>
         <ul>
           {menuItems.map((item, index) => (
