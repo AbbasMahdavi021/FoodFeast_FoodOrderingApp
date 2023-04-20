@@ -9,6 +9,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import UserContext from '../userContext'
+import { Link } from 'react-router-dom';
 
 const HomeHeader = ({ scrollToSecondPage }) => {
   const [favoritedRestaurants, setFavoritedRestaurants] = useState([]);
@@ -67,36 +68,50 @@ const HomeHeader = ({ scrollToSecondPage }) => {
         </div>
       </div>
 
+      <div className='browse-button'>
+        <button onClick={scrollToSecondPage}>
+          Browse All Restaurants
+        </button>
+      </div>
+
 
       <div className="featured-restaurants">
         <h1>Featured Restaurants</h1>
-        {featuredRestaurants.map((restaurant) => (
-          <div key={restaurant.id} className="restaurant">
-            <h3>{restaurant.name}</h3>
-            <p>{restaurant.description}</p>
-          </div>
-        ))}
+        <div className="restaurant-f-container">
+          {featuredRestaurants.map((restaurant) => (
+            <Link key={restaurant.id} to={`${restaurant.name.replace(/\s/g, '')}/${restaurant.id}`}>
+              <div key={restaurant.id} className="restaurant-f">
+                <img src={restaurant.picture} alt={restaurant.name} />
+                <div className="restaurant-f-text">
+                  <h3>{restaurant.name}</h3>
+                  <p>{restaurant.description}</p>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
 
       {user ?
         <div className="favorited-restaurants">
           <h1>Favorite Restaurants</h1>
           {favoritedRestaurants.map((restaurant, index) => (
-            <div key={index} className="restaurant">
-              <h3>{restaurant.name}</h3>
-              <p>{restaurant.description}</p>
-            </div>
+            <Link key={restaurant.id} to={`${restaurant.name.replace(/\s/g, '')}/${restaurant.id}`}>
+              <div key={index} className="restaurant">
+                <img src={restaurant.picture} alt={restaurant.name} />
+                <div className="restaurant-details">
+                  <h3>{restaurant.name}</h3>
+                  <p>{restaurant.description}</p>
+                </div>
+              </div>
+            </Link>
           ))}
         </div>
 
         : null
       }
 
-      <div className='browse-button'>
-        <button onClick={scrollToSecondPage}>
-          Browser All Restaurants
-        </button>
-      </div>
+
 
     </div>
   )
