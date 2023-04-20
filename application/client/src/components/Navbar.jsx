@@ -61,17 +61,23 @@ function Navbar() {
   }
   return (
     <nav className="nav">
-      <a href="/" className="brand">
-        SFSU-FoodFeast
-      </a>
 
-      <a href="/" className="Logo">
-        <img
-          alt="logo"
-          src={process.env.PUBLIC_URL + '/images/brand/Logo.png'}
-          className="Logo"
-        />
-      </a>
+
+      <div className='brand'>
+        <a href="/" className="Logo">
+          <img
+            alt="logo"
+            src={process.env.PUBLIC_URL + '/images/brand/Logo.png'}
+            className="Logo"
+          />
+        </a>
+
+        <a href="/" className="brand">
+          SFSU-FoodFeast
+        </a>
+      </div>
+
+
 
       <ul className={active}>
         <li className='navItem'>

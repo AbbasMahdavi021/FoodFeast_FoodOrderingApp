@@ -59,15 +59,21 @@ a.navLink:hover {
   align-items: center;
   justify-content: space-around;
   height: 8vh;
+  min-height: 50px;
   background: rgb(139, 8, 139);
   top: 0;
   z-index: 9999;
 }
 
 .brand {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  min-height: 50px;
+  align-items: center;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 10);
   text-transform: uppercase;
-
+  padding-inline: 10px;
 }
 
 .Logo {
@@ -103,12 +109,13 @@ a.navLink:hover {
     position: fixed;
     top: 8vh;
     right: 0;
-    height: 88%;
+    height: 92vh;
     width: 45%;
-    background: rgb(168, 17, 168);
+    background: rgb(139, 8, 139);
     flex-direction: column;
     transform: translateX(100%);
     transition: 0.5s ease-in;
+    
   }
 }
 
