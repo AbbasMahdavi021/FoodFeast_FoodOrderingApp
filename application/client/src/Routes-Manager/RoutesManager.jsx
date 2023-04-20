@@ -25,7 +25,7 @@ import Restaurant from '../pages/Restaurant';
 
 function RoutesManager() {
 
-  const isUnique = window.location.pathname === "/admin" || window.location.pathname === "/driver";
+  const isUnique = window.location.pathname === "/admin";
 
   return (
     <BrowserRouter>

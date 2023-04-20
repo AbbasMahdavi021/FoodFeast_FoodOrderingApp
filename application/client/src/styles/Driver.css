@@ -1,6 +1,75 @@
 .driverName {
   font-size: 1.5em;
   font-weight: bold;
-  color: #bc0000;
+  color: white;
   margin: 0;
+  margin-bottom: 30px;
+}
+
+.driver-dashboard {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.driver-redirect{
+  margin-top: 50px;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: rgb(255, 0, 0);
+  margin-bottom: 30px;
+
+}
+
+.driver-map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid red;
+  width: 100vw;
+  height: 50vh;
+  margin-bottom: 30px;
+  overflow-y: hidden;
+}
+
+.order-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  width: 100%;
+}
+
+
+.order-info p {
+  color: white;
+  padding: 20px;
+  margin: 20px;
+}
+
+.order-accept{
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  background-color:rgb(228, 17, 217);
+
+}
+
+
+.driver-button {
+
+  color: black;
+  background-color: rgb(255, 207, 1);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 10);
+  border-radius: 10px;
+  padding: 10px 20px;
+  text-align: center;
+  display: inline-block;
+  font-size: 20px;
+  margin-top: 30px;
+
+
 }
