@@ -16,6 +16,79 @@ import '../styles/forgotPassword.css';
 
 export default function Login() {
 
+  const { setUser } = useContext(UserContext)
+  const navigate = useNavigate()
+
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  })
+
+  const handleChange = (e) => {
+    let obj = {
+      ...formData,
+    }
+
+    obj[e.target.name] = e.target.value
+    setFormData(obj)
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+
+    if (!formData.username) {
+      setErr('Username field is required')
+      return
+    }
+
+    if (!formData.password) {
+      setErr('Password field is required')
+      return
+    }
+
+    try {
+      const res = await axios.post('/auth/login', formData)
+      if (res && res.data && res.data.success) {
+        setUser({
+          // the user data is passed from the auth controller on the backend
+          id: res.data.id,
+          username: res.data.username,
+          isDriver: res.data.isDriver,
+          isRestaurantOwner: res.data.isRestaurantOwner,
+          email: res.data.email,
+        })
+
+        if (res.data.isDriver === 1){
+          navigate('/driver')
+        } else if (res.data.isRestaurantOwner === 1) {
+          navigate('/enroll')
+        } else {
+          navigate('/')
+        }
+      }
+    } catch (err) {
+      console.error('Error:', err)
+      setErr(
+        err.response ? err.response.data : 'An error occurred during login.',
+      )
+    }
+  }
+
+  //error display
+
+  const [err, setErr] = useState(null)
+
+  useEffect(() => {
+    if (err) {
+      const timerId = setTimeout(() => {
+        setErr(null)
+      }, 3000)
+      return () => clearTimeout(timerId)
+    }
+  }, [err])
+
+  //Forgot password
+
   const customStyles = {
     content: {
       top: '50%',
@@ -60,72 +133,6 @@ export default function Login() {
     setEmailInput(e.target.value);
   }
 
-
-
-  const { setUser } = useContext(UserContext)
-  const navigate = useNavigate()
-
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-  })
-
-  const handleChange = (e) => {
-    let obj = {
-      ...formData,
-    }
-
-    obj[e.target.name] = e.target.value
-    setFormData(obj)
-  }
-
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-
-    if (!formData.username) {
-      setErr('Username field is required')
-      return
-    }
-
-    if (!formData.password) {
-      setErr('Password field is required')
-      return
-    }
-
-    try {
-      const res = await axios.post('/auth/login', formData)
-      if (res && res.data && res.data.success) {
-        setUser({
-          // the user data is passed from the auth controller on the backend
-          id: res.data.id,
-          username: res.data.username,
-          isDriver: res.data.isDriver,
-          isRestaurantOwner: res.data.isRestaurantOwner,
-          email: res.data.email,
-        })
-
-        navigate('/')
-      }
-    } catch (err) {
-      console.error('Error:', err)
-      setErr(
-        err.response ? err.response.data : 'An error occurred during login.',
-      )
-    }
-  }
-
-  //error display
-
-  const [err, setErr] = useState(null)
-
-  useEffect(() => {
-    if (err) {
-      const timerId = setTimeout(() => {
-        setErr(null)
-      }, 3000)
-      return () => clearTimeout(timerId)
-    }
-  }, [err])
 
   return (
     <Grid container component="main" sx={{ height: '90vh' }}>

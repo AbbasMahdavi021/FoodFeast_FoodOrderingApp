@@ -12,6 +12,7 @@ const enrollRestaurant = require("./routes/enrollRestaurant.js");
 const addMenuItem = require("./routes/addMenuItem.js");
 const orderRoutes = require("./routes/orders.js");
 const sendEmailRoutes = require("./routes/sendEmail.js");
+const driverRoutes = require("./routes/driver.js");
 
 
 
@@ -27,7 +28,10 @@ app.use(cookieParser());
 app.use("/auth", authRoutes);
 app.use("/restaurants", restaurantRoutes);
 app.use("/admin", adminRoutes);
+app.use("/driver", driverRoutes);
 app.use("/sendEmail", sendEmailRoutes);
+
+
 app.use('/favorites', favoritesRoutes);
 app.use('/enroll', enrollRestaurant);
 app.use('/addMenuItem', addMenuItem);

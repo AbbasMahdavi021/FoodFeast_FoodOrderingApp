@@ -5,69 +5,55 @@
  *   To fetch additional data from the db, modify the Login.jsx file.
  */
 
-import React, { useContext } from 'react'
-import UserContext from '../context'
-import '../styles/Driver.css'
-import { Button } from '@mui/material';
+
+import React, { useContext, useEffect } from 'react';
+import UserContext from '../context';
+import '../styles/Driver.css';
 import Map from './Map';
+import DriverRegister from './DriverRegister';
 
 
 function Driver() {
   const { user } = useContext(UserContext);
-  console.log('User in Driver component:', user);
 
-  // without this check, the pages loads before the user is set in context
   if (!user) {
-    return <h2 className='driver-redirect'>Please Login As A Driver!</h2>;
+    return (
+      <div className='admin'>
+        <DriverRegister />
+      </div>
+    )
   }
 
-  const isDriver = user.isDriver;
+
+  const isDriver = user && user.isDriver;
+
 
   const driverDashboard = (
-
     <div className='driver-dashboard'>
-
       <div className='driver-map'>
-
-          <Map />
+        <Map />
       </div>
-
       <div className='order-info'>
-
-        <p> Dliver By: 8:50 </p>
-
+        <p> Deliver By: 8:50 </p>
         <p> Restaurant Name </p>
-
-        <p> number of Items </p>
-
+        <p> Number of Items </p>
       </div>
-
       <div className='order-accept'>
-
         <p> $20.56 </p>
-
         <button className='driver-button'> Accept </button>
-
-
       </div>
-
     </div>
-  )
-
-
+  );
 
   return (
-    <div className='driverName'> 
+    <div className='driverName'>
       {isDriver ? (
-          driverDashboard
+        driverDashboard
       ) : (
-          <p>This user is not a Driver: --Insert link to driver registration here--</p>
+        <p>This user is not a Driver: --Insert link to driver registration here--</p>
       )}
-      </div>
-
-
+    </div>
   );
 }
 
 export default Driver;
-  
