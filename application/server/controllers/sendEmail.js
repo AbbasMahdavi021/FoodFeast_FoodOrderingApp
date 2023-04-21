@@ -18,13 +18,18 @@ const password = async (req, res) => {
     const newPassword = generatePassword();
 
     const salt = bcrypt.genSaltSync(10);
-    const hashedNewPassword = bcrypt.hashSync(newPassword.toString(), salt);
+    const hashedNewPassword = bcrypt.hashSync(newPassword, salt);
 
-    const q = "UPDATE users SET password = " + hashedNewPassword + "WHERE email = ?";
+    const q = `UPDATE users SET password = '${hashedNewPassword}' WHERE email = ?`;
 
     db.query(q, [req.body.email], (err, data) => {
 
         //check if password is Null
+        if (err) {
+            console.log(err);
+            return res.status(500).json({ error: "Failed to update password" });
+        }
+        
         //decrypt password
 
         //call sendEmail function
