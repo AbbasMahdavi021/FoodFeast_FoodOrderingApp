@@ -19,7 +19,8 @@ export default function Register() {
     const [formData, setFormData] = useState({
         email: "",
         username: "",
-        password: ""
+        password: "",
+        checkbox: false,
     });
 
     const handleChange = (e) => {
@@ -62,6 +63,11 @@ export default function Register() {
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
         if (!passwordRegex.test(formData.password)) {
             setErr("Password must contain: one lowercase letter, one uppercase letter, one number, and 5 characters long!");
+            return;
+        }
+
+        if (!formData.checkbox) {
+            setErr("Please accept the Terms & Conditions");
             return;
         }
 
@@ -189,8 +195,18 @@ export default function Register() {
                             </Grid>
 
                             <Grid item marginBottom={10} marginTop={3} marginLeft={1}>
-                                <input type="checkbox" style={{ transform: 'scale(1.5)', marginRight: '8px' }} />
-                                <Link href="#" sx={{ color: 'black', fontSize: '2.1rem' }}>I accept the Terms & Conditions</Link>
+                                <label>
+                                    <input
+                                        checked={formData.checkbox}
+                                        onChange={(e) =>
+                                            setFormData({ ...formData, checkbox: e.target.checked })
+                                        }
+                                        type="checkbox"
+                                        required
+                                        style={{ transform: "scale(1.5)", marginRight: "8px" }}
+                                    />
+                                    <Link sx={{ color: 'black', fontSize: '2.2rem', cursor: 'pointer' }}>I accept the Terms & Conditions </Link>
+                                </label>
                             </Grid>
 
                             <Button

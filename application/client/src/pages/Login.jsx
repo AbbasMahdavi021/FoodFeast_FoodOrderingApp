@@ -11,6 +11,7 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import axios from 'axios'
 import UserContext from '../context'
+import '../styles/forgotPassword.css';
 
 
 export default function Login() {
@@ -21,8 +22,13 @@ export default function Login() {
       left: '50%',
       right: 'auto',
       bottom: 'auto',
-      marginRight: '-50%',
+      marginRight: '-75%',
       transform: 'translate(-50%, -50%)',
+      height: 'clamp(400px, 80vh, 600px)',
+      width: 'clamp(400px, 80vw, 600px)',
+      backgroundColor: 'rgb(51, 51, 51)',
+      borderRadius: '20px',
+      zIndex: 999,
     },
   };
 
@@ -202,11 +208,11 @@ export default function Login() {
               <Grid item marginRight={1} marginTop={2}>
                 <label>
                   <input type="checkbox" style={{ transform: 'scale(1.5)', marginRight: '8px' }} />
-                  <Link sx={{ color: 'black', fontSize: '2.2rem', textDecoration: 'none' }}>Remember Me </Link>
+                  <Link sx={{ color: 'black', fontSize: '2.2rem', textDecoration: 'none', cursor: 'pointer' }}>Remember Me </Link>
                 </label>
               </Grid>
               <Grid item marginRight={1} marginTop={2}>
-                <Button onClick={openModal} sx={{ color: 'black', fontSize: '2.2rem' }}>Forgot Password?</Button>
+                <Link onClick={openModal} sx={{ color: 'black', fontSize: '2.2rem', cursor: 'pointer' }}>Forgot Password?</Link>
               </Grid>
             </Grid>
 
@@ -243,11 +249,52 @@ export default function Login() {
               style={customStyles}
               contentLabel="Example Modal"
             >
-              <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-              <button onClick={closeModal}> X </button>
-              <div> Enter your Email to reset your password</div>
-              <input onChange={handleEmailInputChange} type='text' value={ emailInput } />
-              <button onClick={handleReset}> Reset Password </button>
+              <div className='forgot-password-container'>
+                <div className='fp-header'>
+                  <h1>Forgot your password</h1>
+                  <Button
+                    onClick={closeModal}
+                    sx={{
+                      backgroundColor: "transparent",
+                      border: "none",
+                      color: "white",
+                      cursor: "pointer",
+                      fontSize: "2rem",
+                      position: "absolute",
+                      right: "0",
+                      top: "0",
+                      margin: "1rem",
+                    }}
+                  >
+                    X
+                  </Button>
+                </div>
+                <div className='fp-text'>
+                  <h2> To receive a new password, please provide your email address. </h2>
+                  <h2> Enter email address</h2>
+                </div>
+                <input className='fp-input' onChange={handleEmailInputChange} type='text' value={emailInput} />
+
+
+                <Button
+                  onClick={handleReset}
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{
+                    mt: 3, mb: 2, borderRadius: '15px', fontSize: 20,
+                    backgroundColor: '#FFCF01', color: '#000000',
+                    width: '250px',
+                    '&:hover': { backgroundColor: '#fc3' },
+                    boxShadow: '2px 2px 5px rgba(0, 0, 0, 10)',
+                    display: 'block',
+                    margin: '50px auto 50px',
+                  }}
+                >
+                  Reset Password
+                </Button>
+
+              </div>
             </Modal>
 
             {err && (
