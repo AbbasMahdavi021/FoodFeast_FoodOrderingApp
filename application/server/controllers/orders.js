@@ -48,7 +48,6 @@ module.exports = (io) => {
           console.error("Error fetching orders:", error);
           res.status(500).json({ message: "Error fetching orders" });
         } else {
-          console.log('Results:', results)
           res.status(200).json(results);
         }
       });
@@ -95,20 +94,14 @@ module.exports = (io) => {
             console.error("Error creating order:", error);
             res.status(500).json({ message: "Error creating order" });
           } else {
-            console.log("Order created successfully:", result);
-
             const newOrder = {
               ...req.body,
               order_id: result.insertId,
               order_date: formattedOrderDate,
             };
-            console.log("New order:", newOrder);
-
             res.status(201).json(newOrder);
 
             io.to(restaurantId).emit("newOrder", newOrder);
-            console.log(`Emitted newOrder event to restaurantId: ${restaurantId}`, newOrder);
-
           }
         }
       );

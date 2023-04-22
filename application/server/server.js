@@ -29,8 +29,6 @@ const io = require("socket.io")(server, {
 const orderRoutes = require("./routes/orders.js")(io);
 
 io.on('connection', (socket) => {
-  console.log('A user connected');
-
   socket.on("joinRestaurantRoom", async (room) => {
     console.log(`Socket ${socket.id} joining room: ${room}`);
     socket.join(room);
@@ -44,7 +42,6 @@ io.on('connection', (socket) => {
 
       for (const order of orders) {
         socket.to(room).emit(`newOrder-${restaurantId}`, order);
-        console.log("Emitting order:", order);
       }
     } catch (error) {
       console.error("Error fetching orders:", error);
@@ -56,7 +53,6 @@ io.on('connection', (socket) => {
       console.log('No room specified');
       return;
     } else {
-      console.log(`Sending order to room: ${room}`);
       console.log(`Data: ${JSON.stringify(data)}`);
       io.to(room).emit('receive-order', data);
     }
@@ -77,7 +73,7 @@ app.use("/addMenuItem", addMenuItem);
 app.use("/orders", orderRoutes);
 
 //Build//////////////////////////////////////////////////////////////
-const _dirname = path.resolve(); // Corrected variable name
+const _dirname = path.resolve(); 
 const buildPath = path.join(__dirname, "../client/build");
 
 app.use(express.static(buildPath));
@@ -108,6 +104,6 @@ app.get(
 //Build//////////////////////////////////////////////////////////////
 
 const port = 8080;
-server.listen(port, () => { // Start server with the 'listen' method on the server object
+server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
