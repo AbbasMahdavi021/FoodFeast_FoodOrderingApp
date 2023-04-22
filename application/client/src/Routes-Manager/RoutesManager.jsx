@@ -17,7 +17,7 @@ import Enroll from '../pages/EnrollRestaurant';
 import AddMenuItems from '../pages/AddMenuItems';
 import ThankYouForEnrolling from '../pages/ThankYouForEnrolling';
 import RestaurantDashboard from '../pages/RestaurantDashboard';
-
+import TestCreateOrder from '../pages/TestCreateOrder';
 
 import TeamMemberModal from "../components/TeamMemberModel";
 import teamMembers from '../components/teamMembers';
@@ -42,6 +42,8 @@ function RoutesManager() {
         <Route path="/addMenuItems/:restaurantId" element={<AddMenuItems />} />
         <Route path="/thankyouforenrolling" element={<ThankYouForEnrolling />} />
         <Route path="/restaurantDashboard" element={<RestaurantDashboard />} />
+        <Route path="/testCreateOrder" element={<TestCreateOrder />} />
+
 
         <Route path="/admin" element={<Admin />} />
         <Route path="/adminlogin" element={<AdminLogin />} />
