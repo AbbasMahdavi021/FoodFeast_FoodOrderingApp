@@ -1,6 +1,24 @@
 import React from 'react';
+import axios from 'axios';
 
 const MenuItem = (props) => {
+
+
+    const handleClick = async () => {
+
+        console.log(props.restaurantId + " HAHA");
+
+        const res = await axios.post("/cart/addToCart", {
+
+            restaurantId: props.restaurantId,
+            id: props.id,
+            price: props.price,
+            itemQuantity: 1,
+            
+        });
+
+
+    }
 
     return (
         <div className='menu-item-box'>
@@ -13,6 +31,10 @@ const MenuItem = (props) => {
                 <p>
                     $ {props.price}
                 </p>
+
+                <button className='add-to-cart-btn' onClick={handleClick}>
+                    Add To Card
+                </button>
 
             </div>
 

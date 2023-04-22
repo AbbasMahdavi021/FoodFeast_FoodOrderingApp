@@ -11,8 +11,10 @@ const favoritesRoutes = require("./routes/favorites.js");
 const enrollRestaurant = require("./routes/enrollRestaurant.js");
 const addMenuItem = require("./routes/addMenuItem.js");
 const sendEmailRoutes = require("./routes/sendEmail.js");
+const cartRoutes = require('./routes/cart.js');
 
 const session = require("./config/session.js");
+const adminMW = require("./middleware/authMW.js");
 
 const app = express();
 app.use(cors());
@@ -65,12 +67,13 @@ io.on('connection', (socket) => {
 
 app.use("/auth", authRoutes);
 app.use("/restaurants", restaurantRoutes);
-app.use("/admin", adminRoutes);
+app.use("/admin", adminMW, adminRoutes);
 app.use("/sendEmail", sendEmailRoutes);
 app.use("/favorites", favoritesRoutes);
 app.use("/enroll", enrollRestaurant);
 app.use("/addMenuItem", addMenuItem);
 app.use("/orders", orderRoutes);
+app.use("/cart", cartRoutes);
 
 //Build//////////////////////////////////////////////////////////////
 const _dirname = path.resolve(); 

@@ -36,9 +36,11 @@ const Restaurant = (props) => {
                 {newItem.map(item => {
                     return (
                         <MenuItem
+                            id={item.id}
                             image={item.image}
                             itemName={item.name}
                             price={item.price}
+                            restaurantId={id}
                         />
                     )
                 })}

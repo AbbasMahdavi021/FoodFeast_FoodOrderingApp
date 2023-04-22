@@ -1,5 +1,7 @@
 const express = require("express");
 const {getUserList, getUser, deleteUser, deleteRestaurant, processQuery} = require("../controllers/admin.js");
+const { getRestaurants} = require("../controllers/restaurant.js");
+
 
 const router = express.Router();
 
@@ -12,6 +14,8 @@ router.post("/deleteUser", deleteUser);
 router.post("/deleteRestaurant", deleteRestaurant);
 
 router.post("/processQuery", processQuery);
+
+router.get("/getAllRestaurants", getRestaurants);
 
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const db = require("../db.js");
 const bcrypt = require("bcryptjs");
+const Cart = require('../config/cart.js');
 
 const register = (req, res) => {
     //check if user already exists.
@@ -119,9 +120,12 @@ const adminlogin = (req, res) => {
             return res.status(400).json("Incorrect Username or Password!");
         }
 
-        console.log("Logged in as Admin: " + data[0].username);
         req.session.isAdminLoggedIn = true;
         req.session.username = req.body.username;
+
+        console.log("Logged in as Admin: " + data[0].username);
+        const isAdmin = data[0].isAdmin;
+        req.session.isAdmin = isAdmin;
 
         return res.status(200).send({ success: true });
     });
