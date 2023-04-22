@@ -10,7 +10,7 @@ import React, { useContext, useEffect } from 'react';
 import UserContext from '../context';
 import '../styles/Driver.css';
 import Map from './Map';
-import DriverRegister from './DriverRegister';
+import DriverRegister from '../components/Driver/DriverRegister';
 
 
 function Driver() {
@@ -24,9 +24,7 @@ function Driver() {
     )
   }
 
-
   const isDriver = user && user.isDriver;
-
 
   const driverDashboard = (
     <div className='driver-dashboard'>

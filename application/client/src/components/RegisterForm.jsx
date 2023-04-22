@@ -1,6 +1,4 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -9,83 +7,12 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import axios from "axios";
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme();
 
-export default function DriverRegister() {
 
-    const [formData, setFormData] = useState({
-        email: "",
-        username: "",
-        password: "",
-        checkbox: false,
-    });
-
-    const handleChange = (e) => {
-        let obj = {
-            ...formData
-        }
-
-        obj[e.target.name] = e.target.value;
-        setFormData(obj);
-    };
-
-    const navigate = useNavigate();
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
-        if (!formData.username) {
-            setErr("Username field is required");
-            return;
-        }
-
-        if (!formData.email) {
-            setErr("Email field is required");
-            return;
-        }
-
-        if (!formData.password) {
-            setErr("Password field is required");
-            return;
-        }
-
-        // Validate password format
-        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
-        if (!passwordRegex.test(formData.password)) {
-            setErr("Password must contain: one lowercase letter, one uppercase letter, one number, and 5 characters long!");
-            return;
-        }
-
-        if (!formData.checkbox) {
-            setErr("Please accept the Terms & Conditions");
-            return;
-        }
-
-        try {
-            const res = await axios.post("/driver/register", formData);
-            navigate("/login");
-        } catch (err) {
-            setErr(err.response.data);
-        }
-    };
-
-
-    //error display
-
-    const [err, setErr] = useState(null);
-
-    useEffect(() => {
-        if (err) {
-            const timerId = setTimeout(() => {
-                setErr(null);
-            }, 3000);
-            return () => clearTimeout(timerId);
-        }
-    }, [err]);
-
+const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, title }) => {
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" sx={{ height: '90vh' }}>
@@ -112,7 +39,7 @@ export default function DriverRegister() {
                         }}
                     >
                         <Typography component="h1" variant="h5" fontSize={40} align="center" marginBottom={10} marginTop={10}>
-                            Sign up as a Driver
+                            {title}
                         </Typography>
 
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
@@ -187,7 +114,7 @@ export default function DriverRegister() {
                                 </Grid>
                             </Grid>
 
-                            <Grid item marginBottom={10} marginTop={3} marginLeft={1}>
+                            <Grid item marginRight={1} marginTop={2}>
                                 <label>
                                     <input
                                         checked={formData.checkbox}
@@ -201,6 +128,9 @@ export default function DriverRegister() {
                                     <Link sx={{ color: 'black', fontSize: '2.2rem', cursor: 'pointer' }}>I accept the Terms & Conditions </Link>
                                 </label>
                             </Grid>
+
+
+
 
                             <Button
                                 type="submit"
@@ -239,3 +169,6 @@ export default function DriverRegister() {
         </ThemeProvider>
     );
 }
+
+
+export default RegisterForm;

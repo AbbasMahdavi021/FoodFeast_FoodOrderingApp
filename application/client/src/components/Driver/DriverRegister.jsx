@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import axios from "axios";
 
-import RegisterForm from '../components/RegisterForm';
+import RegisterForm from '../RegisterForm';
 
 
 
@@ -41,10 +41,10 @@ export default function Register() {
             return;
         }
 
-        // check if email ends with @sfsu.edu
-        const emailRegex = /^[\w-.]+@sfsu.edu$/i;
+        // check if email is valid
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(formData.email)) {
-            setErr("Please enter a valid SFSU email address");
+            setErr("Please enter a valid email address");
             return;
         }
 
@@ -66,7 +66,7 @@ export default function Register() {
         }
 
         try {
-            await axios.post("/auth/register", formData);
+            await axios.post("/driver/register", formData);
             navigate("/login");
         } catch (err) {
             setErr(err.response.data);
@@ -95,7 +95,7 @@ export default function Register() {
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
                 err={err}
-                title="Sign Up"
+                title="Sign Up as a Driver"
             />
         </>
     );
