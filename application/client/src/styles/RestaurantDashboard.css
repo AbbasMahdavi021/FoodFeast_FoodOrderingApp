@@ -7,3 +7,24 @@
   height: 100%;
   color: white;
 }
+
+.restaurant-img-thumb {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.restaurant-dashboard {
+  margin-bottom: 100px;
+}
+
+.customer-orders-item {
+  margin-bottom: 10px;
+  color: yellow;
+}
+
+.dash {
+  font-size: 50px;
+}
