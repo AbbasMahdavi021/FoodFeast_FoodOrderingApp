@@ -41,7 +41,7 @@ module.exports = function Cart(oldCart) {
 
     this.removeItem= (item) => {
 
-        for (let i = 0; i < this.itemList; i++) {
+        for (let i = 0; i < this.itemList.length; i++) {
             if (this.itemList[i].id === item.id) {
                 this.totalQuantity -= item.itemQuantity;
                 this.totalCost -= item.itemQuantity * item.price;
@@ -50,14 +50,18 @@ module.exports = function Cart(oldCart) {
         }
     }
 
-    this.updateItem = (item, addend) => {
-        for (let i = 0; i < this.itemList; i++) {
-            if (this.itemList[i].id === item.id) {
+    this.updateItem = (id, addend) => {
+
+        for (let i = 0; i < this.itemList.length; i++) {
+            console.log(this.itemList[i].id);
+            if (this.itemList[i].id === id) {
                 this.totalQuantity += addend;
-                item.itemQuantity += addend;
-                this.totalCost -= item.itemQuantity * item.price;
-                this.itemList.splice(i, 1);
-            }
+                this.itemList[i].itemQuantity += addend;
+                this.totalCost += this.itemList[i].price * addend;
+                if (this.itemList[i].itemQuantity <= 0) {
+                    this.itemList.splice(i, 1);
+                }
+            }   
         }
     }
 

@@ -6,13 +6,12 @@ const MenuItem = (props) => {
 
     const handleClick = async () => {
 
-        console.log(props.restaurantId + " HAHA");
-
         const res = await axios.post("/cart/addToCart", {
 
             restaurantId: props.restaurantId,
             id: props.id,
             price: props.price,
+            image: props.image,
             itemQuantity: 1,
             
         });
