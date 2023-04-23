@@ -18,7 +18,6 @@ import Driver from '../pages/Driver';
 import TeamMemberModal from "../components/TeamMemberModel";
 import teamMembers from '../components/teamMembers';
 import Restaurant from '../pages/Restaurant';
-import RestaurantLogin from '../pages/RestaurantLogin';
 import RestaurantRegister from '../pages/RestaurantRegister';
 import MenuEntry from '../pages/MenuEntry';
 import AddedItem from '../pages/AddedItem';
