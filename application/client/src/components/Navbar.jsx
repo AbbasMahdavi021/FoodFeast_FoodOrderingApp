@@ -84,7 +84,7 @@ function Navbar() {
           {isRestaurantOwner ? (
             <a href="/restaurantDashboard" className='navLink'>For Restaurants</a>
           ) : (
-            <a href="/enroll" className='navLink'>For Restaurants</a>
+            <a href="/restaurantRegister" className='navLink'>For Restaurants</a>
           )}
         </li>
 

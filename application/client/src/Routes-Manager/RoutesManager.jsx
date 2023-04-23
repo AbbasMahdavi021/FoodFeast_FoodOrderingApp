@@ -23,6 +23,9 @@ import {Cart} from '../pages/Cart';
 import TeamMemberModal from "../components/TeamMemberModel";
 import teamMembers from '../components/teamMembers';
 import Restaurant from '../pages/Restaurant';
+import RestaurantRegister from '../pages/RestaurantRegister';
+import MenuEntry from '../pages/MenuEntry';
+import AddedItem from '../pages/AddedItem';
 
 function RoutesManager() {
 
@@ -38,6 +41,8 @@ function RoutesManager() {
         <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About teamMembers={teamMembers} />} />
         <Route path="/map" element={<Map />} />
+        
+        <Route path="/restaurantregister" element={<RestaurantRegister />} />
         <Route path="/driver" element={<Driver />} />
         <Route path="/enroll" element={<Enroll />} />
         <Route path="/addMenuItems/:restaurantId" element={<AddMenuItems />} />
@@ -46,6 +51,8 @@ function RoutesManager() {
         <Route path="/testCreateOrder" element={<TestCreateOrder />} />
         <Route path="/cart" element={<Cart />} />
 
+        <Route path="/menuentry" element={<MenuEntry />}/>
+        <Route path="/addeditem" element={<AddedItem />}/>
 
         <Route path="/admin" element={<Admin />} />
         <Route path="/adminlogin" element={<AdminLogin />} />
