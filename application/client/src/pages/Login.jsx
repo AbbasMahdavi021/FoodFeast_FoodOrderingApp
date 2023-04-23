@@ -241,7 +241,7 @@ export default function Login() {
               Sign In
             </Button>
 
-            <Grid container>
+            <Grid container justifyContent="center">
               <Grid item>
                 <Link href="/register" variant="body2" sx={{ fontSize: 20, color: 'black' }}>
                   {"Don't have an account? Sign Up here"}
