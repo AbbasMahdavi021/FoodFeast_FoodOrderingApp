@@ -68,7 +68,7 @@ function Navbar() {
       <ul className={active}>
 
         <li className="navItem">
-          <a href="/restaurantlogin" className="navLink">
+          <a href="/restaurantregister" className="navLink">
             Enroll Resturant
           </a>
         </li>
