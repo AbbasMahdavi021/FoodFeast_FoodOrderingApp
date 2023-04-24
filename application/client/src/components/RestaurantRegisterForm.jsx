@@ -9,20 +9,12 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme();
 
 
-const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, category, setCatergory, err, title }) => {
+const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err, title }) => {
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" sx={{ height: '90vh' }}>
@@ -122,18 +114,17 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, categ
                                         }}
                                     />
                                 </Grid>
-                                 {/* restaurant name */}
-                                 <Grid item xs={12}>
+                                {/* restaurant name */}
+                                <Grid item xs={12}>
                                     <TextField
-                                        value={formData.restaurantname}
+                                        value={formData.name}
                                         onChange={e => handleChange(e)}
                                         autoComplete="given-name"
-                                        name="restaurantname"
+                                        name="name"
                                         required
                                         fullWidth
-                                        id="restaurantname"
+                                        id="name"
                                         label="Restaurant Name"
-                                        autoFocus
                                         InputLabelProps={{
                                             sx: {
                                                 fontSize: '1.2rem'
@@ -157,7 +148,6 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, categ
                                         fullWidth
                                         id="phone"
                                         label="Restaurant Phone Number"
-                                        autoFocus
                                         InputLabelProps={{
                                             sx: {
                                                 fontSize: '1.2rem'
@@ -181,7 +171,6 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, categ
                                         fullWidth
                                         id="address"
                                         label="Restaurant Address"
-                                        autoFocus
                                         InputLabelProps={{
                                             sx: {
                                                 fontSize: '1.2rem'
@@ -194,63 +183,16 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, categ
                                         }}
                                     />
                                 </Grid>
-                                 {/* category drop down menu */}
-                                 <Grid item xs={12}>
-                                <Box sx={{ minWidth: 120 }}>
-                                <FormControl fullWidth >
-                                <InputLabel sx={{ fontSize: 12}}
-                                 value={formData.category}
-                                 >Select Category </InputLabel>
-                                 <Select
-                                 labelId="category"
-                                 id="category"
-                                 value={category}
-                                 label="Category"
-                                 onChange={handleChange} >
-                                <MenuItem value={1} sx={{ fontSize: 15}}>American</MenuItem>
-                                <MenuItem value={2} sx={{ fontSize: 15}}>Indian</MenuItem>
-                                <MenuItem value={3} sx={{ fontSize: 15}}>Italian</MenuItem>
-                                <MenuItem value={4} sx={{ fontSize: 15}}>Japanese</MenuItem>
-                                <MenuItem value={5} sx={{ fontSize: 15}}>Mexican</MenuItem>
-                                </Select>
-                                </FormControl>
-                                </Box>
-                                </Grid>
 
-                                {/* add images */}
                                 <Grid item xs={12}>
-                                <Stack spacing={2} direction="row">
-                                <Button variant ="text" sx={{ fontSize: 15, color: 'gray' }}>Add Images</Button>
-                                <Button variant="contained" sx={{ background:'purple', borderRadius: 50}}
-                                component="label">
-                                {/* Upload Images  */}
-                                <input
-                                  type="file"
-                                //   hidden
-                                 />
-                                </Button>
-                                </Stack>
-                                </Grid>
-
-                                {/* description box */}
-                                <Grid item xs={12}>
-                                <Box
-                                 sx={{
-                                 width: 500,
-                                 maxWidth: '100%',
-                                 }}
-                                 >
-                                <TextField  
-                                  value={formData.description}
-                                  onChange={e => handleChange(e)}
-                                  autoComplete="given-name"
-                                  name="description"
-                                  required
-                                  multiline
-                                  fullWidth
-                                  id="description"
-                                  label="Description"                
-                                   autoFocus
+                                    <TextField
+                                        value={formData.cuisine}
+                                        onChange={e => handleChange(e)}
+                                        name="cuisine"
+                                        required
+                                        fullWidth
+                                        id="cuisine"
+                                        label="Cuisine"
                                         InputLabelProps={{
                                             sx: {
                                                 fontSize: '1.2rem'
@@ -258,12 +200,155 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, categ
                                         }}
                                         inputProps={{
                                             style: {
-                                                height: "100px",
-                                                fontSize: '1.5rem'
+                                                fontSize: '2rem'
                                             }
                                         }}
-                                    />                             
-                                </Box>
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    <TextField
+                                        value={formData.price}
+                                        onChange={e => handleChange(e)}
+                                        name="price"
+                                        required
+                                        fullWidth
+                                        id="price"
+                                        label="Price Range ($ - $$$$$)"
+                                        InputLabelProps={{
+                                            sx: {
+                                                fontSize: '1.2rem'
+                                            }
+                                        }}
+                                        inputProps={{
+                                            style: {
+                                                fontSize: '2rem'
+                                            }
+                                        }}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    <TextField
+                                        value={formData.rating}
+                                        onChange={e => handleChange(e)}
+                                        name="rating"
+                                        required
+                                        fullWidth
+                                        id="rating"
+                                        label="Current Yelp Star Rating (1-5)"
+                                        InputLabelProps={{
+                                            sx: {
+                                                fontSize: '1.2rem'
+                                            }
+                                        }}
+                                        inputProps={{
+                                            style: {
+                                                fontSize: '2rem'
+                                            }
+                                        }}
+                                    />
+                                </Grid>
+
+
+                                <Grid item xs={12}>
+                                    <TextField
+                                        value={formData.est_delivery_time}
+                                        onChange={e => handleChange(e)}
+                                        required
+                                        fullWidth
+                                        id="est_delivery_time"
+                                        label="Wait Time in Mins (e.g. 20)"
+                                        name="est_delivery_time"
+                                        InputLabelProps={{
+                                            sx: {
+                                                fontSize: '1.2rem'
+                                            }
+                                        }}
+                                        inputProps={{
+                                            style: {
+                                                fontSize: '2rem'
+                                            }
+                                        }}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    <TextField
+                                        value={formData.hours}
+                                        onChange={e => handleChange(e)}
+                                        required
+                                        fullWidth
+                                        id="hours"
+                                        label="Store Hours (e.g. 9am-7pm)"
+                                        name="hours"
+                                        InputLabelProps={{
+                                            sx: {
+                                                fontSize: '1.2rem'
+                                            }
+                                        }}
+                                        inputProps={{
+                                            style: {
+                                                fontSize: '2rem'
+                                            }
+                                        }}
+                                    />
+                                </Grid>
+
+                                {/* add images */}
+                                <Grid item xs={12}>
+                                    <TextField
+                                        value={formData.picture}
+                                        onChange={e => handleChange(e)}
+                                        required
+                                        fullWidth
+                                        id="picture"
+                                        label="Store Image URL"
+                                        name="picture"
+                                        InputLabelProps={{
+                                            sx: {
+                                                fontSize: '1.2rem'
+                                            }
+                                        }}
+                                        inputProps={{
+                                            style: {
+                                                fontSize: '2rem'
+                                            }
+                                        }}
+                                    />
+                                </Grid>
+
+                                {/* description box */}
+                                <Grid item xs={12}>
+                                    <Box
+                                        sx={{
+                                            width: 500,
+                                            maxWidth: '100%',
+                                        }}
+                                    >
+                                        <TextField
+                                            value={formData.description}
+                                            onChange={e => handleChange(e)}
+                                            autoComplete="given-name"
+                                            name="description"
+                                            required
+                                            multiline
+                                            fullWidth
+                                            id="description"
+                                            label="Description"
+                                            InputLabelProps={{
+                                                sx: {
+                                                    fontSize: '1.2rem'
+                                                }
+                                            }}
+                                            inputProps={{
+                                                style: {
+                                                    height: "100px",
+                                                    fontSize: '1.5rem'
+                                                }
+                                            }}
+                                        />
+                                    </Box>
                                 </Grid>
                             </Grid>
 
@@ -281,9 +366,6 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, categ
                                     <Link sx={{ color: 'black', fontSize: '2.2rem', cursor: 'pointer' }}>I accept the Terms & Conditions </Link>
                                 </label>
                             </Grid>
-
-
-
 
                             <Button
                                 type="submit"

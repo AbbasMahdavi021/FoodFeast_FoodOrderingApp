@@ -1,131 +1,156 @@
-// form for restaurant owner to enroll their restaurant
+// this file is for restuarant owners to register for the site
+// the styling and input fields are in RestaurantRegisterForm.jsx
 
-import React, { useState } from 'react';
+import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import '../styles/EnrollRestaurant.css';
 
-const EnrollRestaurant = (props) => {
+import axios from "axios";
+
+import RegisterForm from '../components/RestaurantRegisterForm';
+
+export default function Register() {
+    const [formData, setFormData] = useState({
+        email: "",
+        username: "",
+        password: "",
+        name: "",
+        phone: "",
+        address: "",
+        cuisine: "",
+        price: "",
+        rating: null,
+        est_delivery_time: null,
+        hours: "",
+        picture: "",
+        description: "",
+        checkbox: false,
+    });
+
+    const handleChange = (e) => {
+        let obj = {
+            ...formData
+        }
+
+        obj[e.target.name] = e.target.value;
+        setFormData(obj);
+    };
+
     const navigate = useNavigate();
-    const [name, setName] = useState('');
-    const [cuisine, setCuisine] = useState('');
-    const [description, setDescription] = useState('');
-    const [est_delivery_time, setEstDeliveryTime] = useState('');
-    const [address, setAddress] = useState('');
-    const [picture, setPicture] = useState('');
-    const [phone, setPhone] = useState('');
-    const [hours, setHours] = useState('');
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+        if (!formData.username) {
+            setErr("Username field is required");
+            return;
+        }
+        const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i;
+        if (!emailRegex.test(formData.email)) {
+            setErr("Please enter a valid email address");
+            return;
+        }
+        
+        if (!formData.password) {
+            setErr("Password field is required");
+            return;
+        }
+
+        // Validate password format
+        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
+        if (!passwordRegex.test(formData.password)) {
+            setErr("Password must contain: one lowercase letter, one uppercase letter, one number, and 5 characters long!");
+            return;
+        }
+
+        if (!formData.name) {
+            setErr("Restaurant Name field is required");
+            return;
+        }
+        
+        if (!formData.phone) {
+            setErr("Restaurant Phone field is required");
+            return;
+        }
+
+        if (!formData.address) {
+            setErr("Restaurant Address field is required ");
+            return;
+        }
+
+        if (!formData.cuisine) {
+            setErr("Cuisine field is required ");
+            return;
+        }
+
+        if (!formData.price) {
+            setErr("Price Range field is required ");
+            return;
+        }
+
+        if (!formData.rating) {
+            setErr("Rating field is required!");
+            return;
+        }
+        if (!formData.est_delivery_time) {
+            setErr("Estimated Delivery Time field is required ");
+            return;
+        }
+        if (!formData.hours) {
+            setErr("Restaurant Hours field is required ");
+            return;
+        }
+        if (!formData.picture) {
+            setErr("Restaurant Image field is required ");
+            return;
+        }
+
+        if (!formData.description) {
+            setErr("Description field is required ");
+            return;
+        }
+
+        if (!formData.checkbox) {
+            setErr("Please accept the Terms & Conditions");
+            return;
+        }
+
+        
         try {
-            const response = await axios.post('http://localhost:8080/enroll', {
-                name,
-                cuisine,
-                description,
-                est_delivery_time,
-                address,
-                picture,
-                phone,
-                hours,
-            });
-            console.log('your restaurant id: ', response.data.restaurant_id);
-            navigate(`/addMenuItems/${response.data.restaurant_id}`);
-
+            const res = await axios.post("/auth/restaurantOwnerRegister", formData);
+            console.log(res);
+            const result = await axios.post("/enroll", formData);
+            console.log(result);
+            navigate("/thankyouforenrolling");
         } catch (err) {
-            console.error(err);
+            setErr(err.response.data);
         }
     };
 
+
+    //error display
+
+    const [err, setErr] = useState(null);
+
+    useEffect(() => {
+        if (err) {
+            const timerId = setTimeout(() => {
+                setErr(null);
+            }, 3000);
+            return () => clearTimeout(timerId);
+        }
+    }, [err]);
+
     return (
-        <div className='enroll-restaurant'>
-            <h1>Enroll Restaurant</h1>
-            <form onSubmit={handleSubmit}>
-                <div className='form-group'>
-                    <label htmlFor='name'>Restaurant Name</label>
-                    <input
-                        type='text'
-                        id='name'
-                        name='name'
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </div>
-                <div className='form-group'>
-                    <label htmlFor='cuisine'>Cuisine</label>
-                    <input
-                        type='text'
-                        id='cuisine'
-                        name='cuisine'
-                        value={cuisine}
-                        onChange={(e) => setCuisine(e.target.value)}
-                    />
-                </div>
-                <div className='form-group'>
-                    <label htmlFor='est_delivery_time'>Estimated Delivery Time</label>
-                    <input
-                        type='text'
-                        id='est_delivery_time'
-                        name='est_delivery_time'
-                        value={est_delivery_time}
-                        onChange={(e) => setEstDeliveryTime(e.target.value)}
-                    />
-                </div>
-                <div className='form-group'>
-                    <label htmlFor='hours'>Hours</label>
-                    <input
-                        type='text'
-                        id='hours'
-                        name='hours'
-                        value={hours}
-                        onChange={(e) => setHours(e.target.value)}
-                    />
-                </div>
-                <div className='form-group'>
-                    <label htmlFor='address'>Address</label>
-                    <input
-                        type='text'
-                        id='address'
-                        name='address'
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
-                    />
-                </div>
-                <div className='form-group'>
-                    <label htmlFor='phone'>Phone</label>
-                    <input
-                        type='text'
-                        id='phone'
-                        name='phone'
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                    />
-                </div>
-                <div className='form-group'>
-                    <label htmlFor='description'>Description</label>
-                    <input
-                        type='text'
-                        id='description'
-                        name='description'
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                </div>
-                <div className='form-group'>
-                    <label htmlFor='image'>Image</label>
-                    <input
-                        type='text'
-                        id='image'
-                        name='picture'
-                        value={picture}
-                        onChange={(e) => setPicture(e.target.value)}
-                    />
-                </div>
-                <button type='submit'>Enroll</button>
-            </form>
-        </div>
+        <>
+            <RegisterForm
+                formData={formData}
+                setFormData={setFormData}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+                err={err}
+                title="Register Restaurant"
+            />
+        </>
     );
 }
-
-export default EnrollRestaurant;
