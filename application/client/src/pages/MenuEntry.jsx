@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import { useParams } from 'react-router-dom'
 
 
 import Button from '@mui/material/Button';
@@ -18,13 +19,17 @@ import '../styles/MenuEntry.css';
 
 function MenuEntry() {
 
+    const { restaurantId } = useParams();
+
     const [formData, setFormData] = useState({
-        item: "",
-        price: "",
-        description: ""
+        name: "",
+        price: null,
+        description: "",
+        image: "",
+        restaurant_id: restaurantId,
     });
 
-    const handleChange = (e) => {
+    const handleChange = (e) => {        
         let obj = {
             ...formData
         }
@@ -39,11 +44,11 @@ function MenuEntry() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (!formData.item) {
-            setErr("Item field is required");
+        if (!formData.name) {
+            setErr("Item Name field is required");
             return;
         }
-        
+
         if (!formData.price) {
             setErr("Price field is required");
             return;
@@ -54,28 +59,33 @@ function MenuEntry() {
             return;
         }
 
+        if (!formData.image) {
+            setErr("Image URL field is required ");
+            return;
+        }
+
         try {
-            const res = await axios.post("/auth/menuentry", formData);
+            const res = await axios.post("/addMenuItem", formData);
             if (res.data.success) {
-                window.location.href = '/menuentry';
+                window.location.href = `/addeditem/${restaurantId}`;
             }
 
         } catch (err) {
             console.log(err);
         }
     };
-    
-   
+
+
     const [err, setErr] = useState(null);
 
     useEffect(() => {
         if (err) {
-          const timerId = setTimeout(() => {
-            setErr(null);
-        }, 3000);
-      return () => clearTimeout(timerId);
-    }
-  }, [err]);
+            const timerId = setTimeout(() => {
+                setErr(null);
+            }, 3000);
+            return () => clearTimeout(timerId);
+        }
+    }, [err]);
 
 
     return (
@@ -106,7 +116,7 @@ function MenuEntry() {
                             }}
                         >
 
-                            <Typography component="h1" variant="h5" fontSize={38} align='center'paddingTop='20px' >
+                            <Typography component="h1" variant="h5" fontSize={38} align='center' paddingTop='20px' >
                                 Menu Entry
                             </Typography>
 
@@ -115,11 +125,11 @@ function MenuEntry() {
                                 <TextField
                                     value={formData.name}
                                     onChange={e => handleChange(e)}
-                                    autoComplete="given-name"
-                                    name="item"
-                                    label="Item"
+                                    margin="normal"
                                     required
                                     fullWidth
+                                    name="name"
+                                    label="Item Name"
                                     autoFocus
                                     InputLabelProps={{
                                         sx: {
@@ -133,6 +143,7 @@ function MenuEntry() {
                                     }}
                                     sx={{ mt: 2 }}
                                 />
+
                                 <TextField
                                     value={formData.price}
                                     onChange={e => handleChange(e)}
@@ -154,61 +165,80 @@ function MenuEntry() {
                                     }}
                                     sx={{ mt: 2 }}
                                 />
-                            
-                                <TextField  
-                                  value={formData.description}
-                                  onChange={e => handleChange(e)}
-                                  autoComplete="given-name"
-                                  name="description"
-                                  required
-                                  multiline
-                                  fullWidth
-                                  id="description"
-                                  label="Description"                
-                                   autoFocus
-                                        InputLabelProps={{
-                                            sx: {
-                                                fontSize: '1.2rem'
-                                            }
-                                        }}
-                                        inputProps={{
-                                            style: {
-                                                height: "100px",
-                                                fontSize: '1.5rem'
-                                            }
-                                        }}
-                                />   
 
-                                                             
-                                <Button 
-                                startIcon={<UploadFileIcon />}
-                                variant="outlined" 
-                                color="primary" 
-                                onClick={()=>fileInput.current.click()} 
-                                sx={{ width:"238px", marginTop: "10px", color: "purple"}}>
-                                upload images
-                                 </Button>
-                                 <input 
-                                ref={fileInput} 
-                                type="file" 
-                                style={{ display: 'none' }}/>
-              
+                                <TextField
+                                    value={formData.description}
+                                    onChange={e => handleChange(e)}
+                                    autoComplete="given-name"
+                                    name="description"
+                                    required
+                                    multiline
+                                    fullWidth
+                                    id="description"
+                                    label="Description"
+                                    InputLabelProps={{
+                                        sx: {
+                                            fontSize: '1.2rem'
+                                        }
+                                    }}
+                                    inputProps={{
+                                        style: {
+                                            height: "100px",
+                                            fontSize: '1.5rem'
+                                        }
+                                    }}
+                                />
+
+                                <TextField
+                                    value={formData.image}
+                                    onChange={e => handleChange(e)}
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    name="image"
+                                    label="Item Image URL"
+                                    InputLabelProps={{
+                                        sx: {
+                                            fontSize: '1.2rem'
+                                        }
+                                    }}
+                                    inputProps={{
+                                        style: {
+                                            fontSize: '2rem'
+                                        }
+                                    }}
+                                    sx={{ mt: 2 }}
+                                />
+
+                                {/* <Button
+                                    startIcon={<UploadFileIcon />}
+                                    variant="outlined"
+                                    color="primary"
+                                    onClick={() => fileInput.current.click()}
+                                    sx={{ width: "238px", marginTop: "10px", color: "purple" }}>
+                                    upload images
+                                </Button> */}
+
+                                {/* <input
+                                    ref={fileInput}
+                                    type="file"
+                                    style={{ display: 'none' }} /> */}
+
                                 <Button
-                                    href="/addeditem"
                                     type="submit"
                                     fullWidth
                                     variant="contained"
-                                    sx={{ mt: 3, mb: 2, fontSize: 20, backgroundColor:"purple" }}
+                                    sx={{ mt: 3, mb: 2, fontSize: 20, backgroundColor: "purple" }}
                                 >
                                     Submit
                                 </Button>
-                                
-                                
+
+
                                 {err && (
-                                <p style={{ fontSize: "20px", color: "red", textAlign: "center" }}>
-                                    {err}
-                                </p>
-                            )}
+                                    <p style={{ fontSize: "20px", color: "red", textAlign: "center" }}>
+                                        {err}
+                                    </p>
+                                )}
                             </Box>
                         </Box>
                     </Grid>

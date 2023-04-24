@@ -2,7 +2,7 @@
  * Here the restaurant owner can add menu items to their restaurant.
  * The items they add are displayed in a list below the form.
  * Once they have added all of the items they want, they can click the "Finish" button
- * which will take them to the "Thank You For Enrolling" page.
+ * which will take them to the "Menu Item Added Page" page.
  */
 
 import React, { useState } from 'react'

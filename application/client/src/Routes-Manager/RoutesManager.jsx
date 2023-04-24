@@ -49,7 +49,7 @@ function RoutesManager() {
         <Route path="/testCreateOrder" element={<TestCreateOrder />} />
         <Route path="/cart" element={<Cart />} />
 
-        <Route path="/menuentry" element={<MenuEntry />}/>
+        <Route path="/menuentry/:restaurantId" element={<MenuEntry />}/>
         <Route path="/addeditem" element={<AddedItem />}/>
 
         <Route path="/admin" element={<Admin />} />
