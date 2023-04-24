@@ -84,7 +84,16 @@ const HomeHeader = ({ scrollToSecondPage }) => {
                 <img src={restaurant.picture} alt={restaurant.name} />
                 <div className="restaurant-f-text">
                   <h3>{restaurant.name}</h3>
-                  <p>{restaurant.description}</p>
+                  <div className="restaurant-f-starbox">
+                    {[...Array(5)].map((star, i) => {
+                      if (i < restaurant.rating) {
+                        return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star1.png'} alt="star" />;
+                      } else {
+                        return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star2.png'} alt="star" />;
+                      }
+                    })}
+                    <span>{restaurant.est_delivery_time - 5}-{restaurant.est_delivery_time} mins</span>
+                  </div>
                 </div>
               </div>
             </Link>

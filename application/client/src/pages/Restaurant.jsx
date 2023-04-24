@@ -32,6 +32,7 @@ const Restaurant = (props) => {
 
     return (
         <div className='restaurant'>
+            <h1>Menu</h1>
             <div className='menu_container'>
                 {newItem.map(item => {
                     return (
