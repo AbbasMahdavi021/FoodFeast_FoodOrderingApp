@@ -118,9 +118,8 @@ export default function Register() {
         
         try {
             const res = await axios.post("/auth/restaurantOwnerRegister", formData);
-            console.log(res);
-            const result = await axios.post("/enroll", formData);
-            console.log(result);
+            const owner_id = res.data.owner_id;
+            const result = await axios.post("/enroll", {...formData, owner_id: owner_id});
             navigate("/thankyouforenrolling");
         } catch (err) {
             setErr(err.response.data);

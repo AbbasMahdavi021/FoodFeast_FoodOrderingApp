@@ -147,9 +147,10 @@ const restaurantOwnerRegister = (req, res) => {
       const values = [  req.body.username,  req.body.email,  hash, 1]
       
       db.query(q, [values], (err, data) => {
-          if (err) return res.json(err);
-          return res.status(200).json("User Created!"),
-              console.log("Account for " + req.body.username + " was created!")
+        if (err) return res.json(err);
+        const owner_id = data.insertId;
+        console.log("Account for " + req.body.username + " was created with ID " + owner_id);
+        return res.send({owner_id: owner_id});
       });
   });
 };
