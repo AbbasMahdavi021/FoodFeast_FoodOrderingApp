@@ -12,6 +12,8 @@ const enrollRestaurant = require("./routes/enrollRestaurant.js");
 const addMenuItem = require("./routes/addMenuItem.js");
 const sendEmailRoutes = require("./routes/sendEmail.js");
 const cartRoutes = require('./routes/cart.js');
+const driverRoutes = require('./routes/driver.js');
+
 
 const session = require("./config/session.js");
 const adminMW = require("./middleware/authMW.js");
@@ -68,6 +70,7 @@ io.on('connection', (socket) => {
 app.use("/auth", authRoutes);
 app.use("/restaurants", restaurantRoutes);
 app.use("/admin", adminMW, adminRoutes);
+app.use("/driver", driverRoutes);
 app.use("/sendEmail", sendEmailRoutes);
 app.use("/favorites", favoritesRoutes);
 app.use("/enroll", enrollRestaurant);
