@@ -74,51 +74,63 @@ const HomeHeader = ({ scrollToSecondPage }) => {
         </button>
       </div>
 
-
-      <div className="featured-restaurants">
-        <h1>Featured Restaurants</h1>
-        <div className="restaurant-f-container">
-          {featuredRestaurants.map((restaurant) => (
-            <Link key={restaurant.id} to={`${restaurant.name.replace(/\s/g, '')}/${restaurant.id}`}>
-              <div key={restaurant.id} className="restaurant-f">
-                <img src={restaurant.picture} alt={restaurant.name} />
-                <div className="restaurant-f-text">
-                  <h3>{restaurant.name}</h3>
-                  <div className="restaurant-f-starbox">
-                    {[...Array(5)].map((star, i) => {
-                      if (i < restaurant.rating) {
-                        return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star1.png'} alt="star" />;
-                      } else {
-                        return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star2.png'} alt="star" />;
-                      }
-                    })}
-                    <span>{restaurant.est_delivery_time - 5}-{restaurant.est_delivery_time} mins</span>
+      <div className="featured-favorite-container">
+        <div className="f-restaurants">
+          <h1>Featured Restaurants</h1>
+          <div className="restaurant-f-container">
+            {featuredRestaurants.map((restaurant) => (
+              <Link key={restaurant.id} to={`${restaurant.name.replace(/\s/g, '')}/${restaurant.id}`}>
+                <div key={restaurant.id} className="restaurant-f">
+                  <img className="restaurant-f-img" src={restaurant.picture} alt={restaurant.name} />
+                  <div className="restaurant-f-text">
+                    <h3>{restaurant.name}</h3>
+                    <div className="restaurant-f-starbox">
+                      {[...Array(5)].map((star, i) => {
+                        if (i < restaurant.rating) {
+                          return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star1.png'} alt="star" />;
+                        } else {
+                          return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star2.png'} alt="star" />;
+                        }
+                      })}
+                      <span>{restaurant.est_delivery_time - 5}-{restaurant.est_delivery_time} mins</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
+
+        {user ?
+          <div className="f-restaurants">
+            <h1>Favorite Restaurants</h1>
+            <div className="restaurant-f-container">
+              {favoritedRestaurants.map((restaurant) => (
+                <Link key={restaurant.id} to={`${restaurant.name.replace(/\s/g, '')}/${restaurant.id}`}>
+                  <div key={restaurant.id} className="restaurant-f">
+                    <img className="restaurant-f-img" src={restaurant.picture} alt={restaurant.name} />
+                    <div className="restaurant-f-text">
+                      <h3>{restaurant.name}</h3>
+                      <div className="restaurant-f-starbox">
+                        {[...Array(5)].map((star, i) => {
+                          if (i < restaurant.rating) {
+                            return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star1.png'} alt="star" />;
+                          } else {
+                            return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star2.png'} alt="star" />;
+                          }
+                        })}
+                        <span>{restaurant.est_delivery_time - 5}-{restaurant.est_delivery_time} mins</span>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          : null
+        }
       </div>
-
-      {user ?
-        <div className="favorited-restaurants">
-          <h1>Favorite Restaurants</h1>
-          {favoritedRestaurants.map((restaurant, index) => (
-            <Link key={restaurant.id} to={`${restaurant.name.replace(/\s/g, '')}/${restaurant.id}`}>
-              <div key={index} className="restaurant">
-                <img src={restaurant.picture} alt={restaurant.name} />
-                <div className="restaurant-details">
-                  <h3>{restaurant.name}</h3>
-                  <p>{restaurant.description}</p>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        : null
-      }
 
 
 

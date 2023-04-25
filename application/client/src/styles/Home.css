@@ -38,19 +38,20 @@
     transform-origin: top left;
     transform: skewX(-55deg);
 } */
-.text-container h1{
+.text-container h1 {
     color: #ffffff;
     font-size: clamp(20px, 2.5vw, 3vw);
     font-family: Georgia, serif;
 }
-.food-plate img{
+
+.food-plate img {
     width: 20vw;
     min-width: 150px;
 }
 
 
-.favorited-restaurants{
-    border:3px solid rgb(241, 241, 71);
+.favorited-restaurants {
+    border: 3px solid rgb(241, 241, 71);
     width: 80%;
     color: #ffffff;
     font-family: Georgia, serif;
@@ -70,41 +71,89 @@
 }
 
 /*//////////////////// Home Page Featured Restaurants /////////////////////////////*/
+.featured-favorite-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
 
-.featured-restaurants {
+.f-restaurants {
     color: white;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 80vw;
+    flex-shrink: 0;
+    width: 45vw;
     height: 20vh;
     margin-top: 2%;
+    margin-right: 2%;
 }
 
-.featured-restaurants h1 {
+.f-restaurants h1 {
     font-size: 2rem;
     margin-bottom: 1%;
 }
 
 .restaurant-f-container {
     display: flex;
-    flex-wrap: nowrap;
     margin-left: 1rem;
+    gap: 2%;
+    min-height: 220px;
+    width: 100%;
+    overflow-x: auto;
 }
+
+.restaurant-f-container::-webkit-scrollbar {
+    width: 11px;
+}
+
+.restaurant-f-container {
+    scrollbar-width: thin;
+    scrollbar-color: #ada8a5 #c8cbc4;
+}
+
+.restaurant-f-container::-webkit-scrollbar-track {
+    background: #c8cbc4;
+    border-radius: 10px;
+}
+
+.restaurant-f-container::-webkit-scrollbar-thumb {
+    background-color: #ada8a5;
+    border-radius: 10px;
+    border: 3px solid #c8cbc4;
+}
+
+
+.restaurant-f-container {
+    scrollbar-width: thin;
+}
+.restaurant-f-container::-moz-scrollbar-track {
+    background: #c8cbc4;
+}
+
+
+.restaurant-f-container::-moz-scrollbar-thumb {
+    background-color: #ada8a5;
+    border-radius: 6px;
+    border: 3px solid #c8cbc4;
+}
+
 
 .restaurant-f {
     position: relative;
     display: flex;
     flex-direction: column;
-    flex: 0 0 auto;
-    height: 240px;
-    width: 200px;
+    justify-content: flex-end;
+    height: 200px;
+    width: 180px;
     border: 4px solid #ccc;
     border-radius: 10px;
     overflow: hidden;
     z-index: 1;
 }
-.restaurant-f:hover{
+
+.restaurant-f:hover {
     cursor: pointer;
     filter: brightness(90%);
 }
@@ -120,14 +169,19 @@
     border-radius: 9px;
     z-index: 2;
 }
-.restaurant-f img {
-    border-radius: 10px;
+
+.restaurant-f-img {
     width: 100%;
-    height: auto;
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
 }
+
 .restaurant-f-text {
-    transform: translate(0%, -100%);
     color: white;
     border-radius: 5px;
     z-index: 3;
@@ -145,25 +199,33 @@
     font-size: 1.2rem;
 }
 
-.restaurant-f-starbox{
+.restaurant-f-starbox {
     display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
     width: 100%;
 }
 
-.restaurant-f-starbox img{
+.restaurant-f-starbox img {
+    position: relative;
     height: 20px;
     width: 20px;
-    margin-bottom:.5rem;
+    height: auto;
+    object-fit: contain;
 }
-.restaurant-f-starbox img:first-child{
+
+.restaurant-f-starbox img:first-child {
     margin-left: .5rem;
 }
-.restaurant-f-starbox span{
+
+.restaurant-f-starbox span {
     font-size: 1.4rem;
     display: flex;
-    margin-left: auto;
+    margin-left: 15%;
     align-items: center;
 }
+
+/*//////////////////// Home Page Featured Restaurants /////////////////////////////*/
 
 /*//////////////////// HOME-Browse PAGE /////////////////////////////*/
 
@@ -388,7 +450,7 @@
     margin-top: 5px;
 }
 
-.restaurant-details p:nth-of-type(4){
+.restaurant-details p:nth-of-type(4) {
     grid-column: 2 / span 1;
     grid-row: 4 / span 1;
     font-size: 20px;
@@ -397,7 +459,7 @@
     text-align: right;
 }
 
-.restaurant-details p:nth-of-type(5){
+.restaurant-details p:nth-of-type(5) {
     grid-column: 1 / span 2;
     grid-row: 5 / span 1;
     font-size: 18px;
