@@ -57,6 +57,12 @@ export const Cart = () => {
         loadCart();
     }, [toggle]);
 
+    const handleCheckout = async() =>{
+     const res = await axios.post('cart/storeCart',{withCredentials: true}); 
+     console.log(JSON.stringify(res));  
+    };
+
+
     return (
 
         <div className='cart-container'>
@@ -77,7 +83,7 @@ export const Cart = () => {
 
                 ))}
             </div>
-
+            <button className='checkout-button' onClick={handleCheckout}>Place Order</button>
             <p id='cart-balance'> ${parseFloat(totalCost).toFixed(2)} </p>
         </div>
     )
