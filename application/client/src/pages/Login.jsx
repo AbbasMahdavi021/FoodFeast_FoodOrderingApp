@@ -1,3 +1,16 @@
+
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: Login.jsx
+ * Created on: 04/20/2023
+ * Author(s):Elahe Bashiri
+ * Contact: Ebashiri@sfsu.edu
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: This is the login page for users,it contains the client side code for DOM manupulation, and API request
+ */
+
 import * as React from 'react'
 import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -12,17 +25,7 @@ import axios from 'axios'
 import UserContext from '../userContext'
 
 
-/**
- * Project Title: FoodFeast - Full Stack Web Application
- * 
- * Filename: Login.jsx
- * Created on: 04/20/2023
- * Author(s):Elahe Bashiri
- * Contact: Ebashiri@sfsu.edu
- * Copyright (c) 2023 by San Francisco State University
- * 
- * Description: This is the login page for users,it contains the client side code for DOM manupulation, and API request
- */
+
 
 
 

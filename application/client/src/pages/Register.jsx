@@ -1,3 +1,15 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: Register.jsx
+ * Created on: 04/17/2023
+ * Author(s):Elahe Bashiri
+ * Contact: Ebashiri@sfsu.edu
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: This is the Register page for users,it contains the client side code for DOM manupulation, and API request
+ */
+
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -12,18 +24,6 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from "axios";
 
-
-/**
- * Project Title: FoodFeast - Full Stack Web Application
- * 
- * Filename: Register.jsx
- * Created on: 04/17/2023
- * Author(s):Elahe Bashiri
- * Contact: Ebashiri@sfsu.edu
- * Copyright (c) 2023 by San Francisco State University
- * 
- * Description: This is the Register page for users,it contains the client side code for DOM manupulation, and API request
- */
 
 
 const theme = createTheme();
