@@ -1,3 +1,15 @@
+/* Basic but very cool and functioning NavBar.
+Links and buttons for main pages of the project.
+Link and buttons change depending on user status, w/ a request to getStatus api as well use other session related apis.
+
+Functionality to create a animated burger button, to hide navbar and open/close,
+when screensize is small. Optimal for mobile use"
+
+By: Abbas M.
+*/
+
+
+
 import axios from 'axios'
 import React, { useEffect, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'

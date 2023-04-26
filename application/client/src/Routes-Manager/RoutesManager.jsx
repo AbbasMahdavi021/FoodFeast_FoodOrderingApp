@@ -1,6 +1,19 @@
+/* 
+Main file that manages all the routes using BrowseRouter
+import every parent component and create a route, and assign
+the components as elements to every specific route.
+
+Renders NavBar and Footer as a sandwich buns around all other links.
+
+Admin isUnique link, as it renders the admin dashboard, and does not need Nav/Footer.
+
+By: Abbas M.
+
+*/
+
+
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';

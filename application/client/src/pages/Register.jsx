@@ -1,3 +1,15 @@
+/* 
+Register page for regular USERS that uses child register form component,
+to render the form, take data from the user and store in formData,
+and make api request to auth/register api, that send data to db, and create user.
+
+Shows error if any. Must have @sfsu.edu ending email.
+
+By: Abbas M.
+
+*/
+
+
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';

@@ -1,6 +1,13 @@
+/*
+
+Admin dashboard related
+
+By; Abbas M.
+
+*/
+
 import axios from "axios";
 import React from "react";
-
 
 
 const AdminRestaurant = (props) => {

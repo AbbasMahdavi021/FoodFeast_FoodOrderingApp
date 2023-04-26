@@ -1,3 +1,11 @@
+/*
+
+Admin dashboard related
+
+By; Abbas M.
+
+*/
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AdminLayout from '../components/Admin/AdminLayout';

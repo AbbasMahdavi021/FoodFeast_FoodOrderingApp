@@ -1,3 +1,11 @@
+/*
+
+Admin dashboard related
+
+By; Abbas M.
+
+*/
+
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import AdminUser from './AdminUser';

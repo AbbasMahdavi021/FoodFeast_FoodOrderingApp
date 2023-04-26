@@ -1,3 +1,12 @@
+/*
+This component renders the menu items for a particular restaurant. 
+It receives the restaurant ID from the URL parameters using the useParams hook, 
+and makes an API call to fetch the menu items for the restaurant. 
+The fetched items are rendered using the MenuItem component.
+
+By: Abbas M.
+*/
+
 import axios from 'axios';
 import React from 'react';
 import { useState, useEffect } from 'react';

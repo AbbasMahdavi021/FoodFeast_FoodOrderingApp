@@ -1,9 +1,18 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Cart.css';
 
-import { useNavigate } from 'react-router-dom';
 
+/*
+
+Child component that takes itemName, Price, Quantity, etc, 
+and render a cart item in for the parent component, Cart.
+Two buttons for updating item Quantity, that's a function in Cart.js Class.
+
+By; Abbas M.
+
+*/
 
 const CartItem = (props) => {
 
@@ -27,6 +36,25 @@ const CartItem = (props) => {
     )
 }
 
+
+/*
+
+This is a component that manages a shopping cart. It keeps track of the items in the cart, 
+their quantity and price, and allows the user to checkout.
+
+When the component renderes, it loads the cart items from the server and updates the cartItems state.
+
+The component renders the list of cart items, along with their image, name, price, 
+and quantity, using the child component above. It also shows the subtotal, tax, and total cost of the cart.
+
+If there are no items in the cart, the component displays a image telling the user to shop. 
+If there are items, it shows a "Place Order" button that calls the handleCheckout function.
+
+handleCheckout sends the cart data to the server and navigates to the home page.
+
+By; Abbas M.
+
+*/
 
 export const Cart = () => {
 

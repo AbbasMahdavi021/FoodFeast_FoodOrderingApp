@@ -4,6 +4,8 @@
  * in the future.
  * Currently, adding new favorites is not implemented, but can be set in the db.
  * You can pull any of the restaurant info to display on the home page. 
+ * 
+ * By: Jed, Megan, Nathan, Abbas
  */
 
 import React, { useState, useEffect, useContext } from 'react'
@@ -129,9 +131,6 @@ const HomeHeader = ({ scrollToSecondPage }) => {
           : null
         }
       </div>
-
-
-
     </div>
   )
 }

@@ -1,3 +1,11 @@
+/*
+
+Admin Login Page, simple make a request to /admin/login, check db, and log in if info is correct
+
+By; Abbas M.
+
+*/
+
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 

@@ -1,3 +1,9 @@
+/* Basic footer that contains the For Demostration only" tag.
+Plus a secret link if you know where to look ;)
+
+By: Abbas M
+*/
+
 import React from 'react';
 import "../styles/Footer.css";
 

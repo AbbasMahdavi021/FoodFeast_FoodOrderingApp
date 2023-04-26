@@ -1,3 +1,13 @@
+/*  
+A child component that acts as register form, that gets rendered and props passed into,
+to create a good looking signup form. Use for user and driver register pages.
+
+By: Abbas M. 
+
+Credit: Material UI resources.
+*/
+
+
 import React from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';

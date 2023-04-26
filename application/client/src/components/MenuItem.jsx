@@ -1,3 +1,13 @@
+/*  This is a child component that, renders a single menu item.
+It has an image, name, price, and an "add to cart" button. When the button is clicked, 
+the component sends a POST request to the server to add the item to the cart. 
+Component get called per menu item, in parent component 
+
+By: Abbas M
+*/
+
+
+
 import React from 'react';
 import axios from 'axios';
 
@@ -6,15 +16,12 @@ const MenuItem = (props) => {
     const handleAddItemToCart = async () => {
 
         const res = await axios.post("/cart/addToCart", {
-
             restaurantId: props.restaurantId,
             id: props.id,
             price: props.price,
             image: props.image,
-            itemQuantity: 1,
-            
+            itemQuantity: 1, 
         });
-
 
     }
 
