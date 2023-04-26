@@ -22,18 +22,22 @@ const getRestaurantById = async (req, res) => {
     const q = 'SELECT * FROM restaurants WHERE id = ?';
 
     db.query(q, [id], (error, results) => {
-      if (results.length) {
-        res.send(results[0]);
+      if (error) {
+        console.error('Database error:', error);
+        res.status(500).json({ message: 'Internal server error' });
+      } else if (results.length) {
+        res.status(200).send(results[0]);
       } else {
-        res.status(404).json({ message: 'Restaurant not found!!!' });
+        res.status(404).json({ message: 'Restaurant not found' });
       }
     });
 
   } catch (err) {
-    console.error(err);
-    res.send([]);
+    console.error('Error in getRestaurantById:', err);
+    res.status(500).json({ message: 'Internal server error' });
   }
 };
+
 
 
 const getRestaurantsByCuisine = async (req, res) => {
@@ -52,6 +56,32 @@ const getRestaurantsByCuisine = async (req, res) => {
     res.send([]);
   }
 };
+
+
+const getRestaurantByOwner = async (req, res) => {
+  try {
+    const { owner_id } = req.params;
+    const rows = [];
+    const q = 'SELECT * FROM restaurants WHERE owner_id = 15';
+
+
+    db.query(q, [owner_id], (error, results) => {
+      if (error) {
+        console.error("Query error:", error);
+        return res.status(500).json({ error: "Error executing query" });
+      }
+      
+      results.forEach(row => rows.push(row));
+      res.send({ restaurants: rows });
+
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.send([]);
+  }
+};
+
 
 
 const getFeatured = async (req, res) => {
@@ -99,4 +129,4 @@ const getMenu = async (req, res) => {
   }
 }
 
-module.exports = { getRestaurants, getRestaurantById, getRestaurantsByCuisine, getMenu, getFeatured };
+module.exports = { getRestaurants, getRestaurantById, getRestaurantsByCuisine, getMenu, getFeatured, getRestaurantByOwner };

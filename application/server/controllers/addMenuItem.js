@@ -9,6 +9,7 @@ const addMenuItem = async (req, res) => {
         const q = 'INSERT INTO menu_items (name, price, restaurant_id, image, description) VALUES (?, ?, ?, ?, ?)';
         db.query(q, [name, price, restaurant_id, image, description], (error, results) => {
             if (error) {
+                console.log("ERROR HERE!")
                 res.status(400).json({ message: 'Menu item not saved!' });
             } else {
                 res.status(201).json({ message: 'Menu item saved!' });

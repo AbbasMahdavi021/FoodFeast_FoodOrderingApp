@@ -14,7 +14,7 @@ const AdminRestaurants = () => {
 
         const getRestaurantList = async () => {
 
-            const res = await axios.get('/restaurants/getAllRestaurants');
+            const res = await axios.get('/admin/getAllRestaurants');
 
             setRestaurantList(res.data);
 

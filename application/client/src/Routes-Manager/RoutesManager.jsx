@@ -13,18 +13,22 @@ import Map from '../pages/Map';
 import AdminLogin from '../pages/AdminLogin';
 import Admin from '../pages/Admin';
 import Driver from '../pages/Driver';
-import Enroll from '../pages/EnrollRestaurant';
+import EnrollRestaurant from '../pages/EnrollRestaurant';
 import AddMenuItems from '../pages/AddMenuItems';
 import ThankYouForEnrolling from '../pages/ThankYouForEnrolling';
-
+import RestaurantDashboard from '../pages/RestaurantDashboard';
+import TestCreateOrder from '../pages/TestCreateOrder';
+import {Cart} from '../pages/Cart';
 
 import TeamMemberModal from "../components/TeamMemberModel";
 import teamMembers from '../components/teamMembers';
 import Restaurant from '../pages/Restaurant';
+import MenuEntry from '../pages/MenuEntry';
+import AddedItem from '../pages/AddedItem';
 
 function RoutesManager() {
 
-  const isUnique = window.location.pathname === "/admin" || window.location.pathname === "/driver";
+  const isUnique = window.location.pathname === "/admin";
 
   return (
     <BrowserRouter>
@@ -36,10 +40,17 @@ function RoutesManager() {
         <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About teamMembers={teamMembers} />} />
         <Route path="/map" element={<Map />} />
+        
         <Route path="/driver" element={<Driver />} />
-        <Route path="/enroll" element={<Enroll />} />
+        <Route path="/enroll" element={<EnrollRestaurant />} />
         <Route path="/addMenuItems/:restaurantId" element={<AddMenuItems />} />
         <Route path="/thankyouforenrolling" element={<ThankYouForEnrolling />} />
+        <Route path="/restaurantDashboard" element={<RestaurantDashboard />} />
+        <Route path="/testCreateOrder" element={<TestCreateOrder />} />
+        <Route path="/cart" element={<Cart />} />
+
+        <Route path="/menuentry/:restaurantId" element={<MenuEntry />}/>
+        <Route path="/addeditem" element={<AddedItem />}/>
 
         <Route path="/admin" element={<Admin />} />
         <Route path="/adminlogin" element={<AdminLogin />} />

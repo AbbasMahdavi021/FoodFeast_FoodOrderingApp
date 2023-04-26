@@ -101,6 +101,7 @@ const processQuery = async (req, res) => {
       console.log(results);
 
       if(error){
+        res.send(error.message);
         console.log(error.message);
       }
       res.send( JSON.stringify(results) );
@@ -109,7 +110,7 @@ const processQuery = async (req, res) => {
 
   } catch (err) {
     console.error(err);
-    res.send(err.message);
+    res.send(err);
   }
 
 }

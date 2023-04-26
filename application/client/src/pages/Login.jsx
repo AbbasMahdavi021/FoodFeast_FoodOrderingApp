@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useState, useEffect, useContext } from 'react'
+import Modal from 'react-modal';
 import { useNavigate } from 'react-router-dom'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
@@ -9,9 +10,12 @@ import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import axios from 'axios'
-import UserContext from '../userContext'
+import UserContext from '../context'
+import '../styles/forgotPassword.css';
+
 
 export default function Login() {
+
   const { setUser } = useContext(UserContext)
   const navigate = useNavigate()
 
@@ -50,11 +54,20 @@ export default function Login() {
           id: res.data.id,
           username: res.data.username,
           isDriver: res.data.isDriver,
+          isRestaurantOwner: res.data.isRestaurantOwner,
+          email: res.data.email,
         })
-        navigate('/')
+
+        if (res.data.isDriver === 1){
+          navigate('/driver')
+        } else if (res.data.isRestaurantOwner === 1) {
+          navigate('/enroll')
+        } else {
+          navigate('/')
+        }
       }
     } catch (err) {
-      console.error('Error:', err) 
+      console.error('Error:', err)
       setErr(
         err.response ? err.response.data : 'An error occurred during login.',
       )
@@ -73,6 +86,51 @@ export default function Login() {
       return () => clearTimeout(timerId)
     }
   }, [err])
+
+  //Forgot password
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-75%',
+      transform: 'translate(-50%, -50%)',
+      height: 'clamp(400px, 80vh, 600px)',
+      width: 'clamp(400px, 80vw, 600px)',
+      backgroundColor: 'rgb(51, 51, 51)',
+      borderRadius: '20px',
+      zIndex: 999,
+    },
+  };
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [emailInput, setEmailInput] = useState("");
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  const handleReset = async () => {
+
+    const res = await axios.post('/sendEmail/password', { email: emailInput });
+    closeModal();
+
+  };
+
+  const handleEmailInputChange = (e) => {
+    setEmailInput(e.target.value);
+  }
+
 
   return (
     <Grid container component="main" sx={{ height: '90vh' }}>
@@ -98,7 +156,7 @@ export default function Login() {
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h5" fontSize={40} align="center">
+          <Typography component="h1" variant="h5" fontSize={40} align="center" marginBottom={10} marginTop={10}>
             Sign in
           </Typography>
 
@@ -127,6 +185,7 @@ export default function Login() {
                   fontSize: '2rem',
                 },
               }}
+              sx={{ marginBottom: '2rem' }}
             />
             <TextField
               value={formData.name}
@@ -150,26 +209,102 @@ export default function Login() {
               }}
             />
 
+            <Grid container justifyContent="space-between" marginBottom={10} marginTop={1} marginLeft={1}  >
+              <Grid item marginRight={1} marginTop={2}>
+                <label>
+                  <input type="checkbox" style={{ transform: 'scale(1.5)', marginRight: '8px' }} />
+                  <Link sx={{ color: 'black', fontSize: '2.2rem', textDecoration: 'none', cursor: 'pointer' }}>Remember Me </Link>
+                </label>
+              </Grid>
+              <Grid item marginRight={1} marginTop={2}>
+                <Link onClick={openModal} sx={{ color: 'black', fontSize: '2.2rem', cursor: 'pointer' }}>Forgot Password?</Link>
+              </Grid>
+            </Grid>
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2, fontSize: 20 }}
+              sx={{
+                mt: 3, mb: 2, borderRadius: '15px', fontSize: 20,
+                backgroundColor: '#FFCF01', color: '#000000',
+                width: '250px',
+                '&:hover': { backgroundColor: '#fc3' },
+                boxShadow: '2px 2px 5px rgba(0, 0, 0, 10)',
+                display: 'block',
+                margin: '50px auto 50px',
+
+              }}
             >
               Sign In
             </Button>
 
-            <Grid container>
+            <Grid container justifyContent="center">
               <Grid item>
-                <Link href="/register" variant="h6" sx={{ fontSize: 20 }}>
-                  {"Don't have an account? Sign Up"}
+                <Link href="/register" variant="body2" sx={{ fontSize: 20, color: 'black' }}>
+                  {"Don't have an account? Sign Up here"}
                 </Link>
               </Grid>
             </Grid>
 
+            <Modal
+              isOpen={modalIsOpen}
+              onAfterOpen={afterOpenModal}
+              onRequestClose={closeModal}
+              style={customStyles}
+              contentLabel="Example Modal"
+            >
+              <div className='forgot-password-container'>
+                <div className='fp-header'>
+                  <h1>Forgot your password</h1>
+                  <Button
+                    onClick={closeModal}
+                    sx={{
+                      backgroundColor: "transparent",
+                      border: "none",
+                      color: "white",
+                      cursor: "pointer",
+                      fontSize: "2rem",
+                      position: "absolute",
+                      right: "0",
+                      top: "0",
+                      margin: "1rem",
+                    }}
+                  >
+                    X
+                  </Button>
+                </div>
+                <div className='fp-text'>
+                  <h2> To receive a new password, please provide your email address. </h2>
+                  <h2> Enter email address</h2>
+                </div>
+                <input className='fp-input' onChange={handleEmailInputChange} type='text' value={emailInput} />
+
+
+                <Button
+                  onClick={handleReset}
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{
+                    mt: 3, mb: 2, borderRadius: '15px', fontSize: 20,
+                    backgroundColor: '#FFCF01', color: '#000000',
+                    width: '250px',
+                    '&:hover': { backgroundColor: '#fc3' },
+                    boxShadow: '2px 2px 5px rgba(0, 0, 0, 10)',
+                    display: 'block',
+                    margin: '50px auto 50px',
+                  }}
+                >
+                  Reset Password
+                </Button>
+
+              </div>
+            </Modal>
+
             {err && (
               <p
-                style={{ fontSize: '20px', color: 'red', textAlign: 'center' }}
+                style={{ fontSize: '20px', color: 'red', textAlign: 'center', marginTop: '25px' }}
               >
                 {err}
               </p>
