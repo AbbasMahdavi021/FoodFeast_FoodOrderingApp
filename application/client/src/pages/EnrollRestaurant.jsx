@@ -3,7 +3,7 @@
  * 
  * Filename: EnrollRestaurant.jsx
  * Created on: 04/23
- * Author(s): 
+ * Author(s): Megan L., Jed G.
  * Contact: 
  * Copyright (c) 2023 by San Francisco State University
  * 
