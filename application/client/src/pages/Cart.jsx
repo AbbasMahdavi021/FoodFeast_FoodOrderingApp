@@ -11,18 +11,18 @@ const CartItem = (props) => {
             <div className='cart-item-img'>
                 <img src={props.itemImage} alt='itemImage' />
             </div>
-            <div className='cart-item-info'>
-                <div className='cart-item-detail'>
-                    <div className='cart-item-name'>{props.itemName} </div>
-                    <div className='cart-item-price'>{props.itemPrice} </div>
+            <div className='cart-item-detail'>
+                <div className='cart-item-name'> Item Name{props.itemName} </div>
+                <div className='cart-item-quantity'>
+                    <button className='item-quantity-button' onClick={() => props.updateQuantity(-1, props.itemId)}> - </button>
+                    <div> {props.itemQuantity} </div>
+                    <button className='item-quantity-button' onClick={() => props.updateQuantity(1, props.itemId)}> + </button>
                 </div>
-                <button onClick={() => props.updateQuantity(1, props.itemId)}> + </button>
-                <div> {props.itemQuantity} </div>
-                <button onClick={() => props.updateQuantity(-1, props.itemId)}> - </button>
+
+                <div className='cart-item-price'>${props.itemPrice} </div>
             </div>
         </div>
     )
-
 }
 
 
@@ -35,7 +35,7 @@ export const Cart = () => {
 
     const updateQuantity = async (addend, id) => {
 
-        const res = await axios.post('cart/updateQuantity', {addend: addend, itemId: id}, {withCredentials: true});
+        const res = await axios.post('cart/updateQuantity', { addend: addend, itemId: id }, { withCredentials: true });
         setToggle(!toggle);
 
     }
@@ -57,34 +57,48 @@ export const Cart = () => {
         loadCart();
     }, [toggle]);
 
-    const handleCheckout = async() =>{
-     const res = await axios.post('cart/storeCart',{withCredentials: true}); 
-     console.log(JSON.stringify(res));  
+    const handleCheckout = async () => {
+        const res = await axios.post('cart/storeCart', { withCredentials: true });
+        console.log(JSON.stringify(res));
     };
 
+    const subTotal = parseFloat(totalCost).toFixed(2);
+    const tax = (parseFloat(totalCost) * 0.1).toFixed(2);
 
     return (
 
         <div className='cart-container'>
             <h1> Cart </h1>
 
+            {cartItems.length === 0 ? <h3 className='empty-cart'> YOUR CART IS EMPTY </h3> : (
+                <>
+                    <div className='cart-items'>
 
-            <div className='cart-items'>
+                        {cartItems.map((item) => (
 
-                {cartItems.map((item) => (
+                            <CartItem
+                                itemId={item.id}
+                                itemImage={item.image}
+                                itemName={item.name}
+                                itemPrice={item.price}
+                                itemQuantity={item.itemQuantity}
+                                updateQuantity={updateQuantity} />
 
-                <CartItem
-                    itemId={item.id}
-                    itemImage={item.image}
-                    itemName={item.name}
-                    itemPrice={item.price}
-                    itemQuantity={item.itemQuantity} 
-                    updateQuantity={updateQuantity} />
+                        ))}
+                    </div>
 
-                ))}
-            </div>
-            <button className='checkout-button' onClick={handleCheckout}>Place Order</button>
-            <p id='cart-balance'> ${parseFloat(totalCost).toFixed(2)} </p>
+                    <div className='cart-balance'>
+                        <h2 >Sub-Total: ${subTotal}</h2>
+                        <h2 >Tax: ${tax}</h2>
+                        <h2 >Total: ${(parseFloat(subTotal) + parseFloat(tax)).toFixed(2)}</h2>
+                    </div>
+
+                    <div className='checkout-button'>
+                        <button onClick={handleCheckout}>Place Order</button>
+                    </div>
+                </>
+            )
+            }
         </div>
     )
 }
