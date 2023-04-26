@@ -18,7 +18,7 @@ Functioning forgotpassword link. Send Email to user, with a valid email.
 A user can submit their email, to get a newly generated password, 
 that gets stored in the database, and can be used to login.
 
-By: Abbas M.
+By: Abbas M and Elahe Bashiri( for frontend).
 
 */
 

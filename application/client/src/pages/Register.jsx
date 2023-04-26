@@ -5,7 +5,7 @@ and make api request to auth/register api, that send data to db, and create user
 
 Shows error if any. Must have @sfsu.edu ending email.
 
-By: Abbas M.
+By: Abbas M and Elahe Bashiri( for frontend ).
 
 */
 
