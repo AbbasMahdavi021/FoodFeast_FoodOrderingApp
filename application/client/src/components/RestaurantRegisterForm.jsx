@@ -1,5 +1,14 @@
-// this file contains the styling and input fields for RestaurantRegister.jsx
-
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: RegisterForm.jsx
+ * Created on: 03/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: contains the styling and input fields for RestaurantRegister.jsx
+ */
 import React from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';

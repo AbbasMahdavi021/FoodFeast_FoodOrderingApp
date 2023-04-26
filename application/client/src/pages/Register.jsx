@@ -1,13 +1,18 @@
-/* 
-Register page for regular USERS that uses child register form component,
-to render the form, take data from the user and store in formData,
-and make api request to auth/register api, that send data to db, and create user.
-
-Shows error if any. Must have @sfsu.edu ending email.
-
-By: Abbas M.
-
-*/
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: Register.jsx
+ * Created on: 04/23
+ * Author(s): Abbas M.
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: Register page for regular USERS that uses child register form component,
+ *      to render the form, take data from the user and store in formData,
+ *      and make api request to auth/register api, that send data to db, and create user.
+ * 
+ *      Shows error if any. Must have @sfsu.edu ending email.
+ */
 
 
 import * as React from 'react';

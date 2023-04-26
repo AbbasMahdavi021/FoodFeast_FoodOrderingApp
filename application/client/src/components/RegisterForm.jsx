@@ -1,11 +1,15 @@
-/*  
-A child component that acts as register form, that gets rendered and props passed into,
-to create a good looking signup form. Use for user and driver register pages.
-
-By: Abbas M. 
-
-Credit: Material UI resources.
-*/
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: RegisterForm.jsx
+ * Created on: 03/23
+ * Author(s): Abbas M. 
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: A child component that acts as register form, that gets rendered and props passed into,
+ *      to create a good looking signup form. Use for user and driver register pages.
+ */
 
 
 import React from 'react';

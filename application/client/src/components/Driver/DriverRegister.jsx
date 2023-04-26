@@ -1,3 +1,17 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: Browse.jsx
+ * Created on: 04/23
+ * Author(s): Alex D.
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: React component which allows users to sign up as a driver. 
+ *      It contains a form that validates input data (email, username, and password) 
+ *      and ensures the user agrees to the terms & conditions. On successful submission, 
+ *      the user is redirected to the login page. 
+ */
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';

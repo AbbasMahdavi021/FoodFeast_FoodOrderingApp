@@ -1,7 +1,17 @@
-// this file is the main page for the restaurant dashboard
-// it allows the restaurant to add menu items and view their orders
-// it also allows the restaurant to send the request to the driver to pick up the order
-
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: RestaurantDashboard.jsx
+ * Created on: 04/23
+ * Author(s): Alex D.
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: main page for the restaurant dashboard, it allows the restaurant to add menu 
+ *    items and view their orders, it also allows the restaurant to send the request to the 
+ *    driver to pick up the order
+ * 
+ */
 import React, { useState, useEffect, useContext } from 'react'
 import UserContext from '../context'
 import axios from 'axios'

@@ -1,10 +1,17 @@
-/*
- *   Conditionally renders the driver name if the user is a driver 
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: Driver.jsx
+ * Created on: 04/23
+ * Author(s): 
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: Conditionally renders the driver name if the user is a driver 
  *   or a link to register as a driver if the user is not a driver.
  *   Other driver and user data can be retrieved this way as well. 
  *   To fetch additional data from the db, modify the Login.jsx file.
  */
-
 
 import React, { useContext, useEffect } from 'react';
 import UserContext from '../context';

@@ -1,27 +1,31 @@
-/* Main log in page for all users
-All Users log in from this page.
-
-The inputs take the username and password, stored in formData,
-and is stored to make a api request.
-
-Displays red error if any.
-
-Otherwise send a request to the server auth/login, which checks,
-what type of user just logged in. 
-
-The result sent back from server, set the session for that user, and 
-navigates them to the proper route.
-
-Calls setUser and stores their info in local storage, as cookies. (By Jed)
-
-Functioning forgotpassword link. Send Email to user, with a valid email.
-A user can submit their email, to get a newly generated password, 
-that gets stored in the database, and can be used to login.
-
-By: Abbas M.
-
-*/
-
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: Login.jsx
+ * Created on: 04/23
+ * Author(s): Abbas M.
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: Main log in page for all users
+ *    All Users log in from this page.
+ * 
+ *    The inputs take the username and password, stored in formData,
+ *    and is stored to make a api request.
+ * 
+ *    Displays red error if any.
+ * 
+ *    Otherwise send a request to the server auth/login, which checks,
+ *    what type of user just logged in. 
+ * 
+ *    The result sent back from server, set the session for that user, and 
+ *    navigates them to the proper route.
+ *    Calls setUser and stores their info in local storage, as cookies. (By Jed)
+ * 
+ *    Functioning forgotpassword link. Send Email to user, with a valid email.
+ *    A user can submit their email, to get a newly generated password, 
+ *    that gets stored in the database, and can be used to login.
+ */
 
 import * as React from 'react'
 import { useState, useEffect, useContext } from 'react'

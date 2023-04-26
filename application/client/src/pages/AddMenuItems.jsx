@@ -1,8 +1,16 @@
-/*
- * Here the restaurant owner can add menu items to their restaurant.
- * The items they add are displayed in a list below the form.
- * Once they have added all of the items they want, they can click the "Finish" button
- * which will take them to the "Menu Item Added Page" page.
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: AddMenuItems.jsx
+ * Created on: 04/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: Here the restaurant owner can add menu items to their restaurant.
+ *    The items they add are displayed in a list below the form.
+ *    Once they have added all of the items they want, they can click the "Finish" button
+ *    which will take them to the "Menu Item Added Page" page.
  */
 
 import React, { useState } from 'react'

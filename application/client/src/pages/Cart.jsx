@@ -1,18 +1,22 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: Cart.jsx
+ * Created on: 04/23
+ * Author(s): Abbas M.
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: Child component that takes itemName, Price, Quantity, etc, 
+ *      and render a cart item in for the parent component, Cart.
+ *      Two buttons for updating item Quantity, that's a function in Cart.js Class.
+ */
+
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Cart.css';
 
-
-/*
-
-Child component that takes itemName, Price, Quantity, etc, 
-and render a cart item in for the parent component, Cart.
-Two buttons for updating item Quantity, that's a function in Cart.js Class.
-
-By; Abbas M.
-
-*/
 
 const CartItem = (props) => {
 

@@ -1,3 +1,20 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: MenuEntry.jsx
+ * Created on: 03/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: React functional component that allows users to add a new menu item for a restaurant. 
+ *      The component renders a form to collect item name, price, description, and image URL. 
+ *      It uses Material-UI components for layout and styling. 
+ * 
+ *      The form data is stored in the local state and submitted to the '/addMenuItem' endpoint 
+ *      using an axios POST request. Upon successful submission, the user is redirected to the 
+ *      '/addeditem/:restaurantId' page. 
+ */
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { useParams } from 'react-router-dom'

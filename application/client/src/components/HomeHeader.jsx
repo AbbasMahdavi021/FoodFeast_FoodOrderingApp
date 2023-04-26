@@ -1,13 +1,18 @@
-/*
- * Featured restaurants can be set manually in the database by setting the  
- * featured flag to 1. Possibly have a way for admin to set featured restaurants
- * in the future.
- * Currently, adding new favorites is not implemented, but can be set in the db.
- * You can pull any of the restaurant info to display on the home page. 
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
  * 
- * By: Jed, Megan, Nathan, Abbas
+ * Filename: HomeHeader.jsx
+ * Created on: 04/23
+ * Author(s): Jed G., Megan L., Nathan R., Abbas M.
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: Featured restaurants can be set manually in the database by setting the  
+ *    featured flag to 1. Possibly have a way for admin to set featured restaurants
+ *    in the future.
+ *    Currently, adding new favorites is not implemented, but can be set in the db.
+ *    You can pull any of the restaurant info to display on the home page. 
  */
-
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 

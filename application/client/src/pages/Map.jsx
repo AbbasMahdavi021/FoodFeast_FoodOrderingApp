@@ -1,3 +1,20 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: Map.jsx
+ * Created on: 03/23
+ * Author(s): Jed G.
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: React functional component that displays an interactive Google Map with markers 
+ *    representing restaurant locations. It fetches restaurant data from an API and retrieves the 
+ *    coordinates for each restaurant using the Google Geocoding API. When a marker is hovered, 
+ *    an InfoWindow is displayed showing the restaurant's name, picture, rating, and a link to its menu. 
+ *    The component uses the '@react-google-maps/api' library for map integration and interactions.
+ */
+
+
 import React, { useState, useEffect } from 'react'
 import {
   GoogleMap,

@@ -1,9 +1,15 @@
-/* Basic footer that contains the For Demostration only" tag.
-Plus a secret link if you know where to look ;)
-
-By: Abbas M
-*/
-
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: Footer.jsx
+ * Created on: 03/23
+ * Author(s): Abbas M.
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: Basic footer that contains the For Demostration only" tag.
+ *      Plus a secret link if you know where to look ;)
+ */
 import React from 'react';
 import "../styles/Footer.css";
 

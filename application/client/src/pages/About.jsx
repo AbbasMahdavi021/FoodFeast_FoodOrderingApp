@@ -1,3 +1,15 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: About.jsx
+ * Created on: 02/23
+ * Author(s): Nathan Rennacker
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: React functional component, which displays a list of team members with their names, 
+ * roles, and photos
+ */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/About.css';

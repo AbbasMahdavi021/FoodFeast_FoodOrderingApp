@@ -1,11 +1,17 @@
-/*  This is a child component that, renders a single menu item.
-It has an image, name, price, and an "add to cart" button. When the button is clicked, 
-the component sends a POST request to the server to add the item to the cart. 
-Component get called per menu item, in parent component 
-
-By: Abbas M
-*/
-
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: MenuItem.jsx
+ * Created on: 04/23
+ * Author(s): Abbas M., Nathan R.
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: This is a child component that, renders a single menu item.
+ *      It has an image, name, price, and an "add to cart" button. When the button is clicked, 
+ *      the component sends a POST request to the server to add the item to the cart. 
+ *      Component get called per menu item, in parent component 
+ */
 
 
 import React from 'react';

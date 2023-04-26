@@ -1,3 +1,16 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: AddedItem.jsx
+ * Created on: 04/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: React functional component that displays a confirmation message after an item 
+ *      has been added to the menu. It provides buttons to add a new item or return to the dashboard, 
+ *      and uses Material-UI components and custom CSS for styling.
+ */
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 

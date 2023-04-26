@@ -1,10 +1,15 @@
-/*
-
-Admin Login Page, simple make a request to /admin/login, check db, and log in if info is correct
-
-By; Abbas M.
-
-*/
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: AdminLogin.jsx
+ * Created on: 04/23
+ * Author(s): Abbas M.
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: Admin Login Page, simple make a request to /admin/login, 
+ *      check db, and log in if info is correct
+ */
 
 import React, { useState, useEffect } from 'react';
 import axios from "axios";

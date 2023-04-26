@@ -1,11 +1,18 @@
-/*
-This component renders the menu items for a particular restaurant. 
-It receives the restaurant ID from the URL parameters using the useParams hook, 
-and makes an API call to fetch the menu items for the restaurant. 
-The fetched items are rendered using the MenuItem component.
-
-By: Abbas M.
-*/
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: Restaurant.jsx
+ * Created on: 04/23
+ * Author(s): Abbas M., Nathan R.
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: This component renders the menu items for a particular restaurant. 
+ *      It receives the restaurant ID from the URL parameters using the useParams hook, 
+ *      and makes an API call to fetch the menu items for the restaurant. 
+ *      The fetched items are rendered using the MenuItem component.
+ * 
+ */
 
 import axios from 'axios';
 import React from 'react';

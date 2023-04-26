@@ -1,18 +1,26 @@
-/*
-Component that allows users to browse a list of restaurants.
-
-It shows you a list of restaurants from an api and lets you filter them by type of food or search for a specific one.
-
-When you open the page, it looks up all the restaurants and saves them. It also creates a list of food types to filter by, via a drop down.
-
-When you pick a food type to filter by, the list of restaurants gets updated to only show the ones that match.
-
-When you search for a specific restaurant, it looks through the list of names and types to find the match and shows you the results.
-
-By: Abbas M
-
-*/
-
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: Browse.jsx
+ * Created on: 04/23
+ * Author(s): Abbas M. 
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: Component that allows users to browse a list of restaurants.
+ * 
+ *      It shows you a list of restaurants from an api and lets you filter them by type of 
+ *      food or search for a specific one.
+ * 
+ *      When you open the page, it looks up all the restaurants and saves them. It also 
+ *      creates a list of food types to filter by, via a drop down.
+ * 
+ *      When you pick a food type to filter by, the list of restaurants gets updated to 
+ *      only show the ones that match.
+ * 
+ *      When you search for a specific restaurant, it looks through the list of names and 
+ *      types to find the match and shows you the results.
+ */
 
 import { useState, useEffect } from 'react';
 import axios from "axios";

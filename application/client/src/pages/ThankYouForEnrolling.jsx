@@ -1,6 +1,17 @@
-// thank the restaurant owner for enrolling their restaurant
-// let them know that they will be notified when their restaurant is approved
-// should be within 1-2 business days
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: ThankYouForEnrolling.jsx
+ * Created on: 04/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: thank the restaurant owner for enrolling their restaurant
+ *    let them know that they will be notified when their restaurant is approved
+ *    should be within 1-2 business days
+ * 
+ */
 
 import styles from '../styles/ThankYouForEnrolling.css';
 

@@ -1,10 +1,18 @@
-/*
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: Admin.jsx
+ * Created on: 04/23
+ * Author(s): Abbas M.
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: React functional component that checks if the user is logged 
+ *    in as an administrator and conditionally renders the Admin Dashboard using 
+ *    'AdminLayout' component. If the user is not an admin, it displays an access 
+ *    restriction message. 
+ */
 
-Admin dashboard related
-
-By; Abbas M.
-
-*/
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';

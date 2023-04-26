@@ -1,14 +1,20 @@
-/* Basic but very cool and functioning NavBar.
-Links and buttons for main pages of the project.
-Link and buttons change depending on user status, w/ a request to getStatus api as well use other session related apis.
-
-Functionality to create a animated burger button, to hide navbar and open/close,
-when screensize is small. Optimal for mobile use"
-
-By: Abbas M.
-*/
-
-
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: Navbar.jsx
+ * Created on: 03/23
+ * Author(s): Abbas M. 
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: Basic but very cool and functioning NavBar.
+ *    Links and buttons for main pages of the project.
+ *    Link and buttons change depending on user status, w/ a request to getStatus api as 
+ *    well use other session related apis.
+ * 
+ *    Functionality to create a animated burger button, to hide navbar and open/close,
+ *    when screensize is small. Optimal for mobile use"
+ */
 
 import axios from 'axios'
 import React, { useEffect, useState, useContext } from 'react'

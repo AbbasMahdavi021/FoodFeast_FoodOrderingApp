@@ -1,16 +1,21 @@
-/* 
-Main file that manages all the routes using BrowseRouter
-import every parent component and create a route, and assign
-the components as elements to every specific route.
-
-Renders NavBar and Footer as a sandwich buns around all other links.
-
-Admin isUnique link, as it renders the admin dashboard, and does not need Nav/Footer.
-
-By: Abbas M.
-
-*/
-
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: RoutesManager.jsx
+ * Created on: 04/23
+ * Author(s): Abbas M.
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: Main file that manages all the routes using BrowseRoutes
+ *    import every parent component and create a route, and assign
+ *    the components as elements to every specific route.
+ * 
+ *    Renders NavBar and Footer as a sandwich buns around all other links.
+ * 
+ *    Admin isUnique link, as it renders the admin dashboard, and does not need Nav/Footer.
+ * 
+ */
 
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';

@@ -1,6 +1,15 @@
-// this file is for restuarant owners to register for the site
-// the styling and input fields are in RestaurantRegisterForm.jsx
-
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: EnrollRestaurant.jsx
+ * Created on: 04/23
+ * Author(s): 
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: this file is for restuarant owners to register for the site
+ *      the styling and input fields are in RestaurantRegisterForm.jsx
+ */
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';

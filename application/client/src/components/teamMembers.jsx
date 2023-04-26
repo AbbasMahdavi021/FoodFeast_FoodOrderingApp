@@ -1,3 +1,14 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: teamMembers.jsx
+ * Created on: 02/23
+ * Author(s): Nathan Rennacker
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: jsx enum populated with team information to use in a react modal component
+ */
 const teamMembers = [
   {
     id: 1,
