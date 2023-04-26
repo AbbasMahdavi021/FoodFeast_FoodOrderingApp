@@ -4,7 +4,7 @@
  * Filename: MenuEntry.jsx
  * Created on: 03/23
  * Author(s): Megan L.
- * Contact: 
+ * Contact: mlew1@mail.sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: React functional component that allows users to add a new menu item for a restaurant. 

@@ -4,7 +4,7 @@
  * Filename: EnrollRestaurant.jsx
  * Created on: 04/23
  * Author(s): Megan L., Jed G.
- * Contact: 
+ * Contact: mlew1@mail.sfsu.edu, jgraves4@mail.sfsu.edu	
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: this file is for restuarant owners to register for the site

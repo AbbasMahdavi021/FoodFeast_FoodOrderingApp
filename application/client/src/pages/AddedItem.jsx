@@ -4,7 +4,7 @@
  * Filename: AddedItem.jsx
  * Created on: 04/23
  * Author(s): Megan L.
- * Contact: 
+ * Contact: mlew1@mail.sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: React functional component that displays a confirmation message after an item 
