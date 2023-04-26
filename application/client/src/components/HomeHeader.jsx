@@ -26,7 +26,7 @@ const HomeHeader = ({ scrollToSecondPage }) => {
       if (user) {
         try {
           const favoritedRes = await axios.get(
-            `http://localhost:8080/favorites/${user.id}`,
+            `/favorites/${user.id}`,
           )
 
           setFavoritedRestaurants(favoritedRes.data)
