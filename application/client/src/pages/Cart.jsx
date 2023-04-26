@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import '../styles/Cart.css';
 
+import { useNavigate } from 'react-router-dom';
+
 
 const CartItem = (props) => {
 
@@ -64,13 +66,27 @@ export const Cart = () => {
 
     const subTotal = parseFloat(totalCost).toFixed(2);
     const tax = (parseFloat(totalCost) * 0.1).toFixed(2);
+    const navigate = useNavigate();
 
     return (
 
         <div className='cart-container'>
             <h1> Cart </h1>
 
-            {cartItems.length === 0 ? <h3 className='empty-cart'> YOUR CART IS EMPTY </h3> : (
+            {cartItems.length === 0 ? (
+                <>
+                    <div className='empty-cart'>
+                        <img src={process.env.PUBLIC_URL + '/images/brand/empty-cart.png'} alt='Your cart is empty' />
+                        <div className='shop-button'>
+                            <button onClick={() => navigate('/')}>Shop Now</button>
+                        </div>
+                    </ div>
+
+
+                </>
+
+
+            ) : (
                 <>
                     <div className='cart-items'>
 
