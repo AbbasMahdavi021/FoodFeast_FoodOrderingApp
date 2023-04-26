@@ -62,6 +62,7 @@ export const Cart = () => {
     const handleCheckout = async () => {
         const res = await axios.post('cart/storeCart', { withCredentials: true });
         console.log(JSON.stringify(res));
+        navigate('/');
     };
 
     const subTotal = parseFloat(totalCost).toFixed(2);

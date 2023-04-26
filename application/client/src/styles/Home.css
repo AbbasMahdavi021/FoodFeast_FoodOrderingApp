@@ -15,7 +15,7 @@
     flex-wrap: wrap-reverse;
     flex-direction: row;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 /* .decal{
@@ -40,24 +40,14 @@
 } */
 .text-container h1 {
     color: #ffffff;
-    font-size: clamp(20px, 2.5vw, 3vw);
+    font-size: clamp(20px, 2.5vw, 40px);
     font-family: Georgia, serif;
 }
 
 .food-plate img {
-    width: 20vw;
+    width: 25vw;
     min-width: 150px;
-}
-
-
-.favorited-restaurants {
-    border: 3px solid rgb(241, 241, 71);
-    width: 80%;
-    color: #ffffff;
-    font-family: Georgia, serif;
-    font-size: 20px;
-    margin-bottom: 10px;
-
+    max-width: 250px;
 }
 
 .browse-button button {
@@ -73,9 +63,35 @@
 /*//////////////////// Home Page Featured Restaurants /////////////////////////////*/
 .featured-favorite-container {
     display: flex;
-    flex-wrap: wrap;
     width: 100%;
     justify-content: center;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 768px) {
+    .featured-favorite-container {
+        flex-direction: column;
+    }
+
+    .f-restaurants {
+        width: 95%;
+    }
+
+    .browse-button button {
+        font-size: 15px;
+    }
+
+    #favorite-restaurants {
+        margin-top: 90px;
+    }
+
+    #f-restaurant-h1 {
+        font-size: 2rem;
+        margin-inline: 10px;
+        text-align: center;
+        z-index: 1000;
+        font-weight: bold;
+    }
 }
 
 .f-restaurants {
@@ -84,16 +100,28 @@
     flex-direction: column;
     align-items: flex-start;
     flex-shrink: 0;
-    width: 45vw;
+    width: 78%;
     height: 20vh;
-    margin-top: 2%;
     margin-right: 2%;
+}
+
+#favorite-restaurants {
+    margin-top: 90px;
 }
 
 .f-restaurants h1 {
     font-size: 2rem;
     margin-bottom: 1%;
 }
+
+#f-restaurant-h1 {
+    font-size: 2rem;
+    margin: 10px;
+    text-align: center;
+    z-index: 1000;
+    font-weight: bold;
+}
+
 
 .restaurant-f-container {
     display: flex;
@@ -375,6 +403,11 @@
     display: flex;
     flex-direction: column;
     border-radius: 10px;
+}
+
+.restaurant-box:hover {
+    cursor: pointer;
+    filter: brightness(85%);
 }
 
 .restaurant-box img {

@@ -10,7 +10,7 @@ const enrollRestaurant = async (req, res) => {
         const q = 'INSERT INTO restaurants (name, cuisine, description, est_delivery_time, address, picture, phone, hours, price, rating, owner_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         db.query(q, [name, cuisine, description, est_delivery_time, address, picture, phone, hours, price, rating, owner_id], (error, results) => {
             if (error) {
-                res.status(400).json({ message: 'Restaurant not saved!' });
+                res.status(400).json({ message: 'Restaurant not saved!', restaurant_id: restaurant_id });
             } else {
                 const restaurant_id = results.insertId;
                 res.status(201).json({ message: 'Restaurant Enrolled: ', restaurant_id: restaurant_id });

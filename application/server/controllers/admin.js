@@ -36,6 +36,24 @@ const getUser = async (req, res) => {
     }
 };
 
+const getRestaurant = async (req, res) => {
+
+  try {
+      const rows = [];
+      const q = "SELECT * FROM restaurants WHERE id = ? OR name LIKE ?";
+  
+      db.query(q, [req.body.searchTerm, '%'+req.body.searchTerm+'%'], (error, results) => { 
+
+        results.forEach(row => rows.push(row));
+        res.send(rows);
+      });
+  
+    } catch (err) {
+      console.error(err);
+      res.send([]);
+    }
+};
+
 
 const deleteUser = async (req, res) => {
 
@@ -117,4 +135,4 @@ const processQuery = async (req, res) => {
 
 
 
-module.exports = { getUserList, getUser, deleteUser, processQuery, deleteRestaurant};
+module.exports = { getUserList, getUser, deleteUser, processQuery, deleteRestaurant, getRestaurant};

@@ -35,6 +35,16 @@ function AdminLogin() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        if (!formData.username) {
+            setErr('Username field is required')
+            return
+        }
+
+        if (!formData.password) {
+            setErr('Password field is required')
+            return
+        }
+
         try {
             const res = await axios.post("/auth/adminlogin", formData);
             if (res.data.success) {
@@ -42,7 +52,10 @@ function AdminLogin() {
             }
 
         } catch (err) {
-            console.log(err);
+            console.error('Error:', err)
+            setErr(
+              err.response ? err.response.data : 'An error occurred during login.',
+            )
         }
     };
 
@@ -54,6 +67,20 @@ function AdminLogin() {
 
         return () => clearTimeout(timeout);
     }, []);
+
+    //error display
+
+    const [err, setErr] = useState(null)
+
+    useEffect(() => {
+        if (err) {
+            const timerId = setTimeout(() => {
+                setErr(null)
+            }, 3000)
+            return () => clearTimeout(timerId)
+        }
+    }, [err])
+
 
 
 
@@ -90,7 +117,7 @@ function AdminLogin() {
                             }}
                         >
 
-                            <Typography component="h1" variant="h5" fontSize={38} align='center' >
+                            <Typography component="h1" variant="h5" fontSize={38} align='center' color='red' >
                                 Admin Sign in
                             </Typography>
 
@@ -148,6 +175,15 @@ function AdminLogin() {
                                 >
                                     Sign In
                                 </Button>
+
+
+                                {err && (
+                                    <p
+                                        style={{ fontSize: '20px', color: 'red', textAlign: 'center', marginTop: '25px', marginBottom: '25px' }}
+                                    >
+                                        {err}
+                                    </p>
+                                )}
 
                             </Box>
                         </Box>

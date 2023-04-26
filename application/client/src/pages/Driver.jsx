@@ -32,12 +32,12 @@ function Driver() {
         <Map />
       </div>
       <div className='order-info'>
-        <p> Deliver By: 8:50 </p>
-        <p> Restaurant Name </p>
-        <p> Number of Items </p>
+        <p> Restaurant Name: Roti Bistro</p>
+        <p> Number of Items: 4</p>
+        <p> Deliver By: 4:30pm </p>
       </div>
       <div className='order-accept'>
-        <p> $20.56 </p>
+        <p>Your Earnings For This Delivery: $5.50 </p>
         <button className='driver-button'> Accept </button>
       </div>
     </div>

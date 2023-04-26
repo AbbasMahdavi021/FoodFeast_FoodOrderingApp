@@ -36,6 +36,11 @@
     font-size: 35px;
 }
 
+.admin-users {
+    border-radius: 5px;
+    height: 100%;
+    overflow-y: scroll;
+}
 
 .admin-users h1{
     text-align: center;
@@ -44,37 +49,39 @@
     font-size: 25px;
 }
 
-
-
 .info{
-
+    font-size: 18px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-inline: 50px;
+}
 
-
-
+.admin-user-info{
+    color: white;
+    display: flex;
+    width: 30%;
+    margin: 20px;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .info.even {
-
     background-color: rgb(70, 70, 70);
     
 }
-
 .info.odd {
     background-color: rgb(51, 51, 51);
 }
 
-
 .admin-delete{
     color: white;
-    background-color: red;
+    background-color: rgb(230, 12, 12);
+    width: 5%;
     font-size: 16px;
+    border-radius: 5px;
 }
 
 
@@ -85,5 +92,9 @@
     height: 90%;
     width: 100%;
     font-size: 25px;
+}
+
+.text-area:focus{
+    border: 2px solid white;
 }
   

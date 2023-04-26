@@ -74,7 +74,7 @@ const HomeHeader = ({ scrollToSecondPage }) => {
 
       <div className="featured-favorite-container">
         <div className="f-restaurants">
-          <h1>Featured Restaurants</h1>
+          <h1 id='f-restaurant-h1'>Featured Restaurants</h1>
           <div className="restaurant-f-container">
             {featuredRestaurants.map((restaurant) => (
               <Link key={restaurant.id} to={`${restaurant.name.replace(/\s/g, '')}/${restaurant.id}`}>
@@ -100,8 +100,8 @@ const HomeHeader = ({ scrollToSecondPage }) => {
         </div>
 
         {user ?
-          <div className="f-restaurants">
-            <h1>Favorite Restaurants</h1>
+          <div className="f-restaurants" id='favorite-restaurants'>
+            <h1 id='f-restaurant-h1'>Favorite Restaurants</h1>
             <div className="restaurant-f-container">
               {favoritedRestaurants.map((restaurant) => (
                 <Link key={restaurant.id} to={`${restaurant.name.replace(/\s/g, '')}/${restaurant.id}`}>

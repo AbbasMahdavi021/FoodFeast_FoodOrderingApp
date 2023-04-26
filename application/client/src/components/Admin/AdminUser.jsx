@@ -10,30 +10,29 @@ const AdminUser = (props) => {
         let id = e.target.value;
         console.log(id + " HAHAH");
 
-        const res = await axios.post("/admin/deleteUser", {userId : id },  {withCredentials: true});
+        const res = await axios.post("/admin/deleteUser", { userId: id }, { withCredentials: true });
 
-        if(res.status === 200) {
+        if (res.status === 200) {
             //props.consoleOut(`User ${userId} was deleted!`);
             console.log((`User ${id} was deleted!`));
             props.refresh(props.userId);
 
-        }else {
+        } else {
             //props.consoleOut(`Error: ${res.status}`);
             console.log(`Error: ${res}`);
         }
-    } 
+    }
 
-    return(
-        <div className="adminUser">
+    return (
 
+        <div className={`info ${props.isOdd}`}>
             <div className="admin-user-info">
-                <div className={`info ${props.isOdd}`}>
-                    {props.name}
-                    {props.userId}
-                    <button className="admin-delete" onClick={e => handleDelete(e)} value={props.userId}> X </button>
-                </div>
+                <div className="admin-user-name">{props.name} </div>
+                <div className="admin-user-name"></div> {props.userId}
             </div>
+            <button className="admin-delete" onClick={e => handleDelete(e)} value={props.userId}> X </button>
         </div>
+
     )
 };
 

@@ -7,8 +7,8 @@ const AdminRestaurants = () => {
 
 
     const [restaurantList, setRestaurantList] = useState([]);
-
     const [refresh, setRefresh] = useState(1);
+    const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
 
@@ -23,24 +23,43 @@ const AdminRestaurants = () => {
     }, [refresh]);
 
 
+    const handleChange = (e) => {
+
+        setSearchTerm(e.target.value);
+        console.log(searchTerm);
+    };
+
+    const handleSearch = async () => {
+
+        const res = await axios.post("/admin/getRestaurants", { searchTerm: searchTerm }, { withCredentials: true });
+        setRestaurantList(res.data);
+    };
+
+
+
+
     return (
 
         <div className='admin-users'>
-            <h1 className='Header'> Restaurant List </h1>
-            <div className='admin-list'>
-
-                {restaurantList.map((restaurant, index) =>
-                    <AdminRestaurant
-                        isOdd={index % 2 === 0 ? "even" : "odd"}
-                        name={restaurant.name}
-                        restaurantId={restaurant.id}
-                        key={restaurant.id}
-                        refresh={setRefresh}
-                    />
-                )}
-
+            <div className='TL-header'>
+                <h1 className='Header'> Restaurant List </h1>
+                <div className='search-bar'>
+                    <input className='search-input' type='text' placeholder='search user...' value={searchTerm} onChange={e => handleChange(e)} />
+                    <button onClick={handleSearch}>
+                        <img src={process.env.PUBLIC_URL + '/images/brand/search.png'} alt="Search" />
+                    </button>
+                </div>
             </div>
 
+            {restaurantList.map((restaurant, index) =>
+                <AdminRestaurant
+                    isOdd={index % 2 === 0 ? "even" : "odd"}
+                    name={restaurant.name}
+                    restaurantId={restaurant.id}
+                    key={restaurant.id}
+                    refresh={setRefresh}
+                />
+            )}
         </div>
     )
 

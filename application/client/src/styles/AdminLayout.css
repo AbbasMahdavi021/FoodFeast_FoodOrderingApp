@@ -104,15 +104,33 @@
     opacity: 1;
 }
 
-
-
-.user-box {
+.cmd-box {
     background-color: #292f45;
     flex: 1;
     padding: 20px;
+    border: 2px solid white;
     margin-inline: 30px;
+    margin-bottom: 10px;
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(82, 117, 231, 0.9);
+}
+
+.cmd-box input {
+  width: 100%;
+  padding: 5px;
+  outline: none;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 16px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.cmd-box input:focus {
+  border: none;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
+  border: 2px solid white;
 }
 
 .tab-buttons {
@@ -120,11 +138,6 @@
     flex-direction: column;
     justify-content: center;
     margin: 10px;
-}
-
-.admin-users {
-    height: 100%;
-    overflow-y: hidden;
 }
 
 .TL-header {

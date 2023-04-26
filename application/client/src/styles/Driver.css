@@ -15,7 +15,6 @@
 }
 
 .driver-redirect{
-  margin-top: 50px;
   text-align: center;
   font-size: 1.5em;
   font-weight: bold;
@@ -45,8 +44,7 @@
 
 .order-info p {
   color: white;
-  padding: 20px;
-  margin: 20px;
+  padding: 18px;
 }
 
 .order-accept{
@@ -54,7 +52,7 @@
   width: 100%;
   height: 100%;
   padding: 30px;
-  background-color:rgb(228, 17, 217);
+  background: rgb(139, 8, 139);
 
 }
 

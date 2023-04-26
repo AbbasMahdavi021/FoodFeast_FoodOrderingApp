@@ -167,9 +167,8 @@ const CMD = () => {
 
     return (
 
-        <div className='user-box'>
-            C:\Users\abbas\OneDrive\Desktop\648\csc648-03-sp23-team01\application\server
-
+        <div className='cmd-box'>
+            http://localhost:3000/admin/Admin1
             <textarea className='text-area' value={content} />
 
             <input
