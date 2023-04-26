@@ -4,7 +4,7 @@
  * Filename: RestaurantDashboard.jsx
  * Created on: 04/23
  * Author(s): Alex D.
- * Contact: 
+ * Contact: adiaz41@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: main page for the restaurant dashboard, it allows the restaurant to add menu 

@@ -4,7 +4,7 @@
  * Filename: Restaurant.jsx
  * Created on: 04/23
  * Author(s): Abbas M., Nathan R.
- * Contact: 
+ * Contact: amahdavi2@sfsu.edu, nrennacker@mail.sfsu.edu.
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: This component renders the menu items for a particular restaurant. 

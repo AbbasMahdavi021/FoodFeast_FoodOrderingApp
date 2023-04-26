@@ -4,7 +4,7 @@
  * Filename: RoutesManager.jsx
  * Created on: 04/23
  * Author(s): Abbas M.
- * Contact: 
+ * Contact: amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: Main file that manages all the routes using BrowseRoutes

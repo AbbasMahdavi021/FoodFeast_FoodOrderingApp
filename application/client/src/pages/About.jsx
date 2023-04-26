@@ -4,7 +4,7 @@
  * Filename: About.jsx
  * Created on: 02/23
  * Author(s): Nathan Rennacker
- * Contact: 
+ * Contact: nrennacker@mail.sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: React functional component, which displays a list of team members with their names, 
