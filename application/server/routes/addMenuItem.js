@@ -1,4 +1,15 @@
-// route for adding an item to the menu
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: addMenuItem.js
+ * Created on: 04/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: routes for adding a menu item
+ * 
+ */
 
 const express = require('express');
 const router = express.Router();

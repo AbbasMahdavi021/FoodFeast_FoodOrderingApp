@@ -1,3 +1,17 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: favorites.js
+ * Created on: 03/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: This module manages user favorites, including saving, deleting, 
+ *      and fetching favorite restaurants for a specific user.
+ * 
+ */
+
 const db = require('../db');
 
 const saveFavorite = async (req, res) => {
@@ -67,4 +81,3 @@ module.exports = {
     deleteFavorite,
     getFavorites,
 };
-

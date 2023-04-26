@@ -1,4 +1,16 @@
-// controller for adding menu items to the database
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: addMenuItem.js
+ * Created on: 03/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: This module provides functionality for adding menu items to the database
+ * 
+ */
+
 
 const db = require('../db');
 

@@ -1,3 +1,16 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: cart.js
+ * Created on: 04/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: routes for the cart
+ * 
+ */
+
 const express = require("express");
 
 const {addToCart, getCart, updateQuantity, storeCart} = require('../controllers/cart');

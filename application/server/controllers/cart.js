@@ -1,3 +1,17 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: cart.js
+ * Created on: 03/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: This module manages a shopping cart by adding, retrieving, and updating items, 
+ *              as well as storing the cart's contents in the database.
+ * 
+ */
+
 const Cart = require('../config/cart.js');
 const db = require('../db.js');
 

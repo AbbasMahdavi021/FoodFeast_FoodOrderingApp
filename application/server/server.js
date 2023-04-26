@@ -1,3 +1,20 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: server.js
+ * Created on: 03/23
+ * Author(s): Abbas M., Jed G.
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: This server sets up an Express app with CORS, session, and routes for 
+ *    authentication, restaurants, admin, drivers, email, favorites, and orders. 
+ * 
+ *    It also establishes a Socket.IO connection for real-time communication between clients and the server. 
+ *    The server listens on port 8080 and serves the React client's build files.
+ * 
+ */
+
 const cors = require("cors");
 const path = require("path");
 const express = require("express");

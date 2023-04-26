@@ -1,3 +1,18 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: sendEmail.js
+ * Created on: 03/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: This module generates a random new password for a user, hashes it, 
+ *      updates the user's password in the database, and sends an email to the user 
+ *      with the new password.
+ * 
+ */
+
 const db = require("../db.js");
 const bcrypt = require("bcryptjs");
 const sendMail = require('../config/sendEmail.js');

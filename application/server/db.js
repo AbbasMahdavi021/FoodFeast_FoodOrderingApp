@@ -1,3 +1,16 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: db.js
+ * Created on: 03/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: connects to the SQL database requiring a .env for configuration and information
+ * 
+ */
+
 const mySQL = require("mysql2");
 require("dotenv").config();
 

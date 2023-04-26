@@ -1,4 +1,20 @@
 // controller for adding restaurants to the database
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: enrollRestaurant.js
+ * Created on: 03/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: This module handles enrolling a new restaurant into the system 
+ *      by inserting its details into the database. The required details include 
+ * 
+ *          name, cuisine, description, estimated delivery time, address, picture, 
+ *          phone, hours, price, rating, and owner ID.
+ * 
+ */
 
 const db = require('../db');
 

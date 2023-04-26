@@ -1,3 +1,17 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: driver.js
+ * Created on: 03/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: This module registers new users by checking for existing accounts, 
+ *      hashing passwords, and adding user details to the database.
+ * 
+ */
+
 const db = require("../db.js");
 const bcrypt = require("bcryptjs");
 

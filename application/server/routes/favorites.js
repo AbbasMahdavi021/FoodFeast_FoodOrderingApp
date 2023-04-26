@@ -1,4 +1,15 @@
-// routes for favorites
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: favorites.js
+ * Created on: 03/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: routes for favorites
+ * 
+ */
 
 const express = require('express');
 const { saveFavorite, deleteFavorite, getFavorites } = require('../controllers/favorites.js');

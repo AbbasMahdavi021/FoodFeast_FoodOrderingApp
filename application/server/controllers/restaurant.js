@@ -1,3 +1,19 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: restaurant.js
+ * Created on: 03/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: This module provides endpoints to get restaurant information, 
+ *    including retrieving all restaurants, a restaurant by ID, restaurants by 
+ *    cuisine, menu items for a restaurant, featured restaurants, and restaurants 
+ *    by owner ID.
+ * 
+ */
+
 const db = require("../db.js");
 
 const getRestaurants = async (req, res) => {

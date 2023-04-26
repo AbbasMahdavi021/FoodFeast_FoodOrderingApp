@@ -1,3 +1,20 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: admin.js
+ * Created on: 03/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: This module provides functionality for managing users and restaurants. 
+ *    The functions include retrieving a list of users or a single user, retrieving a specific restaurant, 
+ *    deleting a user or a restaurant, and processing custom SQL queries. 
+ *    These features are typically used by administrators for managing user accounts and restaurants 
+ *    within the application.
+ * 
+ */
+
 const db = require("../db.js");
 
 

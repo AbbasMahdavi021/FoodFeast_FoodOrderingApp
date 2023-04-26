@@ -1,3 +1,16 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: restaurant.js
+ * Created on: 04/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: routes for restaurants
+ * 
+ */
+
 const express = require("express");
 const { getRestaurants , getRestaurantsByCuisine, getFeatured, getMenu, getRestaurantByOwner, getRestaurantById } = require("../controllers/restaurant.js");
 

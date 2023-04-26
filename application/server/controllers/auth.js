@@ -1,3 +1,19 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: auth.js
+ * Created on: 03/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: This module provides user authentication functionality, 
+ *    including registration and login for regular users, restaurant owners, 
+ *    and administrators. It also includes a logout function and a function 
+ *    to check the login status of users.
+ * 
+ */
+
 const db = require("../db.js");
 const bcrypt = require("bcryptjs");
 const Cart = require('../config/cart.js');

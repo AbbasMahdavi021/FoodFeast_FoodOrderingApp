@@ -1,3 +1,16 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: auth.js
+ * Created on: 03/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: routes for authentication
+ * 
+ */
+
 const express = require("express");
 const { register, login, logout, getStatus, adminlogin, restaurantOwnerRegister} = require("../controllers/auth.js");
 

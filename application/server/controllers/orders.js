@@ -1,3 +1,17 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: orders.js
+ * Created on: 03/23
+ * Author(s):
+ * Contact: 
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: This module handles order-related operations, including fetching and creating orders, 
+ *    and getting order items.
+ * 
+ */
+
 const db = require('../db');
 const moment = require('moment');
 
