@@ -4,7 +4,7 @@
  * Filename: AdminLogin.jsx
  * Created on: 04/23
  * Author(s): Abbas M.
- * Contact: 
+ * Contact: amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: Admin Login Page, simple make a request to /admin/login, 

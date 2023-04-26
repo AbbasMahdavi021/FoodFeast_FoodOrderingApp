@@ -4,7 +4,7 @@
  * Filename: Home.jsx
  * Created on: 04/23
  * Author(s): Abbas M.
- * Contact: 
+ * Contact: amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: The main home component that renders the two child components:

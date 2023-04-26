@@ -3,8 +3,8 @@
  * 
  * Filename: Map.jsx
  * Created on: 03/23
- * Author(s): Jed G.
- * Contact: 
+ * Author(s): Jed Graves.
+ * Contact: jgraves4@mail.sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: React functional component that displays an interactive Google Map with markers 

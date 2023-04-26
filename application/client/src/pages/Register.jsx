@@ -3,8 +3,8 @@
  * 
  * Filename: Register.jsx
  * Created on: 04/23
- * Author(s): Abbas M., Elahe B.
- * Contact: 
+ * Author(s): Abbas M., Elahe Bashiri
+ * Contact: amahdavi2@sfsu.edu , Ebashiri@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: Register page for regular USERS that uses child register form component,

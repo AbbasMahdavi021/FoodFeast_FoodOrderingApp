@@ -3,8 +3,8 @@
  * 
  * Filename: RegisterForm.jsx
  * Created on: 03/23
- * Author(s):
- * Contact: 
+ * Author(s): Megan L.
+ * Contact: mlew1@mail.sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: contains the styling and input fields for RestaurantRegister.jsx
