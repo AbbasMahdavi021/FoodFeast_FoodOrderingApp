@@ -93,8 +93,17 @@ app.get(
     "/map",
     "/enroll",
     "/driver",
+    "/enroll",
+    "/addMenuItems/:restaurantId",
+    "/thankyouforenrolling",
+    "/restaurantDashboard",
+    "/testCreateOrder",
     "/cart",
+    "/menuentry/:restaurantId",
+    "/addeditem",
+    "/admin",
     "/adminlogin",
+    "/:name/:id"
   ],
   function (req, res) {
     res.sendFile(

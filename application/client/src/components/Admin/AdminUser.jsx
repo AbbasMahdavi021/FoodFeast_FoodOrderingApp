@@ -8,7 +8,6 @@ const AdminUser = (props) => {
     const handleDelete = async (e) => {
 
         let id = e.target.value;
-        console.log(id + " HAHAH");
 
         const res = await axios.post("/admin/deleteUser", { userId: id }, { withCredentials: true });
 

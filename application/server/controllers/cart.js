@@ -20,7 +20,6 @@ const addToCart = async (req, res) => {
 
 const getCart = async (req, res) => {
 
-    console.log("Getting Cart ")
     res.send(req.session.cart);
 
 }
