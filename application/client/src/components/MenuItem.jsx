@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const MenuItem = (props) => {
 
-    const handleAddItemToCart = () => {
+    const handleAddItemToCart = async () => {
 
         const res = await axios.post("/cart/addToCart", {
 
@@ -31,10 +31,6 @@ const MenuItem = (props) => {
                 <p>
                     $ {props.price}
                 </p>
-
-                <button className='add-to-cart-btn' onClick={handleClick}>
-                    Add To Card
-                </button>
 
             </div>
 
