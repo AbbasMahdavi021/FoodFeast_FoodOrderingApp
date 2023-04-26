@@ -3,7 +3,7 @@
  * 
  * Filename: MenuEntry.jsx
  * Created on: 03/23
- * Author(s):
+ * Author(s): Megan L.
  * Contact: 
  * Copyright (c) 2023 by San Francisco State University
  * 
