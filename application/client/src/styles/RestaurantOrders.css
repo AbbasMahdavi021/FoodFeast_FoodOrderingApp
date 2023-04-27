@@ -1,0 +1,136 @@
+.orders-page {
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-bottom: 100px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.restaurant-orders-item {
+  background-color: #cacaca;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #000000;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h3 {
+  color: #000000;
+}
+
+.order-items-container {
+  background-color: rgb(139, 8, 139);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08) inset;
+  border-radius: 4px;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.order-items-container h4 {
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.order-items-container .customer-orders-item {
+  background-color: #8B088B;
+  color: #333;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.order-items-container .customer-orders-item {
+  margin-bottom: 0;
+  background-color: white;
+}
+
+.customer-orders-item {
+  background-color: #f0f0f0;
+  color: #ffffff;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+}
+
+.customer-orders-item:last-child {
+  margin-bottom: 0;
+}
+
+.restaurant-orders-item p:last-child {
+  margin-bottom: 0;
+}
+
+.order-complete-button {
+  background-color: #ffcf01;
+  color: #000000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.order-complete-button:hover {
+  background-color: #d4bd46;
+  color: #3b3b3b;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 400px;
+}
+
+.modal-content {
+  position: relative;
+  width: 400px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 4px;
+}
+
+.status {
+  color: red;
+}
+
+.orders-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  font-size: 30px;
+  margin: 0 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.tab-button.active {
+  border-bottom: 2px solid #8B088B;
+}
+
+.tab-button:hover {
+  background-color: #ad85ad;
+
+  
+}

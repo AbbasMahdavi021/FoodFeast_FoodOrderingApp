@@ -49,6 +49,23 @@ const getOrderItemsByOrderId = async (req, res) => {
   }
 };
 
+const changeOrderStatus = async (req, res) => {
+  const { orderId, orderStatus } = req.body;
+
+  try {
+    const q = 'UPDATE food_orders SET order_status = ? WHERE order_id = ?';
+    db.query(q, [orderStatus, orderId], (error, results) => {
+      if (error) {
+        res.status(500).json(error);
+      } else {
+        res.status(200).json(results);
+      }
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
 module.exports = (io) => {
   const getOrdersByRestaurantId = async (req, res) => {
     const { restaurantId } = req.params;
@@ -125,5 +142,5 @@ module.exports = (io) => {
     }
   };
 
-  return { getOrdersByUserId, getOrdersByRestaurantId, createOrder, getOrderItemsByOrderId };
+  return { getOrdersByUserId, getOrdersByRestaurantId, createOrder, getOrderItemsByOrderId, changeOrderStatus };
 };

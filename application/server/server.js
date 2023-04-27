@@ -43,7 +43,7 @@ app.use(express.json());
 app.use(cookieParser());
 const io = require("socket.io")(server, {
   cors: {
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3000", "http://35.160.127.228/"],
   },
 });
 

@@ -15,7 +15,7 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (io) => {
-  const { getOrdersByUserId, getOrdersByRestaurantId, createOrder, getOrderItemsByOrderId } = require('../controllers/orders')(io);
+  const { getOrdersByUserId, getOrdersByRestaurantId, createOrder, getOrderItemsByOrderId, changeOrderStatus } = require('../controllers/orders')(io);
 
   router.get('/user/:id', getOrdersByUserId);
 
@@ -24,6 +24,8 @@ module.exports = (io) => {
   router.post('/', (req, res) => createOrder(req, res, io));
 
   router.get('/items/:orderId', getOrderItemsByOrderId);
+
+  router.put('/updateStatus', changeOrderStatus);
 
   return router;
 };
