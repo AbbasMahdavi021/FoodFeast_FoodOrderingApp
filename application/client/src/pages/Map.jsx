@@ -30,7 +30,7 @@ const apiKey = 'AIzaSyDV-F6ADu9wNi12fMyIxMMjUnnfquIV_50'
 // Map does not run into footer
 const containerStyle = {
   width: '100%',
-  height: '87vh',
+  height: '88vh',
 }
 
 // Center at SFSU
