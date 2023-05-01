@@ -138,7 +138,7 @@ export default function Login() {
               autoFocus
               InputLabelProps={{
                 sx: {
-                  fontSize: '1.2rem'
+                  fontSize: '1.7rem'
                 },
               }}
               inputProps={{
@@ -146,7 +146,7 @@ export default function Login() {
                   fontSize: '2rem' 
                 },
               }}
-              sx={{ marginBottom: '2rem' }}
+              sx={{ marginBottom: '2rem', }}
             />
             <TextField
               value={formData.name}
@@ -160,7 +160,7 @@ export default function Login() {
               autoComplete="current-password"
               InputLabelProps={{
                 sx: {
-                  fontSize: '1.2rem',
+                  fontSize: '1.7rem',
                 },
               }}
               inputProps={{

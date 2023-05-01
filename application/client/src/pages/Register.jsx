@@ -127,11 +127,11 @@ export default function Register() {
                         }}
                     >
                         <Typography component="h1" variant="h5" fontSize={40} align='center' marginBottom={10}>
-                            Sign up to have an account
+                            Sign up 
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                             <Grid container spacing={2}>
-                                <Grid item xs={12}>
+                                <Grid item xs={12} >
                                     <TextField
                                         value={formData.username}
                                         onChange={e => handleChange(e)}
@@ -144,12 +144,13 @@ export default function Register() {
                                         autoFocus
                                         InputLabelProps={{
                                             sx: {
-                                                fontSize: '1.2rem'
+                                                fontSize: '1.7rem',
                                             }
                                         }}
                                         inputProps={{
                                             style: {
-                                                fontSize: '2rem'
+                                                fontSize: '2rem',
+                                                
                                             }
                                         }}
                                         
@@ -167,7 +168,7 @@ export default function Register() {
                                         autoComplete="email"
                                         InputLabelProps={{
                                             sx: {
-                                                fontSize: '1.2rem'
+                                                fontSize: '1.7rem'
                                             }
                                         }}
                                         inputProps={{
@@ -190,7 +191,31 @@ export default function Register() {
                                         autoComplete="new-password"
                                         InputLabelProps={{
                                             sx: {
-                                                fontSize: '1.2rem'
+                                                fontSize: '1.7rem'
+                                            }
+                                        }}
+                                        inputProps={{
+                                            style: {
+                                                fontSize: '2rem'
+                                            }
+                                        }}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    <TextField
+                                        value={formData.password}
+                                        onChange={e => handleChange(e)}
+                                        required
+                                        fullWidth
+                                        name="password"
+                                        label="Confirm Password"
+                                        type="Password"
+                                        id="password"
+                                        autoComplete="new-password"
+                                        InputLabelProps={{
+                                            sx: {
+                                                fontSize: '1.7rem'
                                             }
                                         }}
                                         inputProps={{
