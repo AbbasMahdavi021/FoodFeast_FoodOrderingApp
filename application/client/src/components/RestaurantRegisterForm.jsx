@@ -18,6 +18,10 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme();
@@ -52,7 +56,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                         <Typography component="h1" variant="h5" fontSize={40} align="center" marginBottom={10} marginTop={10}>
                             {title}
                         </Typography>
-
+                        {/* Username */}
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                             <Grid container spacing={2}>
                                 <Grid item xs={12}>
@@ -68,7 +72,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                                         autoFocus
                                         InputLabelProps={{
                                             sx: {
-                                                fontSize: '1.2rem'
+                                                fontSize: '1.7rem'
                                             }
                                         }}
                                         inputProps={{
@@ -78,6 +82,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                                         }}
                                     />
                                 </Grid>
+                                {/* Email address */}
                                 <Grid item xs={12}>
                                     <TextField
                                         value={formData.email}
@@ -90,7 +95,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                                         autoComplete="email"
                                         InputLabelProps={{
                                             sx: {
-                                                fontSize: '1.2rem'
+                                                fontSize: '1.7rem'
                                             }
                                         }}
                                         inputProps={{
@@ -100,6 +105,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                                         }}
                                     />
                                 </Grid>
+                                {/* password */}
                                 <Grid item xs={12}>
                                     <TextField
                                         value={formData.password}
@@ -113,7 +119,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                                         autoComplete="new-password"
                                         InputLabelProps={{
                                             sx: {
-                                                fontSize: '1.2rem'
+                                                fontSize: '1.7rem'
                                             }
                                         }}
                                         inputProps={{
@@ -136,7 +142,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                                         label="Restaurant Name"
                                         InputLabelProps={{
                                             sx: {
-                                                fontSize: '1.2rem'
+                                                fontSize: '1.7rem'
                                             }
                                         }}
                                         inputProps={{
@@ -159,7 +165,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                                         label="Restaurant Phone Number"
                                         InputLabelProps={{
                                             sx: {
-                                                fontSize: '1.2rem'
+                                                fontSize: '1.7rem'
                                             }
                                         }}
                                         inputProps={{
@@ -182,7 +188,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                                         label="Restaurant Address"
                                         InputLabelProps={{
                                             sx: {
-                                                fontSize: '1.2rem'
+                                                fontSize: '1.7rem'
                                             }
                                         }}
                                         inputProps={{
@@ -193,28 +199,33 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                                     />
                                 </Grid>
 
-                                <Grid item xs={12}>
-                                    <TextField
-                                        value={formData.cuisine}
-                                        onChange={e => handleChange(e)}
-                                        name="cuisine"
-                                        required
-                                        fullWidth
-                                        id="cuisine"
-                                        label="Cuisine"
-                                        InputLabelProps={{
-                                            sx: {
-                                                fontSize: '1.2rem'
-                                            }
-                                        }}
-                                        inputProps={{
-                                            style: {
-                                                fontSize: '2rem'
-                                            }
-                                        }}
-                                    />
+                                 {/* cuisine drop down menu */}
+                                 <Grid item xs={12}>
+                                    <Box sx={{ minWidth: 120 }}>
+                                    <FormControl fullWidth >
+                                    <InputLabel sx={{ fontSize: '1.7rem'}}
+                                    value={formData.cuisine}
+                                    onChange={e => handleChange(e)} 
+                                    name="cuisine"
+                                    required
+                                    fullWidth
+                                    > Select Category </InputLabel>
+                                    <Select
+                                    id="cuisine"
+                                    label="Cuisine"
+                                    //font size for input prop
+                                    sx={{ fontSize: '2rem'}}
+                                    >
+                                <MenuItem value={1} sx={{ fontSize: '1.7rem'}}>American</MenuItem>
+                                <MenuItem value={2} sx={{ fontSize: '1.7rem'}}>Indian</MenuItem>
+                                <MenuItem value={3} sx={{ fontSize: '1.7rem'}}>Italian</MenuItem>
+                                <MenuItem value={4} sx={{ fontSize: '1.7rem'}}>Japanese</MenuItem>
+                                <MenuItem value={5} sx={{ fontSize: '1.7rem'}}>Mexican</MenuItem>
+                                </Select>
+                                </FormControl>
+                                </Box>
                                 </Grid>
-
+                                {/* price range */}
                                 <Grid item xs={12}>
                                     <TextField
                                         value={formData.price}
@@ -226,7 +237,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                                         label="Price Range ($ - $$$$$)"
                                         InputLabelProps={{
                                             sx: {
-                                                fontSize: '1.2rem'
+                                                fontSize: '1.7rem'
                                             }
                                         }}
                                         inputProps={{
@@ -236,7 +247,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                                         }}
                                     />
                                 </Grid>
-
+                                {/* yelp rating */}
                                 <Grid item xs={12}>
                                     <TextField
                                         value={formData.rating}
@@ -248,7 +259,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                                         label="Current Yelp Star Rating (1-5)"
                                         InputLabelProps={{
                                             sx: {
-                                                fontSize: '1.2rem'
+                                                fontSize: '1.7rem'
                                             }
                                         }}
                                         inputProps={{
@@ -259,7 +270,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                                     />
                                 </Grid>
 
-
+                                {/* delivery time */}
                                 <Grid item xs={12}>
                                     <TextField
                                         value={formData.est_delivery_time}
@@ -271,7 +282,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                                         name="est_delivery_time"
                                         InputLabelProps={{
                                             sx: {
-                                                fontSize: '1.2rem'
+                                                fontSize: '1.7rem'
                                             }
                                         }}
                                         inputProps={{
@@ -281,7 +292,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                                         }}
                                     />
                                 </Grid>
-
+                                {/* store hours */}
                                 <Grid item xs={12}>
                                     <TextField
                                         value={formData.hours}
@@ -293,7 +304,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                                         name="hours"
                                         InputLabelProps={{
                                             sx: {
-                                                fontSize: '1.2rem'
+                                                fontSize: '1.7rem'
                                             }
                                         }}
                                         inputProps={{
@@ -316,7 +327,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                                         name="picture"
                                         InputLabelProps={{
                                             sx: {
-                                                fontSize: '1.2rem'
+                                                fontSize: '1.7rem'
                                             }
                                         }}
                                         inputProps={{
@@ -347,7 +358,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                                             label="Description"
                                             InputLabelProps={{
                                                 sx: {
-                                                    fontSize: '1.2rem'
+                                                    fontSize: '1.7rem'
                                                 }
                                             }}
                                             inputProps={{
@@ -360,7 +371,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData , err,
                                     </Box>
                                 </Grid>
                             </Grid>
-
+                            {/* checkbox */}
                             <Grid item marginRight={1} marginTop={2}>
                                 <label>
                                     <input
