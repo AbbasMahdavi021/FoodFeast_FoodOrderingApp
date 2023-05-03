@@ -15,6 +15,7 @@ const RestaurantOrders = () => {
   const [collapsedOrders, setCollapsedOrders] = useState([])
   const [scrollToBottom, setScrollToBottom] = useState(false)
   const [activeTab, setActiveTab] = useState('pending')
+  const [initialOrdersFetched, setInitialOrdersFetched] = useState(false);
 
   const toggleOrderVisibility = (orderId) => {
     if (collapsedOrders.includes(orderId)) {
@@ -58,13 +59,21 @@ const RestaurantOrders = () => {
         orderStatus: newOrderStatus,
       })
 
-      setOrders(
-        orders.map((order) =>
-          order.order_id === orderId
-            ? { ...order, order_status: newOrderStatus }
-            : order,
-        ),
+      const updatedOrder = orders.find((order) => order.order_id === orderId)
+      const updatedOrders = orders.map((order) =>
+        order.order_id === orderId
+          ? { ...order, order_status: newOrderStatus }
+          : order,
       )
+      setOrders(updatedOrders)
+
+      const updatedOrderWithStatus = {
+        ...updatedOrder,
+        order_status: newOrderStatus,
+      }
+
+      socket.emit('orderInProgress', updatedOrderWithStatus)
+      console.log('Emitted orderInProgress event:', updatedOrderWithStatus)
     } catch (error) {
       console.error('Error updating order status:', error)
     }
@@ -81,13 +90,17 @@ const RestaurantOrders = () => {
   }, [scrollToBottom])
 
   useEffect(() => {
+    if (!restaurantId) return
+
     const newSocket = io('http://localhost:8080')
     setSocket(newSocket)
-    newSocket.emit('joinRestaurantRoom', 'restaurant-5')
+    newSocket.emit('joinRestaurantRoom', restaurantId)
+    console.log('Sent joinRestaurantRoom event:', restaurantId)
 
-    newSocket.on('receive-order', (newOrder) => {
+    newSocket.on('newOrder', (newOrder) => {
       console.log('Received new order:', newOrder)
       setOrders((prevOrders) => [...prevOrders, newOrder])
+      localStorage.setItem('lastReceivedOrderId', newOrder.order_id)
       setShowOrderAlert(true)
     })
 
@@ -95,7 +108,8 @@ const RestaurantOrders = () => {
       newSocket.off('receive-order')
       newSocket.close()
     }
-  }, [])
+  }, [restaurantId])
+
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -109,11 +123,13 @@ const RestaurantOrders = () => {
         console.error(err)
       }
     }
-
+  
     if (restaurantId) {
-      fetchOrders()
+      fetchOrders().then(() => {
+        setInitialOrdersFetched(true);
+      });
     }
-  }, [restaurantId])
+  }, [restaurantId, showOrderAlert])
 
   useEffect(() => {
     if (orders.length > 0) {
@@ -131,6 +147,19 @@ const RestaurantOrders = () => {
       fetchOrderItems()
     }
   }, [orders])
+
+  useEffect(() => {
+    if (orders.length > 0 && initialOrdersFetched) {
+      const lastReceivedOrderId = localStorage.getItem('lastReceivedOrderId');
+      if (
+        lastReceivedOrderId &&
+        parseInt(lastReceivedOrderId) !== orders[orders.length - 1].order_id
+      ) {
+        setShowOrderAlert(true);
+      }
+    }
+  }, [orders, initialOrdersFetched]);
+  
 
   return (
     <div className="orders-page">

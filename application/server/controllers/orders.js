@@ -49,24 +49,42 @@ const getOrderItemsByOrderId = async (req, res) => {
   }
 };
 
-const changeOrderStatus = async (req, res) => {
-  const { orderId, orderStatus } = req.body;
-
-  try {
-    const q = 'UPDATE food_orders SET order_status = ? WHERE order_id = ?';
-    db.query(q, [orderStatus, orderId], (error, results) => {
-      if (error) {
-        res.status(500).json(error);
-      } else {
-        res.status(200).json(results);
-      }
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-};
-
 module.exports = (io) => {
+  const changeOrderStatus = async (req, res) => {
+    const { orderId, orderStatus } = req.body;
+
+    try {
+      const q = 'UPDATE food_orders SET order_status = ? WHERE order_id = ?';
+      db.query(q, [orderStatus, orderId], (error, results) => {
+        if (error) {
+          res.status(500).json(error);
+        } else {
+          res.status(200).json(results);
+
+          const orderDetailsQuery = `
+            SELECT fo.order_id, fo.order_date, fo.order_total, fo.delivery_address, fo.special_instructions, r.name, r.est_delivery_time
+            FROM food_orders fo
+            JOIN restaurants r ON fo.restaurant_id = r.id
+            WHERE fo.order_id = ?
+          `;
+
+          db.query(orderDetailsQuery, [orderId], (error, orderDetailsResults) => {
+            if (error) {
+              console.error('Error fetching order details:', error);
+            } else {
+              const orderDetails = orderDetailsResults[0];
+              if (orderStatus === 'In Progress') {
+                io.to('drivers').emit('orderInProgress', orderDetails);
+              }
+            }
+          });
+        }
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  };
+
   const getOrdersByRestaurantId = async (req, res) => {
     const { restaurantId } = req.params;
 

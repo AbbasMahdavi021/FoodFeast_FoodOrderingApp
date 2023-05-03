@@ -50,6 +50,11 @@ const io = require("socket.io")(server, {
 const orderRoutes = require("./routes/orders.js")(io);
 
 io.on('connection', (socket) => {
+  socket.on('joinDriverRoom', () => {
+    console.log('Driver joined the drivers room');
+    socket.join('drivers');
+  });
+
   socket.on("joinRestaurantRoom", async (room) => {
     console.log(`Socket ${socket.id} joining room: ${room}`);
     socket.join(room);
@@ -96,7 +101,7 @@ app.use("/orders", orderRoutes);
 app.use("/cart", cartRoutes);
 
 //Build//////////////////////////////////////////////////////////////
-const _dirname = path.resolve(); 
+const _dirname = path.resolve();
 const buildPath = path.join(__dirname, "../client/build");
 
 app.use(express.static(buildPath));
