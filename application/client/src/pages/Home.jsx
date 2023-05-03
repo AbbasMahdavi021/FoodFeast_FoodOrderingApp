@@ -14,22 +14,18 @@
 
 import React from 'react';
 import HomeHeader from '../components/HomeHeader';
-import Browse from '../components/Browse';
 import '../styles/Home.css';
 
 
+
 function Home() {
-
-    const scrollToSecondPage = () => {
-        window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-    };
-
+    
     return (
         <div className="home-container">
             <div className="header-page">
-                <HomeHeader scrollToSecondPage={scrollToSecondPage}/>
+                <HomeHeader/>
             </div>
-            <Browse/>
+
         </div>
     );
 }
