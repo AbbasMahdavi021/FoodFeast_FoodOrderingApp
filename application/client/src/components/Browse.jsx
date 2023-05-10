@@ -46,12 +46,13 @@ const Browse = () => {
             try {
                 const response = await axios.get('/restaurants/getAllRestaurants');
                 let rows = response.data;
+                console.log(rows)
                 if (rows.length > 0) {
                     setRestaurants([...rows]);
                     setAllRestaurants([...rows]);
 
                     // Create an array of unique cuisines
-                    const uniqueCuisines = [...new Set(rows.map(restaurant => restaurant.cuisine))];
+                    const uniqueCuisines = [...new Set(rows.map(restaurant => restaurant.cuisine_name))];
                     // Create an array of objects containing the cuisine name
                     const cuisinesArray = uniqueCuisines.map(cuisine => ({ name: cuisine }));
                     setCuisines(cuisinesArray);
@@ -67,7 +68,7 @@ const Browse = () => {
 
     const handleFilterChange = (cuisines) => {
         const checkedCuisines = cuisines.filter((cuisine) => cuisine.isChecked).map((cuisine) => cuisine.name);
-        const filteredRestaurants = checkedCuisines.length === 0 ? [...allRestaurants] : allRestaurants.filter((restaurant) => checkedCuisines.includes(restaurant.cuisine));
+        const filteredRestaurants = checkedCuisines.length === 0 ? [...allRestaurants] : allRestaurants.filter((restaurant) => checkedCuisines.includes(restaurant.cuisine_name));
         setRestaurants(filteredRestaurants);
         setSelectedCuisine(checkedCuisines.length === 1 ? checkedCuisines[0] : 'All');
     };
@@ -75,7 +76,7 @@ const Browse = () => {
     const handleSearch = (event) => {
         event.preventDefault();
         const searchTerm = searchRestaurants.trim();
-        const selectedCuisineFilter = selectedCuisine === 'All' ? () => true : (restaurant) => restaurant.cuisine === selectedCuisine;
+        const selectedCuisineFilter = selectedCuisine === 'All' ? () => true : (restaurant) => restaurant.cuisine_name === selectedCuisine;
         if (!searchTerm) {
             setRestaurants(allRestaurants.filter(selectedCuisineFilter));
             navigate('/browse');

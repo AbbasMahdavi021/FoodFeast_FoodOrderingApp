@@ -19,11 +19,18 @@ const db = require("../db.js");
 const getRestaurants = async (req, res) => {
   try {
     const rows = [];
-    const q = 'SELECT * FROM restaurants';
-
+    const q = `
+    SELECT r.*, c.cuisine_name
+    FROM restaurants r
+    JOIN cuisines c ON r.cuisine = c.id
+  `;
     db.query(q, (error, results) => {
-      results.forEach(row => rows.push(row));
-      res.send(rows);
+      if (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+      } else {
+        res.send(results);
+      }
     });
 
   } catch (err) {
@@ -31,6 +38,7 @@ const getRestaurants = async (req, res) => {
     res.send([]);
   }
 };
+
 
 const getRestaurantById = async (req, res) => {
   try {
@@ -86,7 +94,7 @@ const getRestaurantByOwner = async (req, res) => {
         console.error("Query error:", error);
         return res.status(500).json({ error: "Error executing query" });
       }
-      
+
       results.forEach(row => rows.push(row));
       res.send({ restaurants: rows });
 

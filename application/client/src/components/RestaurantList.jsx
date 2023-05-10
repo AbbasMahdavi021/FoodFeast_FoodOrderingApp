@@ -18,7 +18,7 @@ const RestaurantList = () => {
                 <div className="restaurant-details">
                   <h2>{restaurant.name}</h2>
                   <p>{restaurant.price}</p>
-                  <p>{restaurant.cuisine}</p>
+                  <p>{restaurant.cuisine_name}</p>
                   <h1>{restaurant.description}</h1>
                   <p>
                     {[...Array(5)].map((star, i) => {
