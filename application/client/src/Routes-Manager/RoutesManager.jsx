@@ -73,6 +73,8 @@ function RoutesManager() {
           <Route path="/register" element={<Register />} />
           <Route path="/about" element={<About teamMembers={teamMembers} />} />
           <Route path="/map" element={<Map />} />
+          <Route path="browse/:name/:id" element={<Restaurant />} />
+
 
           <Route path="/driver" element={<Driver />} />
           <Route path="/enroll" element={<EnrollRestaurant />} />
@@ -94,8 +96,6 @@ function RoutesManager() {
               path={`/team/${member.name.replace(/\s/g, '-')}`}
               element={<TeamMemberModal teamMember={member} />} />
           ))}
-
-          <Route path="/:name/:id" element={<Restaurant />} />
 
         </Routes>
         

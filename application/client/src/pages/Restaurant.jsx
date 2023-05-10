@@ -62,7 +62,6 @@ const Restaurant = (props) => {
                     )
                 })}
             </div>
-
         </div>
     );
 };
