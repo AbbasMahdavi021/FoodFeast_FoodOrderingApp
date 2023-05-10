@@ -73,12 +73,6 @@ const HomeHeader = ({ scrollToSecondPage }) => {
         </div>
       </div>
 
-      <div className='browse-button'>
-        <button onClick={scrollToSecondPage}>
-          Browse All Restaurants
-        </button>
-      </div>
-
       <div className="featured-favorite-container">
         <div className="f-restaurants">
           <h1 id='f-restaurant-h1'>Featured Restaurants</h1>

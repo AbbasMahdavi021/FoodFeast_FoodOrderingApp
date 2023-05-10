@@ -22,15 +22,20 @@
  *      types to find the match and shows you the results.
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import Fuse from 'fuse.js';
-import { Link } from 'react-router-dom';
 
+import { RestaurantsContext } from './RestaurantsContext';
 import Filter from './Filter';
 
 const Browse = () => {
-    const [restaurants, setRestaurants] = useState([]);
+
+    const navigate = useNavigate();
+
+    const { setRestaurants } = useContext(RestaurantsContext);
+
     const [allRestaurants, setAllRestaurants] = useState([]);
     const [searchRestaurants, setSearchRestaurants] = useState('');
     const [selectedCuisine, setSelectedCuisine] = useState('All');
@@ -73,6 +78,7 @@ const Browse = () => {
         const selectedCuisineFilter = selectedCuisine === 'All' ? () => true : (restaurant) => restaurant.cuisine === selectedCuisine;
         if (!searchTerm) {
             setRestaurants(allRestaurants.filter(selectedCuisineFilter));
+            navigate('/browse');
             return;
         }
         const fuseOptions = {
@@ -83,52 +89,22 @@ const Browse = () => {
         const searchResults = fuse.search(searchTerm);
         const searchedRestaurants = searchResults.map((result) => result.item);
         setRestaurants(searchedRestaurants);
+        navigate('/browse');
     };
 
+    
     return (
         <div className='browse-div'>
-
             <div className='filter-div'>
-                <h2>Browse</h2>
                 <div className='filter'>
                     <Filter cuisines={cuisines} handleFilterChange={handleFilterChange} />
                     <form className='search-bar' onSubmit={handleSearch}>
                         <input className='search-input' type="text" placeholder="Search for Restaurant or Cuisine..." value={searchRestaurants} onChange={(e) => setSearchRestaurants(e.target.value)} />
-                        <button type="submit">
+                        <button type="submit"> 
                             <img src={process.env.PUBLIC_URL + '/images/brand/search.png'} alt="Search" />
                         </button>
                     </form>
                 </div>
-            </div>
-
-
-            <div className="restaurant-container">
-                {restaurants.map((restaurant) => {
-                    return (
-                        <Link key={restaurant.id} to={`${restaurant.name.replace(/\s/g, '')}/${restaurant.id}`}>
-                            <div className="restaurant-box">
-                                <img src={restaurant.picture} alt={restaurant.name} />
-                                <div className="restaurant-details">
-                                    <h2>{restaurant.name}</h2>
-                                    <p>{restaurant.price}</p>
-                                    <p>{restaurant.cuisine}</p>
-                                    <h1>{restaurant.description}</h1>
-                                    <p>
-                                        {[...Array(5)].map((star, i) => {
-                                            if (i < restaurant.rating) {
-                                                return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star1.png'} alt="star" />;
-                                            } else {
-                                                return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star2.png'} alt="star" />;
-                                            }
-                                        })}
-                                    </p>
-                                    <p>{restaurant.est_delivery_time - 5}-{restaurant.est_delivery_time} mins</p>
-                                    <p>{restaurant.address}</p>
-                                </div>
-                            </div>
-                        </Link>
-                    );
-                })}
             </div>
         </div>
     );

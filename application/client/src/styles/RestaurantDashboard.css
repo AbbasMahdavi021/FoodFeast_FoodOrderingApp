@@ -78,17 +78,17 @@
   background-color: #333;
 }
 
-h2 {
+.restaurant-menu h2 {
   color: #000000;
   text-align: center;
   margin-bottom: 20px;
 }
 
-h3 {
+.restaurant-dashboard h3 {
   color: #000000;
 }
 
-p {
+.restaurant-dashboard p {
   color: #000000;
   margin-bottom: 10px;
 }

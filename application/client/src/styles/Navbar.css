@@ -58,11 +58,12 @@ a.navLink:hover {
   position: sticky;
   align-items: center;
   justify-content: space-around;
-  height: 8vh;
+  height: 100px;
   min-height: 50px;
   background: rgb(139, 8, 139);
-  top: 0;
+  top: 50px;
   z-index: 9999;
+  margin-top: 50px;
 }
 
 .brand {
