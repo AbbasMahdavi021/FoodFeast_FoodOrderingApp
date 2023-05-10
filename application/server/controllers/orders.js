@@ -11,7 +11,6 @@
  *    and getting order items.
  * 
  */
-
 const db = require('../db');
 const moment = require('moment');
 
@@ -106,6 +105,24 @@ module.exports = (io) => {
     }
   };
 
+  const addOrderItem = async (orderId, cartItems) => {
+    try {
+      const q = "INSERT INTO order_items (order_id, menu_item_id, quantity, price, item_total, special_requests) VALUES (?, ?, ?, ?, ?, ?)";
+      for (let i = 0; i < cartItems.length; i++) {
+        db.query(q, [orderId, cartItems[i].itemId, cartItems[i].itemQuantity, cartItems[i].price, cartItems[i].itemQuantity * cartItems[i].price, cartItems[i].specialRequests || " "],
+          (error, results) => {
+            if (error) {
+              console.log(error.message);
+              res.send({ message: "could not insert order items" });
+            }
+          });
+      }
+    } catch (error) {
+      console.log("Error adding order item: ", error);
+      throw error;
+    }
+  };
+
   const createOrder = async (req, res) => {
     const {
       customerId,
@@ -116,16 +133,16 @@ module.exports = (io) => {
       deliveryAddress,
       paymentMethod,
       specialInstructions,
+      cartItems
     } = req.body;
-
     const formattedOrderDate = moment(orderDate).format('YYYY-MM-DD HH:mm:ss');
 
     try {
       const q = `
-        INSERT INTO food_orders
-        (customer_id, restaurant_id, order_date, order_status, order_total, delivery_address, payment_method, special_instructions)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-      `;
+          INSERT INTO food_orders
+          (customer_id, restaurant_id, order_date, order_status, order_total, delivery_address, payment_method, special_instructions)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        `;
       db.query(
         q,
         [
@@ -151,6 +168,7 @@ module.exports = (io) => {
             res.status(201).json(newOrder);
 
             io.to(restaurantId).emit("newOrder", newOrder);
+            addOrderItem(result.insertId, cartItems); 
           }
         }
       );
