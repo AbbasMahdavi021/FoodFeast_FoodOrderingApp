@@ -115,7 +115,7 @@ export const Cart = () => {
       const currentDate = new Date();
       const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' ');
 
-      const response = await axios.post('cart/storeCart', {
+      const response = await axios.post('http://localhost:8080/orders', {
         withCredentials: true,
         cartItems,
         customerId: user.id,
