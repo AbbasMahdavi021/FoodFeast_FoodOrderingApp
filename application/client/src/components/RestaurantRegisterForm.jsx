@@ -153,6 +153,31 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                         }}
                                     />
                                 </Grid>
+
+                                <Grid item xs={12}>
+                                    <TextField
+                                        value={formData.confirmPassword}
+                                        onChange={e => handleChange(e)}
+                                        required
+                                        fullWidth
+                                        name="confirmPassword"
+                                        label="Confirm Password"
+                                        type="password"
+                                        id="password"
+                                        autoComplete="new-password"
+                                        InputLabelProps={{
+                                            sx: {
+                                                fontSize: '1.7rem'
+                                            }
+                                        }}
+                                        inputProps={{
+                                            style: {
+                                                fontSize: '2rem'
+                                            }
+                                        }}
+                                    />
+                                </Grid>
+
                                 {/* restaurant name */}
                                 <Grid item xs={12}>
                                     <TextField

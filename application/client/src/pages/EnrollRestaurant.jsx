@@ -23,6 +23,7 @@ export default function Register() {
         email: "",
         username: "",
         password: "",
+        confirmPassword: "",
         name: "",
         phone: "",
         address: "",
@@ -69,6 +70,11 @@ export default function Register() {
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
         if (!passwordRegex.test(formData.password)) {
             setErr("Password must contain: one lowercase letter, one uppercase letter, one number, and 5 characters long!");
+            return;
+        }
+
+        if (formData.password !== formData.confirmPassword) {
+            setErr("Passwords do not match!");
             return;
         }
 

@@ -90,7 +90,7 @@ export default function Login() {
         if (res.data.isDriver === 1){
           navigate('/driver')
         } else if (res.data.isRestaurantOwner === 1) {
-          navigate('/enroll')
+          navigate('/restaurantDashboard')
         } else {
           navigate('/')
         }
