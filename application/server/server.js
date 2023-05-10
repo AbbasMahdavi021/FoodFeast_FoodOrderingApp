@@ -31,7 +31,6 @@ const sendEmailRoutes = require("./routes/sendEmail.js");
 const cartRoutes = require('./routes/cart.js');
 const driverRoutes = require('./routes/driver.js');
 
-
 const session = require("./config/session.js");
 const adminMW = require("./middleware/authMW.js");
 

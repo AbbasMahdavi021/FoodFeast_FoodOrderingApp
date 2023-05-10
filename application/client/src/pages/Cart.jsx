@@ -19,6 +19,7 @@ import { io } from 'socket.io-client'
 import '../styles/Cart.css'
 import UserContext from '../context'
 
+
 const CartItem = (props) => {
   return (
     <div className="cart-item">
@@ -48,8 +49,8 @@ const CartItem = (props) => {
         <div className="cart-item-price">${props.itemPrice} </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 /*
 
@@ -71,76 +72,74 @@ By; Abbas M.
 */
 
 export const Cart = () => {
-  const [cartItems, setCartItems] = useState([])
-  const [totalQuantity, setTotalQuantity] = useState(0)
-  const [totalCost, setTotalCost] = useState(0)
-  const [toggle, setToggle] = useState(false)
-  const [socket, setSocket] = useState(null)
+  const [cartItems, setCartItems] = useState([]);
+  const [totalQuantity, setTotalQuantity] = useState(0);
+  const [totalCost, setTotalCost] = useState(0);
+  const [toggle, setToggle] = useState(false);
+  const [socket, setSocket] = useState(null);
 
-  const { user, restaurantId } = useContext(UserContext)
+  const { user, restaurantId } = useContext(UserContext);
 
   const updateQuantity = async (addend, id) => {
     const res = await axios.post(
       'cart/updateQuantity',
       { addend: addend, itemId: id },
       { withCredentials: true },
-    )
-    setToggle(!toggle)
-  }
+    );
+    setToggle(!toggle);
+  };
 
   useEffect(() => {
     const loadCart = async () => {
-      const res = await axios.post('cart/getCart', { withCredentials: true })
+      const res = await axios.post('cart/getCart', { withCredentials: true });
 
-      const resData = [...res.data.itemList]
+      const resData = [...res.data.itemList];
 
-      console.log(JSON.stringify(res))
-      setCartItems(resData)
-      setTotalQuantity(res.data.totalQuantity)
-      setTotalCost(res.data.totalCost)
-    }
-    loadCart()
-  }, [toggle])
+      console.log(JSON.stringify(res));
+      setCartItems(resData);
+      setTotalQuantity(res.data.totalQuantity);
+      setTotalCost(res.data.totalCost);
+    };
+    loadCart();
+  }, [toggle]);
 
   useEffect(() => {
-    const newSocket = io('http://localhost:8080')
-    setSocket(newSocket)
+    const newSocket = io('http://localhost:8080');
+    setSocket(newSocket);
 
-    return () => newSocket.close()
-  }, [])
+    return () => newSocket.close();
+  }, []);
 
-  const submitOrder = async () => {
-    const customerId = user.id
-    const restaurantId = 5 // TODO: needs to fetch restaurant id from the restaurant page
-
+  const handleCheckout = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/orders', {
-        customerId,
-        restaurantId,
-        orderDate: new Date().toISOString(),
+      const currentDate = new Date();
+      const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' ');
+
+      const response = await axios.post('cart/storeCart', {
+        withCredentials: true,
+        cartItems,
+        customerId: user.id,
+        restaurantId: restaurantId,
+        orderDate: formattedDate,
         orderStatus: 'Pending',
         orderTotal: parseFloat(subTotal) + parseFloat(tax),
         deliveryAddress: '1234 Test St', // TODO: Replace with actual delivery address
         paymentMethod: 'Credit Card', // TODO: Replace with actual payment method
         specialInstructions: 'Leave at the door', // TODO: Replace with actual special instructions
-      })
-
-      console.log(response.data)
+      });
+  
+      const orderId = response.data.orderId;
 
       if (socket) {
-        socket.emit('send-order', response.data, `restaurant-${restaurantId}`)
+        socket.emit('send-order', response.data, `restaurant-${restaurantId}`);
       }
-    } catch (err) {
-      console.error(err)
+  
+      navigate('/');
+    } catch (error) {
+      console.error('Error during checkout:', error);
     }
-  }
-
-  const handleCheckout = async () => {
-    const res = await axios.post('cart/storeCart', { withCredentials: true })
-    console.log(JSON.stringify(res))
-    await submitOrder()
-    navigate('/')
-  }
+  };
+  
 
   const subTotal = parseFloat(totalCost).toFixed(2)
   const tax = (parseFloat(totalCost) * 0.1).toFixed(2)

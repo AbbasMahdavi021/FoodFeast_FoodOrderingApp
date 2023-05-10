@@ -78,7 +78,7 @@ const getRestaurantByOwner = async (req, res) => {
   try {
     const { owner_id } = req.params;
     const rows = [];
-    const q = 'SELECT * FROM restaurants WHERE owner_id = 15';
+    const q = 'SELECT * FROM restaurants WHERE owner_id = ?';
 
 
     db.query(q, [owner_id], (error, results) => {
