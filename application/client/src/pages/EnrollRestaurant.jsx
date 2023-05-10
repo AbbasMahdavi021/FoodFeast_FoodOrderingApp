@@ -26,7 +26,7 @@ export default function Register() {
         name: "",
         phone: "",
         address: "",
-        cuisine: "",
+        cuisine: null,
         price: "",
         rating: null,
         est_delivery_time: null,

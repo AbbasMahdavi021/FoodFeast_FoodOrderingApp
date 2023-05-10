@@ -82,6 +82,23 @@ const getRestaurantsByCuisine = async (req, res) => {
 };
 
 
+const getAllCuisines = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const rows = [];
+    const q = 'SELECT * FROM cuisines';
+
+    db.query(q, [id], (error, results) => {
+      results.forEach(row => rows.push(row));
+      res.send(rows);
+    });
+  } catch (err) {
+    console.error(err);
+    res.send([]);
+  }
+};
+
+
 const getRestaurantByOwner = async (req, res) => {
   try {
     const { owner_id } = req.params;
@@ -105,7 +122,6 @@ const getRestaurantByOwner = async (req, res) => {
     res.send([]);
   }
 };
-
 
 
 const getFeatured = async (req, res) => {
@@ -153,4 +169,6 @@ const getMenu = async (req, res) => {
   }
 }
 
-module.exports = { getRestaurants, getRestaurantById, getRestaurantsByCuisine, getMenu, getFeatured, getRestaurantByOwner };
+
+
+module.exports = { getRestaurants, getRestaurantById, getAllCuisines, getRestaurantsByCuisine, getMenu, getFeatured, getRestaurantByOwner };
