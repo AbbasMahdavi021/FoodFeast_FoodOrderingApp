@@ -259,6 +259,16 @@
 
 .browse-div {
     display: flex;
+    position: sticky;
+    align-items: center;
+    justify-content: center;
+    background: rgb(139, 8, 139);
+    top: 150px;
+    z-index: 999;
+}
+
+.restaurant-list-div {
+    display: flex;
     margin-left: 10%;
     margin-right: 10%;
     flex-direction: column;
@@ -273,7 +283,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    margin: 10px;
+    margin-bottom: 10px;
 }
 
 .filter {

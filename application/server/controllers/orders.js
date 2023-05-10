@@ -11,7 +11,6 @@
  *    and getting order items.
  * 
  */
-
 const db = require('../db');
 const moment = require('moment');
 
@@ -49,24 +48,42 @@ const getOrderItemsByOrderId = async (req, res) => {
   }
 };
 
-const changeOrderStatus = async (req, res) => {
-  const { orderId, orderStatus } = req.body;
-
-  try {
-    const q = 'UPDATE food_orders SET order_status = ? WHERE order_id = ?';
-    db.query(q, [orderStatus, orderId], (error, results) => {
-      if (error) {
-        res.status(500).json(error);
-      } else {
-        res.status(200).json(results);
-      }
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-};
-
 module.exports = (io) => {
+  const changeOrderStatus = async (req, res) => {
+    const { orderId, orderStatus } = req.body;
+
+    try {
+      const q = 'UPDATE food_orders SET order_status = ? WHERE order_id = ?';
+      db.query(q, [orderStatus, orderId], (error, results) => {
+        if (error) {
+          res.status(500).json(error);
+        } else {
+          res.status(200).json(results);
+
+          const orderDetailsQuery = `
+            SELECT fo.order_id, fo.order_date, fo.order_total, fo.delivery_address, fo.special_instructions, r.name, r.est_delivery_time
+            FROM food_orders fo
+            JOIN restaurants r ON fo.restaurant_id = r.id
+            WHERE fo.order_id = ?
+          `;
+
+          db.query(orderDetailsQuery, [orderId], (error, orderDetailsResults) => {
+            if (error) {
+              console.error('Error fetching order details:', error);
+            } else {
+              const orderDetails = orderDetailsResults[0];
+              if (orderStatus === 'In Progress') {
+                io.to('drivers').emit('orderInProgress', orderDetails);
+              }
+            }
+          });
+        }
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  };
+
   const getOrdersByRestaurantId = async (req, res) => {
     const { restaurantId } = req.params;
 
@@ -88,6 +105,24 @@ module.exports = (io) => {
     }
   };
 
+  const addOrderItem = async (orderId, cartItems) => {
+    try {
+      const q = "INSERT INTO order_items (order_id, menu_item_id, quantity, price, item_total, special_requests) VALUES (?, ?, ?, ?, ?, ?)";
+      for (let i = 0; i < cartItems.length; i++) {
+        db.query(q, [orderId, cartItems[i].itemId, cartItems[i].itemQuantity, cartItems[i].price, cartItems[i].itemQuantity * cartItems[i].price, cartItems[i].specialRequests || " "],
+          (error, results) => {
+            if (error) {
+              console.log(error.message);
+              res.send({ message: "could not insert order items" });
+            }
+          });
+      }
+    } catch (error) {
+      console.log("Error adding order item: ", error);
+      throw error;
+    }
+  };
+
   const createOrder = async (req, res) => {
     const {
       customerId,
@@ -98,16 +133,16 @@ module.exports = (io) => {
       deliveryAddress,
       paymentMethod,
       specialInstructions,
+      cartItems
     } = req.body;
-
     const formattedOrderDate = moment(orderDate).format('YYYY-MM-DD HH:mm:ss');
 
     try {
       const q = `
-        INSERT INTO food_orders
-        (customer_id, restaurant_id, order_date, order_status, order_total, delivery_address, payment_method, special_instructions)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-      `;
+          INSERT INTO food_orders
+          (customer_id, restaurant_id, order_date, order_status, order_total, delivery_address, payment_method, special_instructions)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        `;
       db.query(
         q,
         [
@@ -133,6 +168,7 @@ module.exports = (io) => {
             res.status(201).json(newOrder);
 
             io.to(restaurantId).emit("newOrder", newOrder);
+            addOrderItem(result.insertId, cartItems); 
           }
         }
       );

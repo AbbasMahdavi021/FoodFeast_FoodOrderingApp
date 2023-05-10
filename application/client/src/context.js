@@ -7,13 +7,13 @@ export const UserProvider = ({ children }) => {
   const [restaurantId, setRestaurantId] = useState(null);
 
   const fetchRestaurantId = async (user) => {
-    
     if (user.isRestaurantOwner) {
       try {
         const response = await fetch(`http://localhost:8080/restaurants/owner/${user.id}`);
         const data = await response.json();
-        if (data && data.restaurant) { // Update this condition
-          setAndPersistRestaurantId(data.restaurant.id); // Update this line
+        console.log('data', data);
+        if (data && data.restaurants && data.restaurants.length > 0) {
+          setAndPersistRestaurantId(data.restaurants[0].id);
         }
       } catch (error) {
         console.error('Error fetching restaurant ID:', error);
@@ -21,9 +21,6 @@ export const UserProvider = ({ children }) => {
     }
   };
   
-  
-  
-
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     const storedRestaurantId = localStorage.getItem('restaurantId');
@@ -34,15 +31,18 @@ export const UserProvider = ({ children }) => {
 
       if (storedRestaurantId) {
         const parsedRestaurantId = JSON.parse(storedRestaurantId);
+        console.log("Retrieved restaurantId:", parsedRestaurantId);
         setRestaurantId(parsedRestaurantId);
       } else {
         fetchRestaurantId(parsedUser);
       }
     } else {
+      console.log('No user in local storage')
     }
   }, []);
 
   const setAndPersistRestaurantId = (id) => {
+    console.log('restaurant id in context', id)
     setRestaurantId(id);
     localStorage.setItem('restaurantId', JSON.stringify(id));
   };

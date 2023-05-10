@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react'
-import Modal from 'react-modal'
 import UserContext from '../context'
 import { io } from 'socket.io-client'
 import axios from 'axios'
@@ -9,12 +8,12 @@ const RestaurantOrders = () => {
   const { restaurantId } = useContext(UserContext)
 
   const [orders, setOrders] = useState([])
-  const [orderItems, setOrderItems] = useState([])
-  const [showOrderAlert, setShowOrderAlert] = useState(false)
+  const [unacceptedOrders, setUnacceptedOrders] = useState([])
   const [socket, setSocket] = useState(null)
   const [collapsedOrders, setCollapsedOrders] = useState([])
   const [scrollToBottom, setScrollToBottom] = useState(false)
   const [activeTab, setActiveTab] = useState('pending')
+  const [orderItems, setOrderItems] = useState([])
 
   const toggleOrderVisibility = (orderId) => {
     if (collapsedOrders.includes(orderId)) {
@@ -50,6 +49,14 @@ const RestaurantOrders = () => {
     }
   }
 
+  const acceptOrder = (orderId) => {
+    setUnacceptedOrders(
+      unacceptedOrders.filter((order) => order.order_id !== orderId),
+    )
+    setOrderInProgress(orderId)
+    fetchOrderItems([orderId])
+  }
+
   const setOrderInProgress = async (orderId) => {
     try {
       const newOrderStatus = 'In Progress'
@@ -58,13 +65,21 @@ const RestaurantOrders = () => {
         orderStatus: newOrderStatus,
       })
 
-      setOrders(
-        orders.map((order) =>
-          order.order_id === orderId
-            ? { ...order, order_status: newOrderStatus }
-            : order,
-        ),
+      const updatedOrder = orders.find((order) => order.order_id === orderId)
+      const updatedOrders = orders.map((order) =>
+        order.order_id === orderId
+          ? { ...order, order_status: newOrderStatus }
+          : order,
       )
+      setOrders(updatedOrders)
+
+      const updatedOrderWithStatus = {
+        ...updatedOrder,
+        order_status: newOrderStatus,
+      }
+
+      socket.emit('acceptOrder', updatedOrderWithStatus)
+      console.log('Emitted acceptOrder event:', updatedOrderWithStatus)
     } catch (error) {
       console.error('Error updating order status:', error)
     }
@@ -81,21 +96,28 @@ const RestaurantOrders = () => {
   }, [scrollToBottom])
 
   useEffect(() => {
+    if (!restaurantId) return
+
     const newSocket = io('http://localhost:8080')
     setSocket(newSocket)
-    newSocket.emit('joinRestaurantRoom', 'restaurant-5')
+    newSocket.emit('joinRestaurantRoom', restaurantId)
+    console.log('Sent joinRestaurantRoom event:', restaurantId)
 
-    newSocket.on('receive-order', (newOrder) => {
+    newSocket.on('newOrder', (newOrder) => {
       console.log('Received new order:', newOrder)
       setOrders((prevOrders) => [...prevOrders, newOrder])
-      setShowOrderAlert(true)
+      setUnacceptedOrders((prevUnacceptedOrders) => [
+        ...prevUnacceptedOrders,
+        newOrder,
+      ])
+      localStorage.setItem('lastReceivedOrderId', newOrder.order_id)
     })
 
     return () => {
       newSocket.off('receive-order')
       newSocket.close()
     }
-  }, [])
+  }, [restaurantId])
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -109,119 +131,133 @@ const RestaurantOrders = () => {
         console.error(err)
       }
     }
-
     if (restaurantId) {
       fetchOrders()
     }
   }, [restaurantId])
 
+  const fetchOrderItems = async (orderIds) => {
+    try {
+      const response = await Promise.all(
+        orderIds.map((orderId) =>
+          axios.get(`http://localhost:8080/orders/items/${orderId}`),
+        ),
+      )
+      console.log('Fetched order items:', response)
+
+      const newOrderItems = response.reduce((acc, orderItemRes, index) => {
+        console.log('orderItemRes:', orderItemRes.data)
+        acc[orderIds[index]] = orderItemRes.data
+        return acc
+      }, {})
+
+      setOrderItems((prevOrderItems) => ({
+        ...prevOrderItems,
+        ...newOrderItems,
+      }))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   useEffect(() => {
     if (orders.length > 0) {
-      const fetchOrderItems = async () => {
-        try {
-          const response = await axios.get(
-            `http://localhost:8080/orders/items/${orders[0].order_id}`,
-          )
-          console.log('Fetched order items:', response.data)
-          setOrderItems(response.data)
-        } catch (err) {
-          console.error(err)
-        }
-      }
-      fetchOrderItems()
+      fetchOrderItems(orders.map((order) => order.order_id))
     }
   }, [orders])
 
   return (
     <div className="orders-page">
-      <Modal
-        isOpen={showOrderAlert}
-        onRequestClose={() => {
-          setShowOrderAlert(false)
-        }}
-        className="modal-content"
-        overlayClassName="modal-overlay"
-      >
-        <h2>New Order Received!</h2>
-        <button
-          onClick={() => {
-            setShowOrderAlert(false)
-            if (orders.length > 0) {
-              setOrderInProgress(orders[orders.length - 1].order_id)
-            }
-            setScrollToBottom(true)
-          }}
-        >
-          Close
-        </button>
-      </Modal>
-      <div className="orders-tabs">
-        <button
-          className={`tab-button ${
-            activeTab === 'pendingOrders' ? 'active' : ''
-          }`}
-          onClick={() => setActiveTab('pendingOrders')}
-        >
-          Current Orders
-        </button>
-        <button
-          className={`tab-button ${
-            activeTab === 'completedOrders' ? 'active' : ''
-          }`}
-          onClick={() => setActiveTab('completedOrders')}
-        >
-          Completed Orders
-        </button>
-      </div>
-
-      {orders
-        .filter((order) =>
-          activeTab === 'pendingOrders'
-            ? order.order_status === 'Pending' ||
-              order.order_status === 'In Progress'
-            : order.order_status === 'Completed' ||
-              order.order_status === 'Ready for Pickup',
-        )
-        .map((order) => (
-          <div key={order.order_id} className="restaurant-orders-item">
-            <h3 className="order-id">Order ID: {order.order_id}</h3>
-            {!collapsedOrders.includes(order.order_id) && (
-              <>
-                <p>Customer ID: {order.customer_id}</p>
-                <p className="status">Status: {order.order_status}</p>
-                <p>Total: {order.order_total}</p>
-              </>
-            )}
-
-            {!collapsedOrders.includes(order.order_id) && (
-              <div className="order-items-container">
-                <h4>Items in order:</h4>
-                {orderItems
-                  .filter((item) => item.order_id === order.order_id)
-                  .map((item) => (
-                    <div
-                      key={item.order_item_id}
-                      className="customer-orders-item"
-                    >
-                      <p>item id: {item.order_item_id}</p>
-                      <p>item name: {item.item_name}</p>
-                      <p>price: {item.price}</p>
-                      <p>special requests: {item.special_requests}</p>
-                    </div>
-                  ))}
-              </div>
-            )}
+      <div className="unaccepted-orders-sidebar">
+        <h2>Unaccepted Orders</h2>
+        {unacceptedOrders.map((order) => (
+          <div key={order.order_id} className="unaccepted-order">
+            <p>Order ID: {order.order_id}</p>
             <button
-              className="order-complete-button"
-              onClick={() => {
-                toggleOrderVisibility(order.order_id)
-                updateOrderStatus(order.order_id)
-              }}
+              className="accept-order-button"
+              onClick={() => acceptOrder(order.order_id)}
             >
-              Order Complete
+              Accept Order
             </button>
           </div>
         ))}
+      </div>
+      <div className="orders-container">
+        <div className="orders-tabs">
+          <button
+            className={`tab-button ${activeTab === 'pending' ? 'active' : ''}`}
+            onClick={() => setActiveTab('pending')}
+          >
+            Current Orders
+          </button>
+          <button
+            className={`tab-button ${
+              activeTab === 'completed' ? 'active' : ''
+            }`}
+            onClick={() => setActiveTab('completed')}
+          >
+            Completed Orders
+          </button>
+        </div>
+        {orders
+          .filter((order) =>
+            activeTab === 'pending'
+              ? order.order_status === 'Pending' ||
+                order.order_status === 'In Progress'
+              : order.order_status === 'Completed' ||
+                order.order_status === 'Ready for Pickup',
+          )
+          .map((order) => (
+            <div key={order.order_id} className="restaurant-orders-item">
+              <h3 className="order-id">Order ID: {order.order_id}</h3>
+              {!collapsedOrders.includes(order.order_id) && (
+                <>
+                  <p>Customer ID: {order.customer_id}</p>
+                  <p className="status">Status: {order.order_status}</p>
+                  <p>Total: {order.order_total}</p>
+                </>
+              )}
+
+              {!collapsedOrders.includes(order.order_id) && (
+                <div className="order-items-container">
+                  <h4>Items in order:</h4>
+                  {orderItems[order.order_id] &&
+                    orderItems[order.order_id].map((item) => (
+                      <div
+                        key={item.order_item_id}
+                        className="customer-orders-item"
+                      >
+                        <p>item id: {item.order_item_id}</p>
+                        <p>price: {item.price}</p>
+                        <p>special requests: {item.special_requests}</p>
+                      </div>
+                    ))}
+                </div>
+              )}
+              {activeTab === 'pending' && (
+                <button
+                  className="order-complete-button"
+                  onClick={() => {
+                    toggleOrderVisibility(order.order_id)
+                    updateOrderStatus(order.order_id)
+                  }}
+                >
+                  Order Complete
+                </button>
+              )}
+              {activeTab === 'completed' && (
+                <button
+                  className="order-complete-button"
+                  onClick={() => {
+                    toggleOrderVisibility(order.order_id)
+                  }}
+                >
+                  Collapse Order
+                </button>
+              )}
+            </div>
+          ))}
+      </div>
     </div>
   )
 }

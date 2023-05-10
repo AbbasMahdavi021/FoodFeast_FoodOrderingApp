@@ -73,18 +73,12 @@ const HomeHeader = ({ scrollToSecondPage }) => {
         </div>
       </div>
 
-      <div className='browse-button'>
-        <button onClick={scrollToSecondPage}>
-          Browse All Restaurants
-        </button>
-      </div>
-
       <div className="featured-favorite-container">
         <div className="f-restaurants">
           <h1 id='f-restaurant-h1'>Featured Restaurants</h1>
           <div className="restaurant-f-container">
             {featuredRestaurants.map((restaurant) => (
-              <Link key={restaurant.id} to={`${restaurant.name.replace(/\s/g, '')}/${restaurant.id}`}>
+              <Link key={restaurant.id} to={`browse/${restaurant.name.replace(/\s/g, '')}/${restaurant.id}`}>
                 <div key={restaurant.id} className="restaurant-f">
                   <img className="restaurant-f-img" src={restaurant.picture} alt={restaurant.name} />
                   <div className="restaurant-f-text">
@@ -111,7 +105,7 @@ const HomeHeader = ({ scrollToSecondPage }) => {
             <h1 id='f-restaurant-h1'>Favorite Restaurants</h1>
             <div className="restaurant-f-container">
               {favoritedRestaurants.map((restaurant) => (
-                <Link key={restaurant.id} to={`${restaurant.name.replace(/\s/g, '')}/${restaurant.id}`}>
+                <Link key={restaurant.id} to={`browse/${restaurant.name.replace(/\s/g, '')}/${restaurant.id}`}>
                   <div key={restaurant.id} className="restaurant-f">
                     <img className="restaurant-f-img" src={restaurant.picture} alt={restaurant.name} />
                     <div className="restaurant-f-text">

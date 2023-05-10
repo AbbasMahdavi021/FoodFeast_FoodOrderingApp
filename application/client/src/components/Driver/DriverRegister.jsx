@@ -28,7 +28,9 @@ export default function Register() {
         email: "",
         username: "",
         password: "",
+        confirmPassword: "",
         checkbox: false,
+        checkboxDriver: false,
     });
 
     const handleChange = (e) => {
@@ -74,10 +76,22 @@ export default function Register() {
             return;
         }
 
+        if (formData.password !== formData.confirmPassword) {
+            setErr("Passwords do not match!");
+            return;
+        }
+
+        if (!formData.checkboxDriver) {
+            setErr("Drivers License is Required");
+            return;
+        }
+
         if (!formData.checkbox) {
             setErr("Please accept the Terms & Conditions");
             return;
         }
+
+
 
         try {
             await axios.post("/driver/register", formData);

@@ -36,7 +36,7 @@ import AddMenuItems from '../pages/AddMenuItems';
 import ThankYouForEnrolling from '../pages/ThankYouForEnrolling';
 import RestaurantDashboard from '../pages/RestaurantDashboard';
 import TestCreateOrder from '../pages/TestCreateOrder';
-import {Cart} from '../pages/Cart';
+import { Cart } from '../pages/Cart';
 import RestaurantOrders from '../pages/RestaurantOrders';
 
 import TeamMemberModal from "../components/TeamMemberModel";
@@ -45,48 +45,64 @@ import Restaurant from '../pages/Restaurant';
 import MenuEntry from '../pages/MenuEntry';
 import AddedItem from '../pages/AddedItem';
 
+import Browse from '../components/Browse';
+import RestaurantList from '../components/RestaurantList';
+
+import { RestaurantsProvider } from '../components/RestaurantsContext';
+
+
 function RoutesManager() {
 
   const isUnique = window.location.pathname === "/admin";
 
   return (
-    <BrowserRouter>
-      {!isUnique && <Navbar />}
-      <Routes>
 
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/about" element={<About teamMembers={teamMembers} />} />
-        <Route path="/map" element={<Map />} />
+    <RestaurantsProvider>
+
+      <BrowserRouter>
+
+        {!isUnique && <Footer />}
+        {!isUnique && <Navbar />}
+        {!isUnique && <Browse />}
+
+        <Routes>
+
+          <Route path="/" element={<Home />} />
+          <Route path="/browse" element={<RestaurantList />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/about" element={<About teamMembers={teamMembers} />} />
+          <Route path="/map" element={<Map />} />
+          <Route path="browse/:name/:id" element={<Restaurant />} />
+
+
+          <Route path="/driver" element={<Driver />} />
+          <Route path="/enroll" element={<EnrollRestaurant />} />
+          <Route path="/addMenuItems/:restaurantId" element={<AddMenuItems />} />
+          <Route path="/thankyouforenrolling" element={<ThankYouForEnrolling />} />
+          <Route path="/restaurantDashboard" element={<RestaurantDashboard />} />
+          <Route path="/restaurantOrders" element={<RestaurantOrders />} />
+          <Route path="/testCreateOrder" element={<TestCreateOrder />} />
+          <Route path="/cart" element={<Cart />} />
+
+          <Route path="/menuentry/:restaurantId" element={<MenuEntry />} />
+          <Route path="/addeditem" element={<AddedItem />} />
+
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/adminlogin" element={<AdminLogin />} />
+
+          {teamMembers.map((member) => (
+            <Route key={member.id}
+              path={`/team/${member.name.replace(/\s/g, '-')}`}
+              element={<TeamMemberModal teamMember={member} />} />
+          ))}
+
+        </Routes>
         
-        <Route path="/driver" element={<Driver />} />
-        <Route path="/enroll" element={<EnrollRestaurant />} />
-        <Route path="/addMenuItems/:restaurantId" element={<AddMenuItems />} />
-        <Route path="/thankyouforenrolling" element={<ThankYouForEnrolling />} />
-        <Route path="/restaurantDashboard" element={<RestaurantDashboard />} />
-        <Route path="/restaurantOrders" element={<RestaurantOrders />} />
-        <Route path="/testCreateOrder" element={<TestCreateOrder />} />
-        <Route path="/cart" element={<Cart />} />
+      </BrowserRouter>
 
-        <Route path="/menuentry/:restaurantId" element={<MenuEntry />}/>
-        <Route path="/addeditem" element={<AddedItem />}/>
+    </RestaurantsProvider>
 
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/adminlogin" element={<AdminLogin />} />
-
-        {teamMembers.map((member) => (
-          <Route key={member.id}
-            path={`/team/${member.name.replace(/\s/g, '-')}`}
-            element={<TeamMemberModal teamMember={member} />} />
-        ))}
-
-        <Route path="/:name/:id" element={<Restaurant />} />
-
-
-      </Routes>
-      {!isUnique &&  <Footer />}
-    </BrowserRouter>
   );
 }
 

@@ -126,7 +126,50 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                         }}
                                     />
                                 </Grid>
+
+                                <Grid item xs={12}>
+                                    <TextField
+                                        value={formData.confirmPassword}
+                                        onChange={e => handleChange(e)}
+                                        required
+                                        fullWidth
+                                        name="confirmPassword"
+                                        label="Confirm Password"
+                                        type="password"
+                                        id="password"
+                                        autoComplete="new-password"
+                                        InputLabelProps={{
+                                            sx: {
+                                                fontSize: '1.2rem'
+                                            }
+                                        }}
+                                        inputProps={{
+                                            style: {
+                                                fontSize: '2rem'
+                                            }
+                                        }}
+                                    />
+                                </Grid>
                             </Grid>
+
+                            {title === "Sign Up as a Driver" &&
+
+                                <Grid item marginRight={1} marginTop={2}>
+                                    <label>
+                                        <input
+                                            checked={formData.checkboxDriver}
+                                            onChange={(e) =>
+                                                setFormData({ ...formData, checkboxDriver: e.target.checked })
+                                            }
+                                            type="checkbox"
+                                            required
+                                            style={{ transform: "scale(1.5)", marginRight: "8px" }}
+                                        />
+                                        <Link sx={{ color: 'black', fontSize: '2.2rem', cursor: 'pointer' }}>I have a valid Drivers License </Link>
+                                    </label>
+                                </Grid>
+
+                            }
 
                             <Grid item marginRight={1} marginTop={2}>
                                 <label>
@@ -142,9 +185,6 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                     <Link sx={{ color: 'black', fontSize: '2.2rem', cursor: 'pointer' }}>I accept the Terms & Conditions </Link>
                                 </label>
                             </Grid>
-
-
-
 
                             <Button
                                 type="submit"
