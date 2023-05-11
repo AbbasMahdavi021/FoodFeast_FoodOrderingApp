@@ -91,7 +91,7 @@ const HomeHeader = ({ scrollToSecondPage }) => {
                           return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star2.png'} alt="star" />;
                         }
                       })}
-                      <span>{restaurant.est_delivery_time - 5}-{restaurant.est_delivery_time} mins</span>
+                      <span>{restaurant.est_delivery_time - 5}-{restaurant.est_delivery_time} mins delivery to SFSU</span>
                     </div>
                   </div>
                 </div>
@@ -118,7 +118,7 @@ const HomeHeader = ({ scrollToSecondPage }) => {
                             return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star2.png'} alt="star" />;
                           }
                         })}
-                        <span>{restaurant.est_delivery_time - 5}-{restaurant.est_delivery_time} mins</span>
+                        <span>{restaurant.est_delivery_time - 5}-{restaurant.est_delivery_time} mins delivery to SFSU</span>
                       </div>
                     </div>
                   </div>
