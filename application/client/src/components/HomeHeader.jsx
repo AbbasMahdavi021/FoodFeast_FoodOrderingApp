@@ -4,7 +4,7 @@
  * Filename: HomeHeader.jsx
  * Created on: 04/23
  * Author(s): Jed G., Megan L., Nathan R., Abbas M.
- * Contact: 
+ * Contact:  amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: Featured restaurants can be set manually in the database by setting the  

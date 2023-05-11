@@ -3,8 +3,8 @@
  * 
  * Filename: cart.js
  * Created on: 03/23
- * Author(s):
- * Contact: 
+ * Author(s): Abbas M. Jed G.
+ * Contact: amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: This module manages a shopping cart by adding, retrieving, and updating items, 

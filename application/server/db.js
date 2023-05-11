@@ -3,8 +3,8 @@
  * 
  * Filename: db.js
  * Created on: 03/23
- * Author(s):
- * Contact: 
+ * Author(s): Abbas M.
+ * Contact: amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: connects to the SQL database requiring a .env for configuration and information

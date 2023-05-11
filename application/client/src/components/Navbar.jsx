@@ -3,8 +3,8 @@
  * 
  * Filename: Navbar.jsx
  * Created on: 03/23
- * Author(s): Abbas M. 
- * Contact: 
+ * Author(s): Abbas M
+ * Contact:  amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: Basic but very cool and functioning NavBar.

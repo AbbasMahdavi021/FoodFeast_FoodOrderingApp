@@ -4,7 +4,7 @@
  * Filename: MenuItem.jsx
  * Created on: 04/23
  * Author(s): Abbas M., Nathan R.
- * Contact: 
+ * Contact:  amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: This is a child component that, renders a single menu item.

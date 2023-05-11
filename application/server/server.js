@@ -4,7 +4,7 @@
  * Filename: server.js
  * Created on: 03/23
  * Author(s): Abbas M., Jed G.
- * Contact: 
+ * Contact: amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: This server sets up an Express app with CORS, session, and routes for 

@@ -1,3 +1,16 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: Admin.jsx
+ * Created on: 04/23
+ * Author(s): Abbas M.
+ * Contact: amahdavi2@sfsu.edu
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: Email sending functions for resetting passwords.
+ */
+
+
 const dotenv = require("dotenv");
 const nodemailer = require("nodemailer");
 

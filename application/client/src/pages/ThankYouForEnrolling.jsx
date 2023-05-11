@@ -3,8 +3,8 @@
  * 
  * Filename: ThankYouForEnrolling.jsx
  * Created on: 04/23
- * Author(s):
- * Contact: 
+ * Author(s): Jed G, Abbas M
+ * Contact:  amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: thank the restaurant owner for enrolling their restaurant

@@ -3,8 +3,8 @@
  * 
  * Filename: driver.js
  * Created on: 04/23
- * Author(s):
- * Contact: 
+ * Author(s): Abbas M.
+ * Contact: amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: routes for drivers

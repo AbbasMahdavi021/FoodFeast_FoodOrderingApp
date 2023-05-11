@@ -3,7 +3,7 @@
  *
  * Filename: Driver.jsx
  * Created on: 04/23
- * Author(s):
+ * Author(s): Jed Graves, Alex D.
  * Contact:
  * Copyright (c) 2023 by San Francisco State University
  *

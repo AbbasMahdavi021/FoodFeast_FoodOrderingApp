@@ -52,9 +52,18 @@ const CartItem = (props) => {
   );
 };
 
-/*
 
-This is a component that manages a shopping cart. It keeps track of the items in the cart, 
+
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: RegisterForm.jsx
+ * Created on: 03/23
+ * Author(s): Abbas M
+ * Contact:  amahdavi2@sfsu.edu
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: This is a component that manages a shopping cart. It keeps track of the items in the cart, 
 their quantity and price, and allows the user to checkout.
 
 When the component renderes, it loads the cart items from the server and updates the cartItems state.
@@ -67,9 +76,8 @@ If there are items, it shows a "Place Order" button that calls the handleCheckou
 
 handleCheckout sends the cart data to the server and navigates to the home page.
 
-By; Abbas M.
+**/
 
-*/
 
 export const Cart = () => {
   const [cartItems, setCartItems] = useState([]);

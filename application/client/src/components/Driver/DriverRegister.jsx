@@ -3,8 +3,8 @@
  * 
  * Filename: Browse.jsx
  * Created on: 04/23
- * Author(s): Alex D.
- * Contact: 
+ * Author(s): Abbas M, Alex D.
+ * Contact:  amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: React component which allows users to sign up as a driver. 

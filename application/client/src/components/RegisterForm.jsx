@@ -3,8 +3,8 @@
  * 
  * Filename: RegisterForm.jsx
  * Created on: 03/23
- * Author(s): Abbas M. 
- * Contact: 
+ * Author(s): Abbas M
+ * Contact:  amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: A child component that acts as register form, that gets rendered and props passed into,
