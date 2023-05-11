@@ -65,9 +65,12 @@ function Driver() {
   }
 
   const isDriver = user ? user.isDriver : false;
+  
 
   const driverDashboard = (
     <div className='driver-dashboard'>
+
+      <p> Welcome {user.username} </p>
 
       {orders.map((order, index) => (
         <div key={index}>

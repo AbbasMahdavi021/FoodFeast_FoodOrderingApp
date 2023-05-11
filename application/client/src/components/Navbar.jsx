@@ -59,8 +59,9 @@ function Navbar() {
       )
       console.log('Logged Out Status: ' + res.data)
       setIsLoggedIn(false)
-      setUser(null)
-      localStorage.removeItem('user')
+      //setUser(null)
+      //localStorage.removeItem('user')
+      localStorage.clear();
       navigate('/')
     } catch (err) {
       console.error(err)

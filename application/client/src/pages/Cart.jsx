@@ -76,9 +76,16 @@ export const Cart = () => {
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
   const [toggle, setToggle] = useState(false);
+  const [step, setStep] = useState(1);
+
   const [socket, setSocket] = useState(null);
 
-  const { user, restaurantId } = useContext(UserContext);
+  //Change restaurandId to get fetched from getCart, rather than local storage,
+  
+  const [restaurantId, setRestaurantId] = useState();
+
+
+  const { user } = useContext(UserContext);
 
   const updateQuantity = async (addend, id) => {
     const res = await axios.post(
@@ -97,6 +104,7 @@ export const Cart = () => {
 
       console.log(JSON.stringify(res));
       setCartItems(resData);
+      setRestaurantId(res.data.restaurantId);
       setTotalQuantity(res.data.totalQuantity);
       setTotalCost(res.data.totalCost);
     };
