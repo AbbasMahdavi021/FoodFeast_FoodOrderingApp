@@ -19,6 +19,8 @@ import { io } from 'socket.io-client'
 import '../styles/Cart.css'
 import UserContext from '../context'
 
+import CartCheckout from '../components/Cart/CartCheckout'
+
 
 const CartItem = (props) => {
   return (
@@ -80,20 +82,46 @@ handleCheckout sends the cart data to the server and navigates to the home page.
 
 
 export const Cart = () => {
+
+  const navigate = useNavigate();
+
   const [cartItems, setCartItems] = useState([]);
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
   const [toggle, setToggle] = useState(false);
-  const [step, setStep] = useState(1);
+
+  const [checkout, setCheckout] = useState(0);
 
   const [socket, setSocket] = useState(null);
 
   //Change restaurandId to get fetched from getCart, rather than local storage,
-  
+
   const [restaurantId, setRestaurantId] = useState();
 
-
   const { user } = useContext(UserContext);
+
+
+  const [formData, setFormData] = useState({
+    building: "",
+    room: "",
+    paymentMethod: "",
+    specialInstructions: "",
+    checkbox: false,
+  });
+  
+  const handleChange = (e) => {
+    let obj = {
+      ...formData
+    }
+
+    obj[e.target.name] = e.target.value;
+    setFormData(obj);
+  };
+
+  const deliveryAddress = formData.building + " " + formData.room;
+
+  console.log(deliveryAddress);
+
 
   const updateQuantity = async (addend, id) => {
     const res = await axios.post(
@@ -129,7 +157,12 @@ export const Cart = () => {
   const handleCheckout = async () => {
     try {
       const currentDate = new Date();
-      const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' ');
+      const formattedDate = currentDate.toLocaleString('en-US', {
+        timeZone: 'America/Los_Angeles',
+        hour12: false
+      }).replace(/:\d{2}$/, '');
+
+      console.log(formattedDate);
 
       const response = await axios.post('http://localhost:8080/orders', {
         withCredentials: true,
@@ -138,73 +171,140 @@ export const Cart = () => {
         restaurantId: restaurantId,
         orderDate: formattedDate,
         orderStatus: 'Pending',
-        orderTotal: parseFloat(subTotal) + parseFloat(tax),
-        deliveryAddress: '1234 Test St', // TODO: Replace with actual delivery address
-        paymentMethod: 'Credit Card', // TODO: Replace with actual payment method
-        specialInstructions: 'Leave at the door', // TODO: Replace with actual special instructions
+        orderTotal: total,
+        deliveryAddress: deliveryAddress,
+        paymentMethod: formData.paymentMethod, // TODO: Replace with actual payment method
+        specialInstructions: formData.specialInstructions, // TODO: Replace with actual special instructions
       });
-  
+
       const orderId = response.data.orderId;
 
       if (socket) {
         socket.emit('send-order', response.data, `restaurant-${restaurantId}`);
       }
-  
+
       navigate('/');
     } catch (error) {
       console.error('Error during checkout:', error);
     }
   };
-  
 
-  const subTotal = parseFloat(totalCost).toFixed(2)
-  const tax = (parseFloat(totalCost) * 0.1).toFixed(2)
-  const navigate = useNavigate()
+
+  const handleNextClick = () => {
+
+    setCheckout(checkout + 1);
+  };
+
+  const handleBackClick = () => {
+    setCheckout(checkout + -1);
+  };
+
+
+  const [err, setErr] = useState(null);
+
+  useEffect(() => {
+    if (err) {
+      const timerId = setTimeout(() => {
+        setErr(null);
+      }, 3000);
+      return () => clearTimeout(timerId);
+    }
+  }, [err]);
+
+  const subTotal = parseFloat(totalCost).toFixed(2);
+  const tax = (parseFloat(totalCost) * 0.1).toFixed(2);
+  const deliveryFee = 3.99;
+  const total = (parseFloat(subTotal) + parseFloat(tax) + deliveryFee).toFixed(2);
 
   return (
-    <div className="cart-container">
-      <h1> Cart </h1>
 
-      {cartItems.length === 0 ? (
-        <>
-          <div className="empty-cart">
-            <img
-              src={process.env.PUBLIC_URL + '/images/brand/empty-cart.png'}
-              alt="Your cart is empty"
-            />
-            <div className="shop-button">
-              <button onClick={() => navigate('/')}>Shop Now</button>
-            </div>
+    <>
+
+      {checkout === 1 ? (
+
+        <div className='cart-container'>
+
+          <div className='cart-checkout'>
+
+            {checkout &&
+              <CartCheckout
+                formData={formData}
+                setFormData={setFormData}
+                handleChange={handleChange}
+                handleNextClick={handleNextClick}
+                err={err}
+                title="Sign Up"
+              />}
+
           </div>
-        </>
+
+        </div>
+
+
       ) : (
-        <>
-          <div className="cart-items">
-            {cartItems.map((item) => (
-              <CartItem
-                itemId={item.id}
-                itemImage={item.image}
-                itemName={item.name}
-                itemPrice={item.price}
-                itemQuantity={item.itemQuantity}
-                updateQuantity={updateQuantity}
-              />
-            ))}
-          </div>
 
-          <div className="cart-balance">
-            <h2>Sub-Total: ${subTotal}</h2>
-            <h2>Tax: ${tax}</h2>
-            <h2>
-              Total: ${(parseFloat(subTotal) + parseFloat(tax)).toFixed(2)}
-            </h2>
-          </div>
+        <div className="cart-container">
 
-          <div className="checkout-button">
-            <button onClick={handleCheckout}>Place Order</button>
-          </div>
-        </>
+          <h1> Cart </h1>
+
+          {cartItems.length === 0 ? (
+            <>
+              <div className="empty-cart">
+                <img
+                  src={process.env.PUBLIC_URL + '/images/brand/empty-cart.png'}
+                  alt="Your cart is empty"
+                />
+                <div className="shop-button">
+                  <button onClick={() => navigate('/')}>Shop Now</button>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="cart-items">
+                {cartItems.map((item) => (
+                  <CartItem
+                    itemId={item.id}
+                    itemImage={item.image}
+                    itemName={item.name}
+                    itemPrice={item.price}
+                    itemQuantity={item.itemQuantity}
+                    updateQuantity={updateQuantity}
+                  />
+                ))}
+              </div>
+
+              <div className="cart-balance">
+                <h2>Sub-Total: ${subTotal}</h2>
+                <h2>Tax: ${tax}</h2>
+                <h2>Delivery Fee: ${deliveryFee}</h2>
+                <h2>
+                  Total: ${total}
+                </h2>
+              </div>
+
+              <div className="checkout-button">
+                {checkout === 0 && (
+                  <button onClick={handleNextClick}>Next</button>
+                )}
+                {checkout === 2 && (
+                  <>
+                    <button onClick={handleBackClick}>Back</button>
+                    <button onClick={handleCheckout}>Place Order</button>
+
+                  </>
+                )}
+
+              </div>
+
+
+
+            </>
+          )}
+        </div>
+
       )}
-    </div>
+
+    </>
   )
 }

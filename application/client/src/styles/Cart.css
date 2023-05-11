@@ -7,7 +7,7 @@
     background-color: white;
     border-radius: 10px;
     padding-top: 30px;
-    height: 84vh;
+    height: 80vh;
 }
 
 .empty-cart {
@@ -206,4 +206,9 @@
     text-align: center;
     display: inline-block;
     font-size: 20px;
+  }
+
+  .cart-checkout{
+    margin-inline: auto;
+    width: 50%;
   }
