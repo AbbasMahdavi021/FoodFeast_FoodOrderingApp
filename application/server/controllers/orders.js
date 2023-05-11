@@ -168,7 +168,8 @@ module.exports = (io) => {
             res.status(201).json(newOrder);
 
             io.to(restaurantId).emit("newOrder", newOrder);
-            addOrderItem(result.insertId, cartItems); 
+            io.to('drivers').emit('newOrder', newOrder);
+            addOrderItem(result.insertId, cartItems);
           }
         }
       );
@@ -178,5 +179,47 @@ module.exports = (io) => {
     }
   };
 
-  return { getOrdersByUserId, getOrdersByRestaurantId, createOrder, getOrderItemsByOrderId, changeOrderStatus };
+  const setOrderAcceptedByDriver = async (req, res) => {
+    const { orderId } = req.body;
+
+    try {
+      const q = 'UPDATE food_orders SET order_accepted_by_driver = 1 WHERE order_id = ?';
+      db.query(q, [orderId], (error, results) => {
+        if (error) {
+          res.status(500).json(error);
+        } else {
+          res.status(200).json(results);
+          io.to('drivers').emit('orderAccepted', orderId);
+        }
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  };
+
+  const getUnacceptedOrders = async (req, res) => {
+    try {
+      const q = 'SELECT * FROM food_orders WHERE order_accepted_by_driver = 0';
+      db.query(q, (error, results) => {
+        if (error) {
+          res.status(500).json(error);
+        } else {
+          res.status(200).json(results);
+        }
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  };
+
+
+  return {
+    getOrdersByUserId,
+    getOrdersByRestaurantId, 
+    createOrder, 
+    getOrderItemsByOrderId, 
+    changeOrderStatus, 
+    setOrderAcceptedByDriver,
+    getUnacceptedOrders
+  };
 };

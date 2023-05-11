@@ -13,98 +13,151 @@
  *   To fetch additional data from the db, modify the Login.jsx file.
  */
 
-import React, { useContext, useEffect, useState } from 'react';
-import { io } from 'socket.io-client';
-import UserContext from '../context';
-import '../styles/Driver.css';
-import Map from './Map';
-import DriverRegister from '../components/Driver/DriverRegister';
+import React, { useContext, useEffect, useState, useCallback } from 'react'
+import { io } from 'socket.io-client'
+import UserContext from '../context'
+import '../styles/Driver.css'
+import Map from './Map'
+import DriverRegister from '../components/Driver/DriverRegister'
 
 function Driver() {
-  const { user, restaurantId } = useContext(UserContext);
-  const [socket, setSocket] = useState(null);
-  const [orders, setOrders] = useState([]);
+  const { user, restaurantId } = useContext(UserContext)
+  const [socket, setSocket] = useState(null)
+  const [orders, setOrders] = useState([])
+
+  const [acceptedOrder, setAcceptedOrder] = useState(null)
+
+  const acceptOrder = async (order) => {
+    try {
+      const response = await fetch(
+        'http://localhost:8080/orders/setOrderAcceptedByDriver',
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ orderId: order.order_id }),
+        },
+      )
+
+      if (response.ok) {
+        setAcceptedOrder(order)
+        setOrders((prevOrders) =>
+          prevOrders.filter((o) => o.order_id !== order.order_id),
+        )
+      } else {
+        console.error('Error accepting order:', response)
+      }
+    } catch (error) {
+      console.error('Error accepting order:', error)
+    }
+  }
+
+  const fetchAllOrders = useCallback(async () => {
+    try {
+      const response = await fetch('http://localhost:8080/orders/unaccepted')
+      const data = await response.json()
+      console.log('orders fetched from server:', data)
+      setOrders(data)
+      console.log('Orders:', data)
+    } catch (error) {
+      console.error('Error fetching orders:', error)
+    }
+  }, [])
 
   useEffect(() => {
-    if (!user || !user.isDriver) return;
-  
-    const newSocket = io('http://localhost:8080');
-    setSocket(newSocket);
-    console.log('Driver socket connection established:', newSocket);
-  
-    // Check if the socket is already connected
-    if (newSocket.connected) {
-      newSocket.emit('joinDriverRoom', 'drivers');
-      console.log('Sent joinDriverRoom event');
-    } else {
-      // Otherwise, wait for the connect event before emitting joinDriverRoom
-      newSocket.on('connect', () => {
-        newSocket.emit('joinDriverRoom', 'drivers');
-        console.log('Sent joinDriverRoom event after connecting');
-      });
+    if (!user || !user.isDriver || !socket) return
+
+    const handleNewOrder = (newOrder) => {
+      if (newOrder.accepted_by_driver === 0) {
+        setOrders((prevOrders) => [...prevOrders, newOrder])
+      }
     }
-  
-    newSocket.on('orderInProgress', (order) => {
-      console.log('Order in progress received:', order);
-      setOrders((prevOrders) => [...prevOrders, order]);
-    });
-  
+
+    socket.on('newOrder', handleNewOrder)
+
     return () => {
-      newSocket.off('orderInProgress');
-      newSocket.close();
-    };
-  }, [user]);
-  
+      socket.off('newOrder', handleNewOrder)
+    }
+  }, [user, socket])
+
+  useEffect(() => {
+    if (!user || !user.isDriver) return
+
+    const newSocket = io('http://localhost:8080')
+    setSocket(newSocket)
+    newSocket.emit('joinDriverRoom')
+
+    fetchAllOrders()
+
+    return () => {
+      newSocket.disconnect()
+    }
+  }, [user, fetchAllOrders])
 
   if (!user) {
     return (
-      <div className='admin'>
+      <div className="admin">
         <DriverRegister />
       </div>
-    );
+    )
   }
 
-  const isDriver = user ? user.isDriver : false;
+  const isDriver = user ? user.isDriver : false
 
   const driverDashboard = (
-    <div className='driver-dashboard'>
-
-      {orders.map((order, index) => (
-        <div key={index}>
-          <div className='order-info'>
-            <p>Order ID: {order.order_id}</p>
-            <p>Restaurant Name: {order.name}</p>
-            <p>Order Total: {order.order_total}</p>
-            <p>Order Placed at: {order.order_date}</p>
-            <p>Special Instructions: {order.special_instructions}</p>
+    <div className="driver-dashboard">
+      {orders
+        .filter((order) => !order.accepted)
+        .map((order, index) => (
+          <div key={index}>
+            <div className="order-info">
+              <p>Order ID: {order.order_id}</p>
+              <p>Restaurant Name: {order.name}</p>
+              <p>Order Total: {order.order_total}</p>
+              <p>Order Placed at: {order.order_date}</p>
+              <p>Special Instructions: {order.special_instructions}</p>
+            </div>
+            <div className="order-accept">
+              <p>Your Earnings For This Delivery: </p>
+              <button
+                className="driver-button"
+                onClick={() => acceptOrder(order)}
+              >
+                Accept
+              </button>{' '}
+            </div>
           </div>
-          <div className='order-accept'>
-            {/* Next step: calculate driver pay based on percentage of total.
-            then, "driver button" needs to trigger directions to restaurant,
-            and once the driver has picked up the order and the order status changes
-            from ready to pick up, to out for delivery, directions to the delivery
-            address. also when the driver accepts the delivery, the order should no
-            longer be available to other drivers. */}
-            <p>Your Earnings For This Delivery: $5.50</p>
-            <button className='driver-button'>Accept</button>
-          </div>
-        </div>
-      ))}
+        ))}
     </div>
-  );
+  )
+
+  const acceptedOrderDisplay = acceptedOrder ? (
+    <div className="accepted-order">
+      <h2>Accepted Order</h2>
+      <p>Order ID: {acceptedOrder.order_id}</p>
+      <p>Restaurant Name: {acceptedOrder.name}</p>
+      <p>Order Total: {acceptedOrder.order_total}</p>
+      <p>Order Placed at: {acceptedOrder.order_date}</p>
+      <p>Special Instructions: {acceptedOrder.special_instructions}</p>
+    </div>
+  ) : null
 
   return (
-    <div className='driverName'>
+    <div className="driverName">
       {user && isDriver ? (
-        driverDashboard
+        <>
+          {driverDashboard}
+          {acceptedOrderDisplay}
+          Welcome {user.username}!
+        </>
       ) : (
         <p>
-          This user is not a Driver: --Insert link to driver registration
-          here--
+          This user is not a Driver: --Insert link to driver registration here--
         </p>
       )}
     </div>
-  );
+  )
 }
 
-export default Driver;
+export default Driver

@@ -15,7 +15,7 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (io) => {
-  const { getOrdersByUserId, getOrdersByRestaurantId, createOrder, getOrderItemsByOrderId, changeOrderStatus } = require('../controllers/orders')(io);
+  const { getUnacceptedOrders, getOrdersByUserId, getOrdersByRestaurantId, createOrder, getOrderItemsByOrderId, changeOrderStatus, setOrderAcceptedByDriver } = require('../controllers/orders')(io);
 
   router.get('/user/:id', getOrdersByUserId);
 
@@ -26,6 +26,10 @@ module.exports = (io) => {
   router.get('/items/:orderId', getOrderItemsByOrderId);
 
   router.put('/updateStatus', changeOrderStatus);
+
+  router.put('/setOrderAcceptedByDriver', setOrderAcceptedByDriver);
+
+  router.get("/unaccepted", getUnacceptedOrders);
 
   return router;
 };
