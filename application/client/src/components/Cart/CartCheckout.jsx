@@ -160,11 +160,11 @@ const CartCheckout = ({ handleSubmit, formData, handleChange, handleNextClick, e
                                             //font size for input prop
                                             sx={{ fontSize: '2rem' }}
                                         >
-                                            <MenuItem value={1} sx={{ fontSize: '1.7rem' }} >
-                                                Student ID
+                                            <MenuItem value="Payment via Student ID" sx={{ fontSize: '1.7rem' }} >
+                                                Payment via Student ID
                                             </MenuItem>
-                                            <MenuItem value={2} sx={{ fontSize: '1.7rem' }} >
-                                                In-Person Cash
+                                            <MenuItem value="Cash on Delivery" sx={{ fontSize: '1.7rem' }} >
+                                                Cash on Delivery
                                             </MenuItem>
 
                                         </Select>

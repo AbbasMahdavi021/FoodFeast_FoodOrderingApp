@@ -19,8 +19,6 @@ module.exports = function Cart(oldCart) {
     this.totalCost = oldCart.totalCost || 0;
     this.restaurantId = oldCart.restaurantId || -1;
 
-
-
     this.addItem = (item) => {
 
         //users trying to add two different items from different restaurants
@@ -35,11 +33,11 @@ module.exports = function Cart(oldCart) {
 
         let i = 0;
 
-        for (i ; i < this.itemList.length; i++) {
+        for (i; i < this.itemList.length; i++) {
 
 
             if (this.itemList[i].id === item.id) {
-                this.itemList[i].itemQuantity ++;
+                this.itemList[i].itemQuantity++;
                 break;
             }
         }
@@ -53,7 +51,7 @@ module.exports = function Cart(oldCart) {
         this.totalCost += parseFloat(item.price);
     };
 
-    this.removeItem= (item) => {
+    this.removeItem = (item) => {
 
         for (let i = 0; i < this.itemList.length; i++) {
             if (this.itemList[i].id === item.id) {
@@ -75,11 +73,8 @@ module.exports = function Cart(oldCart) {
                 if (this.itemList[i].itemQuantity <= 0) {
                     this.itemList.splice(i, 1);
                 }
-            }   
+            }
         }
     }
-
-
-
 
 }

@@ -48,6 +48,17 @@ const updateQuantity = async (req, res) => {
     res.send(true);
 }
 
+const emptyCart = async (req, res) => {
+    req.session.cart = new Cart({
+        itemList: [],
+        totalQuantity: 0,
+        totalCost: 0,
+        restaurantId: -1,
+    });
+
+    res.send(true);
+};
+
 const createOrder = async (orderData) => {
     return new Promise((resolve, reject) => {
         const q = 'INSERT INTO food_orders (customer_id, restaurant_id, order_date, order_status, order_total, delivery_address, payment_method, special_instructions) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
@@ -125,6 +136,7 @@ module.exports = {
     addToCart,
     getCart,
     updateQuantity,
+    emptyCart,
     storeCart,
     createOrderEndpoint
 };

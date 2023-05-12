@@ -118,10 +118,7 @@ export const Cart = () => {
     setFormData(obj);
   };
 
-  const deliveryAddress = formData.building + " " + formData.room;
-
-  console.log(deliveryAddress);
-
+  const deliveryAddress = "SFSU Campus: " + formData.building + " " + formData.room;
 
   const updateQuantity = async (addend, id) => {
     const res = await axios.post(
@@ -173,8 +170,8 @@ export const Cart = () => {
         orderStatus: 'Pending',
         orderTotal: total,
         deliveryAddress: deliveryAddress,
-        paymentMethod: formData.paymentMethod, // TODO: Replace with actual payment method
-        specialInstructions: formData.specialInstructions, // TODO: Replace with actual special instructions
+        paymentMethod: formData.paymentMethod, 
+        specialInstructions: formData.specialInstructions,
       });
 
       const orderId = response.data.orderId;
@@ -183,6 +180,9 @@ export const Cart = () => {
         socket.emit('send-order', response.data, `restaurant-${restaurantId}`);
       }
 
+      //empty cart after order placed
+      await axios.post("cart/emptyCart", { withCredentials: true })
+      
       navigate('/');
     } catch (error) {
       console.error('Error during checkout:', error);
