@@ -6,6 +6,7 @@ import '../styles/RestaurantOrders.css'
 
 const RestaurantOrders = () => {
   const { restaurantId } = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   const [orders, setOrders] = useState([])
   const [unacceptedOrders, setUnacceptedOrders] = useState([])
@@ -34,7 +35,7 @@ const RestaurantOrders = () => {
       const newOrderStatus = 'Ready for Pickup'
       await axios.put('http://localhost:8080/orders/updateStatus', {
         orderId,
-        orderStatus: newOrderStatus,
+        order_status: newOrderStatus,
       })
 
       setOrders(
@@ -62,9 +63,9 @@ const RestaurantOrders = () => {
       const newOrderStatus = 'In Progress'
       await axios.put('http://localhost:8080/orders/updateStatus', {
         orderId,
-        orderStatus: newOrderStatus,
+        order_status: newOrderStatus,
       })
-
+  
       const updatedOrder = orders.find((order) => order.order_id === orderId)
       const updatedOrders = orders.map((order) =>
         order.order_id === orderId
@@ -72,18 +73,23 @@ const RestaurantOrders = () => {
           : order,
       )
       setOrders(updatedOrders)
-
+  
       const updatedOrderWithStatus = {
         ...updatedOrder,
         order_status: newOrderStatus,
       }
-
-      socket.emit('acceptOrder', updatedOrderWithStatus)
-      console.log('Emitted acceptOrder event:', updatedOrderWithStatus)
+  
+      socket.emit(
+        'acceptOrder',
+        updatedOrderWithStatus, 
+        user.id,
+      )
+      console.log('Emitted acceptOrderForDriver event:', updatedOrderWithStatus)
     } catch (error) {
       console.error('Error updating order status:', error)
     }
   }
+  
 
   useEffect(() => {
     if (scrollToBottom) {
@@ -101,6 +107,7 @@ const RestaurantOrders = () => {
     const newSocket = io('http://localhost:8080')
     setSocket(newSocket)
     newSocket.emit('joinRestaurantRoom', restaurantId)
+
     console.log('Sent joinRestaurantRoom event:', restaurantId)
 
     newSocket.on('newOrder', (newOrder) => {
@@ -120,17 +127,29 @@ const RestaurantOrders = () => {
   }, [restaurantId])
 
   useEffect(() => {
+    if (socket) {
+      socket.emit('joinDriverRoom', `driver-${user.id}`, user.id)
+    }
+  }, [socket])
+
+  useEffect(() => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
           `http://localhost:8080/orders/restaurant/${restaurantId}`,
-        )
-        console.log('Fetched orders:', response.data)
-        setOrders(response.data)
+        );
+        console.log('Fetched orders:', response.data);
+        setOrders(response.data);
+    
+        const initialUnacceptedOrders = response.data.filter(
+          (order) => order.order_status === 'Pending',
+        );
+        setUnacceptedOrders(initialUnacceptedOrders);
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
-    }
+    };
+    
     if (restaurantId) {
       fetchOrders()
     }
@@ -146,7 +165,6 @@ const RestaurantOrders = () => {
       console.log('Fetched order items:', response)
 
       const newOrderItems = response.reduce((acc, orderItemRes, index) => {
-        console.log('orderItemRes:', orderItemRes.data)
         acc[orderIds[index]] = orderItemRes.data
         return acc
       }, {})
@@ -165,6 +183,7 @@ const RestaurantOrders = () => {
       fetchOrderItems(orders.map((order) => order.order_id))
     }
   }, [orders])
+
 
   return (
     <div className="orders-page">

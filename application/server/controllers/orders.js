@@ -133,10 +133,10 @@ module.exports = (io) => {
       deliveryAddress,
       paymentMethod,
       specialInstructions,
-      cartItems
+      cartItems,
     } = req.body;
-    const formattedOrderDate = moment(orderDate).format('YYYY-MM-DD HH:mm:ss');
-
+    const formattedOrderDate = moment(orderDate).format("YYYY-MM-DD HH:mm:ss");
+  
     try {
       const q = `
           INSERT INTO food_orders
@@ -161,14 +161,21 @@ module.exports = (io) => {
             res.status(500).json({ message: "Error creating order" });
           } else {
             const newOrder = {
-              ...req.body,
               order_id: result.insertId,
+              customer_id: customerId,
+              restaurant_id: restaurantId,
               order_date: formattedOrderDate,
+              order_status: orderStatus,
+              order_total: orderTotal,
+              delivery_address: deliveryAddress,
+              payment_method: paymentMethod,
+              special_instructions: specialInstructions,
+              cartItems,
             };
             res.status(201).json(newOrder);
-
+  
             io.to(restaurantId).emit("newOrder", newOrder);
-            io.to('drivers').emit('newOrder', newOrder);
+            io.to("drivers").emit("newOrder", newOrder);
             addOrderItem(result.insertId, cartItems);
           }
         }
@@ -178,7 +185,8 @@ module.exports = (io) => {
       res.status(500).json({ message: "Error creating order" });
     }
   };
-
+  
+  
   const setOrderAcceptedByDriver = async (req, res) => {
     const { orderId } = req.body;
 
@@ -197,9 +205,32 @@ module.exports = (io) => {
     }
   };
 
+  const setOrderAsPickedUp = async (req, res) => {
+  const { orderId } = req.params;
+
+  try {
+    const q = 'UPDATE food_orders SET order_status = "Out for Delivery" WHERE order_id = ?';
+    db.query(q, [orderId], (error, results) => {
+      if (error) {
+        res.status(500).json(error);
+      } else {
+        res.status(200).json(results);
+      }
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+
   const getUnacceptedOrders = async (req, res) => {
     try {
-      const q = 'SELECT * FROM food_orders WHERE order_accepted_by_driver = 0';
+      const q = `
+        SELECT fo.*, r.name, r.est_delivery_time, r.address, r.phone
+        FROM food_orders fo
+        JOIN restaurants r ON fo.restaurant_id = r.id
+        WHERE fo.order_accepted_by_driver = 0
+      `;
       db.query(q, (error, results) => {
         if (error) {
           res.status(500).json(error);
@@ -211,6 +242,24 @@ module.exports = (io) => {
       res.status(500).json(err);
     }
   };
+  
+  const setOrderAsDelivered = async (req, res) => {
+  const { orderId } = req.params;
+
+  try {
+    const q = 'UPDATE food_orders SET order_status = "Delivered" WHERE order_id = ?';
+    db.query(q, [orderId], (error, results) => {
+      if (error) {
+        res.status(500).json(error);
+      } else {
+        res.status(200).json(results);
+      }
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
 
 
   return {
@@ -220,6 +269,8 @@ module.exports = (io) => {
     getOrderItemsByOrderId, 
     changeOrderStatus, 
     setOrderAcceptedByDriver,
-    getUnacceptedOrders
+    getUnacceptedOrders,
+    setOrderAsDelivered,
+    setOrderAsPickedUp
   };
 };

@@ -24,10 +24,16 @@ function Driver() {
   const { user, restaurantId } = useContext(UserContext)
   const [socket, setSocket] = useState(null)
   const [orders, setOrders] = useState([])
-
+  const [orderStatus, setOrderStatus] = useState(null)
+  const [isOrderPickedUp, setIsOrderPickedUp] = useState(false)
   const [acceptedOrder, setAcceptedOrder] = useState(null)
 
-  const acceptOrder = async (order) => {
+  const acceptOrder = async (order, socket) => {
+    if (acceptedOrder) {
+      alert('Please complete current order first')
+      return
+    }
+  
     try {
       const response = await fetch(
         'http://localhost:8080/orders/setOrderAcceptedByDriver',
@@ -39,12 +45,15 @@ function Driver() {
           body: JSON.stringify({ orderId: order.order_id }),
         },
       )
-
+  
       if (response.ok) {
-        setAcceptedOrder(order)
+        setAcceptedOrder({ ...order, order_status: 'In Progress' })
+        setOrderStatus('In Progress')
         setOrders((prevOrders) =>
           prevOrders.filter((o) => o.order_id !== order.order_id),
         )
+  
+        socket.emit('acceptOrder', { ...order, order_status: 'In Progress' }, user.id)
       } else {
         console.error('Error accepting order:', response)
       }
@@ -52,6 +61,7 @@ function Driver() {
       console.error('Error accepting order:', error)
     }
   }
+  
 
   const fetchAllOrders = useCallback(async () => {
     try {
@@ -65,28 +75,73 @@ function Driver() {
     }
   }, [])
 
-  useEffect(() => {
-    if (!user || !user.isDriver || !socket) return
+  const markOrderAsDelivered = async (orderId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/orders/markAsDelivered/${orderId}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      )
 
-    const handleNewOrder = (newOrder) => {
-      if (newOrder.accepted_by_driver === 0) {
-        setOrders((prevOrders) => [...prevOrders, newOrder])
+      if (response.ok) {
+        setAcceptedOrder(null)
+      } else {
+        console.error('Error marking order as delivered:', response)
       }
+    } catch (error) {
+      console.error('Error marking order as delivered:', error)
     }
+  }
 
-    socket.on('newOrder', handleNewOrder)
+  const markOrderPickedUp = async (orderId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/orders/markAsPickedUp/${orderId}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+
+      if (response.ok) {
+        setIsOrderPickedUp(true)
+        setAcceptedOrder((prevState) => ({
+          ...prevState,
+          order_status: 'out_for_delivery',
+        }))
+      } else {
+        console.error('Error marking order as picked up:', response)
+      }
+    } catch (error) {
+      console.error('Error marking order as picked up:', error)
+    }
+  }
+
+  useEffect(() => {
+    if (!user || !user.isDriver || !socket) return;
+
+    socket.on('acceptedOrder', (newOrder) => {
+      console.log('Received accepted order:', newOrder)
+      setOrders((prevOrders) => [...prevOrders, newOrder])
+    })
 
     return () => {
-      socket.off('newOrder', handleNewOrder)
+      socket.off('acceptedOrder')
     }
-  }, [user, socket])
+  }, [socket, user]);
 
   useEffect(() => {
     if (!user || !user.isDriver) return
 
     const newSocket = io('http://localhost:8080')
     setSocket(newSocket)
-    newSocket.emit('joinDriverRoom')
+    newSocket.emit('joinDriverRoom', `driver-${user.id}`, user.id)
 
     fetchAllOrders()
 
@@ -94,6 +149,22 @@ function Driver() {
       newSocket.disconnect()
     }
   }, [user, fetchAllOrders])
+
+  useEffect(() => {
+    if (!socket) return;
+  
+    socket.on("newOrderForDriver", (order) => {
+      console.log("Received new order for driver:", order);
+      setOrders((prevOrders) => [...prevOrders, order]);
+    });
+  
+    return () => {
+      socket.off("newOrderForDriver");
+    };
+  }, [socket]);
+  
+
+
 
   if (!user) {
     return (
@@ -105,51 +176,71 @@ function Driver() {
 
   const isDriver = user ? user.isDriver : false
 
-  const driverDashboard = (
-    <div className="driver-dashboard">
+  const acceptOrderWithSocket = (order) => {
+    acceptOrder(order, socket)
+  }
+
+  const unacceptedOrdersSidebar = (
+    <div className="unaccepted-orders-sidebar">
       {orders
-        .filter((order) => !order.accepted)
+        .filter(
+          (order) => order.order_status === 'In Progress' && order.order_accepted_by_driver === 0,
+        )
         .map((order, index) => (
-          <div key={index}>
-            <div className="order-info">
-              <p>Order ID: {order.order_id}</p>
-              <p>Restaurant Name: {order.name}</p>
-              <p>Order Total: {order.order_total}</p>
-              <p>Order Placed at: {order.order_date}</p>
-              <p>Special Instructions: {order.special_instructions}</p>
-            </div>
-            <div className="order-accept">
-              <p>Your Earnings For This Delivery: </p>
-              <button
-                className="driver-button"
-                onClick={() => acceptOrder(order)}
-              >
-                Accept
-              </button>{' '}
-            </div>
+          <div key={index} className="unaccepted-order">
+            <div>Order ID: {order.order_id}</div>
+            <div>Restaurant Name: {order.name}</div>
+            <div>Est. Delivery Time: {order.est_delivery_time} minutes</div>
+            <div>Restaurant Phone: {order.phone}</div>
+            <button
+              className="accept-order-button"
+              onClick={() => acceptOrderWithSocket(order)}
+            >
+              Accept
+            </button>
           </div>
         ))}
     </div>
   )
 
   const acceptedOrderDisplay = acceptedOrder ? (
-    <div className="accepted-order">
+    <div className="orders-container">
       <h2>Accepted Order</h2>
       <p>Order ID: {acceptedOrder.order_id}</p>
       <p>Restaurant Name: {acceptedOrder.name}</p>
       <p>Order Total: {acceptedOrder.order_total}</p>
       <p>Order Placed at: {acceptedOrder.order_date}</p>
       <p>Special Instructions: {acceptedOrder.special_instructions}</p>
+      {acceptedOrder.order_status === 'In Progress' && (
+        <button
+          className="order-picked-up-button"
+          onClick={() => markOrderPickedUp(acceptedOrder.order_id)}
+        >
+          Mark as Picked Up
+        </button>
+      )}
+      {acceptedOrder.order_status === 'out_for_delivery' && (
+        <button
+          className="order-complete-button"
+          onClick={() => markOrderAsDelivered(acceptedOrder.order_id)}
+        >
+          Mark as Delivered
+        </button>
+      )}
     </div>
-  ) : null
+  ) : (
+    <p>No order accepted yet</p>
+  )
 
   return (
     <div className="driverName">
+      Welcome {user.username}!
       {user && isDriver ? (
         <>
-          {driverDashboard}
-          {acceptedOrderDisplay}
-          Welcome {user.username}!
+          <div className="orders-page">
+            {unacceptedOrdersSidebar}
+            {acceptedOrderDisplay}
+          </div>
         </>
       ) : (
         <p>
