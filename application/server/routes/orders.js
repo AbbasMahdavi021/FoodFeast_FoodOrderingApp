@@ -15,7 +15,7 @@ const express = require('express');
 const router = express.Router();
 
 module.exports = (io) => {
-  const { setOrderAsPickedUp, setOrderAsDelivered, getUnacceptedOrders, getOrdersByUserId, getOrdersByRestaurantId, createOrder, getOrderItemsByOrderId, changeOrderStatus, setOrderAcceptedByDriver } = require('../controllers/orders')(io);
+  const { checkOrderAcceptedByDriver, setOrderAsPickedUp, setOrderAsDelivered, getUnacceptedOrders, getOrdersByUserId, getOrdersByRestaurantId, createOrder, getOrderItemsByOrderId, changeOrderStatus, setOrderAcceptedByDriver } = require('../controllers/orders')(io);
 
   router.get('/user/:id', getOrdersByUserId);
 
@@ -34,6 +34,8 @@ module.exports = (io) => {
   router.put("/markAsDelivered/:orderId", setOrderAsDelivered);
 
   router.put("/markAsPickedUp/:orderId", setOrderAsPickedUp);
+
+  router.get("/checkOrderAcceptedByDriver/:orderId", checkOrderAcceptedByDriver);
 
   return router;
 };

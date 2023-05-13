@@ -23,7 +23,10 @@ import DriverRegister from '../components/Driver/DriverRegister'
 function Driver() {
   const { user, restaurantId } = useContext(UserContext)
   const [socket, setSocket] = useState(null)
-  const [orders, setOrders] = useState([])
+  const [orders, setOrders] = useState(() => {
+    const storedOrders = localStorage.getItem('orders')
+    return storedOrders ? JSON.parse(storedOrders) : []
+  })
   const [orderStatus, setOrderStatus] = useState(null)
   const [isOrderPickedUp, setIsOrderPickedUp] = useState(false)
   const [acceptedOrder, setAcceptedOrder] = useState(null)
@@ -33,7 +36,7 @@ function Driver() {
       alert('Please complete current order first')
       return
     }
-  
+
     try {
       const response = await fetch(
         'http://localhost:8080/orders/setOrderAcceptedByDriver',
@@ -45,15 +48,19 @@ function Driver() {
           body: JSON.stringify({ orderId: order.order_id }),
         },
       )
-  
+
       if (response.ok) {
+        socket.emit(
+          'acceptOrder',
+          { ...order, order_status: 'In Progress' },
+          user.id,
+        ) 
+
         setAcceptedOrder({ ...order, order_status: 'In Progress' })
         setOrderStatus('In Progress')
         setOrders((prevOrders) =>
           prevOrders.filter((o) => o.order_id !== order.order_id),
         )
-  
-        socket.emit('acceptOrder', { ...order, order_status: 'In Progress' }, user.id)
       } else {
         console.error('Error accepting order:', response)
       }
@@ -61,15 +68,12 @@ function Driver() {
       console.error('Error accepting order:', error)
     }
   }
-  
 
   const fetchAllOrders = useCallback(async () => {
     try {
       const response = await fetch('http://localhost:8080/orders/unaccepted')
       const data = await response.json()
-      console.log('orders fetched from server:', data)
       setOrders(data)
-      console.log('Orders:', data)
     } catch (error) {
       console.error('Error fetching orders:', error)
     }
@@ -113,7 +117,7 @@ function Driver() {
         setIsOrderPickedUp(true)
         setAcceptedOrder((prevState) => ({
           ...prevState,
-          order_status: 'out_for_delivery',
+          order_status: 'Out for Delivery',
         }))
       } else {
         console.error('Error marking order as picked up:', response)
@@ -124,17 +128,16 @@ function Driver() {
   }
 
   useEffect(() => {
-    if (!user || !user.isDriver || !socket) return;
+    if (!user || !user.isDriver || !socket) return
 
     socket.on('acceptedOrder', (newOrder) => {
-      console.log('Received accepted order:', newOrder)
       setOrders((prevOrders) => [...prevOrders, newOrder])
     })
 
     return () => {
       socket.off('acceptedOrder')
     }
-  }, [socket, user]);
+  }, [socket, user])
 
   useEffect(() => {
     if (!user || !user.isDriver) return
@@ -151,20 +154,32 @@ function Driver() {
   }, [user, fetchAllOrders])
 
   useEffect(() => {
-    if (!socket) return;
-  
-    socket.on("newOrderForDriver", (order) => {
-      console.log("Received new order for driver:", order);
-      setOrders((prevOrders) => [...prevOrders, order]);
-    });
-  
+    if (!socket) return
+
+    socket.on('newOrderForDriver', async (order) => {
+      const response = await fetch(
+        `http://localhost:8080/orders/checkOrderAcceptedByDriver/${order.order_id}`,
+      )
+      const data = await response.json()
+
+      if (!data.order_accepted_by_driver) {
+        setOrders((prevOrders) => {
+          const orderExists = prevOrders.some(
+            (prevOrder) => prevOrder.order_id === order.order_id,
+          )
+          if (orderExists) {
+            return prevOrders
+          } else {
+            return [...prevOrders, order]
+          }
+        })
+      }
+    })
+
     return () => {
-      socket.off("newOrderForDriver");
-    };
-  }, [socket]);
-  
-
-
+      socket.off('newOrderForDriver')
+    }
+  }, [socket])
 
   if (!user) {
     return (
@@ -176,15 +191,20 @@ function Driver() {
 
   const isDriver = user ? user.isDriver : false
 
-  const acceptOrderWithSocket = (order) => {
-    acceptOrder(order, socket)
+  const acceptOrderWithSocket = async (order) => {
+    await acceptOrder(order, socket)
+    setOrders((prevOrders) =>
+      prevOrders.filter((o) => o.order_id !== order.order_id),
+    )
   }
 
   const unacceptedOrdersSidebar = (
     <div className="unaccepted-orders-sidebar">
       {orders
         .filter(
-          (order) => order.order_status === 'In Progress' && order.order_accepted_by_driver === 0,
+          (order) =>
+            order.order_status === 'In Progress' &&
+            order.order_accepted_by_driver === 0,
         )
         .map((order, index) => (
           <div key={index} className="unaccepted-order">
@@ -219,7 +239,7 @@ function Driver() {
           Mark as Picked Up
         </button>
       )}
-      {acceptedOrder.order_status === 'out_for_delivery' && (
+      {acceptedOrder.order_status === 'Out for Delivery' && (
         <button
           className="order-complete-button"
           onClick={() => markOrderAsDelivered(acceptedOrder.order_id)}

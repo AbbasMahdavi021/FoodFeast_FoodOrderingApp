@@ -26,16 +26,16 @@ const RestaurantOrders = () => {
 
   const updateOrderStatus = async (orderId) => {
     const orderToUpdate = orders.find((order) => order.order_id === orderId)
-
     if (orderToUpdate.order_status === 'Ready for Pickup') {
       return
     }
 
     try {
       const newOrderStatus = 'Ready for Pickup'
+
       await axios.put('http://localhost:8080/orders/updateStatus', {
         orderId,
-        order_status: newOrderStatus,
+        orderStatus: newOrderStatus,
       })
 
       setOrders(
@@ -60,35 +60,37 @@ const RestaurantOrders = () => {
 
   const setOrderInProgress = async (orderId) => {
     try {
-      const newOrderStatus = 'In Progress'
+      const newOrderStatus = 'In Progress';
       await axios.put('http://localhost:8080/orders/updateStatus', {
         orderId,
-        order_status: newOrderStatus,
-      })
+        orderStatus: newOrderStatus,
+      });
   
-      const updatedOrder = orders.find((order) => order.order_id === orderId)
+      const updatedOrder = orders.find((order) => order.order_id === orderId);
       const updatedOrders = orders.map((order) =>
         order.order_id === orderId
           ? { ...order, order_status: newOrderStatus }
           : order,
-      )
-      setOrders(updatedOrders)
+      );
+      setOrders(updatedOrders);
   
+      const response = await fetch(`http://localhost:8080/orders/checkOrderAcceptedByDriver/${orderId}`)
+      const data = await response.json()
+      const accepted = data.order_accepted_by_driver
+
       const updatedOrderWithStatus = {
         ...updatedOrder,
         order_status: newOrderStatus,
-      }
+        order_accepted_by_driver: accepted,
+        
+      };
   
-      socket.emit(
-        'acceptOrder',
-        updatedOrderWithStatus, 
-        user.id,
-      )
-      console.log('Emitted acceptOrderForDriver event:', updatedOrderWithStatus)
+      socket.emit('acceptOrder', updatedOrderWithStatus, user.id);
     } catch (error) {
-      console.error('Error updating order status:', error)
+      console.error('Error updating order status:', error);
     }
-  }
+  };
+  
   
 
   useEffect(() => {
@@ -108,10 +110,7 @@ const RestaurantOrders = () => {
     setSocket(newSocket)
     newSocket.emit('joinRestaurantRoom', restaurantId)
 
-    console.log('Sent joinRestaurantRoom event:', restaurantId)
-
     newSocket.on('newOrder', (newOrder) => {
-      console.log('Received new order:', newOrder)
       setOrders((prevOrders) => [...prevOrders, newOrder])
       setUnacceptedOrders((prevUnacceptedOrders) => [
         ...prevUnacceptedOrders,
@@ -138,9 +137,8 @@ const RestaurantOrders = () => {
         const response = await axios.get(
           `http://localhost:8080/orders/restaurant/${restaurantId}`,
         );
-        console.log('Fetched orders:', response.data);
         setOrders(response.data);
-    
+  
         const initialUnacceptedOrders = response.data.filter(
           (order) => order.order_status === 'Pending',
         );
@@ -149,11 +147,12 @@ const RestaurantOrders = () => {
         console.error(err);
       }
     };
-    
+  
     if (restaurantId) {
-      fetchOrders()
+      fetchOrders();
     }
-  }, [restaurantId])
+  }, [restaurantId]);
+  
 
   const fetchOrderItems = async (orderIds) => {
     try {
@@ -162,7 +161,6 @@ const RestaurantOrders = () => {
           axios.get(`http://localhost:8080/orders/items/${orderId}`),
         ),
       )
-      console.log('Fetched order items:', response)
 
       const newOrderItems = response.reduce((acc, orderItemRes, index) => {
         acc[orderIds[index]] = orderItemRes.data
