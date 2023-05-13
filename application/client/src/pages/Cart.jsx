@@ -49,7 +49,7 @@ const CartItem = (props) => {
           </button>
         </div>
 
-        <div className="cart-item-price">${props.itemPrice} </div>
+        <div className="cart-item-price">${(props.itemPrice * props.itemQuantity).toFixed(2)} </div>
       </div>
     </div>
   );
@@ -92,6 +92,7 @@ export const Cart = () => {
   const [toggle, setToggle] = useState(false);
 
   const [checkout, setCheckout] = useState(0);
+  const [popUp, setPopUp] = useState(false);
 
   const [socket, setSocket] = useState(null);
 
@@ -116,9 +117,23 @@ export const Cart = () => {
 
     obj[e.target.name] = e.target.value;
     setFormData(obj);
+
+    setErr(null);
   };
 
   const deliveryAddress = "SFSU Campus: " + formData.building + " " + formData.room;
+
+  const [err, setErr] = useState(null);
+
+
+  const togglePopup = () => {
+    setPopUp(!popUp);
+  };
+
+  const navigateToHome = () => {
+    togglePopup();
+    navigate('/');
+  };
 
   const updateQuantity = async (addend, id) => {
     const res = await axios.post(
@@ -183,7 +198,8 @@ export const Cart = () => {
       //empty cart after order placed
       await axios.post("cart/emptyCart", { withCredentials: true })
 
-      navigate('/');
+      togglePopup();
+
     } catch (error) {
       console.error('Error during checkout:', error);
     }
@@ -198,6 +214,7 @@ export const Cart = () => {
       if (!formData.building || !formData.room || !formData.paymentMethod) {
         setErr('Please fill in the required fields!');
       } else {
+        setErr(null);
         setCheckout(checkout + 1);
       }
     } else {
@@ -208,17 +225,6 @@ export const Cart = () => {
   const handleBackClick = () => {
     setCheckout(checkout + -1);
   };
-
-  const [err, setErr] = useState(null);
-
-  useEffect(() => {
-    if (err) {
-      const timerId = setTimeout(() => {
-        setErr(err);
-      }, 3000);
-      return () => clearTimeout(timerId);
-    }
-  }, [err]);
 
   const subTotal = parseFloat(totalCost).toFixed(2);
   const tax = (parseFloat(totalCost) * 0.1).toFixed(2);
@@ -240,7 +246,7 @@ export const Cart = () => {
               alt="Your cart is empty"
             />
             <div className="shop-button">
-              <button onClick={() => navigate('/')}>Shop Now</button>
+              <button onClick={() => navigate('/browse')}>Shop Now</button>
             </div>
           </div>
         </>
@@ -291,18 +297,37 @@ export const Cart = () => {
 
           <div className="checkout-button">
             {checkout === 0 && (
-              <button onClick={handleNextClick}>Next</button>
+              <>
+                <button onClick={() => navigate('/browse')}>Add more items</button>
+                <button onClick={handleNextClick}>Checkout</button>
+              </>
             )}
             {checkout === 2 && (
               <>
-                <button onClick={handleBackClick}>Back</button>
-                <button onClick={handleCheckout}>Place Order</button>
+                <button onClick={handleBackClick}>Modify Checkout</button>
+                <button onClick={() => {
+                  handleCheckout();
+                  togglePopup();
+                }}>Place Order</button>
 
               </>
             )}
-
           </div>
 
+          {popUp && (
+            <div className='popUp'>
+              <div className="popUpDiv">
+                <h3>Dear {user.username}, Your order with <br/></h3>
+                <h3>{totalQuantity} items, for ${total} ({formData.paymentMethod})</h3>
+                <h3>has been placed, and will be delivered to <br/>{deliveryAddress}<br/></h3>
+                <h3>Please check your email for the order receipt and status!<br/></h3>
+                <h3>Thank you for choosing FoodFeast <br/></h3>
+                <div className="checkout-button">
+                  <button onClick={navigateToHome}>Close</button>
+                </div>
+              </div>
+            </div>
+          )}
         </>
       )}
 
