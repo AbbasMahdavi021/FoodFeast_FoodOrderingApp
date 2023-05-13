@@ -94,6 +94,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                         id="username"
                                         label="Username"
                                         autoFocus
+                                        variant='filled'
                                         InputLabelProps={{
                                             sx: {
                                                 fontSize: '1.7rem'
@@ -117,6 +118,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                         label="Email Address"
                                         name="email"
                                         autoComplete="email"
+                                        variant='filled'
                                         InputLabelProps={{
                                             sx: {
                                                 fontSize: '1.7rem'
@@ -141,6 +143,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                         type="password"
                                         id="password"
                                         autoComplete="new-password"
+                                        variant='filled'
                                         InputLabelProps={{
                                             sx: {
                                                 fontSize: '1.7rem'
@@ -165,6 +168,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                         type="password"
                                         id="password"
                                         autoComplete="new-password"
+                                        variant='filled'
                                         InputLabelProps={{
                                             sx: {
                                                 fontSize: '1.7rem'
@@ -176,7 +180,12 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                             }
                                         }}
                                     />
+
+                                    <img src={process.env.PUBLIC_URL + '/images/brand/line.png'} alt="Restaurant" width="100%" height="auto" style={{ marginTop: '1rem' }} />
                                 </Grid>
+
+
+
 
                                 {/* restaurant name */}
                                 <Grid item xs={12}>
@@ -189,6 +198,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                         fullWidth
                                         id="name"
                                         label="Restaurant Name"
+                                        variant='filled'
                                         InputLabelProps={{
                                             sx: {
                                                 fontSize: '1.7rem'
@@ -212,6 +222,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                         fullWidth
                                         id="phone"
                                         label="Restaurant Phone Number"
+                                        variant='filled'
                                         InputLabelProps={{
                                             sx: {
                                                 fontSize: '1.7rem'
@@ -235,6 +246,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                         fullWidth
                                         id="address"
                                         label="Restaurant Address"
+                                        variant='filled'
                                         InputLabelProps={{
                                             sx: {
                                                 fontSize: '1.7rem'
@@ -250,9 +262,9 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
 
                                 {/* cuisine drop down menu */}
                                 <Grid item xs={12}>
-                                    <Box sx={{ minWidth: 120 }}>
+                                    <Box sx={{ minWidth: 120, }}>
                                         <FormControl fullWidth >
-                                            <InputLabel sx={{ fontSize: '1.7rem' }}
+                                            <InputLabel sx={{ fontSize: '1.7rem', marginBottom: '-1rem'  }}
                                             > Select Category </InputLabel>
                                             <Select
                                                 value={formData.cuisine}
@@ -260,6 +272,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                                 name="cuisine"
                                                 required
                                                 fullWidth
+                                                variant='filled'
                                                 //font size for input prop
                                                 sx={{ fontSize: '2rem' }}
                                             >
@@ -287,6 +300,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                         fullWidth
                                         id="price"
                                         label="Price Range ($ - $$$$$)"
+                                        variant='filled'
                                         InputLabelProps={{
                                             sx: {
                                                 fontSize: '1.7rem'
@@ -309,6 +323,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                         fullWidth
                                         id="rating"
                                         label="Current Yelp Star Rating (1-5)"
+                                        variant='filled'
                                         InputLabelProps={{
                                             sx: {
                                                 fontSize: '1.7rem'
@@ -332,6 +347,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                         id="est_delivery_time"
                                         label="Wait Time in Mins (e.g. 20)"
                                         name="est_delivery_time"
+                                        variant='filled'
                                         InputLabelProps={{
                                             sx: {
                                                 fontSize: '1.7rem'
@@ -354,6 +370,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                         id="hours"
                                         label="Store Hours (e.g. 9am-7pm)"
                                         name="hours"
+                                        variant='filled'
                                         InputLabelProps={{
                                             sx: {
                                                 fontSize: '1.7rem'
@@ -377,6 +394,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                         id="picture"
                                         label="Store Image URL"
                                         name="picture"
+                                        variant='filled'
                                         InputLabelProps={{
                                             sx: {
                                                 fontSize: '1.7rem'
@@ -394,7 +412,6 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                 <Grid item xs={12}>
                                     <Box
                                         sx={{
-                                            width: 500,
                                             maxWidth: '100%',
                                         }}
                                     >
@@ -408,6 +425,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                             fullWidth
                                             id="description"
                                             label="Description"
+                                            variant='filled'
                                             InputLabelProps={{
                                                 sx: {
                                                     fontSize: '1.7rem'

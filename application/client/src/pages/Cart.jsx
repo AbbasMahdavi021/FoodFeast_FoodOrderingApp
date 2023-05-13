@@ -23,6 +23,7 @@ import CartCheckout from '../components/Cart/CartCheckout'
 
 
 const CartItem = (props) => {
+
   return (
     <div className="cart-item">
       <div className="cart-item-img">
@@ -100,7 +101,6 @@ export const Cart = () => {
 
   const { user } = useContext(UserContext);
 
-
   const [formData, setFormData] = useState({
     building: "",
     room: "",
@@ -108,7 +108,7 @@ export const Cart = () => {
     specialInstructions: "",
     checkbox: false,
   });
-  
+
   const handleChange = (e) => {
     let obj = {
       ...formData
@@ -170,7 +170,7 @@ export const Cart = () => {
         orderStatus: 'Pending',
         orderTotal: total,
         deliveryAddress: deliveryAddress,
-        paymentMethod: formData.paymentMethod, 
+        paymentMethod: formData.paymentMethod,
         specialInstructions: formData.specialInstructions,
       });
 
@@ -182,7 +182,7 @@ export const Cart = () => {
 
       //empty cart after order placed
       await axios.post("cart/emptyCart", { withCredentials: true })
-      
+
       navigate('/');
     } catch (error) {
       console.error('Error during checkout:', error);
@@ -190,22 +190,31 @@ export const Cart = () => {
   };
 
 
-  const handleNextClick = () => {
+  const handleNextClick = async (e) => {
 
-    setCheckout(checkout + 1);
+    e.preventDefault()
+
+    if (checkout === 1) {
+      if (!formData.building || !formData.room || !formData.paymentMethod) {
+        setErr('Please fill in the required fields!');
+      } else {
+        setCheckout(checkout + 1);
+      }
+    } else {
+      setCheckout(checkout + 1);
+    }
   };
 
   const handleBackClick = () => {
     setCheckout(checkout + -1);
   };
 
-
   const [err, setErr] = useState(null);
 
   useEffect(() => {
     if (err) {
       const timerId = setTimeout(() => {
-        setErr(null);
+        setErr(err);
       }, 3000);
       return () => clearTimeout(timerId);
     }
@@ -218,93 +227,87 @@ export const Cart = () => {
 
   return (
 
-    <>
+    <div className="cart-container">
 
-      {checkout === 1 ? (
+      {cartItems.length === 0 ? (
+        <>
 
-        <div className='cart-container'>
+          <h1>{user ? user.username : 'User'}, Your Cart is currently empty.  </h1>
+          <h3>Keep exploring and add delicious items to continue your food journey! </h3>
+          <div className="empty-cart">
+            <img
+              src={process.env.PUBLIC_URL + '/images/brand/empty-cart.png'}
+              alt="Your cart is empty"
+            />
+            <div className="shop-button">
+              <button onClick={() => navigate('/')}>Shop Now</button>
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
 
-          <div className='cart-checkout'>
+          {checkout === 1 && (
 
-            {checkout &&
-              <CartCheckout
-                formData={formData}
-                setFormData={setFormData}
-                handleChange={handleChange}
-                handleNextClick={handleNextClick}
-                err={err}
-                title="Sign Up"
-              />}
+            <div className='cart-checkout'>
+
+              {checkout &&
+                <CartCheckout
+                  formData={formData}
+                  setFormData={setFormData}
+                  handleChange={handleChange}
+                  handleNextClick={handleNextClick}
+                  err={err}
+                  title="Sign Up"
+                />}
+
+            </div>
+
+          )}
+
+          <h1>Welcome to Your Cart, {user ? user.username : 'User'}</h1>
+
+          <div className="cart-items">
+            {cartItems.map((item) => (
+              <CartItem
+                itemId={item.id}
+                itemImage={item.image}
+                itemName={item.name}
+                itemPrice={item.price}
+                itemQuantity={item.itemQuantity}
+                updateQuantity={updateQuantity}
+              />
+            ))}
+          </div>
+
+          <div className="cart-balance">
+            <h2>Sub-Total: ${subTotal}</h2>
+            <h2>Tax: ${tax}</h2>
+            <h2>Delivery Fee: ${deliveryFee}</h2>
+            <h2>
+              Total: ${total}
+            </h2>
+          </div>
+
+          <div className="checkout-button">
+            {checkout === 0 && (
+              <button onClick={handleNextClick}>Next</button>
+            )}
+            {checkout === 2 && (
+              <>
+                <button onClick={handleBackClick}>Back</button>
+                <button onClick={handleCheckout}>Place Order</button>
+
+              </>
+            )}
 
           </div>
 
-        </div>
-
-
-      ) : (
-
-        <div className="cart-container">
-
-          <h1> Cart </h1>
-
-          {cartItems.length === 0 ? (
-            <>
-              <div className="empty-cart">
-                <img
-                  src={process.env.PUBLIC_URL + '/images/brand/empty-cart.png'}
-                  alt="Your cart is empty"
-                />
-                <div className="shop-button">
-                  <button onClick={() => navigate('/')}>Shop Now</button>
-                </div>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="cart-items">
-                {cartItems.map((item) => (
-                  <CartItem
-                    itemId={item.id}
-                    itemImage={item.image}
-                    itemName={item.name}
-                    itemPrice={item.price}
-                    itemQuantity={item.itemQuantity}
-                    updateQuantity={updateQuantity}
-                  />
-                ))}
-              </div>
-
-              <div className="cart-balance">
-                <h2>Sub-Total: ${subTotal}</h2>
-                <h2>Tax: ${tax}</h2>
-                <h2>Delivery Fee: ${deliveryFee}</h2>
-                <h2>
-                  Total: ${total}
-                </h2>
-              </div>
-
-              <div className="checkout-button">
-                {checkout === 0 && (
-                  <button onClick={handleNextClick}>Next</button>
-                )}
-                {checkout === 2 && (
-                  <>
-                    <button onClick={handleBackClick}>Back</button>
-                    <button onClick={handleCheckout}>Place Order</button>
-
-                  </>
-                )}
-
-              </div>
-
-
-
-            </>
-          )}
-        </div>
-
+        </>
       )}
 
-    </>
+    </div>
+
+
   )
 }

@@ -1,4 +1,5 @@
 .cart-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -7,7 +8,7 @@
     background-color: white;
     border-radius: 10px;
     padding-top: 30px;
-    height: 80vh;
+    min-height: 80vh;
 }
 
 .empty-cart {
@@ -25,7 +26,16 @@
     justify-self: center;
     color: black;
     font-weight: bold;
-    font-size: clamp(20px, 4rem, 5rem);
+    font-size: clamp(20px, 3rem, 3.5rem);
+    font-family: Georgia, serif;
+    margin: 1%;
+}
+
+.cart-container h3 {
+    justify-self: center;
+    color: black;
+    font-weight: bold;
+    font-size: clamp(16px, 2rem, 3rem);
     font-family: Georgia, serif;
     margin: 1%;
 }
@@ -55,7 +65,6 @@
     align-items: center;
     background-color: white;
     border-radius: 10px;
-    height: 60vh;
     overflow-y: scroll;
 }
 
@@ -194,6 +203,7 @@
     display: inline-block;
     font-size: 20px;
     margin: 0;
+    margin-left: 10px;
   }
 
   .shop-button button{
@@ -210,5 +220,12 @@
 
   .cart-checkout{
     margin-inline: auto;
-    width: 50%;
+    width: 80vw;
+    height: auto;
+    position: absolute;
+    z-index: 100;
+    left: 0;
+    right: 0;
+    background-color: (0 0% 100% / 0.3);
+    backdrop-filter: blur(3px);
   }

@@ -12,7 +12,7 @@
  */
 
 
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 
@@ -35,159 +35,200 @@ const theme = createTheme();
 
 
 const CartCheckout = ({ handleSubmit, formData, handleChange, handleNextClick, err, }) => {
+
     return (
 
-        <Container component="main" width="700px">
+        <form>
+            <Container component="main" width="700px">
 
-            <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
-                <Box
-                    sx={{
-                        my: 10,
-                        mx: 10,
-                        display: 'relative',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        height: '700px',
-                    }}
-                >
+                <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
+                    <Box
+                        sx={{
+                            my: 10,
+                            mx: 10,
+                            display: 'relative',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                        }}
+                    >
 
-                    <Typography component="h1" variant="h5" fontSize={38} align='center' paddingTop='20px' >
-                        Checkout
-                    </Typography>
+                        <Typography component="h1" variant="h5" fontSize={38} align='center' paddingTop='20px' >
+                            Checkout
+                        </Typography>
 
-                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
 
-                        <Grid container spacing={6} >
+                            <Grid container spacing={6} >
 
-                            <Typography variant="h5" align='left' fontSize={16} marginLeft={"2rem"} paddingTop='100px' >
-                                Please provide your building name (e.g. HSS) & Room Number (e.g. 356)
-                            </Typography>
+                                <Typography variant="h5" align='left' fontSize={16} marginLeft={"2rem"} paddingTop='100px' >
+                                    Please provide your building name (e.g. HSS) & Room Number (e.g. 356)
+                                </Typography>
 
-                            <Grid item xs={12} sm={6} marginTop={'-6rem'}>
-                                <TextField
-                                    value={formData.building}
-                                    onChange={e => handleChange(e)}
-                                    required
-                                    id="building"
-                                    name="building"
-                                    label="Building"
-                                    fullWidth
-                                    autoComplete="given-name"
-                                    variant="standard"
-                                    InputLabelProps={{
-                                        sx: {
-                                            fontSize: '3rem'
-                                        }
-                                    }}
-                                    inputProps={{
-                                        style: {
-                                            fontSize: '4rem'
-                                        }
-                                    }}
-                                    sx={{ mt: 2 }}
-                                />
+                                <Grid item xs={12} sm={6} marginTop={'-6rem'}>
+                                    <TextField
+                                        value={formData.building}
+                                        onChange={e => handleChange(e)}
+                                        required
+                                        id="building"
+                                        name="building"
+                                        label="Building"
+                                        fullWidth
+                                        autoComplete="given-name"
+                                        variant="standard"
+                                        InputLabelProps={{
+                                            sx: {
+                                                fontSize: '3rem'
+                                            }
+                                        }}
+                                        inputProps={{
+                                            style: {
+                                                fontSize: '4rem'
+                                            }
+                                        }}
+                                        sx={{ mt: 2 }}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={6} marginTop={'-6rem'}>
+                                    <TextField
+                                        value={formData.room}
+                                        onChange={e => handleChange(e)}
+                                        required
+                                        id="room"
+                                        name="room"
+                                        label="Room"
+                                        fullWidth
+                                        autoComplete="given-name"
+                                        variant="standard"
+                                        InputLabelProps={{
+                                            sx: {
+                                                fontSize: '3rem'
+                                            }
+                                        }}
+                                        inputProps={{
+                                            style: {
+                                                fontSize: '4rem'
+                                            }
+                                        }}
+                                        sx={{ mt: 2 }}
+                                    />
+                                </Grid>
+
+                                <Typography variant="h5" align='left' marginLeft={"3rem"} fontSize={16} paddingTop='50px' >
+                                    Please select your payment method type!
+                                </Typography>
+
+                                <Grid item xs={12} marginTop={'-3rem'}>
+                                    <Box sx={{ minWidth: 120 }}>
+                                        <FormControl fullWidth >
+                                            <InputLabel sx={{ fontSize: '1.7rem' }} required required
+
+                                            > Payment Method</InputLabel>
+                                            <Select
+                                                value={formData.paymentMethod}
+                                                onChange={e => handleChange(e)}
+                                                name="paymentMethod"
+                                                required
+                                                fullWidth
+                                                variant="standard"
+                                                //font size for input prop
+                                                sx={{ fontSize: '2rem' }}
+                                            >
+                                                <MenuItem align='left' value="Payment via Student ID" sx={{ fontSize: '1.7rem' }} >
+                                                    Payment via Student ID
+                                                </MenuItem>
+                                                <MenuItem value="Cash on Delivery" sx={{ fontSize: '1.7rem' }} >
+                                                    Cash on Delivery
+                                                </MenuItem>
+
+                                            </Select>
+                                        </FormControl>
+                                    </Box>
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    <TextField
+                                        value={formData.specialInstructions}
+                                        onChange={e => handleChange(e)}
+                                        autoComplete="given-name"
+                                        name="specialInstructions"
+                                        multiline
+                                        fullWidth
+                                        id="specialInstructions"
+                                        label="Special Instructions"
+                                        variant="standard"
+                                        InputLabelProps={{
+                                            sx: {
+
+                                                fontSize: '2rem'
+                                            }
+                                        }}
+                                        inputProps={{
+                                            style: {
+                                                height: "50px",
+                                                fontSize: '2rem',
+                                                paddingTop: '1rem',
+                                            }
+                                        }}
+                                    />
+                                </Grid>
+
+                                {err ? (
+
+                                    <Button
+                                        onClick={handleNextClick}
+                                        type="submit"
+                                        fullWidth
+                                        variant="contained"
+                                        sx={{
+                                            mt: 3, mb: 2, borderRadius: '15px', fontSize: 20,
+                                            backgroundColor: 'grey', color: '#000000',
+                                            width: '250px',
+                                            '&:hover': { backgroundColor: '#FFCF01' },
+                                            boxShadow: '2px 2px 5px rgba(0, 0, 0, 10)',
+                                            display: 'block',
+                                            margin: '50px auto 50px',
+                                        }}
+                                    >
+                                        Next
+                                    </Button>
+
+                                ) : (
+
+                                    <Button
+                                        onClick={handleNextClick}
+                                        type="submit"
+                                        fullWidth
+                                        variant="contained"
+                                        sx={{
+                                            mt: 3, mb: 2, borderRadius: '15px', fontSize: 20,
+                                            backgroundColor: '#fc3', color: '#000000',
+                                            width: '250px',
+                                            '&:hover': { backgroundColor: '#FFCF01' },
+                                            boxShadow: '2px 2px 5px rgba(0, 0, 0, 10)',
+                                            display: 'block',
+                                            margin: '50px auto 50px',
+                                        }}
+                                    >
+                                        Next
+                                    </Button>
+                                )}
+
                             </Grid>
 
-                            <Grid item xs={12} sm={6} marginTop={'-6rem'}>
-                                <TextField
-                                    value={formData.room}
-                                    onChange={e => handleChange(e)}
-                                    required
-                                    id="room"
-                                    name="room"
-                                    label="Room"
-                                    fullWidth
-                                    autoComplete="given-name"
-                                    variant="standard"
-                                    InputLabelProps={{
-                                        sx: {
-                                            fontSize: '3rem'
-                                        }
-                                    }}
-                                    inputProps={{
-                                        style: {
-                                            fontSize: '4rem'
-                                        }
-                                    }}
-                                    sx={{ mt: 2 }}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12}>
-                                <TextField
-                                    value={formData.specialInstructions}
-                                    onChange={e => handleChange(e)}
-                                    autoComplete="given-name"
-                                    name="specialInstructions"
-                                    required
-                                    multiline
-                                    fullWidth
-                                    id="specialInstructions"
-                                    label="Special Instructions"
-                                    variant="standard"
-                                    InputLabelProps={{
-                                        sx: {
-
-                                            fontSize: '2rem'
-                                        }
-                                    }}
-                                    inputProps={{
-                                        style: {
-                                            height: "50px",
-                                            fontSize: '2rem',
-                                            paddingTop: '1rem',
-                                        }
-                                    }}
-                                />
-                            </Grid>
-
-                            <Typography variant="h5" align='left' marginLeft={"3rem"} fontSize={16} paddingTop='50px' >
-                                Please select your payment method type!
-                            </Typography>
-
-                            <Grid item xs={12} marginTop={'-3rem'}>
-                                <Box sx={{ minWidth: 120 }}>
-                                    <FormControl fullWidth >
-                                        <InputLabel sx={{ fontSize: '1.7rem' }}
-                                        > Payment Method</InputLabel>
-                                        <Select
-                                            value={formData.paymentMethod}
-                                            onChange={e => handleChange(e)}
-                                            name="paymentMethod"
-                                            required
-                                            fullWidth
-                                            variant="standard"
-                                            //font size for input prop
-                                            sx={{ fontSize: '2rem' }}
-                                        >
-                                            <MenuItem value="Payment via Student ID" sx={{ fontSize: '1.7rem' }} >
-                                                Payment via Student ID
-                                            </MenuItem>
-                                            <MenuItem value="Cash on Delivery" sx={{ fontSize: '1.7rem' }} >
-                                                Cash on Delivery
-                                            </MenuItem>
-
-                                        </Select>
-                                    </FormControl>
-                                </Box>
-                            </Grid>
-
-                        </Grid>
-
-
-                        <div className="checkout-button" style={{ margin: '5rem' }}>
-                            <button onClick={handleNextClick}>Next</button>
-                        </div>
-
-                        {err && (
-                            <p style={{ fontSize: "20px", color: "red", textAlign: "center" }}>
-                                {err}
-                            </p>
-                        )}
+                            {err && (
+                                <p style={{ fontSize: "20px", color: "red", textAlign: "center", paddingBottom: "30px" }}>
+                                    {err}
+                                </p>
+                            )}
+                        </Box>
                     </Box>
-                </Box>
-            </Grid>
-        </Container>
+                </Grid>
+            </Container>
+
+        </form>
+
+
 
     );
 }
