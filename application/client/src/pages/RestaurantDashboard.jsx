@@ -40,7 +40,7 @@ const RestaurantDashboard = (props) => {
     const fetchRestaurant = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/restaurants/restaurant/${restaurantId}`,
+          `http://localhost:8080/restaurants/getRestaurantById/${restaurantId}`,
         )
         console.log('Fetched restaurant data:', response.data)
 
@@ -73,7 +73,9 @@ const RestaurantDashboard = (props) => {
       fetchRestaurant()
       fetchMenuItems()
     }
+
   }, [restaurantId])
+
 
   return (
     <div className="restaurant-dashboard">

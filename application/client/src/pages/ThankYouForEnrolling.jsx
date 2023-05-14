@@ -14,10 +14,13 @@
  */
 
 import styles from '../styles/ThankYouForEnrolling.css';
+import { useNavigate } from 'react-router-dom'
 
 function ThankYouForEnrolling() {
-  return (
 
+  const navigate = useNavigate();
+
+  return (
 
     <div className="thank-you-for-enrolling"
 
@@ -26,7 +29,6 @@ function ThankYouForEnrolling() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        height: '89vh',
         width: '100vw',
       }}
     >
@@ -34,9 +36,18 @@ function ThankYouForEnrolling() {
         <h1>Thank you for enrolling your restaurant!</h1>
         <h1>You will be notified when your restaurant is approved.</h1>
         <h1>This should be within 1-2 business days.</h1>
+        <h1>You can also checkout your Restaurant's Dashboard too see if it's live.</h1>
+        <h1>You will be prompted to login.</h1>
+
+        <div className="checkout-button">
+          <button style={{marginRight : '30%'}}onClick={() => navigate('/restaurantDashboard')}>Go to Restaurant Dashboard</button>
+        </div>
       </div>
 
+
+
     </div>
+
   );
 }
 
