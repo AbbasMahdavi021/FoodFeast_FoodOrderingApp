@@ -3,8 +3,8 @@
  * 
  * Filename: Filter.jsx
  * Created on: 03/23
- * Author(s): Abbas M. 
- * Contact: 
+ * Author(s): Abbas M
+ * Contact:  amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: This code is a React component that allows users to filter a list of cuisines 

@@ -3,8 +3,8 @@
  * 
  * Filename: sendEmail.js
  * Created on: 03/23
- * Author(s):
- * Contact: 
+ * Author(s): Abbas M.
+ * Contact: amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: This module generates a random new password for a user, hashes it, 

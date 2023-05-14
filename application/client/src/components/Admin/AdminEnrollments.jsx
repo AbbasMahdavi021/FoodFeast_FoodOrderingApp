@@ -1,10 +1,14 @@
-/*
-
-Admin dashboard related
-
-By; Abbas M.
-
-*/
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: Footer.jsx
+ * Created on: 03/23
+ * Author(s): Abbas M
+ * Contact:  amahdavi2@sfsu.edu
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: Admin Dashboard, and sql command line components (Side Project)
+ */
 
 
 import axios from 'axios';

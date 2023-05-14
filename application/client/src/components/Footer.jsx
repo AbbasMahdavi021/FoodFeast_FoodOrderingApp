@@ -3,8 +3,8 @@
  * 
  * Filename: Footer.jsx
  * Created on: 03/23
- * Author(s): Abbas M.
- * Contact: 
+ * Author(s): Abbas M
+ * Contact:  amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: Basic footer that contains the For Demostration only" tag.

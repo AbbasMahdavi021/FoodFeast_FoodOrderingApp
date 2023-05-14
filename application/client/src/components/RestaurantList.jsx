@@ -1,3 +1,16 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: RegisterForm.jsx
+ * Created on: 03/23
+ * Author(s): Abbas M
+ * Contact:  amahdavi2@sfsu.edu
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: A component that renders the list of all or filtered restaurant based on Browse.jsx
+ */
+
+
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { RestaurantsContext } from './RestaurantsContext';
@@ -6,9 +19,12 @@ const RestaurantList = () => {
 
   const { restaurants } = useContext(RestaurantsContext);
 
+  const restaurantsLength = restaurants.length;
+
   return (
 
     <div className='restaurant-list-div'>
+      <h1>Showing {restaurantsLength} result(s)</h1>
       <div className="restaurant-container">
         {restaurants.map((restaurant) => {
           return (

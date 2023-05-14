@@ -3,8 +3,8 @@
  * 
  * Filename: restaurant.js
  * Created on: 03/23
- * Author(s):
- * Contact: 
+ * Author(s): Abbas M.
+ * Contact: amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: This module provides endpoints to get restaurant information, 
@@ -42,20 +42,21 @@ const getRestaurants = async (req, res) => {
 
 const getRestaurantById = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id;
     const q = 'SELECT * FROM restaurants WHERE id = ?';
 
     db.query(q, [id], (error, results) => {
       if (error) {
-        console.error('Database error:', error);
-        res.status(500).json({ message: 'Internal server error' });
-      } else if (results.length) {
-        res.status(200).send(results[0]);
-      } else {
-        res.status(404).json({ message: 'Restaurant not found' });
+        console.error('Query error:', error);
+        return res.status(500).json({ message: 'Error executing query' });
       }
-    });
 
+      if (results.length === 0) {
+        return res.status(404).json({ message: 'Restaurant not found' });
+      }
+      const restaurant = results[0];
+      res.status(200).json(restaurant);
+    });
   } catch (err) {
     console.error('Error in getRestaurantById:', err);
     res.status(500).json({ message: 'Internal server error' });
@@ -75,6 +76,23 @@ const getRestaurantsByCuisine = async (req, res) => {
       res.send(rows);
     });
 
+  } catch (err) {
+    console.error(err);
+    res.send([]);
+  }
+};
+
+
+const getAllCuisines = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const rows = [];
+    const q = 'SELECT * FROM cuisines';
+
+    db.query(q, [id], (error, results) => {
+      results.forEach(row => rows.push(row));
+      res.send(rows);
+    });
   } catch (err) {
     console.error(err);
     res.send([]);
@@ -105,7 +123,6 @@ const getRestaurantByOwner = async (req, res) => {
     res.send([]);
   }
 };
-
 
 
 const getFeatured = async (req, res) => {
@@ -153,4 +170,6 @@ const getMenu = async (req, res) => {
   }
 }
 
-module.exports = { getRestaurants, getRestaurantById, getRestaurantsByCuisine, getMenu, getFeatured, getRestaurantByOwner };
+
+
+module.exports = { getRestaurants, getRestaurantById, getAllCuisines, getRestaurantsByCuisine, getMenu, getFeatured, getRestaurantByOwner };

@@ -3,8 +3,8 @@
  * 
  * Filename: RegisterForm.jsx
  * Created on: 03/23
- * Author(s): Abbas M. 
- * Contact: 
+ * Author(s): Abbas M
+ * Contact:  amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: A child component that acts as register form, that gets rendered and props passed into,
@@ -52,7 +52,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                             alignItems: 'center',
                         }}
                     >
-                        <Typography component="h1" variant="h5" fontSize={40} align="center" marginBottom={10} marginTop={10}>
+                        <Typography component="h1" variant="h5" fontSize={40} align="center" marginBottom={3} marginTop={5}>
                             {title}
                         </Typography>
 
@@ -167,6 +167,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                         />
                                         <Link sx={{ color: 'black', fontSize: '2.2rem', cursor: 'pointer' }}>I have a valid Drivers License </Link>
                                     </label>
+                                    
                                 </Grid>
 
                             }

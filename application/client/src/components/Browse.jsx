@@ -3,8 +3,8 @@
  * 
  * Filename: Browse.jsx
  * Created on: 04/23
- * Author(s): Abbas M. 
- * Contact: 
+ * Author(s): Abbas M
+ * Contact:  amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: Component that allows users to browse a list of restaurants.
@@ -46,7 +46,6 @@ const Browse = () => {
             try {
                 const response = await axios.get('/restaurants/getAllRestaurants');
                 let rows = response.data;
-                console.log(rows)
                 if (rows.length > 0) {
                     setRestaurants([...rows]);
                     setAllRestaurants([...rows]);

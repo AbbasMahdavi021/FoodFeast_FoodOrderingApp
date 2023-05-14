@@ -3,8 +3,8 @@
  * 
  * Filename: restaurant.js
  * Created on: 04/23
- * Author(s):
- * Contact: 
+ * Author(s): Abbas M.
+ * Contact: amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: routes for restaurants
@@ -12,13 +12,15 @@
  */
 
 const express = require("express");
-const { getRestaurants , getRestaurantsByCuisine, getFeatured, getMenu, getRestaurantByOwner, getRestaurantById } = require("../controllers/restaurant.js");
+const { getRestaurants , getAllCuisines, getRestaurantsByCuisine, getFeatured, getMenu, getRestaurantByOwner, getRestaurantById } = require("../controllers/restaurant.js");
 
 const router = express.Router();
 
-router.get("/restaurant/:id", getRestaurantById);
+router.get("/getRestaurantById/:id", getRestaurantById);
 
 router.get("/getAllRestaurants", getRestaurants);
+
+router.get("/getAllCuisines", getAllCuisines);
 
 router.get("/getFeatured", getFeatured);
 

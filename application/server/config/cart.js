@@ -1,11 +1,23 @@
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: Admin.jsx
+ * Created on: 04/23
+ * Author(s): Abbas M.
+ * Contact: amahdavi2@sfsu.edu
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: Cart Class handler, create, update, add, remove cart and items in it,
+ * Keeps tracks of items, toatal, etc.
+ */
+
+
 module.exports = function Cart(oldCart) {
 
     this.itemList = oldCart.itemList || [];
     this.totalQuantity = oldCart.totalQuantity || 0;
     this.totalCost = oldCart.totalCost || 0;
     this.restaurantId = oldCart.restaurantId || -1;
-
-
 
     this.addItem = (item) => {
 
@@ -21,11 +33,11 @@ module.exports = function Cart(oldCart) {
 
         let i = 0;
 
-        for (i ; i < this.itemList.length; i++) {
+        for (i; i < this.itemList.length; i++) {
 
 
             if (this.itemList[i].id === item.id) {
-                this.itemList[i].itemQuantity ++;
+                this.itemList[i].itemQuantity++;
                 break;
             }
         }
@@ -39,7 +51,7 @@ module.exports = function Cart(oldCart) {
         this.totalCost += parseFloat(item.price);
     };
 
-    this.removeItem= (item) => {
+    this.removeItem = (item) => {
 
         for (let i = 0; i < this.itemList.length; i++) {
             if (this.itemList[i].id === item.id) {
@@ -61,11 +73,8 @@ module.exports = function Cart(oldCart) {
                 if (this.itemList[i].itemQuantity <= 0) {
                     this.itemList.splice(i, 1);
                 }
-            }   
+            }
         }
     }
-
-
-
 
 }

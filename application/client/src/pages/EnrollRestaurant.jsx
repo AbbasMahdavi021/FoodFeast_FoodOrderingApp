@@ -3,8 +3,8 @@
  * 
  * Filename: EnrollRestaurant.jsx
  * Created on: 04/23
- * Author(s): Megan L., Jed G.
- * Contact: mlew1@mail.sfsu.edu, jgraves4@mail.sfsu.edu	
+ * Author(s): Megan L., Jed G., Abbas M
+ * Contact: mlew1@mail.sfsu.edu, jgraves4@mail.sfsu.edu	, amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: this file is for restuarant owners to register for the site
@@ -23,10 +23,11 @@ export default function Register() {
         email: "",
         username: "",
         password: "",
+        confirmPassword: "",
         name: "",
         phone: "",
         address: "",
-        cuisine: "",
+        cuisine: null,
         price: "",
         rating: null,
         est_delivery_time: null,
@@ -69,6 +70,11 @@ export default function Register() {
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
         if (!passwordRegex.test(formData.password)) {
             setErr("Password must contain: one lowercase letter, one uppercase letter, one number, and 5 characters long!");
+            return;
+        }
+
+        if (formData.password !== formData.confirmPassword) {
+            setErr("Passwords do not match!");
             return;
         }
 

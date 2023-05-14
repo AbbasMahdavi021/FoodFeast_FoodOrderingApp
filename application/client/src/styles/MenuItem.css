@@ -1,125 +1,241 @@
-.restaurant {
-  margin-top: 1%;
-  width: 100%;
+.restaurant-page {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
-.restaurant h1 {
-  justify-self: center;
-  font-size: 8rem;
-  color: #ffffff;
-  font-size: clamp(20px, 4rem, 5rem);
-  font-family: Georgia, serif;
-}
-
-.menu_container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.menu-item-box {
+.restaurant-header-div {
   position: relative;
-  border: 1px solid black;
-  background-color: white;
-  padding: 3px;
-  margin: 10px;
-  height: 200px;
-  width: 300px;
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  flex-direction: column;
-  border-radius: 10px;
-}
-
-.menu-item-box::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 40%, transparent 70%);
-  border-radius: 9px;
-  z-index: 1;
-}
-
-
-.add-to-cart-button {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background-color: #f1f1f1;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  z-index: 3;
-}
-
-.add-to-cart-button:hover {
-  transition: ease-in-out .2s;
-  filter: brightness(90%);
-}
-
-.add-to-cart-button::after {
-  content: "Add To Cart";
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #333;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 4px;
-  white-space: nowrap;
-  font-size: 14px;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.add-to-cart-button::before {
-  content: "";
-  position: absolute;
-  bottom: calc(100% - 1px);
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent #333 transparent;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.add-to-cart-button:hover::after,
-.add-to-cart-button:hover::before {
-  opacity: 1;
-}
-.menu-item-details {
-  display: flex;
-  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
-  font-size: 20px;
-  text-transform: capitalize;
-  color: white;
-  z-index: 2;
+  height: 20vh;
+  min-height: 130px;
+  border: 5px solid rgb(0, 0, 0);
+  background-color: hsl(0 0% 0% / 0.5);
+  backdrop-filter: blur(3px);
+  margin-bottom: 10px;
+  padding-inline: 10%;
 }
 
-.menu-item-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 10px;
+.restaurant-banner {
+  width: 200px;
+  height: 80%;
+  min-height: 130px;
+  border-radius: 50%;
+  border: 5px solid white;
 }
+
+.restaurant-banner img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.restaurant-menu-details {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  margin: 20px;
+  color: #ffffff;
+}
+
+.restaurant-menu-details h1 {
+  font-size: 4rem;
+  margin-bottom: 50px;
+}
+
+.restaurant-menu-details h2 {
+  font-size: 2rem;
+  margin-bottom: 10%;
+}
+
+@media screen and (max-width: 768px) {
+  .restaurant-menu-details{
+    font-size: 18px;
+  }
+
+  .restaurant-header-div{
+    padding: 0;
+  }
+
+  .restaurant-menu-details h1 {
+    margin-bottom: 20px;
+  }
+
+  .menuPopUpDiv{
+    width: 50%;
+  }
+}
+
+  .restaurant-menu-div {
+    margin-top: 1%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .restaurant-menu-div h1 {
+    justify-self: center;
+    font-size: 8rem;
+    color: #ffffff;
+    font-size: clamp(20px, 4rem, 5rem);
+    font-family: Georgia, serif;
+  }
+
+  .menu_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .menu-item-box {
+    position: relative;
+    border: 1px solid black;
+    background-color: white;
+    padding: 3px;
+    margin: 10px;
+    height: 200px;
+    width: 300px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex-direction: column;
+    border-radius: 10px;
+  }
+
+  .menu-item-box::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 40%, transparent 70%);
+    border-radius: 9px;
+    z-index: 1;
+  }
+
+
+  .add-to-cart-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    z-index: 3;
+  }
+
+  .add-to-cart-button:hover {
+    transition: ease-in-out .2s;
+    filter: brightness(90%);
+  }
+
+  .add-to-cart-button::after {
+    content: "Add To Cart";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .add-to-cart-button::before {
+    content: "";
+    position: absolute;
+    bottom: calc(100% - 1px);
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #333 transparent;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .add-to-cart-button:hover::after,
+  .add-to-cart-button:hover::before {
+    opacity: 1;
+  }
+
+  .menu-item-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 20px;
+    text-transform: capitalize;
+    color: white;
+    z-index: 2;
+  }
+
+  .menu-item-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+  }
+
+  .menuPopUpDiv {
+    position: absolute;
+    margin-top: 20vh;
+    margin-inline: auto;
+    width: 50%;
+    height: auto;
+    background-color: hsl(0 0% 0% / 0.5);
+    backdrop-filter: blur(3px);
+    border: 5px solid rgb(255, 207, 1);
+    border-radius: 1rem;
+    z-index: 999;
+  }
+
+  .menuPopUpDiv::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 5px;
+    background-color: rgb(255, 255, 255);
+    animation: fillBar 3s linear forwards;
+  }
+
+  @keyframes fillBar {
+    0% {
+      width: 0;
+    }
+
+    100% {
+      width: 100%;
+    }
+  }
+
+  .menuPopUpDiv h3 {
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-size: clamp(20px, 3rem, 3.5rem);
+    font-family: Georgia, serif;
+    margin: 1%;
+    margin-bottom: 20px;
+  }

@@ -3,8 +3,8 @@
  * 
  * Filename: cart.js
  * Created on: 03/23
- * Author(s):
- * Contact: 
+ * Author(s): Abbas M. Jed G.
+ * Contact: amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: This module manages a shopping cart by adding, retrieving, and updating items, 
@@ -47,6 +47,17 @@ const updateQuantity = async (req, res) => {
 
     res.send(true);
 }
+
+const emptyCart = async (req, res) => {
+    req.session.cart = new Cart({
+        itemList: [],
+        totalQuantity: 0,
+        totalCost: 0,
+        restaurantId: -1,
+    });
+
+    res.send(true);
+};
 
 const createOrder = async (orderData) => {
     return new Promise((resolve, reject) => {
@@ -125,6 +136,7 @@ module.exports = {
     addToCart,
     getCart,
     updateQuantity,
+    emptyCart,
     storeCart,
     createOrderEndpoint
 };

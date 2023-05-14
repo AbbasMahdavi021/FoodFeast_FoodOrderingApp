@@ -4,7 +4,7 @@
  * Filename: HomeHeader.jsx
  * Created on: 04/23
  * Author(s): Jed G., Megan L., Nathan R., Abbas M.
- * Contact: 
+ * Contact:  amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: Featured restaurants can be set manually in the database by setting the  
@@ -62,7 +62,7 @@ const HomeHeader = ({ scrollToSecondPage }) => {
 
       <div className='home-header'>
         <div className='text-container'>
-          <h1>Meals made simple.</h1>
+          <h1>Find your food simple.</h1>
           <h1>Food delivered anywhere </h1>
           <h1>on campus.</h1>
           <h1>Exclusive use for SFSU </h1>
@@ -102,30 +102,30 @@ const HomeHeader = ({ scrollToSecondPage }) => {
 
         {user ?
           <div className="f-restaurants" id='favorite-restaurants'>
-            <h1 id='f-restaurant-h1'>Favorite Restaurants</h1>
-            <div className="restaurant-f-container">
-              {favoritedRestaurants.map((restaurant) => (
-                <Link key={restaurant.id} to={`browse/${restaurant.name.replace(/\s/g, '')}/${restaurant.id}`}>
-                  <div key={restaurant.id} className="restaurant-f">
-                    <img className="restaurant-f-img" src={restaurant.picture} alt={restaurant.name} />
-                    <div className="restaurant-f-text">
-                      <h3>{restaurant.name}</h3>
-                      <div className="restaurant-f-starbox">
-                        {[...Array(5)].map((star, i) => {
-                          if (i < restaurant.rating) {
-                            return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star1.png'} alt="star" />;
-                          } else {
-                            return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star2.png'} alt="star" />;
-                          }
-                        })}
-                        <span>{restaurant.est_delivery_time - 5}-{restaurant.est_delivery_time} mins delivery to SFSU</span>
-                      </div>
+          <h1 id='f-restaurant-h1'>Favorite Restaurants</h1>
+          <div className="restaurant-f-container">
+            {favoritedRestaurants.map((restaurant) => (
+              <Link key={restaurant.id} to={`browse/${restaurant.name.replace(/\s/g, '')}/${restaurant.id}`}>
+                <div key={restaurant.id} className="restaurant-f">
+                  <img className="restaurant-f-img" src={restaurant.picture} alt={restaurant.name} />
+                  <div className="restaurant-f-text">
+                    <h3>{restaurant.name}</h3>
+                    <div className="restaurant-f-starbox">
+                      {[...Array(5)].map((star, i) => {
+                        if (i < restaurant.rating) {
+                          return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star1.png'} alt="star" />;
+                        } else {
+                          return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star2.png'} alt="star" />;
+                        }
+                      })}
+                      <span>{restaurant.est_delivery_time - 5}-{restaurant.est_delivery_time} mins delivery to SFSU</span>
                     </div>
                   </div>
-                </Link>
-              ))}
-            </div>
+                </div>
+              </Link>
+            ))}
           </div>
+        </div>
 
           : null
         }

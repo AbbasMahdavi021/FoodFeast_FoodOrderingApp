@@ -41,7 +41,7 @@ a.navItem {
 }
 a.log-button{
   color: black;
-  background-color: rgb(255, 207, 1);
+  background-color: #ffdc70;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 10);
   border-radius: 10px;
   padding: 10px 20px;
@@ -60,7 +60,7 @@ a.navLink:hover {
   justify-content: space-around;
   height: 100px;
   min-height: 50px;
-  background: rgb(139, 8, 139);
+  background:rgb(109, 3, 109);
   top: 50px;
   z-index: 9999;
   margin-top: 50px;
@@ -112,7 +112,7 @@ a.navLink:hover {
     right: 0;
     height: 92vh;
     width: 45%;
-    background: rgb(139, 8, 139);
+    background:rgb(109, 3, 109);
     flex-direction: column;
     transform: translateX(100%);
     transition: 0.5s ease-in;

@@ -3,8 +3,8 @@
  * 
  * Filename: Login.jsx
  * Created on: 04/23
- * Author(s): Abbas M., Elahe Bashiri.
- * Contact: amahdavi2@sfsu.edu, Ebashiri@sfsu.edu
+ * Author(s): Elahe Bashiri.
+ * Contact: Ebashiri@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: Main log in page for all users
@@ -90,7 +90,8 @@ export default function Login() {
         if (res.data.isDriver === 1){
           navigate('/driver')
         } else if (res.data.isRestaurantOwner === 1) {
-          navigate('/enroll')
+          navigate('/restaurantDashboard');
+          window.location.reload();
         } else {
           navigate('/')
         }

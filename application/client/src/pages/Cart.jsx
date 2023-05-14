@@ -19,8 +19,11 @@ import { io } from 'socket.io-client'
 import '../styles/Cart.css'
 import UserContext from '../context'
 
+import CartCheckout from '../components/Cart/CartCheckout'
+
 
 const CartItem = (props) => {
+
   return (
     <div className="cart-item">
       <div className="cart-item-img">
@@ -46,15 +49,24 @@ const CartItem = (props) => {
           </button>
         </div>
 
-        <div className="cart-item-price">${props.itemPrice} </div>
+        <div className="cart-item-price">${(props.itemPrice * props.itemQuantity).toFixed(2)} </div>
       </div>
     </div>
   );
 };
 
-/*
 
-This is a component that manages a shopping cart. It keeps track of the items in the cart, 
+
+/**
+ * Project Title: FoodFeast - Full Stack Web Application
+ * 
+ * Filename: RegisterForm.jsx
+ * Created on: 03/23
+ * Author(s): Abbas M
+ * Contact:  amahdavi2@sfsu.edu
+ * Copyright (c) 2023 by San Francisco State University
+ * 
+ * Description: This is a component that manages a shopping cart. It keeps track of the items in the cart, 
 their quantity and price, and allows the user to checkout.
 
 When the component renderes, it loads the cart items from the server and updates the cartItems state.
@@ -67,18 +79,61 @@ If there are items, it shows a "Place Order" button that calls the handleCheckou
 
 handleCheckout sends the cart data to the server and navigates to the home page.
 
-By; Abbas M.
+**/
 
-*/
 
 export const Cart = () => {
+
+  const navigate = useNavigate();
+
   const [cartItems, setCartItems] = useState([]);
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
   const [toggle, setToggle] = useState(false);
+
+  const [checkout, setCheckout] = useState(0);
+  const [popUp, setPopUp] = useState(false);
+
   const [socket, setSocket] = useState(null);
 
-  const { user, restaurantId } = useContext(UserContext);
+  //Change restaurandId to get fetched from getCart, rather than local storage,
+
+  const [restaurantId, setRestaurantId] = useState();
+
+  const { user } = useContext(UserContext);
+
+  const [formData, setFormData] = useState({
+    building: "",
+    room: "",
+    paymentMethod: "",
+    specialInstructions: "",
+    checkbox: false,
+  });
+
+  const handleChange = (e) => {
+    let obj = {
+      ...formData
+    }
+
+    obj[e.target.name] = e.target.value;
+    setFormData(obj);
+
+    setErr(null);
+  };
+
+  const deliveryAddress = "SFSU Campus: " + formData.building + " " + formData.room;
+
+  const [err, setErr] = useState(null);
+
+
+  const togglePopup = () => {
+    setPopUp(!popUp);
+  };
+
+  const navigateToHome = () => {
+    togglePopup();
+    navigate('/');
+  };
 
   const updateQuantity = async (addend, id) => {
     const res = await axios.post(
@@ -97,6 +152,7 @@ export const Cart = () => {
 
       console.log(JSON.stringify(res));
       setCartItems(resData);
+      setRestaurantId(res.data.restaurantId);
       setTotalQuantity(res.data.totalQuantity);
       setTotalCost(res.data.totalCost);
     };
@@ -113,7 +169,12 @@ export const Cart = () => {
   const handleCheckout = async () => {
     try {
       const currentDate = new Date();
-      const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' ');
+      const formattedDate = currentDate.toLocaleString('en-US', {
+        timeZone: 'America/Los_Angeles',
+        hour12: false
+      }).replace(/:\d{2}$/, '');
+
+      console.log(formattedDate);
 
       const response = await axios.post('http://localhost:8080/orders', {
         withCredentials: true,
@@ -122,47 +183,100 @@ export const Cart = () => {
         restaurantId: restaurantId,
         orderDate: formattedDate,
         orderStatus: 'Pending',
-        orderTotal: parseFloat(subTotal) + parseFloat(tax),
-        deliveryAddress: '1234 Test St', // TODO: Replace with actual delivery address
-        paymentMethod: 'Credit Card', // TODO: Replace with actual payment method
-        specialInstructions: 'Leave at the door', // TODO: Replace with actual special instructions
+        orderTotal: total,
+        deliveryAddress: deliveryAddress,
+        paymentMethod: formData.paymentMethod,
+        specialInstructions: formData.specialInstructions,
       });
-  
+
       const orderId = response.data.orderId;
 
       if (socket) {
         socket.emit('send-order', response.data, `restaurant-${restaurantId}`);
       }
-  
-      navigate('/');
+
+      //empty cart after order placed
+      await axios.post("cart/emptyCart", { withCredentials: true })
+
+      togglePopup();
+
     } catch (error) {
       console.error('Error during checkout:', error);
     }
   };
-  
 
-  const subTotal = parseFloat(totalCost).toFixed(2)
-  const tax = (parseFloat(totalCost) * 0.1).toFixed(2)
-  const navigate = useNavigate()
+
+  const handleNextClick = async (e) => {
+
+    e.preventDefault()
+
+    if (checkout === 1) {
+      if (!formData.building || !formData.room || !formData.paymentMethod) {
+        setErr('Please fill in the required fields!');
+      } else {
+        setErr(null);
+        setCheckout(checkout + 1);
+      }
+    } else {
+      setCheckout(checkout + 1);
+    }
+  };
+
+  const handleBackClick = () => {
+    setCheckout(checkout + -1);
+  };
+
+  const subTotal = parseFloat(totalCost).toFixed(2);
+  const tax = (parseFloat(totalCost) * 0.1).toFixed(2);
+  const deliveryFee = 3.99;
+  const total = (parseFloat(subTotal) + parseFloat(tax) + deliveryFee).toFixed(2);
+
+  if(!user){
+    return navigate('/login');
+  }
 
   return (
+
     <div className="cart-container">
-      <h1> Cart </h1>
 
       {cartItems.length === 0 ? (
         <>
+
+          <h1>{user ? user.username : 'User'}, Your Cart is currently empty.  </h1>
+          <h3>Keep exploring and add delicious items to continue your food journey! </h3>
           <div className="empty-cart">
             <img
               src={process.env.PUBLIC_URL + '/images/brand/empty-cart.png'}
               alt="Your cart is empty"
             />
             <div className="shop-button">
-              <button onClick={() => navigate('/')}>Shop Now</button>
+              <button onClick={() => navigate('/browse')}>Shop Now</button>
             </div>
           </div>
         </>
       ) : (
         <>
+
+          {checkout === 1 && (
+
+            <div className='cart-checkout'>
+
+              {checkout &&
+                <CartCheckout
+                  formData={formData}
+                  setFormData={setFormData}
+                  handleChange={handleChange}
+                  handleNextClick={handleNextClick}
+                  err={err}
+                  title="Sign Up"
+                />}
+
+            </div>
+
+          )}
+
+          <h1>Welcome to Your Cart, {user ? user.username : 'User'}</h1>
+
           <div className="cart-items">
             {cartItems.map((item) => (
               <CartItem
@@ -179,16 +293,50 @@ export const Cart = () => {
           <div className="cart-balance">
             <h2>Sub-Total: ${subTotal}</h2>
             <h2>Tax: ${tax}</h2>
+            <h2>Delivery Fee: ${deliveryFee}</h2>
             <h2>
-              Total: ${(parseFloat(subTotal) + parseFloat(tax)).toFixed(2)}
+              Total: ${total}
             </h2>
           </div>
 
           <div className="checkout-button">
-            <button onClick={handleCheckout}>Place Order</button>
+            {checkout === 0 && (
+              <>
+                <button onClick={() => navigate('/browse')}>Add more items</button>
+                <button onClick={handleNextClick}>Checkout</button>
+              </>
+            )}
+            {checkout === 2 && (
+              <>
+                <button onClick={handleBackClick}>Modify Checkout</button>
+                <button onClick={() => {
+                  handleCheckout();
+                  togglePopup();
+                }}>Place Order</button>
+
+              </>
+            )}
           </div>
+
+          {popUp && (
+            <div className='popUp'>
+              <div className="popUpDiv">
+                <h3>Dear {user.username}, Your order with <br/></h3>
+                <h3>{totalQuantity} items, for ${total} ({formData.paymentMethod})</h3>
+                <h3>has been placed, and will be delivered to <br/>{deliveryAddress}<br/></h3>
+                <h3>Please check your email for the order receipt and status!<br/></h3>
+                <h3>Thank you for choosing FoodFeast <br/></h3>
+                <div className="checkout-button">
+                  <button onClick={navigateToHome}>Close</button>
+                </div>
+              </div>
+            </div>
+          )}
         </>
       )}
+
     </div>
+
+
   )
 }

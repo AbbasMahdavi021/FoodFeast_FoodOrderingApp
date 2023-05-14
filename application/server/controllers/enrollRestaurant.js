@@ -4,8 +4,8 @@
  * 
  * Filename: enrollRestaurant.js
  * Created on: 03/23
- * Author(s):
- * Contact: 
+ * Author(s): Jed G. Abbas M.
+ * Contact: amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: This module handles enrolling a new restaurant into the system 

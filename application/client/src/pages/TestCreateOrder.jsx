@@ -3,8 +3,8 @@
  * 
  * Filename: TestCreateOrder.jsx
  * Created on: 04/23
- * Author(s): Alex D., Abbas M.
- * Contact: adiaz41@sfsu.edu, amahdavi2@sfsu.edu
+ * Author(s): Alex D., 
+ * Contact: adiaz41@sfsu.edu, 
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: React functional component that serves as a simple testing interface for 

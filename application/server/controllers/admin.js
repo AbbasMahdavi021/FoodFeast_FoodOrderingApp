@@ -3,8 +3,8 @@
  * 
  * Filename: admin.js
  * Created on: 03/23
- * Author(s):
- * Contact: 
+ * Author(s): Abbas M.
+ * Contact: amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: This module provides functionality for managing users and restaurants. 

@@ -15,25 +15,55 @@
  */
 
 import axios from 'axios';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState, useEffect } from 'react';
-import {useParams} from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import MenuItem from '../components/MenuItem';
+import UserContext from '../context';
 import '../styles/MenuItem.css';
 
 const Restaurant = (props) => {
 
-    const {id} = useParams();
+    const { user } = useContext(UserContext);
 
+    const navigate = useNavigate();
+
+    const { id } = useParams();
+    const [restaurant, setRestaurant] = useState([]);
     const [newItem, setNewItem] = useState([]);
 
+    const [popUp, setPopUp] = useState(false);
+
+    console.log(popUp)
+
+    const togglePopup = () => {
+        setPopUp(!popUp);
+        setTimeout(() => {
+          setPopUp(false);
+        }, 3000);
+      };
+
+    const navigateToCart = () => {
+        togglePopup();
+        navigate('/cart');
+    };
+
+
     useEffect(() => {
+
+        const getRestaurantById = async () => {
+            try {
+                const response = await axios.get(`/restaurants/getRestaurantById/${id}`)
+                setRestaurant(response.data);
+            } catch (err) {
+                console.error(err);
+            }
+        }; getRestaurantById();
 
         const getMenu = async () => {
             try {
                 const response = await axios.get(`/restaurants/getMenu/${id}`);
                 let rows = response.data;
-                console.log(response);
                 if (rows.length > 0) {
                     setNewItem([...rows]);
                 } else {
@@ -42,27 +72,51 @@ const Restaurant = (props) => {
             } catch (err) {
                 console.error(err);
             }
-        };
-        getMenu();
+        }; getMenu();
+
     }, [id]);
 
     return (
-        <div className='restaurant'>
-            <h1>Menu</h1>
-            <div className='menu_container'>
-                {newItem.map(item => {
-                    return (
-                        <MenuItem
-                            id={item.id}
-                            image={item.image}
-                            itemName={item.name}
-                            price={item.price}
-                            restaurantId={id}
-                        />
-                    )
-                })}
+        <div className='restaurant-page'>
+
+            <div className='restaurant-header-div'>
+                <img className='restaurant-banner' src={restaurant.picture} alt={restaurant.name} />
+                <div className="restaurant-menu-details">
+                    <h1>{restaurant.name}</h1>
+                    <h2>{restaurant.description}</h2>
+                </div>
             </div>
+
+            <div className='restaurant-menu-div'>
+                <h1>Menu</h1>
+                <div className='menu_container'>
+                    {newItem.map(item => {
+                        return (
+                            <MenuItem
+                                id={item.id}
+                                image={item.image}
+                                itemName={item.name}
+                                price={item.price}
+                                restaurantId={id}
+                                togglePopup={togglePopup}
+                            />
+                        )
+                    })}
+                </div>
+
+                {popUp && (
+                    <div className="menuPopUpDiv">
+                        <h3>Item Added to Cart</h3>
+                        <div className="checkout-button">
+                            <button onClick={navigateToCart}>Go To Checkout?</button>
+                        </div>
+                    </div>
+                )}
+            </div>
+
+
         </div>
+
     );
 };
 

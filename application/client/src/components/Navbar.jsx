@@ -3,8 +3,8 @@
  * 
  * Filename: Navbar.jsx
  * Created on: 03/23
- * Author(s): Abbas M. 
- * Contact: 
+ * Author(s): Abbas M
+ * Contact:  amahdavi2@sfsu.edu
  * Copyright (c) 2023 by San Francisco State University
  * 
  * Description: Basic but very cool and functioning NavBar.
@@ -59,8 +59,9 @@ function Navbar() {
       )
       console.log('Logged Out Status: ' + res.data)
       setIsLoggedIn(false)
-      setUser(null)
-      localStorage.removeItem('user')
+      //setUser(null)
+      //localStorage.removeItem('user')
+      localStorage.clear();
       navigate('/')
     } catch (err) {
       console.error(err)
@@ -154,7 +155,7 @@ function Navbar() {
         <li className="navItem">
           {isLoggedIn ? (
             <a href="/login" className="log-button" onClick={handleLogout}>
-              Logout
+              Logout, <br/> ({user.username})
             </a>
           ) : (
             <a href="/login" className="log-button">
