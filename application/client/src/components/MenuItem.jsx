@@ -29,6 +29,8 @@ const MenuItem = (props) => {
             itemQuantity: 1, 
         });
 
+        props.togglePopup();
+
     }
 
     return (

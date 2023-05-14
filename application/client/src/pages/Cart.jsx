@@ -231,6 +231,10 @@ export const Cart = () => {
   const deliveryFee = 3.99;
   const total = (parseFloat(subTotal) + parseFloat(tax) + deliveryFee).toFixed(2);
 
+  if(!user){
+    return navigate('/login');
+  }
+
   return (
 
     <div className="cart-container">

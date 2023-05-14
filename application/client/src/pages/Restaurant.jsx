@@ -15,17 +15,39 @@
  */
 
 import axios from 'axios';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import MenuItem from '../components/MenuItem';
+import UserContext from '../context';
 import '../styles/MenuItem.css';
 
 const Restaurant = (props) => {
 
+    const { user } = useContext(UserContext);
+
+    const navigate = useNavigate();
+
     const { id } = useParams();
     const [restaurant, setRestaurant] = useState([]);
     const [newItem, setNewItem] = useState([]);
+
+    const [popUp, setPopUp] = useState(false);
+
+    console.log(popUp)
+
+    const togglePopup = () => {
+        setPopUp(!popUp);
+        setTimeout(() => {
+          setPopUp(false);
+        }, 3000);
+      };
+
+    const navigateToCart = () => {
+        togglePopup();
+        navigate('/cart');
+    };
+
 
     useEffect(() => {
 
@@ -60,20 +82,8 @@ const Restaurant = (props) => {
             <div className='restaurant-header-div'>
                 <img className='restaurant-banner' src={restaurant.picture} alt={restaurant.name} />
                 <div className="restaurant-menu-details">
-                    <h2>{restaurant.name}</h2>
-                    <p>{restaurant.price}</p>
-                    <p>{restaurant.cuisine_name}</p>
-                    <h1>{restaurant.description}</h1>
-                    <p>
-                        {[...Array(5)].map((star, i) => {
-                            if (i < restaurant.rating) {
-                                return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star1.png'} alt="star" />;
-                            } else {
-                                return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star2.png'} alt="star" />;
-                            }
-                        })}
-                    </p>
-                    <p>{restaurant.est_delivery_time - 5}-{restaurant.est_delivery_time} mins</p>
+                    <h1>{restaurant.name}</h1>
+                    <h2>{restaurant.description}</h2>
                 </div>
             </div>
 
@@ -88,10 +98,20 @@ const Restaurant = (props) => {
                                 itemName={item.name}
                                 price={item.price}
                                 restaurantId={id}
+                                togglePopup={togglePopup}
                             />
                         )
                     })}
                 </div>
+
+                {popUp && (
+                    <div className="menuPopUpDiv">
+                        <h3>Item Added to Cart</h3>
+                        <div className="checkout-button">
+                            <button onClick={navigateToCart}>Go To Checkout?</button>
+                        </div>
+                    </div>
+                )}
             </div>
 
 

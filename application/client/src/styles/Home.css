@@ -1,7 +1,6 @@
 /*//////////////////// HOME-Header PAGE /////////////////////////////*/
 
-.header-page {
-}
+.header-page {}
 
 .home-header-div {
     display: flex;
@@ -155,6 +154,7 @@
 .restaurant-f-container {
     scrollbar-width: thin;
 }
+
 .restaurant-f-container::-moz-scrollbar-track {
     background: #c8cbc4;
 }
@@ -272,6 +272,15 @@
     margin-right: 10%;
     flex-direction: column;
     justify-content: center;
+}
+
+.restaurant-list-div h1 {
+    margin: 10px;
+    color: #ffffff;
+    font-size: clamp(16px, 2vw, 40px);
+    font-family: Georgia, serif;
+
+
 }
 
 /* Filter */
@@ -400,6 +409,8 @@
     flex-wrap: wrap;
     margin-bottom: 60px;
 }
+
+
 
 .restaurant-box {
     position: relative;

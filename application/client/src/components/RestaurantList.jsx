@@ -19,9 +19,12 @@ const RestaurantList = () => {
 
   const { restaurants } = useContext(RestaurantsContext);
 
+  const restaurantsLength = restaurants.length;
+
   return (
 
     <div className='restaurant-list-div'>
+      <h1>Showing {restaurantsLength} result(s)</h1>
       <div className="restaurant-container">
         {restaurants.map((restaurant) => {
           return (
