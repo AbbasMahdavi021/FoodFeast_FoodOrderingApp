@@ -118,6 +118,16 @@ const Restaurant = (props) => {
                     <h1>{restaurant.name}</h1>
                     <h2>{restaurant.description}</h2>
                 </div>
+                <div class="love">
+                    <input id="switch" type="checkbox" onClick={handleLike} />
+                    <label class="love-heart" for="switch">
+                        <i class="left"></i>
+                        <i class="right"></i>
+                        <i class="bottom"></i>
+                        <div class="round"></div>
+                    </label>
+                </div>
+
 
             </div>
 
@@ -138,7 +148,8 @@ const Restaurant = (props) => {
                     })}
                 </div>
 
-            
+                
+
                 {popUp && (
                     <div className="menuPopUpDiv">
                         <h3>Item Added to Cart</h3>

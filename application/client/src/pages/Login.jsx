@@ -202,6 +202,7 @@ export default function Login() {
               autoComplete="given-name"
               name="username"
               label="Username"
+              variant='filled'
               required
               fullWidth
               autoFocus
