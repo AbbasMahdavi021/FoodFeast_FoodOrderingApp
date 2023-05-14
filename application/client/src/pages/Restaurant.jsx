@@ -138,6 +138,7 @@ const Restaurant = (props) => {
                     })}
                 </div>
 
+            
                 {popUp && (
                     <div className="menuPopUpDiv">
                         <h3>Item Added to Cart</h3>
