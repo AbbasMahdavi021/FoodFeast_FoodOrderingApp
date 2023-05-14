@@ -42,20 +42,21 @@ const getRestaurants = async (req, res) => {
 
 const getRestaurantById = async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id;
     const q = 'SELECT * FROM restaurants WHERE id = ?';
 
     db.query(q, [id], (error, results) => {
       if (error) {
-        console.error('Database error:', error);
-        res.status(500).json({ message: 'Internal server error' });
-      } else if (results.length) {
-        res.status(200).send(results[0]);
-      } else {
-        res.status(404).json({ message: 'Restaurant not found' });
+        console.error('Query error:', error);
+        return res.status(500).json({ message: 'Error executing query' });
       }
-    });
 
+      if (results.length === 0) {
+        return res.status(404).json({ message: 'Restaurant not found' });
+      }
+      const restaurant = results[0];
+      res.status(200).json(restaurant);
+    });
   } catch (err) {
     console.error('Error in getRestaurantById:', err);
     res.status(500).json({ message: 'Internal server error' });

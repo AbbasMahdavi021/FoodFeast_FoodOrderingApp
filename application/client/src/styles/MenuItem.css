@@ -1,4 +1,107 @@
-.restaurant {
+.restaurant-page{
+  display: flex;
+  flex-direction: column;
+}
+
+.restaurant-header-div{
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  height: 15vh;
+  min-height: 130px;
+  background-color: rgb(36, 33, 33);
+  margin-bottom: 10px;
+  padding-inline: 10%;
+}
+
+.restaurant-banner {
+  width: 200px;
+  min-width: 100px;
+  height: 15vh;
+  min-height: 130px;
+  border-radius: 50%;
+  border: 5px solid white;
+}
+
+.restaurant-banner img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.restaurant-menu-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  z-index: 9;
+  margin: 20px;
+  color: #ffffff;
+}
+
+.restaurant-menu-details {
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+  font-size: 36px;
+  text-transform: capitalize;
+}
+
+@media screen and (max-width: 768px) {
+  .restaurant-menu-details{
+    font-size: 18px;
+  }
+
+  .restaurant-header-div{
+    padding: 0;
+  }
+}
+
+.restaurant-menu-details p:nth-of-type(1){
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 1;
+  margin-top: 5px;
+  margin-right: 10px;
+  text-align: right;
+}
+
+.restaurant-menu-details p:nth-of-type(2) {
+  grid-column: 1 / span 2;
+  grid-row: 2 / span 1;
+  font-size: 25px;
+  font-style: italic;
+}
+
+.restaurant-menu-details h1 {
+  grid-column: 1 / span 2;
+  grid-row: 3 / span 1;
+  font-size: 18px;
+}
+
+.restaurant-menu-details p:nth-of-type(3) {
+  display: flex;
+  flex-direction: row;
+  grid-column: 1 / span 1;
+  grid-row: 4 / span 1;
+  height: 20px;
+  width: 20px;
+  margin-top: 5px;
+}
+
+.restaurant-menu-details p:nth-of-type(4) {
+  grid-column: 2 / span 1;
+  grid-row: 4 / span 1;
+  font-size: 20px;
+  margin-right: 10px;
+  margin-top: 5px;
+  text-align: right;
+}
+
+.restaurant-menu-details p:nth-of-type(5) {
+  grid-column: 1 / span 2;
+  grid-row: 5 / span 1;
+  font-size: 18px;
+}
+
+
+.restaurant-menu-div {
   margin-top: 1%;
   width: 100%;
   display: flex;
@@ -6,7 +109,7 @@
   align-items: center;
 }
 
-.restaurant h1 {
+.restaurant-menu-div h1 {
   justify-self: center;
   font-size: 8rem;
   color: #ffffff;
@@ -18,6 +121,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .menu-item-box {

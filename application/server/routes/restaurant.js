@@ -16,7 +16,7 @@ const { getRestaurants , getAllCuisines, getRestaurantsByCuisine, getFeatured, g
 
 const router = express.Router();
 
-router.get("/restaurant/:id", getRestaurantById);
+router.get("/getRestaurantById/:id", getRestaurantById);
 
 router.get("/getAllRestaurants", getRestaurants);
 

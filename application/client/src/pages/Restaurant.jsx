@@ -17,23 +17,31 @@
 import axios from 'axios';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import {useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import MenuItem from '../components/MenuItem';
 import '../styles/MenuItem.css';
 
 const Restaurant = (props) => {
 
-    const {id} = useParams();
-
+    const { id } = useParams();
+    const [restaurant, setRestaurant] = useState([]);
     const [newItem, setNewItem] = useState([]);
 
     useEffect(() => {
+
+        const getRestaurantById = async () => {
+            try {
+                const response = await axios.get(`/restaurants/getRestaurantById/${id}`)
+                setRestaurant(response.data);
+            } catch (err) {
+                console.error(err);
+            }
+        }; getRestaurantById();
 
         const getMenu = async () => {
             try {
                 const response = await axios.get(`/restaurants/getMenu/${id}`);
                 let rows = response.data;
-                console.log(response);
                 if (rows.length > 0) {
                     setNewItem([...rows]);
                 } else {
@@ -42,27 +50,53 @@ const Restaurant = (props) => {
             } catch (err) {
                 console.error(err);
             }
-        };
-        getMenu();
+        }; getMenu();
+
     }, [id]);
 
     return (
-        <div className='restaurant'>
-            <h1>Menu</h1>
-            <div className='menu_container'>
-                {newItem.map(item => {
-                    return (
-                        <MenuItem
-                            id={item.id}
-                            image={item.image}
-                            itemName={item.name}
-                            price={item.price}
-                            restaurantId={id}
-                        />
-                    )
-                })}
+        <div className='restaurant-page'>
+
+            <div className='restaurant-header-div'>
+                <img className='restaurant-banner' src={restaurant.picture} alt={restaurant.name} />
+                <div className="restaurant-menu-details">
+                    <h2>{restaurant.name}</h2>
+                    <p>{restaurant.price}</p>
+                    <p>{restaurant.cuisine_name}</p>
+                    <h1>{restaurant.description}</h1>
+                    <p>
+                        {[...Array(5)].map((star, i) => {
+                            if (i < restaurant.rating) {
+                                return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star1.png'} alt="star" />;
+                            } else {
+                                return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star2.png'} alt="star" />;
+                            }
+                        })}
+                    </p>
+                    <p>{restaurant.est_delivery_time - 5}-{restaurant.est_delivery_time} mins</p>
+                </div>
             </div>
+
+            <div className='restaurant-menu-div'>
+                <h1>Menu</h1>
+                <div className='menu_container'>
+                    {newItem.map(item => {
+                        return (
+                            <MenuItem
+                                id={item.id}
+                                image={item.image}
+                                itemName={item.name}
+                                price={item.price}
+                                restaurantId={id}
+                            />
+                        )
+                    })}
+                </div>
+            </div>
+
+
         </div>
+
     );
 };
 
