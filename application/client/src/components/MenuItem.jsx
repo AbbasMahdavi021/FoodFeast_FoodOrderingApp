@@ -48,8 +48,12 @@ const MenuItem = (props) => {
                 </p>
 
             </div>
+            <div className="checkout-button">
+         <button style = {{zIndex: '9999'}}onClick={handleAddItemToCart}>Add To Cart</button>
+     </div>
 
         </div>
+        
     );
 };
 
