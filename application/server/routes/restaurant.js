@@ -12,7 +12,11 @@
  */
 
 const express = require("express");
-const { getRestaurants , getAllCuisines, getRestaurantsByCuisine, getFeatured, getMenu, getRestaurantByOwner, getRestaurantById } = require("../controllers/restaurant.js");
+const { getRestaurants , getAllCuisines, getRestaurantsByCuisine, 
+        getFeatured, getMenu, getRestaurantByOwner, 
+        getRestaurantById
+         
+        } = require("../controllers/restaurant.js");
 
 const router = express.Router();
 

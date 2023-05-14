@@ -11,6 +11,7 @@
  */
 
 import React, { useState } from 'react';
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 import AdminUsers from './AdminUsers';
@@ -23,11 +24,31 @@ import '../..//styles/AdminLayout.css';
 
 
 const AdminTabs = ({ activeTab, handleTabClick }) => {
+
+    const navigate = useNavigate();
+
     const tabs = [
         { name: 'users', label: 'Users' },
         { name: 'restaurants', label: 'Restaurants' },
         { name: 'enrollments', label: 'Enrollments' }
     ];
+
+    const handleLogout = async () => {
+        try {
+            const res = await axios.post(
+                '/auth/logout',
+                {},
+                { withCredentials: true },
+            )
+            console.log('Logged Out Status: ' + res.data)
+            //setUser(null)
+            //localStorage.removeItem('user')
+            localStorage.clear();
+            navigate('/')
+        } catch (err) {
+            console.error(err)
+        }
+    }
 
     return (
         <div className='tabs'>
@@ -40,10 +61,10 @@ const AdminTabs = ({ activeTab, handleTabClick }) => {
             </div>
 
             <div className='tab-buttons'>
-                <a href='/adminlogin' className='tab-button'>
+                <a href='/adminlogin' onClick={handleLogout} className='tab-button'>
                     Logout
                 </a>
-                <a href='/' className='tab-button'>
+                <a href='/' onClick={handleLogout} className='tab-button'>
                     Exit
                 </a>
             </div>
