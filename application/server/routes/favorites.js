@@ -19,7 +19,7 @@ router.get('/:user_id', (req, res) => {
   getFavorites(req, res);
 });
 
-router.post('/save', saveFavorite);
-router.post('/delete', deleteFavorite);
+router.post('/saveFavorite', saveFavorite);
+router.post('/deleteFavorite', deleteFavorite);
 
 module.exports = router;

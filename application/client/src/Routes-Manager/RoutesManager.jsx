@@ -44,7 +44,7 @@ import teamMembers from '../components/teamMembers';
 import Restaurant from '../pages/Restaurant';
 import MenuEntry from '../pages/MenuEntry';
 import AddedItem from '../pages/AddedItem';
-
+import CampusMap from '../pages/CampusMap';
 import Browse from '../components/Browse';
 import RestaurantList from '../components/RestaurantList';
 
@@ -84,6 +84,7 @@ function RoutesManager() {
           <Route path="/restaurantOrders" element={<RestaurantOrders />} />
           <Route path="/testCreateOrder" element={<TestCreateOrder />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/campusmap" element={<CampusMap />}/>
 
           <Route path="/menuentry/:restaurantId" element={<MenuEntry />} />
           <Route path="/addeditem" element={<AddedItem />} />

@@ -33,21 +33,54 @@ const Restaurant = (props) => {
     const [newItem, setNewItem] = useState([]);
 
     const [popUp, setPopUp] = useState(false);
+    const [addedToFav, setAddedToFav] = useState();
 
-    console.log(popUp)
+    const [favoriteMessage, setFavoriteMessage] = useState("");
+
+    console.log(addedToFav + " " + favoriteMessage)
 
     const togglePopup = () => {
         setPopUp(!popUp);
         setTimeout(() => {
-          setPopUp(false);
+            setPopUp(false);
         }, 3000);
-      };
+    };
 
     const navigateToCart = () => {
         togglePopup();
         navigate('/cart');
     };
 
+    const handleLike = async () => {
+
+        if (!user) {
+            navigate('/login');
+        } else {
+            if (!addedToFav || addedToFav === false) {
+                console.log("HERE!")
+                const res = await axios.post("/favorites/saveFavorite",
+                    { user_id: user.id, restaurant_id: id });
+
+                const message = res.data.message;
+                console.log(message);
+                setFavoriteMessage(message);
+                setAddedToFav(true);
+                togglePopup();
+            } else if (addedToFav === true) {
+                console.log("removing Favorite");
+
+                const res = await axios.post("/favorites/deleteFavorite",
+                    { user_id: user.id, restaurant_id: id });
+
+                const message = res.data.message;
+                console.log(message);
+                setFavoriteMessage(message);
+                setAddedToFav(false);
+                togglePopup();
+
+            }
+        }
+    }
 
     useEffect(() => {
 
@@ -85,6 +118,17 @@ const Restaurant = (props) => {
                     <h1>{restaurant.name}</h1>
                     <h2>{restaurant.description}</h2>
                 </div>
+                <div class="love">
+                    <input id="switch" type="checkbox" onClick={handleLike} />
+                    <label class="love-heart" for="switch">
+                        <i class="left"></i>
+                        <i class="right"></i>
+                        <i class="bottom"></i>
+                        <div class="round"></div>
+                    </label>
+                </div>
+
+
             </div>
 
             <div className='restaurant-menu-div'>
@@ -104,12 +148,26 @@ const Restaurant = (props) => {
                     })}
                 </div>
 
+                
+
                 {popUp && (
                     <div className="menuPopUpDiv">
                         <h3>Item Added to Cart</h3>
                         <div className="checkout-button">
                             <button onClick={navigateToCart}>Go To Checkout?</button>
                         </div>
+                    </div>
+                )}
+
+                {popUp && favoriteMessage === "favoriteSaved" && (
+                    <div className="menuPopUpDiv">
+                        <h3>Restaurant Added To Favorites</h3>
+                    </div>
+                )}
+
+                {popUp && favoriteMessage === "favoriteRemoved" && (
+                    <div className="menuPopUpDiv">
+                        <h3>Restaurant Removed From Favorites</h3>
                     </div>
                 )}
             </div>

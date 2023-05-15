@@ -337,9 +337,13 @@
     text-align: left;
     white-space: nowrap;
     font-size: 18px;
-    color: black;
-    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
     font-family: Georgia, serif;
+}
+
+.filter-container select option:hover{
+    background-color: red;
 }
 
 .search-bar {

@@ -172,4 +172,13 @@ const getMenu = async (req, res) => {
 
 
 
-module.exports = { getRestaurants, getRestaurantById, getAllCuisines, getRestaurantsByCuisine, getMenu, getFeatured, getRestaurantByOwner };
+module.exports = { 
+    getRestaurants, 
+    getRestaurantById, 
+    getAllCuisines, 
+    getRestaurantsByCuisine, 
+    getMenu, 
+    getFeatured, 
+    getRestaurantByOwner
+
+  };

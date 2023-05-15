@@ -15,11 +15,14 @@
 
 
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AdminLayout from '../components/Admin/AdminLayout';
 
 const Admin = () => {
   const [isAdminLoggedIn, setIsAdminLoggedin] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getStatus = async () => {
@@ -46,7 +49,12 @@ const Admin = () => {
         </div>
 
       ) : (
-        <div>You must be logged in as an admin to access this page</div>
+        <div className='admin-div'>
+          <h1>You must be logged in as an admin to access this page</h1>
+          <a href='/adminlogin' className='tab-button'>
+            Admin Login
+          </a>
+        </div>
       )}
     </>
   );

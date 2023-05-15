@@ -68,10 +68,11 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                         fullWidth
                                         id="username"
                                         label="Username"
+                                        variant='filled'
                                         autoFocus
                                         InputLabelProps={{
                                             sx: {
-                                                fontSize: '1.2rem'
+                                                fontSize: '1.9rem'
                                             }
                                         }}
                                         inputProps={{
@@ -89,11 +90,12 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                         fullWidth
                                         id="email"
                                         label="Email Address"
+                                        variant='filled'
                                         name="email"
                                         autoComplete="email"
                                         InputLabelProps={{
                                             sx: {
-                                                fontSize: '1.2rem'
+                                                fontSize: '1.9rem'
                                             }
                                         }}
                                         inputProps={{
@@ -111,12 +113,13 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                         fullWidth
                                         name="password"
                                         label="Password"
+                                        variant='filled'
                                         type="password"
                                         id="password"
                                         autoComplete="new-password"
                                         InputLabelProps={{
                                             sx: {
-                                                fontSize: '1.2rem'
+                                                fontSize: '1.9rem'
                                             }
                                         }}
                                         inputProps={{
@@ -135,12 +138,13 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                                         fullWidth
                                         name="confirmPassword"
                                         label="Confirm Password"
+                                        variant='filled'
                                         type="password"
                                         id="password"
                                         autoComplete="new-password"
                                         InputLabelProps={{
                                             sx: {
-                                                fontSize: '1.2rem'
+                                                fontSize: '1.9rem'
                                             }
                                         }}
                                         inputProps={{

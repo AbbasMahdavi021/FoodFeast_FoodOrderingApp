@@ -202,12 +202,13 @@ export default function Login() {
               autoComplete="given-name"
               name="username"
               label="Username"
+              variant='filled'
               required
               fullWidth
               autoFocus
               InputLabelProps={{
                 sx: {
-                  fontSize: '1.2rem',
+                  fontSize: '2rem',
                 },
               }}
               inputProps={{
@@ -225,11 +226,12 @@ export default function Login() {
               fullWidth
               name="password"
               label="Password"
+              variant='filled'
               type="password"
               autoComplete="current-password"
               InputLabelProps={{
                 sx: {
-                  fontSize: '1.2rem',
+                  fontSize: '2rem',
                 },
               }}
               inputProps={{
@@ -239,7 +241,7 @@ export default function Login() {
               }}
             />
 
-            <Grid container justifyContent="space-between" marginBottom={10} marginTop={1} marginLeft={1}  >
+<Grid container justifyContent="space-between" marginBottom={10} marginTop={1} marginLeft={1}  >
               <Grid item marginRight={1} marginTop={2}>
                 <label>
                   <input type="checkbox" style={{ transform: 'scale(1.5)', marginRight: '8px' }} />

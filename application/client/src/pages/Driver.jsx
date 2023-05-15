@@ -18,6 +18,8 @@ import { io } from 'socket.io-client';
 import UserContext from '../context';
 import '../styles/Driver.css';
 import Map from './Map';
+import Link from '@mui/material/Link';
+import Button from '@mui/material/Button';
 import DriverRegister from '../components/Driver/DriverRegister';
 
 function Driver() {
@@ -98,6 +100,24 @@ function Driver() {
 
   return (
     <div className='driverName'>
+  <Button
+        href="/campusmap"
+        type="submit"
+        fullWidth
+        variant="contained"
+        sx={{
+            mt: 3, mb: 2, borderRadius: '15px', fontSize: 20,
+            backgroundColor: '#fc3', color: '#000000',
+            width: '250px',
+            '&:hover': { backgroundColor: '#FFCF01' },
+            boxShadow: '2px 2px 5px rgba(0, 0, 0, 10)',
+            display: 'inline',
+            margin: '50px auto 50px',
+        }}
+    >
+        View Campus Map
+    </Button>
+
       {user && isDriver ? (
         driverDashboard
       ) : (
