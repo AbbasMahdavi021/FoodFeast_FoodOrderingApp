@@ -24,7 +24,14 @@ const RestaurantList = () => {
   return (
 
     <div className='restaurant-list-div'>
-      <h1>Showing {restaurantsLength} result(s)</h1>
+      {restaurantsLength != 1 ? (
+        <h1>Showing {restaurantsLength} results</h1>
+      ) : (
+
+        <h1>Showing {restaurantsLength} result</h1>
+      )
+      }
+
       <div className="restaurant-container">
         {restaurants.map((restaurant) => {
           return (
