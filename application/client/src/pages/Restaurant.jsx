@@ -21,10 +21,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import MenuItem from '../components/MenuItem';
 import UserContext from '../context';
 import '../styles/MenuItem.css';
+import AddToFavorite from '../components/AddToFavorite';
 
 const Restaurant = (props) => {
 
     const { user } = useContext(UserContext);
+    const user_id = user ? user.id : null;
 
     const navigate = useNavigate();
 
@@ -32,15 +34,12 @@ const Restaurant = (props) => {
     const [restaurant, setRestaurant] = useState([]);
     const [newItem, setNewItem] = useState([]);
 
-    const [popUp, setPopUp] = useState(false);
-    const [addedToFav, setAddedToFav] = useState();
+    const [favoritedRestaurants, setFavoritedRestaurants] = useState([]);
 
-    const [favoriteMessage, setFavoriteMessage] = useState("");
-
-    console.log(addedToFav + " " + favoriteMessage)
+    const [popUp, setPopUp] = useState("");
+    const [addedToFav, setAddedToFav] = useState(false);
 
     const togglePopup = () => {
-        setPopUp(!popUp);
         setTimeout(() => {
             setPopUp(false);
         }, 3000);
@@ -56,35 +55,54 @@ const Restaurant = (props) => {
         if (!user) {
             navigate('/login');
         } else {
-            if (!addedToFav || addedToFav === false) {
-                console.log("HERE!")
+            if (addedToFav === false) {
+                console.log("Adding to Fav")
                 const res = await axios.post("/favorites/saveFavorite",
-                    { user_id: user.id, restaurant_id: id });
+                    { user_id: user_id, restaurant_id: id });
 
                 const message = res.data.message;
-                console.log(message);
-                setFavoriteMessage(message);
                 setAddedToFav(true);
+                setPopUp(message)
                 togglePopup();
-            } else if (addedToFav === true) {
-                console.log("removing Favorite");
 
+            }
+            if (addedToFav === true) {
+                console.log("removing Favorite");
                 const res = await axios.post("/favorites/deleteFavorite",
-                    { user_id: user.id, restaurant_id: id });
+                    { user_id: user_id, restaurant_id: id });
 
                 const message = res.data.message;
-                console.log(message);
-                setFavoriteMessage(message);
+                setPopUp(message)
                 setAddedToFav(false);
                 togglePopup();
-
             }
         }
     }
 
     useEffect(() => {
 
+        const getFavorites = async () => {
+            try {
+                const res = await axios.get(`/favorites/${user_id}`);
+
+                console.log(res.data)
+
+                for (let i=0; i < res.data.length; i ++) {
+                    console.log(res.data[i].id)
+                    console.log(id)
+
+                    if (res.data[i].id == id){
+                        setAddedToFav(true);
+                    }
+                }
+
+            } catch (err) {
+                console.error(err);
+            }
+        }; getFavorites();
+
         const getRestaurantById = async () => {
+
             try {
                 const response = await axios.get(`/restaurants/getRestaurantById/${id}`)
                 setRestaurant(response.data);
@@ -107,7 +125,7 @@ const Restaurant = (props) => {
             }
         }; getMenu();
 
-    }, [id]);
+    }, [user_id]);
 
     return (
         <div className='restaurant-page'>
@@ -118,8 +136,9 @@ const Restaurant = (props) => {
                     <h1>{restaurant.name}</h1>
                     <h2>{restaurant.description}</h2>
                 </div>
+
                 <div class="love">
-                    <input id="switch" type="checkbox" onClick={handleLike} />
+                    <input id="switch" type="checkbox" onClick={handleLike} checked={addedToFav} />
                     <label class="love-heart" for="switch">
                         <i class="left"></i>
                         <i class="right"></i>
@@ -127,7 +146,6 @@ const Restaurant = (props) => {
                         <div class="round"></div>
                     </label>
                 </div>
-
 
             </div>
 
@@ -143,14 +161,13 @@ const Restaurant = (props) => {
                                 price={item.price}
                                 restaurantId={id}
                                 togglePopup={togglePopup}
+                                setPopUp={setPopUp}
                             />
                         )
                     })}
                 </div>
 
-                
-
-                {popUp && (
+                {popUp === "addToCart" && (
                     <div className="menuPopUpDiv">
                         <h3>Item Added to Cart</h3>
                         <div className="checkout-button">
@@ -159,13 +176,13 @@ const Restaurant = (props) => {
                     </div>
                 )}
 
-                {popUp && favoriteMessage === "favoriteSaved" && (
+                {popUp === "favoriteSaved" && (
                     <div className="menuPopUpDiv">
                         <h3>Restaurant Added To Favorites</h3>
                     </div>
                 )}
 
-                {popUp && favoriteMessage === "favoriteRemoved" && (
+                {popUp === "favoriteRemoved" && (
                     <div className="menuPopUpDiv">
                         <h3>Restaurant Removed From Favorites</h3>
                     </div>

@@ -37,7 +37,7 @@ const RegisterForm = ({ handleSubmit, formData, handleChange, setFormData, err, 
                     sm={4}
                     md={7}
                     sx={{
-                        backgroundImage: `url(${process.env.PUBLIC_URL}/images/brand/banner.jpg)`, //TODO 
+                        backgroundImage: `url(${process.env.PUBLIC_URL}/images/brand/restaurantlogin.jpg)`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                     }}

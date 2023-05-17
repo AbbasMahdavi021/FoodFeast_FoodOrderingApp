@@ -239,7 +239,7 @@
     backdrop-filter: blur(3px);
     width: 100%;
     height: 80%;
-    z-index: 1000;
+    z-index: 9999999;
 }
 
 .popUpDiv {

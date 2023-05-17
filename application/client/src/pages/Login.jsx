@@ -170,7 +170,7 @@ export default function Login() {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: `url(${process.env.PUBLIC_URL}/images/brand/banner.jpg)`, //Change later
+          backgroundImage: `url(${process.env.PUBLIC_URL}/images/brand/restaurantlogin.jpg)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}

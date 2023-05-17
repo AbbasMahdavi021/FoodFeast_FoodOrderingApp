@@ -29,6 +29,7 @@ const MenuItem = (props) => {
             itemQuantity: 1, 
         });
 
+        props.setPopUp("addToCart")
         props.togglePopup();
 
     }
@@ -49,7 +50,7 @@ const MenuItem = (props) => {
 
             </div>
             <div className="checkout-button">
-         <button style = {{zIndex: '9999'}}onClick={handleAddItemToCart}>Add To Cart</button>
+         <button style = {{zIndex: '999'}}onClick={handleAddItemToCart}>Add To Cart</button>
      </div>
 
         </div>
