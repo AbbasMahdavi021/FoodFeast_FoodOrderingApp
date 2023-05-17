@@ -21,9 +21,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import MenuItem from '../components/MenuItem';
 import UserContext from '../context';
 import '../styles/MenuItem.css';
-import AddToFavorite from '../components/AddToFavorite';
 
-const Restaurant = (props) => {
+const Restaurant = () => {
 
     const { user } = useContext(UserContext);
     const user_id = user ? user.id : null;
@@ -33,8 +32,6 @@ const Restaurant = (props) => {
     const { id } = useParams();
     const [restaurant, setRestaurant] = useState([]);
     const [newItem, setNewItem] = useState([]);
-
-    const [favoritedRestaurants, setFavoritedRestaurants] = useState([]);
 
     const [popUp, setPopUp] = useState("");
     const [addedToFav, setAddedToFav] = useState(false);
