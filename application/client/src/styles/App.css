@@ -110,7 +110,7 @@ section {
 
 body {
     line-height: 1;
-    background: linear-gradient(to bottom right, rgb(51, 51, 51) 35%, purple 35%);
+    background: linear-gradient(to bottom right, white, rgb(45, 43, 43) 33%);
     background-size: 200% 200%;
     scrollbar-width: none;
 }
