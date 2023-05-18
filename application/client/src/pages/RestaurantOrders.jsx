@@ -60,21 +60,25 @@ const RestaurantOrders = () => {
 
   const setOrderInProgress = async (orderId) => {
     try {
-      const newOrderStatus = 'In Progress';
+      const newOrderStatus = 'In Progress'
       await axios.put('http://localhost:8080/orders/updateStatus', {
         orderId,
         orderStatus: newOrderStatus,
-      });
-  
-      const updatedOrder = orders.find((order) => order.order_id === orderId);
+      })
+
+      console.log('set order : ', orderId, ' to in ', newOrderStatus)
+
+      const updatedOrder = orders.find((order) => order.order_id === orderId)
       const updatedOrders = orders.map((order) =>
         order.order_id === orderId
           ? { ...order, order_status: newOrderStatus }
           : order,
-      );
-      setOrders(updatedOrders);
-  
-      const response = await fetch(`http://localhost:8080/orders/checkOrderAcceptedByDriver/${orderId}`)
+      )
+      setOrders(updatedOrders)
+
+      const response = await fetch(
+        `http://localhost:8080/orders/checkOrderAcceptedByDriver/${orderId}`,
+      )
       const data = await response.json()
       const accepted = data.order_accepted_by_driver
 
@@ -82,16 +86,13 @@ const RestaurantOrders = () => {
         ...updatedOrder,
         order_status: newOrderStatus,
         order_accepted_by_driver: accepted,
-        
-      };
-  
-      socket.emit('acceptOrder', updatedOrderWithStatus, user.id);
+      }
+
+      socket.emit('acceptOrder', updatedOrderWithStatus, user.id)
     } catch (error) {
-      console.error('Error updating order status:', error);
+      console.error('Error updating order status:', error)
     }
-  };
-  
-  
+  }
 
   useEffect(() => {
     if (scrollToBottom) {
@@ -136,23 +137,22 @@ const RestaurantOrders = () => {
       try {
         const response = await axios.get(
           `http://localhost:8080/orders/restaurant/${restaurantId}`,
-        );
-        setOrders(response.data);
-  
+        )
+        setOrders(response.data)
+
         const initialUnacceptedOrders = response.data.filter(
           (order) => order.order_status === 'Pending',
-        );
-        setUnacceptedOrders(initialUnacceptedOrders);
+        )
+        setUnacceptedOrders(initialUnacceptedOrders)
       } catch (err) {
-        console.error(err);
+        console.error(err)
       }
-    };
-  
-    if (restaurantId) {
-      fetchOrders();
     }
-  }, [restaurantId]);
-  
+
+    if (restaurantId) {
+      fetchOrders()
+    }
+  }, [restaurantId])
 
   const fetchOrderItems = async (orderIds) => {
     try {
@@ -182,9 +182,9 @@ const RestaurantOrders = () => {
     }
   }, [orders])
 
-
   return (
     <div className="orders-page">
+      <h2>Restaurant ID: {restaurantId}</h2>
       <div className="unaccepted-orders-sidebar">
         <h2>Unaccepted Orders</h2>
         {unacceptedOrders.map((order) => (
@@ -219,10 +219,12 @@ const RestaurantOrders = () => {
         {orders
           .filter((order) =>
             activeTab === 'pending'
-              ? order.order_status === 'Pending' ||
-                order.order_status === 'In Progress'
-              : order.order_status === 'Completed' ||
-                order.order_status === 'Ready for Pickup',
+              ? (order.order_status === 'Pending' ||
+                  order.order_status === 'In Progress') &&
+                order.restaurant_id === restaurantId
+              : (order.order_status === 'Completed' ||
+                  order.order_status === 'Ready for Pickup') &&
+                order.restaurant_id === restaurantId,
           )
           .map((order) => (
             <div key={order.order_id} className="restaurant-orders-item">

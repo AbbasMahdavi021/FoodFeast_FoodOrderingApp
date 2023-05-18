@@ -203,7 +203,8 @@ function Driver() {
       {orders
         .filter(
           (order) =>
-            order.order_status === 'In Progress' &&
+            (order.order_status === 'In Progress' ||
+            order.order_status === 'Ready for Pickup') &&
             order.order_accepted_by_driver === 0,
         )
         .map((order, index) => (
