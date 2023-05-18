@@ -6,6 +6,7 @@ import '../styles/RestaurantOrders.css'
 
 const RestaurantOrders = () => {
   const { restaurantId } = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   const [orders, setOrders] = useState([])
   const [unacceptedOrders, setUnacceptedOrders] = useState([])
@@ -25,13 +26,13 @@ const RestaurantOrders = () => {
 
   const updateOrderStatus = async (orderId) => {
     const orderToUpdate = orders.find((order) => order.order_id === orderId)
-
     if (orderToUpdate.order_status === 'Ready for Pickup') {
       return
     }
 
     try {
       const newOrderStatus = 'Ready for Pickup'
+
       await axios.put('http://localhost:8080/orders/updateStatus', {
         orderId,
         orderStatus: newOrderStatus,
@@ -65,6 +66,8 @@ const RestaurantOrders = () => {
         orderStatus: newOrderStatus,
       })
 
+      console.log('set order : ', orderId, ' to in ', newOrderStatus)
+
       const updatedOrder = orders.find((order) => order.order_id === orderId)
       const updatedOrders = orders.map((order) =>
         order.order_id === orderId
@@ -73,13 +76,19 @@ const RestaurantOrders = () => {
       )
       setOrders(updatedOrders)
 
+      const response = await fetch(
+        `http://localhost:8080/orders/checkOrderAcceptedByDriver/${orderId}`,
+      )
+      const data = await response.json()
+      const accepted = data.order_accepted_by_driver
+
       const updatedOrderWithStatus = {
         ...updatedOrder,
         order_status: newOrderStatus,
+        order_accepted_by_driver: accepted,
       }
 
-      socket.emit('acceptOrder', updatedOrderWithStatus)
-      console.log('Emitted acceptOrder event:', updatedOrderWithStatus)
+      socket.emit('acceptOrder', updatedOrderWithStatus, user.id)
     } catch (error) {
       console.error('Error updating order status:', error)
     }
@@ -101,10 +110,8 @@ const RestaurantOrders = () => {
     const newSocket = io('http://localhost:8080')
     setSocket(newSocket)
     newSocket.emit('joinRestaurantRoom', restaurantId)
-    console.log('Sent joinRestaurantRoom event:', restaurantId)
 
     newSocket.on('newOrder', (newOrder) => {
-      console.log('Received new order:', newOrder)
       setOrders((prevOrders) => [...prevOrders, newOrder])
       setUnacceptedOrders((prevUnacceptedOrders) => [
         ...prevUnacceptedOrders,
@@ -120,17 +127,28 @@ const RestaurantOrders = () => {
   }, [restaurantId])
 
   useEffect(() => {
+    if (socket) {
+      socket.emit('joinDriverRoom', `driver-${user.id}`, user.id)
+    }
+  }, [socket])
+
+  useEffect(() => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
           `http://localhost:8080/orders/restaurant/${restaurantId}`,
         )
-        console.log('Fetched orders:', response.data)
         setOrders(response.data)
+
+        const initialUnacceptedOrders = response.data.filter(
+          (order) => order.order_status === 'Pending',
+        )
+        setUnacceptedOrders(initialUnacceptedOrders)
       } catch (err) {
         console.error(err)
       }
     }
+
     if (restaurantId) {
       fetchOrders()
     }
@@ -143,10 +161,8 @@ const RestaurantOrders = () => {
           axios.get(`http://localhost:8080/orders/items/${orderId}`),
         ),
       )
-      console.log('Fetched order items:', response)
 
       const newOrderItems = response.reduce((acc, orderItemRes, index) => {
-        console.log('orderItemRes:', orderItemRes.data)
         acc[orderIds[index]] = orderItemRes.data
         return acc
       }, {})
@@ -168,6 +184,7 @@ const RestaurantOrders = () => {
 
   return (
     <div className="orders-page">
+      <h2>Restaurant ID: {restaurantId}</h2>
       <div className="unaccepted-orders-sidebar">
         <h2>Unaccepted Orders</h2>
         {unacceptedOrders.map((order) => (
@@ -202,10 +219,12 @@ const RestaurantOrders = () => {
         {orders
           .filter((order) =>
             activeTab === 'pending'
-              ? order.order_status === 'Pending' ||
-                order.order_status === 'In Progress'
-              : order.order_status === 'Completed' ||
-                order.order_status === 'Ready for Pickup',
+              ? (order.order_status === 'Pending' ||
+                  order.order_status === 'In Progress') &&
+                order.restaurant_id === restaurantId
+              : (order.order_status === 'Completed' ||
+                  order.order_status === 'Ready for Pickup') &&
+                order.restaurant_id === restaurantId,
           )
           .map((order) => (
             <div key={order.order_id} className="restaurant-orders-item">

@@ -32,6 +32,9 @@ function Navbar() {
   const [icon, setIcon] = useState('navButton')
   const { user, setUser } = useContext(UserContext)
 
+  const { logoutUser } = useContext(UserContext);
+
+
   const navigate = useNavigate()
 
   const isRestaurantOwner = user && user.isRestaurantOwner === 1
@@ -59,9 +62,9 @@ function Navbar() {
       )
       console.log('Logged Out Status: ' + res.data)
       setIsLoggedIn(false)
-      //setUser(null)
-      //localStorage.removeItem('user')
-      localStorage.clear();
+      setUser(null)
+      localStorage.removeItem('user')
+      logoutUser(); // from userContext. Nulls the restaurant and user id
       navigate('/')
     } catch (err) {
       console.error(err)

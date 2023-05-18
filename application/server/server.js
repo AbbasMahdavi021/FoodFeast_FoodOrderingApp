@@ -49,10 +49,17 @@ const io = require("socket.io")(server, {
 const orderRoutes = require("./routes/orders.js")(io);
 
 io.on('connection', (socket) => {
-  socket.on('joinDriverRoom', () => {
-    console.log('Driver joined the drivers room');
-    socket.join('drivers');
+  socket.on('joinDriverRoom', async (room, userId) => {
+    console.log(`Socket ${socket.id} joining room: ${room} (driverId: ${userId})`);
+    socket.join(room);
   });
+  
+  socket.on('acceptOrder', (order, driverId) => {
+    const driverRoom = `driver-${driverId}`;
+    console.log(`Sending order to driver room: ${driverRoom}`);
+    io.to(driverRoom).emit('newOrderForDriver', order);
+  });
+  
 
   socket.on("joinRestaurantRoom", async (room) => {
     console.log(`Socket ${socket.id} joining room: ${room}`);
@@ -78,10 +85,11 @@ io.on('connection', (socket) => {
       console.log('No room specified');
       return;
     } else {
-      console.log(`Data: ${JSON.stringify(data)}`);
+      console.log(`Data: ${JSON.stringify(data)}, Room: ${room}`);
       io.to(room).emit('receive-order', data);
     }
   });
+  
 
   socket.on('disconnect', () => {
     console.log('A user disconnected');

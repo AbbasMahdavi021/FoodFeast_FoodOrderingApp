@@ -34,6 +34,35 @@
   overflow-y: hidden;
 }
 
+.unaccepted-order {
+  display: flex;
+  flex-direction: column;
+  color: rgb(51, 51, 51);
+}
+
+
+.order-complete-button {
+  margin-top: 10px;
+  background-color: #28a745;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.order-picked-up-button {
+  margin-top: 10px;
+  background-color: #28a745;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
 .order-info {
   display: flex;
   flex-direction: column;
