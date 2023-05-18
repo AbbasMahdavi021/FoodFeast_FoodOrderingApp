@@ -37,5 +37,16 @@ const register = (req, res) => {
         });
     });
 };
+const becomeDriver = (req,res) => {
+    const userId = req.body.userId;
 
-module.exports = { register };
+    const q = "UPDATE users SET isDriver = ? WHERE id = ?";
+    db.query(q, [1, userId], (err, data) => {
+        if (err) return res.json(err);
+        if(data.affectedRows === 0){
+            return res.send({message:  "Could not find user"})
+        }
+        res.send({message: "becameDriver"});
+    });
+}
+module.exports = { register, becomeDriver };

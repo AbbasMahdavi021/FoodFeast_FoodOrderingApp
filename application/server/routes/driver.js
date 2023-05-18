@@ -12,11 +12,11 @@
  */
 
 const express = require("express");
-const { register} = require("../controllers/driver.js");
+const { register, becomeDriver} = require("../controllers/driver.js");
 
 const router = express.Router();
 
 router.post("/register", register);
-
+router.post("/becomeDriver", becomeDriver);
 
 module.exports = router;

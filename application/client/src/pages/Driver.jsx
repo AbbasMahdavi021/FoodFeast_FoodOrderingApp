@@ -21,6 +21,7 @@ import Map from './Map';
 import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
 import DriverRegister from '../components/Driver/DriverRegister';
+import BecomeDriver from '../components/Driver/BecomeDriver';
 
 function Driver() {
   const { user, restaurantId } = useContext(UserContext)
@@ -257,7 +258,9 @@ function Driver() {
 
   return (
     <div className='driverName'>
-  <Button
+      {user && isDriver ? (
+        <>
+        <Button
         href="/campusmap"
         type="submit"
         fullWidth
@@ -274,18 +277,13 @@ function Driver() {
     >
         View Campus Map
     </Button>
-
-      {user && isDriver ? (
-        <>
           <div className="orders-page">
             {unacceptedOrdersSidebar}
             {acceptedOrderDisplay}
           </div>
         </>
       ) : (
-        <p>
-          This user is not a Driver: --Insert link to driver registration here--
-        </p>
+        <BecomeDriver/>
       )}
     </div>
   )
