@@ -16,7 +16,7 @@
 | Student Name     |       Student Email      | GitHub Username |
 |      :---:       |           :---:          |      :---:      |
 | Elahe Bashiri    |     Ebashiri@sfsu.edu    |     Elahe87     |              
-| Alexander Diaz   |  adiaz41@sfsu.edu        |    Diaz5-hub    |
+| Alexander Diaz   |  adiaz41@sfsu.edu        |    xanderbx    |
 | Abbas Mahdavi    |  amahdavi2@sfsu.edu      | AbbasMahdavi021 |
 | Megan Lew        |  mlew1@mail.sfsu.edu     |    meganlew     |
 | Jed Graves       | jgraves4@mail.sfsu.edu   |   jgraves4      |
