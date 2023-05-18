@@ -62,7 +62,7 @@ const HomeHeader = ({ scrollToSecondPage }) => {
 
       <div className='home-header'>
         <div className='text-container'>
-          <h1>Find your food simple.</h1>
+          <h1>Meals made simple.</h1>
           <h1>Food delivered anywhere </h1>
           <h1>on campus.</h1>
           <h1>Exclusive use for SFSU </h1>
