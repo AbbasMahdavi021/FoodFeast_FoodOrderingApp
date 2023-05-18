@@ -14,11 +14,12 @@ const teamMembers = [
     id: 1,
     name: 'Elahe Bashiri',
     role: 'Team Lead',
-    bio: `    Hello! My name is Elahe Bashiri, and I am honored to be the team leader of the project. Currently, I am a Master of Science candidate in Computer Science at the San Francisco State University, and my focus is on Human-Computer Interaction with an emphasis on health informatics.
+    bio: `    Hello! My name is Elahe Bashiri, and I am honored to be the team leader of the project. Currently, I am a Master of Science candidate in Computer Science at the San Francisco State University.
+
       I'm highly motivated and an experienced Software Developer, UX Designer, and IT Specialist with over two years of industry expertise in debugging software and hardware.
       I possess excellent communication, teaching, and training skills, along with the ability to work independently with minimal supervision and a strong work ethic.
       When I'm not working, I enjoy hiking with my family or getting lost in a good book.
-      My goal is to improve the user experience of health informatics systems by incorporating user-centered design principles, with the aim of making life easier for patients through intuitive and efficient interfaces.'`,
+      `,
     photo: '../images/brand/Elahe.jpg',
   },
   {
