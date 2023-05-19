@@ -148,9 +148,15 @@ export const Cart = () => {
     const loadCart = async () => {
       const res = await axios.post('cart/getCart', { withCredentials: true });
 
-      const resData = [...res.data.itemList];
+      let resData = [];
 
-      console.log(JSON.stringify(res));
+      if (res.data.itemList && typeof res.data.itemList[Symbol.iterator] === 'function') {
+        resData = [...res.data.itemList];
+      } else {
+        // Handle the case where res.data.itemList is not iterable
+        console.error('res.data.itemList is not iterable');
+      }
+
       setCartItems(resData);
       setRestaurantId(res.data.restaurantId);
       setTotalQuantity(res.data.totalQuantity);
@@ -231,7 +237,7 @@ export const Cart = () => {
   const deliveryFee = 3.99;
   const total = (parseFloat(subTotal) + parseFloat(tax) + deliveryFee).toFixed(2);
 
-  if(!user){
+  if (!user) {
     return navigate('/login');
   }
 
@@ -321,11 +327,11 @@ export const Cart = () => {
           {popUp && (
             <div className='popUp'>
               <div className="popUpDiv">
-                <h3>Dear {user.username}, Your order with <br/></h3>
-                <h3>{totalQuantity} items, for ${total} ({formData.paymentMethod})</h3>
-                <h3>has been placed, and will be delivered to <br/>{deliveryAddress}<br/></h3>
-                <h3>Please check your email for the order receipt and status!<br/></h3>
-                <h3>Thank you for choosing FoodFeast <br/></h3>
+                <h3>Dear {user.username}, Your order with:<br /><br /></h3>
+                <h3>{totalQuantity} items, for ${total} ({formData.paymentMethod}),<br /><br /></h3>
+                <h3>has been placed, and will be delivered to <br /><br />{deliveryAddress}<br /><br /></h3>
+                <h3>Please check your email for the order receipt and status!<br /><br /></h3>
+                <h3>Thank you for choosing FoodFeast<br /><br /></h3>
                 <div className="checkout-button">
                   <button onClick={navigateToHome}>Close</button>
                 </div>

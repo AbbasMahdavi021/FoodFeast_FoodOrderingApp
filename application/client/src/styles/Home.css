@@ -93,7 +93,7 @@
 }
 
 .f-restaurants {
-    color:white;
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -318,10 +318,10 @@
     margin-bottom: 10px;
 }
 
-.filter-container select {
+.filter-dropdown {
     height: 40px;
+    width: 150px;
     border: none;
-    padding: 10px;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
     font-size: 16px;
@@ -329,21 +329,7 @@
     background-color: #fc3;
     cursor: pointer;
     font-size: 20px;
-    text-align: center;
     font-family: Georgia, serif;
-}
-
-.filter-container select option {
-    text-align: left;
-    white-space: nowrap;
-    font-size: 18px;
-    color: rgb(0, 0, 0);
-    background-color: rgb(255, 255, 255);
-    font-family: Georgia, serif;
-}
-
-.filter-container select option:hover{
-    background-color: red;
 }
 
 .search-bar {

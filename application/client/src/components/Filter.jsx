@@ -26,28 +26,61 @@
  */
 
 import React, { useState } from 'react';
+import Select from 'react-select';
+
+
+const colourStyles = {
+  control: (styles) => ({
+    ...styles,
+    backgroundColor: '#fc3',
+    color: 'black',
+    border: 'none',
+    boxShadow: 'none',
+    '&:hover': {
+      backgroundColor: 'yellow',
+    },
+  }),
+  option: (styles, { isDisabled, isFocused, isSelected }) => ({
+    ...styles,
+    backgroundColor: isSelected
+      ? 'grey' 
+      : isFocused
+      ? 'lightblue'
+      : null,
+    color: isSelected ? 'white' : 'black',
+    cursor: isDisabled ? 'not-allowed' : 'default',
+  }),
+};
 
 const Filter = (props) => {
-
   const [selectedCuisine, setSelectedCuisine] = useState('All');
 
-  const handleCuisineSelected = (event) => {
-    setSelectedCuisine(event.target.value);
-    if (event.target.value === 'All') {
+  const handleCuisineSelected = (selectedOption) => {
+    setSelectedCuisine(selectedOption.value);
+    if (selectedOption.value === 'All') {
       props.handleFilterChange([]);
     } else {
-      props.handleFilterChange([{ name: event.target.value, isChecked: true }]);
+      props.handleFilterChange([{ name: selectedOption.value, isChecked: true }]);
     }
   };
 
+  const options = [
+    { value: 'All', label: 'All' },
+    ...props.cuisines.map((cuisine) => ({
+      value: cuisine.name,
+      label: cuisine.name
+    }))
+  ];
+
   return (
     <div className="filter-container">
-      <select value={selectedCuisine} onChange={handleCuisineSelected}>
-        <option value="All">All</option>
-        {props.cuisines.map(cuisine => (
-          <option key={cuisine.name} value={cuisine.name}>{cuisine.name}</option>
-        ))}
-      </select>
+      <Select
+        className='filter-dropdown'
+        value={{ value: selectedCuisine, label: selectedCuisine }}
+        options={options}
+        onChange={handleCuisineSelected}
+        styles={colourStyles}
+      />
     </div>
   );
 };
