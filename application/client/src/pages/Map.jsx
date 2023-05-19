@@ -101,7 +101,7 @@ function Map() {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={13}
+        zoom={14}
         onClick={() => setSelectedRestaurant(null)}
       >
         {/* Render a Marker for each restaurant */}
@@ -126,12 +126,23 @@ function Map() {
                 src={selectedRestaurant.picture}
                 alt={`${selectedRestaurant.name}`}
               />
+
+              <div className="restaurant-f-starbox">
+                {[...Array(5)].map((star, i) => {
+                  if (i < selectedRestaurant.rating) {
+                    return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star1.png'} alt="star" />;
+                  } else {
+                    return <img key={i} src={process.env.PUBLIC_URL + '/images/brand/star2.png'} alt="star" />;
+                  }
+                })}
+              </div>
+
               <p className="info-window-rating">
-                rating: {selectedRestaurant.rating}
+                <br/>{selectedRestaurant.est_delivery_time - 5}-{selectedRestaurant.est_delivery_time} mins delivery to SFSU
               </p>
               {/* Link to the restaurant's menu */}
               <Link
-                to={`/restaurants/${selectedRestaurant.id}`}
+                to={`/browse/restaurants/${selectedRestaurant.id}`}
                 className="view-menu-link"
               >
                 View Menu

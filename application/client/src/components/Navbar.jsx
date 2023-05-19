@@ -64,6 +64,7 @@ function Navbar() {
       setIsLoggedIn(false)
       setUser(null)
       localStorage.removeItem('user')
+      localStorage.removeItem('restaurantId')
       logoutUser(); // from userContext. Nulls the restaurant and user id
       navigate('/')
     } catch (err) {

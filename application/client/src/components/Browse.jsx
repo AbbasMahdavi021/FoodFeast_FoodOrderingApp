@@ -26,6 +26,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import Fuse from 'fuse.js';
+import PageviewIcon from '@mui/icons-material/Pageview';
 
 import { RestaurantsContext } from './RestaurantsContext';
 import Filter from './Filter';
@@ -81,6 +82,8 @@ const Browse = () => {
             navigate('/browse');
             return;
         }
+
+        
         const fuseOptions = {
             keys: ['name', 'cuisine', 'description'],
             threshold: 0.25,
@@ -92,16 +95,23 @@ const Browse = () => {
         navigate('/browse');
     };
 
-    
+
     return (
         <div className='browse-div'>
             <div className='filter-div'>
                 <div className='filter'>
                     <Filter cuisines={cuisines} handleFilterChange={handleFilterChange} />
                     <form className='search-bar' onSubmit={handleSearch}>
-                        <input className='search-input' type="text" placeholder="Search for Restaurant or Cuisine..." value={searchRestaurants} onChange={(e) => setSearchRestaurants(e.target.value)} />
-                        <button type="submit"> 
-                            <img src={process.env.PUBLIC_URL + '/images/brand/search.png'} alt="Search" />
+                        <input  className='search-input' 
+                                type="text" 
+                                placeholder="Search for Restaurant or Cuisine..." 
+                                value={searchRestaurants} 
+                                onChange={(e) => setSearchRestaurants(e.target.value)}
+                                maxLength={40}
+                        />
+
+                        <button type="submit">
+                            <PageviewIcon sx={{fontSize: 60}} />
                         </button>
                     </form>
                 </div>
