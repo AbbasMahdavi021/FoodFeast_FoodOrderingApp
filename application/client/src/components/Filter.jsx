@@ -32,12 +32,12 @@ import Select from 'react-select';
 const colourStyles = {
   control: (styles) => ({
     ...styles,
-    backgroundColor: '#fc3',
+    backgroundColor: '#ffdc70',
     color: 'black',
     border: 'none',
     boxShadow: 'none',
     '&:hover': {
-      backgroundColor: 'yellow',
+      backgroundColor: '#fc3',
     },
   }),
   option: (styles, { isDisabled, isFocused, isSelected }) => ({
@@ -45,7 +45,7 @@ const colourStyles = {
     backgroundColor: isSelected
       ? 'grey' 
       : isFocused
-      ? 'lightblue'
+      ? '#ffdc70'
       : null,
     color: isSelected ? 'white' : 'black',
     cursor: isDisabled ? 'not-allowed' : 'default',
