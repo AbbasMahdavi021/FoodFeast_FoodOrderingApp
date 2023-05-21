@@ -26,7 +26,7 @@ const MenuItem = (props) => {
             id: props.id,
             price: props.price,
             image: props.image,
-            itemQuantity: 1, 
+            itemQuantity: 1,
         });
 
         props.setPopUp("addToCart")
@@ -38,7 +38,7 @@ const MenuItem = (props) => {
         <div className='menu-item-box'>
             <img src={props.image} alt={props.itemName} />
             <button className="add-to-cart-button" onClick={handleAddItemToCart}>
-            +
+                +
             </button>
             <div className='menu-item-details '>
                 <h2>
@@ -50,11 +50,11 @@ const MenuItem = (props) => {
 
             </div>
             <div className="checkout-button">
-         <button style = {{zIndex: '999'}}onClick={handleAddItemToCart}>Add To Cart</button>
-     </div>
+                <button style={{ zIndex: '999' }} onClick={handleAddItemToCart}>Add To Cart</button>
+            </div>
 
         </div>
-        
+
     );
 };
 

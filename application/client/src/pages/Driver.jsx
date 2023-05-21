@@ -34,6 +34,8 @@ function Driver() {
   const [isOrderPickedUp, setIsOrderPickedUp] = useState(false)
   const [acceptedOrder, setAcceptedOrder] = useState(null)
 
+  const [showMap, setShowMap] = useState(0)
+
   const acceptOrder = async (order, socket) => {
     if (acceptedOrder) {
       alert('Please complete current order first')
@@ -57,7 +59,7 @@ function Driver() {
           'acceptOrder',
           { ...order, order_status: 'In Progress' },
           user.id,
-        ) 
+        )
 
         setAcceptedOrder({ ...order, order_status: 'In Progress' })
         setOrderStatus('In Progress')
@@ -207,8 +209,8 @@ function Driver() {
         .filter(
           (order) =>
             (order.order_status === 'In Progress' ||
-            order.order_status === 'Ready for Pickup') &&
-            order.order_accepted_by_driver === 0,
+              order.order_status === 'Ready for Pickup') &&
+            order.order_accepted_by_driver === 0
         )
         .map((order, index) => (
           <div key={index} className="unaccepted-order">
@@ -224,66 +226,102 @@ function Driver() {
             </button>
           </div>
         ))}
+      {!orders && (
+        <div className='orders-container'>
+          <h2>No order accepted yet</h2>
+        </div>
+      )}
     </div>
-  )
+  );
+
 
   const acceptedOrderDisplay = acceptedOrder ? (
     <div className="orders-container">
-      <h2>Accepted Order</h2>
-      <p>Order ID: {acceptedOrder.order_id}</p>
-      <p>Restaurant Name: {acceptedOrder.name}</p>
-      <p>Order Total: {acceptedOrder.order_total}</p>
-      <p>Order Placed at: {acceptedOrder.order_date}</p>
-      <p>Special Instructions: {acceptedOrder.special_instructions}</p>
-      {acceptedOrder.order_status === 'In Progress' && (
-        <button
-          className="order-picked-up-button"
-          onClick={() => markOrderPickedUp(acceptedOrder.order_id)}
-        >
-          Mark as Picked Up
-        </button>
-      )}
-      {acceptedOrder.order_status === 'Out for Delivery' && (
-        <button
-          className="order-complete-button"
-          onClick={() => markOrderAsDelivered(acceptedOrder.order_id)}
-        >
-          Mark as Delivered
-        </button>
-      )}
+      <div className='accepted-order'>
+
+        <h2>Accepted Order</h2>
+        <p>Order ID: {acceptedOrder.order_id}</p>
+        <p>Restaurant Name: {acceptedOrder.name}</p>
+        <p>Order Total: {acceptedOrder.order_total}</p>
+        <p>Order Placed at: {acceptedOrder.order_date}</p>
+        <p>Special Instructions: {acceptedOrder.special_instructions}</p>
+        {acceptedOrder.order_status === 'In Progress' && (
+          <button
+            className="order-picked-up-button"
+            onClick={() => markOrderPickedUp(acceptedOrder.order_id)}
+          >
+            Mark as Picked Up
+          </button>
+        )}
+        {acceptedOrder.order_status === 'Out for Delivery' && (
+          <button
+            className="order-complete-button"
+            onClick={() => markOrderAsDelivered(acceptedOrder.order_id)}
+          >
+            Mark as Delivered
+          </button>
+        )}
+      </div>
+
     </div>
+
   ) : (
-    <p>No order accepted yet</p>
+    <div className='orders-container'>
+      <h2>No order accepted yet</h2>
+    </div>
   )
+
+  const handleShowMap = (state) => {
+
+    setShowMap(0);
+
+    if (showMap !== state.value) {
+      setShowMap(state.value);
+    }
+
+  }
 
   return (
     <div className='driverName'>
       {user && isDriver ? (
-        <>
-        <Button
-        href="/campusmap"
-        type="submit"
-        fullWidth
-        variant="contained"
-        sx={{
-            mt: 3, mb: 2, borderRadius: '15px', fontSize: 20,
-            backgroundColor: '#fc3', color: '#000000',
-            width: '250px',
-            '&:hover': { backgroundColor: '#FFCF01' },
-            boxShadow: '2px 2px 5px rgba(0, 0, 0, 10)',
-            display: 'inline',
-            margin: '50px auto 50px',
-        }}
-    >
-        View Campus Map
-    </Button>
-          <div className="orders-page">
-            {unacceptedOrdersSidebar}
-            {acceptedOrderDisplay}
+        <div className='driver-container'>
+
+          <div className='driver-header'>
+
+            <h2>Accept an order to Deliver:</h2>
+
+            <div className="driver-map-button">
+              <button onClick={() => handleShowMap({ value: 1 })}>Campus Map</button>
+              <button onClick={() => handleShowMap({ value: 2 })}>Map Near Me</button>
+            </div>
+
           </div>
-        </>
+
+          <div className="driver-page">
+            <>
+              {unacceptedOrdersSidebar}
+              <div className='driver-left'>
+                {acceptedOrderDisplay}
+
+                <div className='campus-map'>
+                  {showMap === 1 &&
+                    <img src={process.env.PUBLIC_URL + '/images/brand/CampusMap.png'} alt="Campus Map" />
+                  }
+                </div>
+
+                {showMap === 2 &&
+                  <Map />
+                }
+
+
+              </div>
+
+            </>
+
+          </div>
+        </div>
       ) : (
-        <BecomeDriver/>
+        <BecomeDriver />
       )}
     </div>
   )
