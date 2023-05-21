@@ -100,3 +100,22 @@
 
 
 }
+
+.driver-header{
+  margin-top: 20px;
+}
+.driver-map-button{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+button {
+  background:rgb(255, 207, 1);
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 20px;
+  border-color: white;
+  margin-right: 30px;
+  margin-left: 15px;
+}
+
