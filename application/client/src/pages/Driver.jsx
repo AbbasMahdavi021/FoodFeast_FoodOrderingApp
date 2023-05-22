@@ -204,7 +204,7 @@ function Driver() {
   }
 
   const unacceptedOrdersSidebar = (
-    <div className="unaccepted-orders-sidebar">
+    <div className="driver-unaccepted-orders-sidebar">
       {orders
         .filter(
           (order) =>
@@ -213,13 +213,13 @@ function Driver() {
             order.order_accepted_by_driver === 0
         )
         .map((order, index) => (
-          <div key={index} className="unaccepted-order">
+          <div key={index} className="driver-unaccepted-order">
             <div>Order ID: {order.order_id}</div>
             <div>Restaurant Name: {order.name}</div>
             <div>Est. Delivery Time: {order.est_delivery_time} minutes</div>
             <div>Restaurant Phone: {order.phone}</div>
             <button
-              className="accept-order-button"
+              className="driver-accept-order-button"
               onClick={() => acceptOrderWithSocket(order)}
             >
               Accept
@@ -227,7 +227,7 @@ function Driver() {
           </div>
         ))}
       {!orders && (
-        <div className='orders-container'>
+        <div className='driver-orders-container'>
           <h2>No order accepted yet</h2>
         </div>
       )}
@@ -236,8 +236,8 @@ function Driver() {
 
 
   const acceptedOrderDisplay = acceptedOrder ? (
-    <div className="orders-container">
-      <div className='accepted-order'>
+    <div className="driver-orders-container">
+      <div className='driver-accepted-order'>
 
         <h2>Accepted Order</h2>
         <p>Order ID: {acceptedOrder.order_id}</p>
@@ -266,7 +266,7 @@ function Driver() {
     </div>
 
   ) : (
-    <div className='orders-container'>
+    <div className='driver-orders-container'>
       <h2>No order accepted yet</h2>
     </div>
   )

@@ -110,9 +110,9 @@ section {
 
 body {
     line-height: 1;
-    background: linear-gradient(to bottom right, rgb(51, 51, 51) 33%, purple 33%);
-    background-size: 200% 200%;
+    background: linear-gradient(to bottom, rgb(51, 51, 51) 20%, rgb(95, 66, 112) 50%, rgb(105, 33, 177) 100%);
     scrollbar-width: none;
+    background-size: 100% 200%;
 }
 
 body::-webkit-scrollbar {
