@@ -74,34 +74,61 @@ const Browse = () => {
     };
 
     const handleSearch = (event) => {
-        event.preventDefault();
-        const searchTerm = searchRestaurants.trim();
-        const selectedCuisineFilter = selectedCuisine === 'All' ? () => true : (restaurant) => restaurant.cuisine_name === selectedCuisine;
+        // Good job preventing the default form submission behavior.
+        event.preventDefault(); 
+
+
+        // It's great that you're trimming the input to remove any leading or trailing spaces.
+        // However, the variable name searchRestaurants is a bit confusing, since it's actually the search term.
+        const searchTerm = searchRestaurants.trim(); 
+
+        // Nice use of ternary operator to handle the 'All' case. 
+        // This is a clean and concise way to create the filter function.
+        const selectedCuisineFilter = selectedCuisine === 'All' ? () => true : (restaurant) => 
+            restaurant.cuisine_name === selectedCuisine;
+
+        // Good job handling the case where the search term is empty. This is a good user experience decision.
         if (!searchTerm) {
             setRestaurants(allRestaurants.filter(selectedCuisineFilter));
             navigate('/browse');
             return;
         }
 
-        
+        // It's great that you're specifying multiple keys for Fuse.js to search. 
+        // This will make the search more robust.
+        // It might be helpful to add a comment explaining what the 'threshold' option does
+        // for those unfamiliar with Fuse.js.
         const fuseOptions = {
             keys: ['name', 'cuisine', 'description'],
             threshold: 0.25,
         };
+        
+        // Good job reusing the 'selectedCuisineFilter' from earlier, as it prevents redundant code.
         const fuse = new Fuse(allRestaurants.filter(selectedCuisineFilter), fuseOptions);
+    
+        // Nice use of map to extract the actual restaurant objects from the search results.
         const searchResults = fuse.search(searchTerm);
         const searchedRestaurants = searchResults.map((result) => result.item);
         setRestaurants(searchedRestaurants);
+        
+        // Good job navigating the user to the browse page after the search. 
+        // This is a good user experience decision.
         navigate('/browse');
     };
-
+    
 
     return (
         <div className='browse-div'>
             <div className='filter-div'>
                 <div className='filter'>
                     <Filter cuisines={cuisines} handleFilterChange={handleFilterChange} />
+                    {/* Good job using a form for the search bar. This allows the user to submit the form by 
+                    pressing Enter, which is a good user experience decision. */}
                     <form className='search-bar' onSubmit={handleSearch}>
+                        {/* It's great that you're controlling the input value with state. 
+                        This is a good React pattern.
+                        Also, good job setting a maxLength for the input. 
+                        This prevents the user from entering an excessively long search term. */}
                         <input  className='search-input' 
                                 type="text" 
                                 placeholder="Search for Restaurant or Cuisine..." 
@@ -109,8 +136,8 @@ const Browse = () => {
                                 onChange={(e) => setSearchRestaurants(e.target.value)}
                                 maxLength={40}
                         />
-
-                        <button type="submit">
+    
+                        <button type="submit" className='search-button'>
                             <PageviewIcon sx={{fontSize: 60}} />
                         </button>
                     </form>
