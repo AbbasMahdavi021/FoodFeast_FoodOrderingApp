@@ -120,20 +120,23 @@ app.get(
     "/register",
     "/about",
     "/map",
-    "/enroll",
+    "/browse",
+    "browse/:name/:id",
+
     "/driver",
     "/enroll",
-    "/addMenuItems/:restaurantId",
     "/thankyouforenrolling",
     "/restaurantDashboard",
-    "/testCreateOrder",
+    "restaurantOrders",
     "/cart",
+    "/campusmap",
     "/menuentry/:restaurantId",
-    "/addeditem",
+
     "/admin",
     "/adminlogin",
     "/:name/:id"
   ],
+  
   function (req, res) {
     res.sendFile(
       path.join(__dirname, "../client/build/index.html"),

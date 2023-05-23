@@ -41,7 +41,6 @@ import TeamMemberModal from "../components/TeamMemberModel";
 import teamMembers from '../components/teamMembers';
 import Restaurant from '../pages/Restaurant';
 import MenuEntry from '../pages/MenuEntry';
-import AddedItem from '../pages/AddedItem';
 import CampusMap from '../pages/CampusMap';
 import Browse from '../components/Browse';
 import RestaurantList from '../components/RestaurantList';
@@ -66,11 +65,11 @@ function RoutesManager() {
         <Routes>
 
           <Route path="/" element={<Home />} />
-          <Route path="/browse" element={<RestaurantList />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/about" element={<About teamMembers={teamMembers} />} />
           <Route path="/map" element={<Map />} />
+          <Route path="/browse" element={<RestaurantList />} />
           <Route path="browse/:name/:id" element={<Restaurant />} />
 
 
@@ -83,7 +82,6 @@ function RoutesManager() {
           <Route path="/campusmap" element={<CampusMap />}/>
 
           <Route path="/menuentry/:restaurantId" element={<MenuEntry />} />
-          <Route path="/addeditem" element={<AddedItem />} />
 
           <Route path="/admin" element={<Admin />} />
           <Route path="/adminlogin" element={<AdminLogin />} />
