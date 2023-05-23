@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 import '../../styles/Cart.css';
-import UserContext from '../../context';
+import { UserContext } from '../../context'
 
 const BecomeDriver = () => {
 

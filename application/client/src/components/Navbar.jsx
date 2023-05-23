@@ -19,7 +19,7 @@
 import axios from 'axios'
 import React, { useEffect, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import UserContext from '../context'
+import { UserContext } from '../context'
 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
@@ -30,9 +30,7 @@ function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [active, setActive] = useState('navList')
   const [icon, setIcon] = useState('navButton')
-  const { user, setUser } = useContext(UserContext)
-
-  const { logoutUser } = useContext(UserContext);
+  const { user, setUser, logoutUser } = useContext(UserContext)
 
 
   const navigate = useNavigate()
@@ -60,17 +58,15 @@ function Navbar() {
         {},
         { withCredentials: true },
       )
-      console.log('Logged Out Status: ' + res.data)
-      setIsLoggedIn(false)
-      setUser(null)
-      localStorage.removeItem('user')
-      localStorage.removeItem('restaurantId')
+      console.log('Logged Out Status: ' + res.data);
+      setIsLoggedIn(false);
       logoutUser(); // from userContext. Nulls the restaurant and user id
-      navigate('/')
+      navigate('/');
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
-  }
+  };
+  
 
   const navToggle = () => {
     if (active === 'navList') {

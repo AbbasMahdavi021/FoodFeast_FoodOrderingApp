@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import UserContext from '../context'
+import { UserContext } from '../context'
 import { io } from 'socket.io-client'
 import axios from 'axios'
 import '../styles/RestaurantOrders.css'
