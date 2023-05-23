@@ -35,7 +35,6 @@ import EnrollRestaurant from '../pages/EnrollRestaurant';
 import AddMenuItems from '../pages/AddMenuItems';
 import ThankYouForEnrolling from '../pages/ThankYouForEnrolling';
 import RestaurantDashboard from '../pages/RestaurantDashboard';
-import TestCreateOrder from '../pages/TestCreateOrder';
 import { Cart } from '../pages/Cart';
 import RestaurantOrders from '../pages/RestaurantOrders';
 
@@ -82,7 +81,6 @@ function RoutesManager() {
           <Route path="/thankyouforenrolling" element={<ThankYouForEnrolling />} />
           <Route path="/restaurantDashboard" element={<RestaurantDashboard />} />
           <Route path="/restaurantOrders" element={<RestaurantOrders />} />
-          <Route path="/testCreateOrder" element={<TestCreateOrder />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/campusmap" element={<CampusMap />}/>
 

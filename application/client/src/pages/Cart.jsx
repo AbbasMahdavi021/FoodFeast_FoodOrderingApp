@@ -17,7 +17,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { io } from 'socket.io-client'
 import '../styles/Cart.css'
-import UserContext from '../context'
+import { UserContext } from '../context'
 
 import CartCheckout from '../components/Cart/CartCheckout'
 

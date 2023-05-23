@@ -19,7 +19,7 @@ import React, { useContext } from 'react';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import MenuItem from '../components/MenuItem';
-import UserContext from '../context';
+import { UserContext } from '../context'
 import '../styles/MenuItem.css';
 
 const Restaurant = () => {

@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 
 const UserContext = createContext();
 
-export const UserProvider = ({ children }) => {
+const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [restaurantId, setRestaurantId] = useState(null);
 
@@ -38,8 +38,10 @@ export const UserProvider = ({ children }) => {
       }
     } else {
       console.log('No user in local storage')
+      setRestaurantId(null); 
     }
   }, []);
+
 
   const setAndPersistRestaurantId = (id) => {
     console.log('restaurant id in context', id)
@@ -52,11 +54,27 @@ export const UserProvider = ({ children }) => {
     localStorage.setItem('user', JSON.stringify(newUser));
   };
 
+  const logoutUser = () => {
+    setUser(null);
+    setRestaurantId(null);
+    localStorage.removeItem('user');
+    localStorage.removeItem('restaurantId');
+  };
+  
+
   return (
-    <UserContext.Provider value={{ user, restaurantId, setUser: setPersistedUser }}>
+    <UserContext.Provider
+      value={{
+        user,
+        setUser: setPersistedUser, 
+        logoutUser,
+        restaurantId,
+        setRestaurantId: setAndPersistRestaurantId 
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
 };
 
-export default UserContext;
+export { UserContext, UserProvider };

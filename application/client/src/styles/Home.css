@@ -1,7 +1,5 @@
 /*//////////////////// HOME-Header PAGE /////////////////////////////*/
 
-.header-page {}
-
 .home-header-div {
     display: flex;
     flex-direction: column;
