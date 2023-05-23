@@ -26,7 +26,7 @@ const restaurantRoutes = require("./routes/restaurant.js");
 const adminRoutes = require("./routes/admin.js");
 const favoritesRoutes = require("./routes/favorites.js");
 const enrollRestaurant = require("./routes/enrollRestaurant.js");
-const addMenuItem = require("./routes/addMenuItem.js");
+const menuRoutes = require("./routes/addMenuItem.js");
 const sendEmailRoutes = require("./routes/sendEmail.js");
 const cartRoutes = require('./routes/cart.js');
 const driverRoutes = require('./routes/driver.js');
@@ -103,7 +103,7 @@ app.use("/driver", driverRoutes);
 app.use("/sendEmail", sendEmailRoutes);
 app.use("/favorites", favoritesRoutes);
 app.use("/enroll", enrollRestaurant);
-app.use("/addMenuItem", addMenuItem);
+app.use("/menu", menuRoutes);
 app.use("/orders", orderRoutes);
 app.use("/cart", cartRoutes);
 

@@ -32,7 +32,6 @@ import AdminLogin from '../pages/AdminLogin';
 import Admin from '../pages/Admin';
 import Driver from '../pages/Driver';
 import EnrollRestaurant from '../pages/EnrollRestaurant';
-import AddMenuItems from '../pages/AddMenuItems';
 import ThankYouForEnrolling from '../pages/ThankYouForEnrolling';
 import RestaurantDashboard from '../pages/RestaurantDashboard';
 import TestCreateOrder from '../pages/TestCreateOrder';
@@ -78,7 +77,6 @@ function RoutesManager() {
 
           <Route path="/driver" element={<Driver />} />
           <Route path="/enroll" element={<EnrollRestaurant />} />
-          <Route path="/addMenuItems/:restaurantId" element={<AddMenuItems />} />
           <Route path="/thankyouforenrolling" element={<ThankYouForEnrolling />} />
           <Route path="/restaurantDashboard" element={<RestaurantDashboard />} />
           <Route path="/restaurantOrders" element={<RestaurantOrders />} />

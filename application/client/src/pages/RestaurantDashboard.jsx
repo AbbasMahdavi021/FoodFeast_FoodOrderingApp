@@ -36,6 +36,14 @@ const RestaurantDashboard = (props) => {
     navigate('/RestaurantOrders')
   }
 
+  const goToMenuEntry = () => {
+    navigate(`/menuentry/${restaurantId}`)
+  }
+
+  const goToRestPage = () => {
+    navigate(`/browse/restaurantName/${restaurantId}`)
+  }
+
   useEffect(() => {
     const fetchRestaurant = async () => {
       try {
@@ -84,6 +92,12 @@ const RestaurantDashboard = (props) => {
       </div>
       <div className="orders-page-button">
         <button onClick={goToOrdersPage}>Orders Page</button>
+      </div>
+      <div className="orders-page-button">
+        <button onClick={goToMenuEntry}>Add Menu Items</button>
+      </div>
+      <div className="orders-page-button">
+        <button onClick={goToRestPage}>Visit your Restaurant Page</button>
       </div>
       <div className="restaurant-info-item">
         <h3>Cuisine: {restaurantCuisine}</h3>
