@@ -146,7 +146,7 @@ function MenuEntry() {
                                 display: 'relative',
                                 flexDirection: 'column',
                                 alignItems: 'center',
-                                height: '700px',
+                                height: '750px',
                             }}
                         >
 
@@ -165,14 +165,15 @@ function MenuEntry() {
                                     name="name"
                                     label="Item Name"
                                     autoFocus
+                                    variant='filled'
                                     InputLabelProps={{
                                         sx: {
-                                            fontSize: '1.2rem'
+                                            fontSize: '2rem'
                                         }
                                     }}
                                     inputProps={{
                                         style: {
-                                            fontSize: '2rem'
+                                            fontSize: '2.4rem'
                                         }
                                     }}
                                     sx={{ mt: 2 }}
@@ -187,14 +188,15 @@ function MenuEntry() {
                                     name="price"
                                     label="Price"
                                     type="number"
+                                    variant='filled'
                                     InputLabelProps={{
                                         sx: {
-                                            fontSize: '1.2rem'
+                                            fontSize: '2rem'
                                         }
                                     }}
                                     inputProps={{
                                         style: {
-                                            fontSize: '2rem'
+                                            fontSize: '2.4rem'
                                         }
                                     }}
                                     sx={{ mt: 2 }}
@@ -209,16 +211,19 @@ function MenuEntry() {
                                     multiline
                                     fullWidth
                                     id="description"
+                                    variant='filled'
                                     label="Description"
                                     InputLabelProps={{
                                         sx: {
-                                            fontSize: '1.2rem'
+                                            fontSize: '2rem',
+                   
                                         }
                                     }}
                                     inputProps={{
                                         style: {
                                             height: "100px",
-                                            fontSize: '1.5rem'
+                                            fontSize: '2rem',
+                                            paddingTop: '1rem'
                                         }
                                     }}
                                 />
@@ -231,14 +236,16 @@ function MenuEntry() {
                                     fullWidth
                                     name="image"
                                     label="Item Image URL"
+                                    variant='filled'
                                     InputLabelProps={{
                                         sx: {
-                                            fontSize: '1.2rem'
+                                            fontSize: '2rem'
                                         }
                                     }}
                                     inputProps={{
                                         style: {
-                                            fontSize: '2rem'
+                                            fontSize: '2.2rem',
+                                            marginBottom: '1rem'
                                         }
                                     }}
                                     sx={{ mt: 2 }}

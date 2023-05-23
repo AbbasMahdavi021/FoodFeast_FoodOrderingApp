@@ -125,7 +125,7 @@
 }
 
 
-.add-to-cart-button {
+.add-to-cart-button, .delete-menu-item-button {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -142,9 +142,25 @@
   z-index: 3;
 }
 
-.add-to-cart-button:hover {
+.add-to-cart-button:hover, .delete-menu-item-button:hover {
   transition: ease-in-out .2s;
   filter: brightness(90%);
+}
+
+.delete-menu-item-button::after {
+  content: "Delete Menu Item";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .add-to-cart-button::after {
@@ -163,7 +179,7 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-.add-to-cart-button::before {
+.add-to-cart-button {
   content: "";
   position: absolute;
   bottom: calc(100% - 1px);
@@ -178,6 +194,11 @@
 
 .add-to-cart-button:hover::after,
 .add-to-cart-button:hover::before {
+  opacity: 1;
+}
+
+.delete-menu-item-button:hover::after,
+.delete-menu-item-button:hover::before {
   opacity: 1;
 }
 

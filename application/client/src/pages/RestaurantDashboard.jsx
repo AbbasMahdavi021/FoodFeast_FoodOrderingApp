@@ -31,6 +31,7 @@ const RestaurantDashboard = (props) => {
   const [restaurantPhone, setRestaurantPhone] = useState('')
   const [restaurantHours, setRestaurantHours] = useState('')
   const [restaurantMenuItems, setRestaurantMenuItems] = useState([])
+  const [itemIdToBeDeleted, setItemIdToBeDeleted] = useState();
 
   const goToOrdersPage = () => {
     navigate('/RestaurantOrders')
@@ -42,6 +43,17 @@ const RestaurantDashboard = (props) => {
 
   const goToRestPage = () => {
     navigate(`/browse/restaurantName/${restaurantId}`)
+  }
+
+  const handleDelete = async (state) => {
+
+    const res = await axios.post('/menu/deleteMenuItem', {id: state.value});
+
+    console.log(res.data.message);
+    //used to re-render useEffect, so when item deleted, it rerender the item list
+    setItemIdToBeDeleted(state.value);
+
+
   }
 
   useEffect(() => {
@@ -82,7 +94,7 @@ const RestaurantDashboard = (props) => {
       fetchMenuItems()
     }
 
-  }, [restaurantId])
+  }, [restaurantId, itemIdToBeDeleted])
 
 
   return (
@@ -129,10 +141,21 @@ const RestaurantDashboard = (props) => {
         <h2>Menu</h2>
 
         {restaurantMenuItems.map((menuItem, index) => (
+
+          
           <div key={index} className="restaurant-menu-item">
             <p>Menu item name: {menuItem.name}</p>
             <p>Price: {menuItem.price}</p>
             <p>Description: {menuItem.description}</p>
+
+            <div className='menu-item-box'>
+              <img src={menuItem.image} alt='item-image' />
+              <button className="delete-menu-item-button" onClick={() => handleDelete({ value: menuItem.id })}>
+                X
+              </button>
+
+            </div>
+
           </div>
         ))}
       </div>

@@ -38,6 +38,31 @@ const addMenuItem = async (req, res) => {
     }
 }
 
+
+const deleteMenuItem = async (req, res) => {
+
+    try {
+
+        const {id} = req.body;
+
+        const q = `DELETE FROM menu_items WHERE id = ${id};`;
+        
+        db.query(q, (error, results) => {
+            if (error) {
+                console.log("ERROR HERE!!!")
+                console.log(error)
+                res.status(400).json({ message: 'Menu item not saved!' });
+            } else {
+                res.status(201).json({ message: 'deletedMenuItem' });
+            }
+        });
+    } catch (err) {
+        console.error(err);
+        res.send([]);
+    }
+}
+
 module.exports = {
     addMenuItem,
+    deleteMenuItem,
 };

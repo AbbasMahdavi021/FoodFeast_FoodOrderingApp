@@ -13,9 +13,11 @@
 
 const express = require('express');
 const router = express.Router();
-const {addMenuItem} = require('../controllers/addMenuItem');
+const {addMenuItem, deleteMenuItem} = require('../controllers/addMenuItem');
 
 router.post("/addMenuItem", addMenuItem);
+router.post("/deleteMenuItem", deleteMenuItem);
+
 
 
 module.exports = router;
