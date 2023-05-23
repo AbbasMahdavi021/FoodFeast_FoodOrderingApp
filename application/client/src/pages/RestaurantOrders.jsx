@@ -184,7 +184,6 @@ const RestaurantOrders = () => {
 
   return (
     <div className="orders-page">
-      <h2>Restaurant ID: {restaurantId}</h2>
       <div className="unaccepted-orders-sidebar">
         <h2>Unaccepted Orders</h2>
         {unacceptedOrders.map((order) => (

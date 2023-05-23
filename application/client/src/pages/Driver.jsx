@@ -13,15 +13,15 @@
  *   To fetch additional data from the db, modify the Login.jsx file.
  */
 
-import React, { useContext, useEffect, useState, useCallback } from 'react';
-import { io } from 'socket.io-client';
+import React, { useContext, useEffect, useState, useCallback } from 'react'
+import { io } from 'socket.io-client'
 import { UserContext } from '../context'
-import '../styles/Driver.css';
-import Map from './Map';
-import Link from '@mui/material/Link';
-import Button from '@mui/material/Button';
-import DriverRegister from '../components/Driver/DriverRegister';
-import BecomeDriver from '../components/Driver/BecomeDriver';
+import '../styles/Driver.css'
+import Map from './Map'
+import Link from '@mui/material/Link'
+import Button from '@mui/material/Button'
+import DriverRegister from '../components/Driver/DriverRegister'
+import BecomeDriver from '../components/Driver/BecomeDriver'
 
 function Driver() {
   const { user, restaurantId } = useContext(UserContext)
@@ -43,16 +43,13 @@ function Driver() {
     }
 
     try {
-      const response = await fetch(
-        '/orders/setOrderAcceptedByDriver',
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ orderId: order.order_id }),
+      const response = await fetch('/orders/setOrderAcceptedByDriver', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      )
+        body: JSON.stringify({ orderId: order.order_id }),
+      })
 
       if (response.ok) {
         socket.emit(
@@ -86,15 +83,12 @@ function Driver() {
 
   const markOrderAsDelivered = async (orderId) => {
     try {
-      const response = await fetch(
-        `/orders/markAsDelivered/${orderId}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+      const response = await fetch(`/orders/markAsDelivered/${orderId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      )
+      })
 
       if (response.ok) {
         setAcceptedOrder(null)
@@ -108,15 +102,12 @@ function Driver() {
 
   const markOrderPickedUp = async (orderId) => {
     try {
-      const response = await fetch(
-        `/orders/markAsPickedUp/${orderId}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+      const response = await fetch(`/orders/markAsPickedUp/${orderId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      )
+      })
 
       if (response.ok) {
         setIsOrderPickedUp(true)
@@ -210,7 +201,7 @@ function Driver() {
           (order) =>
             (order.order_status === 'In Progress' ||
               order.order_status === 'Ready for Pickup') &&
-            order.order_accepted_by_driver === 0
+            order.order_accepted_by_driver === 0,
         )
         .map((order, index) => (
           <div key={index} className="driver-unaccepted-order">
@@ -227,18 +218,16 @@ function Driver() {
           </div>
         ))}
       {!orders && (
-        <div className='driver-orders-container'>
+        <div className="driver-orders-container">
           <h2>No order accepted yet</h2>
         </div>
       )}
     </div>
-  );
-
+  )
 
   const acceptedOrderDisplay = acceptedOrder ? (
     <div className="driver-orders-container">
-      <div className='driver-accepted-order'>
-
+      <div className="driver-accepted-order">
         <h2>Accepted Order</h2>
         <p>Order ID: {acceptedOrder.order_id}</p>
         <p>Restaurant Name: {acceptedOrder.name}</p>
@@ -262,62 +251,58 @@ function Driver() {
           </button>
         )}
       </div>
-
     </div>
-
   ) : (
-    <div className='driver-orders-container'>
+    <div className="driver-orders-container">
       <h2>No order accepted yet</h2>
     </div>
   )
 
   const handleShowMap = (state) => {
-
-    setShowMap(0);
+    setShowMap(0)
 
     if (showMap !== state.value) {
-      setShowMap(state.value);
+      setShowMap(state.value)
     }
-
   }
 
   return (
-    <div className='driverName'>
+    <div className="driverName">
       {user && isDriver ? (
-        <div className='driver-container'>
-
-          <div className='driver-header'>
-
+        <div className="driver-container">
+          <div className="driver-header">
             <h2>Accept an order to Deliver:</h2>
 
             <div className="driver-map-button">
-              <button onClick={() => handleShowMap({ value: 1 })}>Campus Map</button>
-              <button onClick={() => handleShowMap({ value: 2 })}>Map Near Me</button>
+              <button onClick={() => handleShowMap({ value: 1 })}>
+                Campus Map
+              </button>
+              <button onClick={() => handleShowMap({ value: 2 })}>
+                Map Near Me
+              </button>
             </div>
-
           </div>
 
           <div className="driver-page">
             <>
               {unacceptedOrdersSidebar}
-              <div className='driver-left'>
+              <div className="driver-left">
                 {acceptedOrderDisplay}
 
-                <div className='campus-map'>
-                  {showMap === 1 &&
-                    <img src={process.env.PUBLIC_URL + '/images/brand/CampusMap.png'} alt="Campus Map" />
-                  }
+                <div className="campus-map">
+                  {showMap === 1 && (
+                    <img
+                      src={
+                        process.env.PUBLIC_URL + '/images/brand/CampusMap.png'
+                      }
+                      alt="Campus Map"
+                    />
+                  )}
                 </div>
 
-                {showMap === 2 &&
-                  <Map />
-                }
-
-
+                {showMap === 2 && <Map />}
               </div>
-
             </>
-
           </div>
         </div>
       ) : (
