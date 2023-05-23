@@ -9,7 +9,7 @@ const UserProvider = ({ children }) => {
   const fetchRestaurantId = async (user) => {
     if (user.isRestaurantOwner) {
       try {
-        const response = await fetch(`http://localhost:8080/restaurants/owner/${user.id}`);
+        const response = await fetch(`/restaurants/owner/${user.id}`);
         const data = await response.json();
         console.log('data', data);
         if (data && data.restaurants && data.restaurants.length > 0) {

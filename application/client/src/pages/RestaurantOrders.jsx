@@ -33,7 +33,7 @@ const RestaurantOrders = () => {
     try {
       const newOrderStatus = 'Ready for Pickup'
 
-      await axios.put('http://localhost:8080/orders/updateStatus', {
+      await axios.put('/orders/updateStatus', {
         orderId,
         orderStatus: newOrderStatus,
       })
@@ -61,7 +61,7 @@ const RestaurantOrders = () => {
   const setOrderInProgress = async (orderId) => {
     try {
       const newOrderStatus = 'In Progress'
-      await axios.put('http://localhost:8080/orders/updateStatus', {
+      await axios.put('/orders/updateStatus', {
         orderId,
         orderStatus: newOrderStatus,
       })
@@ -77,7 +77,7 @@ const RestaurantOrders = () => {
       setOrders(updatedOrders)
 
       const response = await fetch(
-        `http://localhost:8080/orders/checkOrderAcceptedByDriver/${orderId}`,
+        `/orders/checkOrderAcceptedByDriver/${orderId}`,
       )
       const data = await response.json()
       const accepted = data.order_accepted_by_driver
@@ -107,7 +107,7 @@ const RestaurantOrders = () => {
   useEffect(() => {
     if (!restaurantId) return
 
-    const newSocket = io('http://localhost:8080')
+    const newSocket = io('/')
     setSocket(newSocket)
     newSocket.emit('joinRestaurantRoom', restaurantId)
 
@@ -136,7 +136,7 @@ const RestaurantOrders = () => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/orders/restaurant/${restaurantId}`,
+          `/orders/restaurant/${restaurantId}`,
         )
         setOrders(response.data)
 
@@ -158,7 +158,7 @@ const RestaurantOrders = () => {
     try {
       const response = await Promise.all(
         orderIds.map((orderId) =>
-          axios.get(`http://localhost:8080/orders/items/${orderId}`),
+          axios.get(`/orders/items/${orderId}`),
         ),
       )
 

@@ -44,7 +44,7 @@ function Driver() {
 
     try {
       const response = await fetch(
-        'http://localhost:8080/orders/setOrderAcceptedByDriver',
+        '/orders/setOrderAcceptedByDriver',
         {
           method: 'PUT',
           headers: {
@@ -76,7 +76,7 @@ function Driver() {
 
   const fetchAllOrders = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:8080/orders/unaccepted')
+      const response = await fetch('/orders/unaccepted')
       const data = await response.json()
       setOrders(data)
     } catch (error) {
@@ -87,7 +87,7 @@ function Driver() {
   const markOrderAsDelivered = async (orderId) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/orders/markAsDelivered/${orderId}`,
+        `/orders/markAsDelivered/${orderId}`,
         {
           method: 'PUT',
           headers: {
@@ -109,7 +109,7 @@ function Driver() {
   const markOrderPickedUp = async (orderId) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/orders/markAsPickedUp/${orderId}`,
+        `/orders/markAsPickedUp/${orderId}`,
         {
           method: 'PUT',
           headers: {
@@ -147,7 +147,7 @@ function Driver() {
   useEffect(() => {
     if (!user || !user.isDriver) return
 
-    const newSocket = io('http://localhost:8080')
+    const newSocket = io('/')
     setSocket(newSocket)
     newSocket.emit('joinDriverRoom', `driver-${user.id}`, user.id)
 
@@ -163,7 +163,7 @@ function Driver() {
 
     socket.on('newOrderForDriver', async (order) => {
       const response = await fetch(
-        `http://localhost:8080/orders/checkOrderAcceptedByDriver/${order.order_id}`,
+        `/orders/checkOrderAcceptedByDriver/${order.order_id}`,
       )
       const data = await response.json()
 

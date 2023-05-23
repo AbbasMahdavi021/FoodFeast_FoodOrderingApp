@@ -60,7 +60,7 @@ const RestaurantDashboard = (props) => {
     const fetchRestaurant = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/restaurants/getRestaurantById/${restaurantId}`,
+          `/restaurants/getRestaurantById/${restaurantId}`,
         )
         console.log('Fetched restaurant data:', response.data)
 
@@ -80,7 +80,7 @@ const RestaurantDashboard = (props) => {
     const fetchMenuItems = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/restaurants/getMenu/${restaurantId}`,
+          `/restaurants/getMenu/${restaurantId}`,
         )
         console.log('Fetched menu items:', response.data)
         setRestaurantMenuItems(response.data)

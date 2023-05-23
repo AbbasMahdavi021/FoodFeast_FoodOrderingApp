@@ -46,6 +46,11 @@ const io = require("socket.io")(server, {
   },
 });
 
+
+
+
+
+//////////////// Socket IO //////////////////////////////////////////////
 const orderRoutes = require("./routes/orders.js")(io);
 
 io.on('connection', (socket) => {
@@ -68,7 +73,7 @@ io.on('connection', (socket) => {
     try {
       const restaurantId = room.split("-")[1];
       const response = await axios.get(
-        `http://localhost:8080/orders/restaurant/${restaurantId}`
+        `/orders/restaurant/${restaurantId}`
       );
       const orders = response.data;
 
@@ -95,6 +100,11 @@ io.on('connection', (socket) => {
     console.log('A user disconnected');
   });
 });
+//////////////// Socket IO //////////////////////////////////////////////
+
+
+
+
 
 app.use("/auth", authRoutes);
 app.use("/restaurants", restaurantRoutes);
@@ -106,6 +116,8 @@ app.use("/enroll", enrollRestaurant);
 app.use("/menu", menuRoutes);
 app.use("/orders", orderRoutes);
 app.use("/cart", cartRoutes);
+
+
 
 //Build//////////////////////////////////////////////////////////////
 const _dirname = path.resolve();
@@ -136,7 +148,7 @@ app.get(
     "/adminlogin",
     "/:name/:id"
   ],
-  
+
   function (req, res) {
     res.sendFile(
       path.join(__dirname, "../client/build/index.html"),

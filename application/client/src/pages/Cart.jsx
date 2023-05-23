@@ -166,7 +166,7 @@ export const Cart = () => {
   }, [toggle]);
 
   useEffect(() => {
-    const newSocket = io('http://localhost:8080');
+    const newSocket = io('/');
     setSocket(newSocket);
 
     return () => newSocket.close();
@@ -182,7 +182,7 @@ export const Cart = () => {
 
       console.log(formattedDate);
 
-      const response = await axios.post('http://localhost:8080/orders', {
+      const response = await axios.post('/orders', {
         withCredentials: true,
         cartItems,
         customerId: user.id,
