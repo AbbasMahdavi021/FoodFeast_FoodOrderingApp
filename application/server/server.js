@@ -54,9 +54,11 @@ const io = require("socket.io")(server, {
 const orderRoutes = require("./routes/orders.js")(io);
 
 io.on('connection', (socket) => {
+  console.log('A user connected');
   socket.on('joinDriverRoom', async (room, userId) => {
     console.log(`Socket ${socket.id} joining room: ${room} (driverId: ${userId})`);
     socket.join(room);
+    console.log(`Sending driverId: ${userId} to room: ${room}`);
   });
   
   socket.on('acceptOrder', (order, driverId) => {
@@ -95,6 +97,9 @@ io.on('connection', (socket) => {
     }
   });
   
+  socket.on('error', (error) => {
+    console.log('server side socket error:', error);
+  });
 
   socket.on('disconnect', () => {
     console.log('A user disconnected');
