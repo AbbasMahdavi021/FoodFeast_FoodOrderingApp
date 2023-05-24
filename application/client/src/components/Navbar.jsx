@@ -58,10 +58,10 @@ function Navbar() {
         {},
         { withCredentials: true },
       )
-      console.log('Logged Out Status: ' + res.data);
-      setIsLoggedIn(false);
-      logoutUser(); // from userContext. Nulls the restaurant and user id
-      navigate('/');
+      await setIsLoggedIn(false);
+      await logoutUser(); // from userContext. Nulls the restaurant and user id
+      await navigate('/');
+      
     } catch (err) {
       console.error(err);
     }
