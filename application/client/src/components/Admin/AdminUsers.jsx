@@ -13,6 +13,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import AdminUser from './AdminUser';
+import PageviewIcon from '@mui/icons-material/Pageview';
+
 
 
 const AdminUsers = () => {
@@ -56,10 +58,10 @@ const AdminUsers = () => {
         <div className='admin-users'>
             <div className='TL-header'>
                 <h1 className='Header'> User List </h1>
-                <div className='search-bar'>
+                <div className='admin-search-bar'>
                     <input className='search-input' type='text' placeholder='search user...' value={searchTerm} onChange={e => handleChange(e)} />
                     <button onClick={handleSearch}>
-                        <img src={process.env.PUBLIC_URL + '/images/brand/search.png'} alt="Search" />
+                        <PageviewIcon sx={{ fontSize: 60 }} />
                     </button>
                 </div>
             </div>

@@ -13,6 +13,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import AdminRestaurant from './AdminRestaurant';
+import PageviewIcon from '@mui/icons-material/Pageview';
+
 
 
 const AdminRestaurants = () => {
@@ -58,7 +60,7 @@ const AdminRestaurants = () => {
                 <div className='search-bar'>
                     <input className='search-input' type='text' placeholder='search user...' value={searchTerm} onChange={e => handleChange(e)} />
                     <button onClick={handleSearch}>
-                        <img src={process.env.PUBLIC_URL + '/images/brand/search.png'} alt="Search" />
+                        <PageviewIcon sx={{ fontSize: 60 }} />
                     </button>
                 </div>
             </div>

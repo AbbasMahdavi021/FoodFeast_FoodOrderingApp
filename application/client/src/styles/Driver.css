@@ -113,7 +113,6 @@
 
   .driver-header{
     flex-direction: column;
-    background-color: red;
     justify-content: center;
   }
   .driver-page{
