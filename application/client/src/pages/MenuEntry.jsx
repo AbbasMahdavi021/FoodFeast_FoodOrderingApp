@@ -271,7 +271,7 @@ function MenuEntry() {
                                     variant="contained"
                                     sx={{ mt: 3, mb: 2, fontSize: 20, backgroundColor: "purple", '&:hover': { backgroundColor: 'purple' } }}
                                 >
-                                    Next Item
+                                    Add Item
                                 </Button>
 
                                 <Button

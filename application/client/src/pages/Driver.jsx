@@ -206,9 +206,12 @@ function Driver() {
         .map((order, index) => (
           <div key={index} className="driver-unaccepted-order">
             <div>Order ID: {order.order_id}</div>
-            <div>Restaurant Name: {order.name}</div>
+            <div><br/>Restaurant Name: {order.name}</div>
             <div>Est. Delivery Time: {order.est_delivery_time} minutes</div>
-            <div>Restaurant Phone: {order.phone}</div>
+            <div><br/>Restaurant Phone: {order.phone}</div>
+
+            <div><br/>Payout: $8</div>
+
             <button
               className="driver-accept-order-button"
               onClick={() => acceptOrderWithSocket(order)}
@@ -230,10 +233,13 @@ function Driver() {
       <div className="driver-accepted-order">
         <h2>Accepted Order</h2>
         <p>Order ID: {acceptedOrder.order_id}</p>
-        <p>Restaurant Name: {acceptedOrder.name}</p>
+        <p><br/>Restaurant Name: {acceptedOrder.name}</p>
         <p>Order Total: {acceptedOrder.order_total}</p>
-        <p>Order Placed at: {acceptedOrder.order_date}</p>
-        <p>Special Instructions: {acceptedOrder.special_instructions}</p>
+        <p>Order Placed on: {new Date(acceptedOrder.order_date).toLocaleString()}</p>
+        <p><br/>Deliver to: {acceptedOrder.delivery_address}</p>
+        <p>Special Instructions: {acceptedOrder.special_instructions}<br/><br/></p>
+        <p>Expected Delivery Time: Within [ {acceptedOrder.est_delivery_time} ] minutes<br/><br/></p>
+
         {acceptedOrder.order_status === 'In Progress' && (
           <button
             className="order-picked-up-button"
