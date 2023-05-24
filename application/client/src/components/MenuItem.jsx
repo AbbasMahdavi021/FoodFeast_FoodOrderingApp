@@ -23,6 +23,7 @@ const MenuItem = (props) => {
 
         const res = await axios.post("/cart/addToCart", {
             restaurantId: props.restaurantId,
+            itemName: props.itemName,
             id: props.id,
             price: props.price,
             image: props.image,

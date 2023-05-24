@@ -270,8 +270,10 @@ function Driver() {
     <div className="driverName">
       {user && isDriver ? (
         <div className="driver-container">
+          <h2>Welcome, {user.username}</h2>
+
           <div className="driver-header">
-            <h2>Accept an order to Deliver:</h2>
+            <h2>Accept an Order, from the list below to Complete!</h2>
 
             <div className="driver-map-button">
               <button onClick={() => handleShowMap({ value: 1 })}>

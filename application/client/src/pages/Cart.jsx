@@ -24,13 +24,15 @@ import CartCheckout from '../components/Cart/CartCheckout'
 
 const CartItem = (props) => {
 
+  console.log(props)
+
   return (
     <div className="cart-item">
       <div className="cart-item-img">
         <img src={props.itemImage} alt="itemImage" />
       </div>
       <div className="cart-item-detail">
-        <div className="cart-item-name"> Item Name{props.itemName} </div>
+        <div className="cart-item-name"> {props.itemName} </div>
         <div className="cart-item-quantity">
           <button
             className="item-quantity-button"
@@ -158,6 +160,7 @@ export const Cart = () => {
       }
 
       setCartItems(resData);
+      console.log(cartItems);
       setRestaurantId(res.data.restaurantId);
       setTotalQuantity(res.data.totalQuantity);
       setTotalCost(res.data.totalCost);
@@ -288,7 +291,7 @@ export const Cart = () => {
               <CartItem
                 itemId={item.id}
                 itemImage={item.image}
-                itemName={item.name}
+                itemName={item.itemName}
                 itemPrice={item.price}
                 itemQuantity={item.itemQuantity}
                 updateQuantity={updateQuantity}
@@ -342,7 +345,6 @@ export const Cart = () => {
       )}
 
     </div>
-
 
   )
 }

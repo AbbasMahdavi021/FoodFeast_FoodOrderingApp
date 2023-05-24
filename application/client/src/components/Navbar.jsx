@@ -66,7 +66,7 @@ function Navbar() {
       console.error(err);
     }
   };
-  
+
 
   const navToggle = () => {
     if (active === 'navList') {
@@ -155,7 +155,7 @@ function Navbar() {
         <li className="navItem">
           {isLoggedIn ? (
             <a href="/login" className="log-button" onClick={handleLogout}>
-              Logout, <br/> ({user.username})
+              Logout, <br /> ({user && user.username ? user.username : "Unknown User"})
             </a>
           ) : (
             <a href="/login" className="log-button">
