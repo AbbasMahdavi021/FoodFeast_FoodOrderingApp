@@ -155,7 +155,7 @@ function Navbar() {
         <li className="navItem">
           {isLoggedIn ? (
             <a href="/login" className="log-button" onClick={handleLogout}>
-              Logout, <br /> ({user && user.username ? user.username : "Unknown User"})
+              Logout, <br /> ({user && user.username ? user.username : null})
             </a>
           ) : (
             <a href="/login" className="log-button">
