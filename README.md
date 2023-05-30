@@ -1,25 +1,65 @@
-# csc648 Repository
+# Food Feast
 
-## Please when ready add your teams application URL or IP to the repository description. This will help with grading. Teams are expected to keep this value up to date.
+**Food Feast** is a collaborative web application developed by a team of software engineers. It showcases my skills in working with a team and utilizing modern technologies. The app simplifies food ordering and delivery for the San Francisco State University (SFSU) community, including students, staff, and faculty.
 
-## Please do the following steps before completing Milestone 0.
-1. Change the name of the repository. All that needs to change is the NN to your respective team number. Team numbers whose value is less than 10, please pad with a 0. Ex team 1 is Team01 team 11 is Team11. Please make sure to also remove the username from the repository as well. Teams with incorrectly name repository will have points deducted from their milestone 0 grades.
-      - Please follow the naming convention assigned by your instructor.
+My Role: **BackEnd Lead**
 
-1. PLEASE REMOVE THE USERNAME FROM THE REPOSITORY NAME!!!
+View App Live: http://35.160.127.228/
 
-2. Add ALL members of your team to this repository. For it to count, they must ACCEPT the invite.
+## About
+Food Feast is a testament to my skills in going above and beyond my role as a key contributor within a team. In addition to coordinating the backend development using Express, Node.js, and MySQL, I took on a significant role in developing the frontend of the application. From designing the user interface to implementing the functionality, I took on a key role in developing all aspects of the site, showcasing my proficiency and versatility in both backend and frontend technologies. This project exemplifies my ability to contribute extensively across the full stack and deliver a professional and polished web application.
 
-3. Fill out the table below
+I invite you to explore the **Contributors** section of the repository to see the specific contributions I made to the project.
+Additionally, for a comprehensive documentation of the app, please refer to the Milestones folder, specifically **M5**. It provides a detailed overview of the app's functionality, design, and implementation.
+
+**Thank you** for considering my work on Food Feast. I believe it exemplifies my skills in teamwork, backend development, and adherence to modern software engineering practices.
 
 
-| Student Name     |       Student Email      | GitHub Username |
-|      :---:       |           :---:          |      :---:      |
-| Elahe Bashiri    |     Ebashiri@sfsu.edu    |     Elahe87     |              
-| Alexander Diaz   |  adiaz41@sfsu.edu        |    xanderbx    |
-| Abbas Mahdavi    |  amahdavi2@sfsu.edu      | AbbasMahdavi021 |
-| Megan Lew        |  mlew1@mail.sfsu.edu     |    meganlew     |
-| Jed Graves       | jgraves4@mail.sfsu.edu   |   jgraves4      |
-| Nathan Rennacker | nrennacker@mail.sfsu.edu |   nlrennacker    |
+## Technologies Used
+Food Feast was built using the following technologies:
 
-## NO code needs to be stored in the root of your repository. You may rename the application folder if you like to your team's application name. But all source code related to your team's application should be stored inside the application folder.
+    Frontend: React
+
+    Backend: Express, Node.js
+
+    Database: MySQL
+    
+    Deployment: Amazon Web Services with EC2 (Elastic Compute Cloud) instances.
+
+Additionally, Food Feast was developed using modern software engineering practices, including:
+
+    SCRUM: 
+    Agile project management methodology.
+
+    User-Centered Design (UCD): 
+    Focus on user experience development.
+
+    Testing and QA: 
+    Comprehensive unit testing was conducted to ensure code quality, 
+    functionality, and overall application stability. 
+    Quality Assurance processes were followed to maintain a high standard of quality 
+    throughout the development lifecycle.
+
+These practices ensured the efficient development and high-quality outcome of the project.
+
+## Features
+    User-friendly Interface: 
+    A streamlined interface that makes it easy for users to 
+    browse and order from nearby restaurants.
+
+    Restaurant Owners: 
+    Restaurant owners can sign up, add their restaurants, 
+    and manage orders received through the app.
+
+    Driver Integration: 
+    Drivers can sign up, view available orders, and deliver food to customers.
+
+    Convenient Delivery Options: 
+    Users can choose on-campus or dorm delivery based on their preferences.
+
+    Support Local Businesses: 
+    Food Feast helps local restaurants reach the SFSU community, 
+    supporting their growth and increasing dining options for users.
+
+
+
