@@ -46,6 +46,10 @@ These practices ensured the efficient development and high-quality outcome of th
     User-friendly Interface: 
     A streamlined interface that makes it easy for users to 
     browse and order from nearby restaurants.
+    
+    Admin Capabilities: Admin access to a dedicated dashboard 
+    for managing users and restaurants, running SQL queries 
+    using the built-in console, and more.
 
     Restaurant Owners: 
     Restaurant owners can sign up, add their restaurants, 
