@@ -7,6 +7,7 @@ Food Feast was built using the following technologies:
 
 **Frontend:** React
 **Backend:** Express, Node.js
+
 **Database:** MySQL
 
 Additionally, Food Feast was developed using modern software engineering practices, including:
