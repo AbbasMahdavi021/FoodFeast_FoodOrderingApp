@@ -4,7 +4,7 @@
 
 My Role: **BackEnd Lead**
 
-View App Live: http://35.160.127.228/
+View App Live: http://35.160.127.228/  (Currently nnavailable due to limited cloud resources)
 
 ## About
 Food Feast is a testament to my skills in going above and beyond my role as a key contributor within a team. In addition to coordinating the backend development using Express, Node.js, and MySQL, I took on a significant role in developing the frontend of the application. From designing the user interface to implementing the functionality, I took on a key role in developing all aspects of the site, showcasing my proficiency and versatility in both backend and frontend technologies. This project exemplifies my ability to contribute extensively across the full stack and deliver a professional and polished web application.
